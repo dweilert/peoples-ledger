@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "perspective_profile.schema.json",
+  "title": "Perspective Profile",
+  "type": "object",
+  "required": ["id", "label", "questions", "weighting_notes"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]+$" },
+    "label": { "type": "string", "minLength": 1 },
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "weighting_notes": { "type": "string", "minLength": 1 }
+  }
+}

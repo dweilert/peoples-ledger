@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "legislative_document.schema.json",
+  "title": "Legislative Document",
+  "type": "object",
+  "required": ["id", "title", "jurisdiction", "session", "document_type", "source_record_ids"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]+$" },
+    "title": { "type": "string", "minLength": 1 },
+    "jurisdiction": { "type": "string", "minLength": 1 },
+    "session": { "type": "string", "minLength": 1 },
+    "document_type": {
+      "type": "string",
+      "enum": ["bill", "public_law", "committee_report", "agency_analysis", "other"]
+    },
+    "source_record_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

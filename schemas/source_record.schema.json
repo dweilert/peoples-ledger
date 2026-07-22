@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "source_record.schema.json",
+  "title": "Source Record",
+  "type": "object",
+  "required": ["id", "title", "publisher", "url", "snapshot_date", "source_type", "integrity"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]+$" },
+    "title": { "type": "string", "minLength": 1 },
+    "publisher": { "type": "string", "minLength": 1 },
+    "url": { "type": "string", "minLength": 1 },
+    "snapshot_date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "source_type": {
+      "type": "string",
+      "enum": ["statute", "committee_report", "government_analysis", "agency_guidance", "academic", "other"]
+    },
+    "integrity": {
+      "type": "object",
+      "required": ["snapshot_method", "content_hash"],
+      "additionalProperties": false,
+      "properties": {
+        "snapshot_method": { "type": "string", "enum": ["manual", "downloaded", "api"] },
+        "content_hash": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ai_decision_ledger_entry.schema.json",
+  "title": "AI Decision Ledger Entry",
+  "type": "object",
+  "required": ["id", "timestamp", "actor", "action", "input_refs", "output_refs", "rationale", "household_financial_data_present"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^adl_[a-z0-9_-]+$" },
+    "timestamp": { "type": "string", "minLength": 1 },
+    "actor": { "type": "string", "minLength": 1 },
+    "action": { "type": "string", "minLength": 1 },
+    "input_refs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "output_refs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "rationale": { "type": "string", "minLength": 1 },
+    "household_financial_data_present": { "type": "boolean" }
+  }
+}

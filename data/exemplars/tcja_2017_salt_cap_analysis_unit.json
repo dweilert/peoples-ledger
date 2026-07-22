@@ -1,0 +1,125 @@
+{
+  "id": "tcja_2017_salt_cap",
+  "title": "TCJA 2017 state and local tax deduction cap",
+  "status": "manual_exemplar",
+  "legislative_document": {
+    "id": "pl115_97",
+    "title": "Public Law 115-97: Tax Cuts and Jobs Act",
+    "jurisdiction": "United States",
+    "session": "115th Congress",
+    "document_type": "public_law",
+    "source_record_ids": ["pl115_97_public_law"]
+  },
+  "provisions": [
+    {
+      "id": "tcja_salt_cap_10000",
+      "legislative_document_id": "pl115_97",
+      "label": "Cap on state and local tax deduction",
+      "summary": "Limits the itemized deduction for state and local taxes to 10000 dollars for most filers during the federal individual tax changes enacted by Public Law 115-97.",
+      "policy_area": "individual income tax deductions",
+      "effective_window": {
+        "start": "2018-01-01",
+        "end": "2025-12-31"
+      },
+      "source_record_ids": ["pl115_97_public_law", "crs_salt_cap_2018"]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_salt_cap_scope",
+      "claim": "The provision is narrow enough to track as a discrete analysis unit because it changes the treatment of one itemized deduction category.",
+      "claim_type": "descriptive",
+      "confidence": "high",
+      "evidence": [
+        {
+          "source_record_id": "pl115_97_public_law",
+          "locator": "Section 11042",
+          "support": "supports"
+        }
+      ]
+    },
+    {
+      "id": "claim_distribution_varies",
+      "claim": "Expected effects vary across taxpayers because use of the deduction depends on itemization and exposure to state and local taxes.",
+      "claim_type": "distributional",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "source_record_id": "jct_tcja_distribution_2017",
+          "locator": "Distributional tables and accompanying notes",
+          "support": "supports"
+        },
+        {
+          "source_record_id": "crs_salt_cap_2018",
+          "locator": "Overview and policy discussion",
+          "support": "qualifies"
+        }
+      ]
+    }
+  ],
+  "narrow_benefit_indicators": [
+    {
+      "id": "indicator_geographic_concentration",
+      "label": "Geographic concentration",
+      "signal": "possible",
+      "rationale": "The affected deduction is connected to state and local tax exposure, so benefits and burdens may be geographically uneven.",
+      "evidence_ids": ["claim_distribution_varies"]
+    },
+    {
+      "id": "indicator_household_specific_exclusion",
+      "label": "Household-specific exclusion",
+      "signal": "unknown",
+      "rationale": "The POC does not evaluate household records and therefore cannot classify individual household effects.",
+      "evidence_ids": ["claim_salt_cap_scope"]
+    }
+  ],
+  "model_scenarios": [
+    {
+      "id": "scenario_qualitative_distribution",
+      "label": "Qualitative aggregate distribution screen",
+      "model_type": "qualitative",
+      "assumptions": [
+        "Only public statutory text and public aggregate analyses are used.",
+        "No household financial records are collected, transmitted, or stored.",
+        "The scenario identifies questions for later modeling rather than estimating household tax liability."
+      ],
+      "outputs": [
+        "Flag provision for aggregate distributional review.",
+        "Record uncertainty around geography, itemization, and interaction with other TCJA provisions."
+      ],
+      "uses_household_financial_data": false
+    }
+  ],
+  "perspective_profiles": [
+    {
+      "id": "profile_general_public",
+      "label": "General public reader",
+      "questions": [
+        "What changed?",
+        "Who might be affected in broad public terms?",
+        "What evidence supports the answer?"
+      ],
+      "weighting_notes": "Prioritize plain-language traceability and clear uncertainty labels."
+    },
+    {
+      "id": "profile_policy_reviewer",
+      "label": "Policy reviewer",
+      "questions": [
+        "Which provision text anchors the claim?",
+        "Which public analyses qualify or support the distributional interpretation?",
+        "What work is explicitly out of scope for this POC?"
+      ],
+      "weighting_notes": "Prioritize source traceability, schema compliance, and out-of-scope boundaries."
+    }
+  ],
+  "expected_outputs": {
+    "plain_language_summary": "Public Law 115-97 capped the federal itemized deduction for state and local taxes. This POC records the provision, evidence, uncertainty, and qualitative distribution questions without household-level tax modeling.",
+    "known_limits": [
+      "No broad bill ingestion is performed.",
+      "No full tax microsimulation is performed.",
+      "No live congressional monitoring is performed.",
+      "No state-level modeling is performed.",
+      "No household financial data is transmitted or stored."
+    ]
+  }
+}

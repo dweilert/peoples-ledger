@@ -1,0 +1,38 @@
+[
+  {
+    "id": "pl115_97_public_law",
+    "title": "Public Law 115-97: Tax Cuts and Jobs Act",
+    "publisher": "U.S. Government Publishing Office",
+    "url": "https://www.govinfo.gov/app/details/PLAW-115publ97",
+    "snapshot_date": "2026-07-22",
+    "source_type": "statute",
+    "integrity": {
+      "snapshot_method": "manual",
+      "content_hash": "manual-snapshot-pl115-97-2026-07-22"
+    }
+  },
+  {
+    "id": "jct_tcja_distribution_2017",
+    "title": "Distributional Effects Of The Conference Agreement For H.R. 1, The Tax Cuts And Jobs Act",
+    "publisher": "Joint Committee on Taxation",
+    "url": "https://www.jct.gov/publications/2017/jcx-68-17/",
+    "snapshot_date": "2026-07-22",
+    "source_type": "government_analysis",
+    "integrity": {
+      "snapshot_method": "manual",
+      "content_hash": "manual-snapshot-jcx-68-17-2026-07-22"
+    }
+  },
+  {
+    "id": "crs_salt_cap_2018",
+    "title": "The State and Local Tax Deduction for Individuals",
+    "publisher": "Congressional Research Service",
+    "url": "https://crsreports.congress.gov/product/pdf/IF/IF11098",
+    "snapshot_date": "2026-07-22",
+    "source_type": "government_analysis",
+    "integrity": {
+      "snapshot_method": "manual",
+      "content_hash": "manual-snapshot-crs-if11098-2026-07-22"
+    }
+  }
+]
