@@ -7,6 +7,7 @@ from .ai_adapter import AIRequest, DeterministicTCJAProvider, ProviderNeutralAIA
 from .analysis import load_analysis_unit
 from .decision_ledger import DecisionLedger
 from .source_registry import SourceRegistry
+from .source_registry import load_source_snapshots
 
 
 def main() -> int:
@@ -18,6 +19,7 @@ def main() -> int:
 
     if args.command == "validate":
         SourceRegistry.load()
+        load_source_snapshots()
         unit = load_analysis_unit()
         print(json.dumps({"status": "ok", "analysis_unit": unit["id"]}, sort_keys=True))
         return 0

@@ -6,6 +6,7 @@
   "required": [
     "id",
     "timestamp",
+    "previous_entry_hash",
     "analysis_unit_id",
     "actor",
     "decision_type",
@@ -36,12 +37,14 @@
     "input_refs",
     "output_refs",
     "rationale",
-    "household_financial_data_present"
+    "household_financial_data_present",
+    "entry_hash"
   ],
   "additionalProperties": false,
   "properties": {
     "id": { "type": "string", "pattern": "^adl_[a-z0-9_-]+$" },
     "timestamp": { "type": "string", "minLength": 1 },
+    "previous_entry_hash": { "type": ["string", "null"] },
     "analysis_unit_id": { "type": "string", "minLength": 1 },
     "actor": { "type": "string", "minLength": 1 },
     "decision_type": { "type": "string", "minLength": 1 },
@@ -118,6 +121,7 @@
       "items": { "type": "string", "minLength": 1 }
     },
     "rationale": { "type": "string", "minLength": 1 },
-    "household_financial_data_present": { "type": "boolean" }
+    "household_financial_data_present": { "type": "boolean" },
+    "entry_hash": { "type": "string", "minLength": 1 }
   }
 }

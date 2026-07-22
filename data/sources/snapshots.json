@@ -1,0 +1,35 @@
+[
+  {
+    "source_record_id": "pl115_97_public_law",
+    "retrieved_at": "2026-07-22T00:00:00+00:00",
+    "url": "https://www.govinfo.gov/app/details/PLAW-115publ97",
+    "content_hash": "manual-snapshot-pl115-97-2026-07-22",
+    "locator_policy": "Manual POC locators use public law section numbers and stable source-record identifiers.",
+    "storage": {
+      "mode": "metadata_only",
+      "path": null
+    }
+  },
+  {
+    "source_record_id": "jct_tcja_distribution_2017",
+    "retrieved_at": "2026-07-22T00:00:00+00:00",
+    "url": "https://www.jct.gov/publications/2017/jcx-68-17/",
+    "content_hash": "manual-snapshot-jcx-68-17-2026-07-22",
+    "locator_policy": "Manual POC locators use report sections, table labels, and accompanying-note references.",
+    "storage": {
+      "mode": "metadata_only",
+      "path": null
+    }
+  },
+  {
+    "source_record_id": "crs_salt_cap_2018",
+    "retrieved_at": "2026-07-22T00:00:00+00:00",
+    "url": "https://crsreports.congress.gov/product/pdf/IF/IF11098",
+    "content_hash": "manual-snapshot-crs-if11098-2026-07-22",
+    "locator_policy": "Manual POC locators use report headings and topical sections.",
+    "storage": {
+      "mode": "metadata_only",
+      "path": null
+    }
+  }
+]

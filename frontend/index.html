@@ -31,6 +31,29 @@
         </div>
         <pre id="ledger" class="content"></pre>
       </section>
+      <section class="panel" data-local-only="household-privacy-prototype">
+        <h2>Local Privacy Check</h2>
+        <div class="local-grid">
+          <label>
+            Filing unit
+            <select id="filing-unit" data-local-only="true" autocomplete="off">
+              <option value="single">Single</option>
+              <option value="married">Married filing jointly</option>
+              <option value="head">Head of household</option>
+            </select>
+          </label>
+          <label>
+            Dependents
+            <input id="dependents" data-local-only="true" type="number" min="0" max="12" value="0" autocomplete="off">
+          </label>
+          <label class="checkbox-row">
+            <input id="itemizes" data-local-only="true" type="checkbox" autocomplete="off">
+            Itemizes deductions
+          </label>
+          <button id="clear-local" type="button">Clear local inputs</button>
+        </div>
+        <p id="local-result" class="content"></p>
+      </section>
     </main>
 
     <script src="app.js"></script>

@@ -3,12 +3,13 @@ from __future__ import annotations
 import sys
 import tempfile
 import unittest
+import json
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from peoples_ledger.ai_adapter import AIRequest, DeterministicTCJAProvider, ProviderNeutralAIAdapter
-from peoples_ledger.decision_ledger import DecisionLedger
+from peoples_ledger.decision_ledger import DecisionLedger, DecisionLedgerIntegrityError
 from peoples_ledger.privacy import HouseholdFinancialDataError, assert_no_household_financial_data
 
 
@@ -71,7 +72,35 @@ class PrivacyAiLedgerTests(unittest.TestCase):
                 payload={"public": "only"},
             )
             self.assertNotEqual(first["id"], second["id"])
+            self.assertIsNone(first["previous_entry_hash"])
+            self.assertEqual(second["previous_entry_hash"], first["entry_hash"])
             self.assertEqual([entry["action"] for entry in ledger.read_all()], ["first", "second"])
+
+    def test_decision_ledger_detects_mutation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "ledger.jsonl"
+            ledger = DecisionLedger(path)
+            entry = ledger.append(
+                analysis_unit_id="tcja_2017_representative_provisions",
+                actor="test",
+                action="first",
+                decision_type="test_decision",
+                model={"provider": "test", "name": "test-model", "version": "1.0"},
+                prompt_template_version="test-template-v1",
+                source_snapshot_ids=["in"],
+                source_hashes=["hash"],
+                baseline_id="current-law-2017-11-01",
+                model_scenario_id="canonical_base_v1",
+                structured_output={"result": "first"},
+                input_refs=["in"],
+                output_refs=["out"],
+                rationale="test append",
+                payload={"public": "only"},
+            )
+            entry["action"] = "mutated"
+            path.write_text(json.dumps(entry, sort_keys=True) + "\n", encoding="utf-8")
+            with self.assertRaises(DecisionLedgerIntegrityError):
+                ledger.read_all()
 
     def test_decision_ledger_rejects_private_payload_keys(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:

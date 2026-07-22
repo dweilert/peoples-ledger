@@ -16,6 +16,7 @@ def load_analysis_unit(path: Path = TCJA_ANALYSIS_UNIT_PATH) -> dict[str, Any]:
     assert_no_household_financial_data(unit)
     SchemaRegistry(SCHEMA_DIR).validate("analysis_unit", unit)
     _validate_source_links(unit, SourceRegistry.load())
+    assert_phase0_acceptance(unit)
     return unit
 
 
@@ -68,3 +69,42 @@ def assert_perspective_invariance(unit: dict[str, Any]) -> None:
         }
         if not required_constraints.issubset(constraints):
             raise ValueError(f"perspective {profile['id']} is missing required invariance constraints")
+
+
+def assert_phase0_acceptance(unit: dict[str, Any]) -> None:
+    if not 8 <= len(unit["provisions"]) <= 12:
+        raise ValueError("Phase 0 requires a representative 8-12 provision subset")
+
+    decision_ids = _ledger_decision_ids()
+    claim_ids = {claim["id"] for claim in unit["claims"]}
+    transformation_ids = {transformation["id"].replace("transform_", "", 1) for transformation in unit["statutory_transformations"]}
+
+    forbidden_terms = ("loophole", "corruption", "corrupt", "quid pro quo", "motive")
+    for provision in unit["provisions"]:
+        if provision["id"] not in transformation_ids:
+            raise ValueError(f"provision {provision['id']} has no statutory transformation")
+        if not provision["source_spans"]:
+            raise ValueError(f"provision {provision['id']} has no source spans")
+        for decision_id in provision["decision_ids"]:
+            if decision_id not in decision_ids:
+                raise ValueError(f"provision {provision['id']} references unknown decision {decision_id}")
+
+    for claim in unit["claims"]:
+        if not claim["evidence"]:
+            raise ValueError(f"claim {claim['id']} has no evidence")
+
+    for indicator in unit["narrow_benefit_indicators"]:
+        text = f"{indicator['label']} {indicator['rationale']}".lower()
+        if any(term in text for term in forbidden_terms):
+            raise ValueError(f"indicator {indicator['id']} uses prohibited shortcut language")
+        for evidence_id in indicator["evidence_ids"]:
+            if evidence_id not in claim_ids:
+                raise ValueError(f"indicator {indicator['id']} references unknown claim {evidence_id}")
+
+    assert_perspective_invariance(unit)
+
+
+def _ledger_decision_ids() -> set[str]:
+    from .decision_ledger import DecisionLedger
+
+    return {entry["id"] for entry in DecisionLedger().read_all()}

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from hashlib import sha256
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -9,6 +10,10 @@ from uuid import uuid4
 from .paths import DECISION_LEDGER_PATH, SCHEMA_DIR
 from .privacy import assert_no_household_financial_data
 from .schema_validator import SchemaRegistry
+
+
+class DecisionLedgerIntegrityError(ValueError):
+    """Raised when the append-only ledger hash chain is invalid."""
 
 
 class DecisionLedger:
@@ -58,6 +63,7 @@ class DecisionLedger:
         entry = {
             "id": entry_id,
             "timestamp": datetime.now(UTC).isoformat(),
+            "previous_entry_hash": self._last_entry_hash(),
             "analysis_unit_id": analysis_unit_id,
             "actor": actor,
             "decision_type": decision_type,
@@ -96,8 +102,9 @@ class DecisionLedger:
             "input_refs": input_refs,
             "output_refs": output_refs,
             "rationale": rationale,
-            "household_financial_data_present": False
+            "household_financial_data_present": False,
         }
+        entry["entry_hash"] = compute_entry_hash(entry)
         self.schema_registry.validate("ai_decision_ledger_entry", entry)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.path.open("a", encoding="utf-8") as handle:
@@ -114,4 +121,32 @@ class DecisionLedger:
                     entry = json.loads(line)
                     self.schema_registry.validate("ai_decision_ledger_entry", entry)
                     entries.append(entry)
+        verify_hash_chain(entries)
         return entries
+
+    def _last_entry_hash(self) -> str | None:
+        if not self.path.exists():
+            return None
+        last_hash = None
+        with self.path.open(encoding="utf-8") as handle:
+            for line in handle:
+                if line.strip():
+                    last_hash = json.loads(line)["entry_hash"]
+        return last_hash
+
+
+def compute_entry_hash(entry: dict[str, Any]) -> str:
+    hashable = {key: value for key, value in entry.items() if key != "entry_hash"}
+    body = json.dumps(hashable, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return "sha256:" + sha256(body).hexdigest()
+
+
+def verify_hash_chain(entries: list[dict[str, Any]]) -> None:
+    previous_hash = None
+    for entry in entries:
+        if entry["previous_entry_hash"] != previous_hash:
+            raise DecisionLedgerIntegrityError(f"ledger hash chain is broken at {entry['id']}")
+        expected_hash = compute_entry_hash(entry)
+        if entry["entry_hash"] != expected_hash:
+            raise DecisionLedgerIntegrityError(f"ledger entry hash mismatch at {entry['id']}")
+        previous_hash = entry["entry_hash"]

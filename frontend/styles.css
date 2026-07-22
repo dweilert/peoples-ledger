@@ -74,6 +74,37 @@ main {
   margin-bottom: 12px;
 }
 
+.local-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  align-items: end;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 650;
+}
+
+select,
+input {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--ink);
+  font: inherit;
+  min-height: 38px;
+  padding: 8px 10px;
+}
+
+.checkbox-row {
+  align-items: center;
+  display: flex;
+  min-height: 38px;
+}
+
 button {
   appearance: none;
   border: 1px solid var(--accent-dark);

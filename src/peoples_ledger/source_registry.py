@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from .paths import SCHEMA_DIR, SOURCE_REGISTRY_PATH
+from .paths import SCHEMA_DIR, SOURCE_REGISTRY_PATH, SOURCE_SNAPSHOT_MANIFEST_PATH
 from .schema_validator import SchemaRegistry
 
 
@@ -30,3 +30,18 @@ class SourceRegistry:
 
     def all(self) -> list[dict[str, Any]]:
         return list(self.records.values())
+
+
+def load_source_snapshots(path: Path = SOURCE_SNAPSHOT_MANIFEST_PATH) -> list[dict[str, Any]]:
+    with path.open(encoding="utf-8") as handle:
+        snapshots = json.load(handle)
+    schema_registry = SchemaRegistry(SCHEMA_DIR)
+    source_registry = SourceRegistry.load()
+    for snapshot in snapshots:
+        schema_registry.validate("source_snapshot", snapshot)
+        source_record = source_registry.require(snapshot["source_record_id"])
+        if snapshot["url"] != source_record["url"]:
+            raise ValueError(f"snapshot URL mismatch for {snapshot['source_record_id']}")
+        if snapshot["content_hash"] != source_record["integrity"]["content_hash"]:
+            raise ValueError(f"snapshot hash mismatch for {snapshot['source_record_id']}")
+    return snapshots

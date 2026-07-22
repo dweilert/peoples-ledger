@@ -6,7 +6,8 @@
 - `src/peoples_ledger/`: backend/domain code, source registry, decision ledger, privacy guard, AI adapter, CLI, and local HTTP API.
 - `frontend/`: static browser UI for inspecting the bundled TCJA analysis unit through the local API.
 - `data/sources/registry.json`: initial public-source registry.
-- `data/exemplars/tcja_2017_salt_cap_analysis_unit.json`: manually curated TCJA analysis unit.
+- `data/sources/snapshots.json`: source snapshot manifest.
+- `data/exemplars/tcja_2017_representative_provisions_analysis_unit.json`: manually curated TCJA analysis unit.
 - `tests/`: unit, schema, regression, and integration tests.
 
 ## Version 0.3 Alignment

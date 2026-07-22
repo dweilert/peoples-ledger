@@ -49,4 +49,25 @@ document.querySelector("#summarize").addEventListener("click", async () => {
   await refresh();
 });
 
+function updateLocalPrivacyCheck() {
+  const filingUnit = document.querySelector("#filing-unit").value;
+  const dependents = Number(document.querySelector("#dependents").value || 0);
+  const itemizes = document.querySelector("#itemizes").checked;
+  const tags = [filingUnit, dependents > 0 ? "dependents" : "no dependents", itemizes ? "itemizer" : "standard deduction"];
+  document.querySelector("#local-result").textContent = `Local only: ${tags.join(", ")}. No household financial values are collected or sent.`;
+}
+
+for (const element of document.querySelectorAll("[data-local-only='true']")) {
+  element.addEventListener("input", updateLocalPrivacyCheck);
+  element.addEventListener("change", updateLocalPrivacyCheck);
+}
+
+document.querySelector("#clear-local").addEventListener("click", () => {
+  document.querySelector("#filing-unit").value = "single";
+  document.querySelector("#dependents").value = "0";
+  document.querySelector("#itemizes").checked = false;
+  updateLocalPrivacyCheck();
+});
+
+updateLocalPrivacyCheck();
 refresh();

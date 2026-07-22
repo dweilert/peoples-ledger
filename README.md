@@ -14,6 +14,8 @@ This repository establishes executable foundations for:
 
 The POC is aligned to the Foundational Product and System Design v0.3 acceptance criteria for the bounded manual exemplar: a representative 8-12 provision TCJA subset, source spans, deterministic statutory-transformation records, governed model scenarios, three perspective profiles, perspective invariance checks, and complete AI Decision Ledger provenance fields.
 
+See `docs/phase-0-acceptance-checklist.md` for the Phase 0 acceptance mapping.
+
 Licensing and intellectual-property decisions are intentionally deferred.
 
 ## Quick Start
@@ -25,6 +27,8 @@ make run
 ```
 
 Then open `frontend/index.html` or call the local API at `http://127.0.0.1:8787`.
+
+CI runs the same `make validate` and `make test` targets on pushes and pull requests.
 
 ## Scope Boundaries
 
