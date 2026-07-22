@@ -21,7 +21,7 @@ class Handler(BaseHTTPRequestHandler):
             self._json({"status": "ok"})
         elif self.path == "/sources":
             self._json({"sources": SourceRegistry.load().all()})
-        elif self.path == "/analysis-units/tcja-2017-salt-cap":
+        elif self.path in {"/analysis-units/tcja-2017-salt-cap", "/analysis-units/tcja-2017-representative-provisions"}:
             self._json(load_analysis_unit())
         elif self.path == "/ai-decision-ledger":
             self._json({"entries": DecisionLedger().read_all()})
@@ -29,7 +29,10 @@ class Handler(BaseHTTPRequestHandler):
             self._json({"error": "not found"}, status=404)
 
     def do_POST(self) -> None:
-        if self.path != "/analysis-units/tcja-2017-salt-cap/summarize":
+        if self.path not in {
+            "/analysis-units/tcja-2017-salt-cap/summarize",
+            "/analysis-units/tcja-2017-representative-provisions/summarize",
+        }:
             self._json({"error": "not found"}, status=404)
             return
         unit = load_analysis_unit()

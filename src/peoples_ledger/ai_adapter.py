@@ -47,9 +47,9 @@ class DeterministicTCJAProvider:
     def complete(self, request: AIRequest) -> AIResponse:
         assert_no_household_financial_data(request.__dict__)
         text = (
-            "The TCJA analysis unit identifies the SALT deduction cap as a provision "
-            "with distributional effects that vary by geography and itemization status. "
-            "The POC records evidence and uncertainty but does not run household-level "
-            "tax calculations."
+            "The TCJA Phase 0 analysis unit covers ten representative federal tax "
+            "provisions across individual, business, estate, and international tax areas. "
+            "The POC records evidence, statutory-transformation snapshots, perspective "
+            "invariance, and uncertainty but does not run household-level tax calculations."
         )
         return AIResponse(provider=self.name, model=self.model, model_version=self.version, text=text, source_refs=request.source_refs)

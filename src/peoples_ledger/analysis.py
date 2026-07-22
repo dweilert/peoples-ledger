@@ -21,6 +21,13 @@ def load_analysis_unit(path: Path = TCJA_ANALYSIS_UNIT_PATH) -> dict[str, Any]:
 
 def _validate_source_links(unit: dict[str, Any], source_registry: SourceRegistry) -> None:
     referenced = set(unit["legislative_document"]["source_record_ids"])
+    provision_ids = {provision["id"] for provision in unit["provisions"]}
+    transformation_ids = {
+        transformation["id"].replace("transform_", "", 1) for transformation in unit["statutory_transformations"]
+    }
+    missing_transformations = sorted(provision_ids - transformation_ids)
+    if missing_transformations:
+        raise ValueError(f"missing statutory transformations for provisions: {missing_transformations}")
     for provision in unit["provisions"]:
         referenced.update(provision["source_record_ids"])
         for source_span in provision["source_spans"]:

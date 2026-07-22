@@ -34,8 +34,8 @@ class BackendIntegrationTests(unittest.TestCase):
         self.assertEqual(self.get_json("/health"), {"status": "ok"})
 
     def test_analysis_unit_endpoint(self) -> None:
-        unit = self.get_json("/analysis-units/tcja-2017-salt-cap")
-        self.assertEqual(unit["id"], "tcja_2017_salt_cap")
+        unit = self.get_json("/analysis-units/tcja-2017-representative-provisions")
+        self.assertEqual(unit["id"], "tcja_2017_representative_provisions")
         self.assertEqual(unit["status"], "manual_exemplar")
 
     def test_sources_endpoint(self) -> None:

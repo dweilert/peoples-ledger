@@ -22,6 +22,7 @@ class PrivacyAiLedgerTests(unittest.TestCase):
         response = adapter.complete(AIRequest(task="summarize", prompt="Summarize.", source_refs=["pl115_97_public_law"]))
         self.assertEqual(response.provider, "deterministic-test-double")
         self.assertEqual(response.model_version, "1.0")
+        self.assertIn("ten representative federal tax provisions", response.text)
         self.assertIn("does not run household-level tax calculations", response.text)
 
     def test_ai_adapter_rejects_private_payload_keys(self) -> None:

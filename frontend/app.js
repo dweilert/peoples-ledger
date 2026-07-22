@@ -31,7 +31,7 @@ function renderLedger(payload) {
 async function refresh() {
   try {
     const [unit, sources, ledger] = await Promise.all([
-      fetchJson("/analysis-units/tcja-2017-salt-cap"),
+      fetchJson("/analysis-units/tcja-2017-representative-provisions"),
       fetchJson("/sources"),
       fetchJson("/ai-decision-ledger")
     ]);
@@ -45,7 +45,7 @@ async function refresh() {
 
 document.querySelector("#refresh").addEventListener("click", refresh);
 document.querySelector("#summarize").addEventListener("click", async () => {
-  await fetchJson("/analysis-units/tcja-2017-salt-cap/summarize", { method: "POST" });
+  await fetchJson("/analysis-units/tcja-2017-representative-provisions/summarize", { method: "POST" });
   await refresh();
 });
 

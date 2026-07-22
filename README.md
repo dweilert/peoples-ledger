@@ -12,7 +12,7 @@ This repository establishes executable foundations for:
 - a small local backend and static frontend
 - unit, schema, regression, and integration tests
 
-The POC is aligned to the Foundational Product and System Design v0.3 acceptance criteria for the bounded manual exemplar: source spans, deterministic statutory-transformation records, governed model scenarios, three perspective profiles, perspective invariance checks, and complete AI Decision Ledger provenance fields.
+The POC is aligned to the Foundational Product and System Design v0.3 acceptance criteria for the bounded manual exemplar: a representative 8-12 provision TCJA subset, source spans, deterministic statutory-transformation records, governed model scenarios, three perspective profiles, perspective invariance checks, and complete AI Decision Ledger provenance fields.
 
 Licensing and intellectual-property decisions are intentionally deferred.
 

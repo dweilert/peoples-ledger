@@ -11,7 +11,7 @@
 
 ## Version 0.3 Alignment
 
-The manual exemplar includes v0.3 acceptance scaffolding for deterministic statutory transformation records, source spans, publication states, governed model scenarios, three perspective profiles, perspective invariance checks, and complete AI Decision Ledger retention, disclosure, redaction, and supersession fields.
+The manual exemplar uses a ten-provision representative TCJA subset and includes v0.3 acceptance scaffolding for deterministic statutory transformation records, source spans, publication states, governed model scenarios, three perspective profiles, perspective invariance checks, and complete AI Decision Ledger retention, disclosure, redaction, and supersession fields.
 
 ## Explicit Non-Goals
 

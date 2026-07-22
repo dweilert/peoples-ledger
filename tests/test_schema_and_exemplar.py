@@ -26,7 +26,10 @@ class SchemaAndExemplarTests(unittest.TestCase):
 
     def test_tcja_analysis_unit_validates_and_links_sources(self) -> None:
         unit = load_analysis_unit()
-        self.assertEqual(unit["id"], "tcja_2017_salt_cap")
+        self.assertEqual(unit["id"], "tcja_2017_representative_provisions")
+        self.assertGreaterEqual(len(unit["provisions"]), 8)
+        self.assertLessEqual(len(unit["provisions"]), 12)
+        self.assertEqual(len(unit["provisions"]), len(unit["statutory_transformations"]))
         self.assertFalse(unit["model_scenarios"][0]["uses_household_financial_data"])
         self.assertEqual(unit["statutory_transformations"][0]["validation"]["deterministic"], True)
 
@@ -42,9 +45,9 @@ class SchemaAndExemplarTests(unittest.TestCase):
             unit = json.load(handle)
         self.assertEqual(
             unit["expected_outputs"]["plain_language_summary"],
-            "Public Law 115-97 capped the federal itemized deduction for state and local taxes. "
-            "This POC records the provision, evidence, uncertainty, and qualitative distribution "
-            "questions without household-level tax modeling.",
+            "Public Law 115-97 made many federal tax changes. This Phase 0 POC records ten "
+            "representative TCJA provisions, evidence, statutory-transformation snapshots, uncertainty, "
+            "and qualitative distribution questions without household-level tax modeling.",
         )
 
     def test_perspective_profiles_preserve_invariant_evidence_layer(self) -> None:
@@ -60,7 +63,9 @@ class SchemaAndExemplarTests(unittest.TestCase):
         registry = SchemaRegistry(SCHEMA_DIR)
         with ledger_path.open(encoding="utf-8") as handle:
             entries = [json.loads(line) for line in handle if line.strip()]
+        self.assertEqual(entries[0]["analysis_unit_id"], "tcja_2017_representative_provisions")
         self.assertEqual(entries[0]["model_scenario_id"], "canonical_base_v1")
+        self.assertEqual(entries[0]["structured_output"]["provision_count"], 10)
         self.assertEqual(entries[0]["disclosure_class"], "public_summary")
         self.assertIsNone(entries[0]["redaction_reason"])
         self.assertIsNone(entries[0]["supersedes_decision_id"])
