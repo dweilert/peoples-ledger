@@ -9,6 +9,10 @@
 - `data/exemplars/tcja_2017_salt_cap_analysis_unit.json`: manually curated TCJA analysis unit.
 - `tests/`: unit, schema, regression, and integration tests.
 
+## Version 0.3 Alignment
+
+The manual exemplar includes v0.3 acceptance scaffolding for deterministic statutory transformation records, source spans, publication states, governed model scenarios, three perspective profiles, perspective invariance checks, and complete AI Decision Ledger retention, disclosure, redaction, and supersession fields.
+
 ## Explicit Non-Goals
 
 The POC intentionally does not begin broad bill ingestion, full tax microsimulation, live congressional monitoring, or state-level modeling.

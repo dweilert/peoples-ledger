@@ -9,6 +9,7 @@
     "status",
     "legislative_document",
     "provisions",
+    "statutory_transformations",
     "claims",
     "narrow_benefit_indicators",
     "model_scenarios",
@@ -25,6 +26,11 @@
       "type": "array",
       "minItems": 1,
       "items": { "$ref": "provision.schema.json" }
+    },
+    "statutory_transformations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "statutory_transformation.schema.json" }
     },
     "claims": {
       "type": "array",

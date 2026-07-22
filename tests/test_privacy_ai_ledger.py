@@ -21,6 +21,7 @@ class PrivacyAiLedgerTests(unittest.TestCase):
         adapter = ProviderNeutralAIAdapter(DeterministicTCJAProvider())
         response = adapter.complete(AIRequest(task="summarize", prompt="Summarize.", source_refs=["pl115_97_public_law"]))
         self.assertEqual(response.provider, "deterministic-test-double")
+        self.assertEqual(response.model_version, "1.0")
         self.assertIn("does not run household-level tax calculations", response.text)
 
     def test_ai_adapter_rejects_private_payload_keys(self) -> None:
@@ -35,16 +36,34 @@ class PrivacyAiLedgerTests(unittest.TestCase):
             path = Path(tmpdir) / "ledger.jsonl"
             ledger = DecisionLedger(path)
             first = ledger.append(
+                analysis_unit_id="tcja_2017_salt_cap",
                 actor="test",
                 action="first",
+                decision_type="test_decision",
+                model={"provider": "test", "name": "test-model", "version": "1.0"},
+                prompt_template_version="test-template-v1",
+                source_snapshot_ids=["in"],
+                source_hashes=["hash"],
+                baseline_id="current-law-2017-11-01",
+                model_scenario_id="canonical_base_v1",
+                structured_output={"result": "first"},
                 input_refs=["in"],
                 output_refs=["out"],
                 rationale="test append",
                 payload={"public": "only"},
             )
             second = ledger.append(
+                analysis_unit_id="tcja_2017_salt_cap",
                 actor="test",
                 action="second",
+                decision_type="test_decision",
+                model={"provider": "test", "name": "test-model", "version": "1.0"},
+                prompt_template_version="test-template-v1",
+                source_snapshot_ids=["in"],
+                source_hashes=["hash"],
+                baseline_id="current-law-2017-11-01",
+                model_scenario_id="canonical_base_v1",
+                structured_output={"result": "second"},
                 input_refs=["in"],
                 output_refs=["out"],
                 rationale="test append again",
@@ -58,8 +77,17 @@ class PrivacyAiLedgerTests(unittest.TestCase):
             ledger = DecisionLedger(Path(tmpdir) / "ledger.jsonl")
             with self.assertRaises(HouseholdFinancialDataError):
                 ledger.append(
+                    analysis_unit_id="tcja_2017_salt_cap",
                     actor="test",
                     action="bad",
+                    decision_type="test_decision",
+                    model={"provider": "test", "name": "test-model", "version": "1.0"},
+                    prompt_template_version="test-template-v1",
+                    source_snapshot_ids=[],
+                    source_hashes=[],
+                    baseline_id="current-law-2017-11-01",
+                    model_scenario_id="canonical_base_v1",
+                    structured_output={"result": "bad"},
                     input_refs=[],
                     output_refs=[],
                     rationale="reject private data",

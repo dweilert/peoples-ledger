@@ -7,7 +7,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from peoples_ledger.analysis import load_analysis_unit
+from peoples_ledger.analysis import assert_perspective_invariance, load_analysis_unit, perspective_invariance_fingerprint
 from peoples_ledger.paths import SCHEMA_DIR, SOURCE_REGISTRY_PATH, TCJA_ANALYSIS_UNIT_PATH
 from peoples_ledger.schema_validator import SchemaRegistry
 from peoples_ledger.source_registry import SourceRegistry
@@ -28,6 +28,7 @@ class SchemaAndExemplarTests(unittest.TestCase):
         unit = load_analysis_unit()
         self.assertEqual(unit["id"], "tcja_2017_salt_cap")
         self.assertFalse(unit["model_scenarios"][0]["uses_household_financial_data"])
+        self.assertEqual(unit["statutory_transformations"][0]["validation"]["deterministic"], True)
 
     def test_validator_rejects_missing_required_field(self) -> None:
         with SOURCE_REGISTRY_PATH.open(encoding="utf-8") as handle:
@@ -45,6 +46,25 @@ class SchemaAndExemplarTests(unittest.TestCase):
             "This POC records the provision, evidence, uncertainty, and qualitative distribution "
             "questions without household-level tax modeling.",
         )
+
+    def test_perspective_profiles_preserve_invariant_evidence_layer(self) -> None:
+        unit = load_analysis_unit()
+        before = perspective_invariance_fingerprint(unit)
+        assert_perspective_invariance(unit)
+        after = perspective_invariance_fingerprint(unit)
+        self.assertEqual(before, after)
+        self.assertEqual(len(unit["perspective_profiles"]), 3)
+
+    def test_manual_decision_ledger_entry_validates_against_v03_fields(self) -> None:
+        ledger_path = Path(__file__).resolve().parents[1] / "data" / "ledger" / "ai_decision_ledger.jsonl"
+        registry = SchemaRegistry(SCHEMA_DIR)
+        with ledger_path.open(encoding="utf-8") as handle:
+            entries = [json.loads(line) for line in handle if line.strip()]
+        self.assertEqual(entries[0]["model_scenario_id"], "canonical_base_v1")
+        self.assertEqual(entries[0]["disclosure_class"], "public_summary")
+        self.assertIsNone(entries[0]["redaction_reason"])
+        self.assertIsNone(entries[0]["supersedes_decision_id"])
+        registry.validate("ai_decision_ledger_entry", entries[0])
 
 
 if __name__ == "__main__":

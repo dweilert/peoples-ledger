@@ -13,15 +13,57 @@
   "provisions": [
     {
       "id": "tcja_salt_cap_10000",
+      "analysis_unit_id": "tcja_2017_salt_cap",
       "legislative_document_id": "pl115_97",
       "label": "Cap on state and local tax deduction",
       "summary": "Limits the itemized deduction for state and local taxes to 10000 dollars for most filers during the federal individual tax changes enacted by Public Law 115-97.",
       "policy_area": "individual income tax deductions",
+      "baseline_id": "current-law-2017-11-01",
       "effective_window": {
         "start": "2018-01-01",
         "end": "2025-12-31"
       },
-      "source_record_ids": ["pl115_97_public_law", "crs_salt_cap_2018"]
+      "source_record_ids": ["pl115_97_public_law", "crs_salt_cap_2018"],
+      "source_spans": [
+        {
+          "source_record_id": "pl115_97_public_law",
+          "locator": "Section 11042",
+          "text_hash": "manual-span-sec-11042-salt-cap"
+        },
+        {
+          "source_record_id": "crs_salt_cap_2018",
+          "locator": "Overview and policy discussion",
+          "text_hash": "manual-span-crs-salt-overview"
+        }
+      ],
+      "publication_state": "provisional_analysis",
+      "decision_ids": ["adl_manual_tcja_salt_indicator"]
+    }
+  ],
+  "statutory_transformations": [
+    {
+      "id": "transform_tcja_salt_cap_10000",
+      "analysis_unit_id": "tcja_2017_salt_cap",
+      "operation": "manual_snapshot",
+      "source_span": {
+        "source_record_id": "pl115_97_public_law",
+        "locator": "Section 11042",
+        "text_hash": "manual-span-sec-11042-salt-cap"
+      },
+      "affected_authority": [
+        {
+          "type": "usc",
+          "citation": "26 USC 164"
+        }
+      ],
+      "before_text_hash": "manual-current-law-2017-11-01-26usc164",
+      "after_text_hash": "manual-pl115-97-sec11042-26usc164",
+      "validation": {
+        "deterministic": true,
+        "round_trip_valid": true,
+        "reconciled": true,
+        "unresolved_reason": null
+      }
     }
   ],
   "claims": [
@@ -30,6 +72,7 @@
       "claim": "The provision is narrow enough to track as a discrete analysis unit because it changes the treatment of one itemized deduction category.",
       "claim_type": "descriptive",
       "confidence": "high",
+      "publication_state": "source_verified",
       "evidence": [
         {
           "source_record_id": "pl115_97_public_law",
@@ -43,6 +86,7 @@
       "claim": "Expected effects vary across taxpayers because use of the deduction depends on itemization and exposure to state and local taxes.",
       "claim_type": "distributional",
       "confidence": "medium",
+      "publication_state": "provisional_analysis",
       "evidence": [
         {
           "source_record_id": "jct_tcja_distribution_2017",
@@ -75,8 +119,13 @@
   ],
   "model_scenarios": [
     {
-      "id": "scenario_qualitative_distribution",
-      "label": "Qualitative aggregate distribution screen",
+      "id": "canonical_base_v1",
+      "label": "Canonical current-law base qualitative screen",
+      "version": "1.0",
+      "methods_owner": "The People's Ledger methods group",
+      "baseline_id": "current-law-2017-11-01",
+      "data_vintage": "2017-11",
+      "time_horizons": [1, 5, 10],
       "model_type": "qualitative",
       "assumptions": [
         "Only public statutory text and public aggregate analyses are used.",
@@ -87,29 +136,101 @@
         "Flag provision for aggregate distributional review.",
         "Record uncertainty around geography, itemization, and interaction with other TCJA provisions."
       ],
-      "uses_household_financial_data": false
+      "uses_household_financial_data": false,
+      "approval_record": "methods-approval-poc-001",
+      "limitations": [
+        "This scenario identifies qualitative questions only.",
+        "It does not estimate taxpayer liability or distributional magnitudes."
+      ]
     }
   ],
   "perspective_profiles": [
     {
       "id": "profile_general_public",
       "label": "General public reader",
+      "version": "1.0",
+      "author": "The People's Ledger methods group",
+      "source_documents": ["Peoples_Ledger_Foundational_Design_v0.3.pdf"],
+      "priorities": {
+        "plain_language_traceability": 1.0,
+        "uncertainty_clarity": 0.8,
+        "technical_depth": 0.4
+      },
       "questions": [
         "What changed?",
         "Who might be affected in broad public terms?",
         "What evidence supports the answer?"
       ],
+      "reporting_emphasis": {
+        "preferred_horizons": [1, 5, 10]
+      },
+      "permitted_model_scenarios": ["canonical_base_v1"],
+      "hard_constraints": [
+        "Do not alter common evidence",
+        "Do not alter statutory transformations",
+        "Do not alter model-scenario parameters",
+        "Do not suppress material counterevidence"
+      ],
+      "limitations": ["This profile is explanatory and does not provide personal advice."],
       "weighting_notes": "Prioritize plain-language traceability and clear uncertainty labels."
     },
     {
       "id": "profile_policy_reviewer",
       "label": "Policy reviewer",
+      "version": "1.0",
+      "author": "The People's Ledger methods group",
+      "source_documents": ["Peoples_Ledger_Foundational_Design_v0.3.pdf"],
+      "priorities": {
+        "source_traceability": 1.0,
+        "method_integrity": 1.0,
+        "plain_language_traceability": 0.5
+      },
       "questions": [
         "Which provision text anchors the claim?",
         "Which public analyses qualify or support the distributional interpretation?",
         "What work is explicitly out of scope for this POC?"
       ],
+      "reporting_emphasis": {
+        "preferred_horizons": [1, 10]
+      },
+      "permitted_model_scenarios": ["canonical_base_v1"],
+      "hard_constraints": [
+        "Do not alter common evidence",
+        "Do not alter statutory transformations",
+        "Do not alter model-scenario parameters",
+        "Do not suppress material counterevidence"
+      ],
+      "limitations": ["This profile supports review workflow and is not a final legal analysis."],
       "weighting_notes": "Prioritize source traceability, schema compliance, and out-of-scope boundaries."
+    },
+    {
+      "id": "profile_fiscal_restraint",
+      "label": "Fiscal restraint",
+      "version": "1.0",
+      "author": "The People's Ledger methods group",
+      "source_documents": ["Peoples_Ledger_Foundational_Design_v0.3.pdf"],
+      "priorities": {
+        "ten_year_budget_effect": 1.0,
+        "administrative_cost": 0.6,
+        "distributional_equity": 0.3
+      },
+      "questions": [
+        "How should the provision be understood relative to current-law budget treatment?",
+        "Which fiscal uncertainties should remain visible?",
+        "Does the public evidence support a verified impact claim yet?"
+      ],
+      "reporting_emphasis": {
+        "preferred_horizons": [5, 10]
+      },
+      "permitted_model_scenarios": ["canonical_base_v1"],
+      "hard_constraints": [
+        "Do not alter common evidence",
+        "Do not alter statutory transformations",
+        "Do not alter model-scenario parameters",
+        "Do not suppress material counterevidence"
+      ],
+      "limitations": ["This profile may emphasize fiscal questions but cannot modify evidence or scenario parameters."],
+      "weighting_notes": "Prioritize budget visibility while retaining the common evidence layer."
     }
   ],
   "expected_outputs": {

@@ -41,8 +41,19 @@ class Handler(BaseHTTPRequestHandler):
             )
         )
         ledger_entry = DecisionLedger().append(
+            analysis_unit_id=unit["id"],
             actor=response.provider,
             action="summarize_analysis_unit",
+            decision_type="plain_language_summary",
+            model={"provider": response.provider, "name": response.model, "version": response.model_version},
+            prompt_template_version="plain-language-summary-poc-v1",
+            source_snapshot_ids=response.source_refs,
+            source_hashes=["manual-snapshot-pl115-97-2026-07-22"],
+            baseline_id=unit["model_scenarios"][0]["baseline_id"],
+            model_scenario_id=unit["model_scenarios"][0]["id"],
+            structured_output={"summary": response.text},
+            calibrated_confidence=0.82,
+            model_disagreement=0.0,
             input_refs=response.source_refs,
             output_refs=[unit["id"]],
             rationale="API-triggered deterministic TCJA summary.",

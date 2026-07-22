@@ -23,8 +23,41 @@ def _validate_source_links(unit: dict[str, Any], source_registry: SourceRegistry
     referenced = set(unit["legislative_document"]["source_record_ids"])
     for provision in unit["provisions"]:
         referenced.update(provision["source_record_ids"])
+        for source_span in provision["source_spans"]:
+            referenced.add(source_span["source_record_id"])
+    for transformation in unit["statutory_transformations"]:
+        referenced.add(transformation["source_span"]["source_record_id"])
     for claim in unit["claims"]:
         for evidence in claim["evidence"]:
             referenced.add(evidence["source_record_id"])
     for source_id in sorted(referenced):
         source_registry.require(source_id)
+
+
+def perspective_invariance_fingerprint(unit: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "legislative_document": unit["legislative_document"],
+        "provisions": unit["provisions"],
+        "statutory_transformations": unit["statutory_transformations"],
+        "claims": unit["claims"],
+        "model_scenarios": unit["model_scenarios"],
+    }
+
+
+def assert_perspective_invariance(unit: dict[str, Any]) -> None:
+    scenario_ids = {scenario["id"] for scenario in unit["model_scenarios"]}
+    if len(unit["perspective_profiles"]) < 3:
+        raise ValueError("v0.3 POC acceptance requires at least three perspective profiles")
+    for profile in unit["perspective_profiles"]:
+        for scenario_id in profile["permitted_model_scenarios"]:
+            if scenario_id not in scenario_ids:
+                raise ValueError(f"perspective {profile['id']} references unknown model scenario {scenario_id}")
+        constraints = set(profile["hard_constraints"])
+        required_constraints = {
+            "Do not alter common evidence",
+            "Do not alter statutory transformations",
+            "Do not alter model-scenario parameters",
+            "Do not suppress material counterevidence",
+        }
+        if not required_constraints.issubset(constraints):
+            raise ValueError(f"perspective {profile['id']} is missing required invariance constraints")
