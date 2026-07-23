@@ -25,6 +25,8 @@ make test
 make validate
 make assure
 make report
+make report-html
+make export-report
 make run
 ```
 
@@ -41,6 +43,8 @@ The first report assembly slice emits a public JSON report with source traces, d
 Browser-local privacy hardening has begun with a dependency-free JavaScript runtime test that proves local-only controls do not trigger network calls.
 
 Challenge-agent disagreement recording has begun with a deterministic test double that can write complete AI Decision Ledger entries.
+
+Report artifact packaging writes JSON, HTML, and a manifest with `sha256:` hashes.
 
 ## Scope Boundaries
 

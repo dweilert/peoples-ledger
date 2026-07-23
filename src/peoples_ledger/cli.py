@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from pathlib import Path
 
 from .ai_adapter import AIRequest, DeterministicTCJAProvider, ProviderNeutralAIAdapter
 from .analysis import load_analysis_unit
@@ -11,6 +12,7 @@ from .source_registry import load_source_snapshots
 from .source_ingestion import validate_source_ingestion_fixtures
 from .assurance import run_assurance_gate
 from .reporting import build_public_report, build_public_report_html
+from .report_artifacts import export_report_artifacts
 from .challenge_agents import record_challenge_comparison, record_challenge_review
 from .corrections import record_correction
 
@@ -22,6 +24,8 @@ def main() -> int:
     subcommands.add_parser("assure", help="run the publication assurance gate")
     subcommands.add_parser("report", help="build the public POC report JSON")
     subcommands.add_parser("report-html", help="build the public POC report HTML")
+    export_parser = subcommands.add_parser("export-report", help="write report JSON, HTML, and artifact manifest")
+    export_parser.add_argument("--output-dir", default=None, help="directory for generated report artifacts")
     subcommands.add_parser("challenge-review", help="record a deterministic challenge-agent review")
     subcommands.add_parser("challenge-compare", help="record deterministic multi-agent challenge comparison")
     subcommands.add_parser("record-correction", help="record the deterministic correction fixture")
@@ -59,6 +63,12 @@ def main() -> int:
 
     if args.command == "report-html":
         print(build_public_report_html())
+        return 0
+
+    if args.command == "export-report":
+        output_dir = Path(args.output_dir) if args.output_dir else None
+        manifest = export_report_artifacts(output_dir) if output_dir else export_report_artifacts()
+        print(json.dumps(manifest, sort_keys=True))
         return 0
 
     if args.command == "challenge-review":

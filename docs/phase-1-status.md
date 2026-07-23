@@ -39,6 +39,7 @@ Status: implemented for JSON and static HTML report.
 
 - `make report` emits a public JSON report.
 - `make report-html` emits a static HTML report.
+- `make export-report` writes JSON, HTML, and a manifest with artifact hashes.
 - The backend exposes `/reports/tcja-2017-representative-provisions`.
 - The backend exposes `/reports/tcja-2017-representative-provisions.html`.
 - Report output includes source manifest, decision trace, model scenarios, perspective profiles, publication decision, and assurance checks.
@@ -96,7 +97,7 @@ These are useful but no longer block the first Phase 1 POC slice:
 - add real Playwright browser request-interception tests
 - add more statutory transformation operation fixtures
 - add authoritative post-enactment round-trip fixtures
-- add richer static HTML styling and downloadable artifact packaging
+- add richer static HTML styling
 - add more correction workflow fixtures and correction-derived regression tests
 - add more risk scoring dimensions as new automation paths create new risks
 - add live-model challenge agents after governance and prompt-template controls exist
