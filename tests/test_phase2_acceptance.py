@@ -36,6 +36,7 @@ class Phase2AcceptanceTests(unittest.TestCase):
                 "candidate_review_ledger_stub_validates",
                 "candidate_audit_bundle_validates",
                 "candidate_status_surfaces_blockers",
+                "promotion_audit_status_surfaces_defined",
                 "frontend_candidate_status_target_defined",
                 "public_report_excludes_candidates",
                 "phase2_privacy_boundaries_preserved",

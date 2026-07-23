@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import copy
+import json
+import subprocess
 import sys
 import unittest
 from pathlib import Path
@@ -42,6 +44,21 @@ class CandidatePromotionAuditTests(unittest.TestCase):
 
     def test_promotion_audit_validation_passes(self) -> None:
         validate_candidate_promotion_audit_cross_check()
+
+    def test_promotion_audit_status_cli_outputs_json(self) -> None:
+        result = subprocess.run(
+            [sys.executable, "-m", "peoples_ledger.cli", "promotion-audit-status"],
+            check=True,
+            capture_output=True,
+            cwd=Path(__file__).resolve().parents[1],
+            env={"PYTHONPATH": "src"},
+            text=True,
+        )
+
+        payload = json.loads(result.stdout)
+        self.assertTrue(payload["candidate_ids_match"])
+        self.assertFalse(payload["public_report_includes_candidates"])
+        self.assertEqual(payload["candidate_summaries"][0]["promotion_decision"], "blocked")
 
     def test_promotion_audit_fails_on_decision_blocker_mismatch(self) -> None:
         entries = _decision_stubs()
