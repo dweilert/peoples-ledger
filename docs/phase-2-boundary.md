@@ -80,6 +80,8 @@ Initial status: added a candidate extraction policy registry for dry-run-only de
 
 Initial status: added candidate review records as human-review stubs. These records document blocking findings and required followups while keeping candidates draft-only and disallowing promotion approval.
 
+Initial status: added a candidate review ledger stub that records blocked human-review decisions in a restricted AI Decision Ledger entry during explicit calls or temporary-ledger assurance dry runs. It does not approve or promote candidates.
+
 ## Out Of Scope
 
 Phase 2 should not include:

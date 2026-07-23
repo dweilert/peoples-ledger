@@ -55,6 +55,8 @@ Candidate extraction policy is checked in separately from public prompt template
 
 Candidate review records are human-review stubs: they document blocking findings and required followups without approving promotion or changing draft candidate state.
 
+Candidate review ledger recording is also a stub: it can record a restricted blocked-review AI Decision Ledger entry, while assurance uses only a temporary ledger dry run.
+
 `candidate-status` prints draft Phase 2 candidate status and promotion blockers without appending ledger entries or changing public reports.
 
 The backend also exposes the same read-only payload at `/candidates/status` for local inspection without ledger writes or public-report changes.
