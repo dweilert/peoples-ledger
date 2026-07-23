@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import Callable
 
 from .analysis import load_analysis_unit
+from .candidate_audit import validate_candidate_audit_bundle
 from .candidate_extraction import validate_candidate_extraction_stub
 from .candidate_extraction_policy import validate_candidate_extraction_policy_registry
 from .candidate_promotion import validate_candidate_promotion_gate_reports
@@ -52,6 +53,7 @@ def run_assurance_gate() -> AssuranceReport:
         _run_check("candidate_extraction_ledger_stub", lambda: validate_candidate_extraction_stub(load_candidate_analysis_queue())),
         _run_check("candidate_review_records", validate_candidate_review_records),
         _run_check("candidate_review_ledger_stub", lambda: validate_candidate_review_ledger_stub(load_candidate_review_records())),
+        _run_check("candidate_audit_bundle", validate_candidate_audit_bundle),
         _run_check("prompt_template_registry", validate_prompt_template_registry),
         _run_check("decision_ledger_integrity", lambda: DecisionLedger().read_all()),
         _run_check("privacy_payload_guard", lambda: assert_no_household_financial_data(_public_payload_probe())),

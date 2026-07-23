@@ -32,6 +32,7 @@ make test-browser
 make report
 make report-html
 make export-report
+make export-candidate-audit
 make run
 ```
 
@@ -56,6 +57,8 @@ Candidate extraction policy is checked in separately from public prompt template
 Candidate review records are human-review stubs: they document blocking findings and required followups without approving promotion or changing draft candidate state.
 
 Candidate review ledger recording is also a stub: it can record a restricted blocked-review AI Decision Ledger entry, while assurance uses only a temporary ledger dry run.
+
+Candidate audit bundles are local artifacts exported with `make export-candidate-audit`. They collect candidate status, blockers, review records, and dry-run ledger summaries without adding candidate content to public reports.
 
 `candidate-status` prints draft Phase 2 candidate status and promotion blockers without appending ledger entries or changing public reports.
 

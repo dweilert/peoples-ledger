@@ -174,3 +174,5 @@ Candidate extraction policy tests validate dry-run policy records, deterministic
 Candidate review tests validate review-record schemas, candidate/source/provision linkage, blocking findings, ledger-entry requirements, draft preservation, household-data rejection, and rejection of approval or ready-for-promotion recommendations.
 
 Candidate review ledger tests validate restricted AI Decision Ledger entries for blocked review decisions, no candidate approval, draft preservation, review triggers, ledger readback, and assurance-time temporary-ledger validation.
+
+Candidate audit tests validate internal-only bundle scope, public-report exclusion, dry-run ledger summaries, artifact manifests, `sha256:` hashes, and CLI export.

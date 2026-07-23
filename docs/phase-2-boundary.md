@@ -82,6 +82,8 @@ Initial status: added candidate review records as human-review stubs. These reco
 
 Initial status: added a candidate review ledger stub that records blocked human-review decisions in a restricted AI Decision Ledger entry during explicit calls or temporary-ledger assurance dry runs. It does not approve or promote candidates.
 
+Initial status: added local candidate audit bundles for candidate status, promotion blockers, review records, and dry-run ledger summaries. These artifacts are explicitly internal candidate-audit output and remain separate from public reports.
+
 ## Out Of Scope
 
 Phase 2 should not include:
