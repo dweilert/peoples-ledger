@@ -46,6 +46,8 @@ Required tests:
 - Add risk-tier stubs for publication routing.
 - Add challenge-agent/test-double interfaces without depending on live model calls.
 
+Initial status: started with `make assure`, which runs the bundled assurance gate and reports named check results, risk tier, publication state, publication allowance, and review triggers.
+
 Required tests:
 
 - failed validators block publication-state advancement

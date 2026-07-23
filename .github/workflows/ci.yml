@@ -22,5 +22,8 @@ jobs:
       - name: Validate bundled data
         run: make validate
 
+      - name: Run assurance gate
+        run: make assure
+
       - name: Run tests
         run: make test

@@ -101,6 +101,7 @@ Purpose: keep the manual TCJA exemplar stable and useful.
 Before merge, CI must pass:
 
 - `make validate`
+- `make assure`
 - `make test`
 
 As the project grows, add gates for:

@@ -23,12 +23,13 @@ Licensing and intellectual-property decisions are intentionally deferred.
 ```bash
 make test
 make validate
+make assure
 make run
 ```
 
 Then open `frontend/index.html` or call the local API at `http://127.0.0.1:8787`.
 
-CI runs the same `make validate` and `make test` targets on pushes and pull requests.
+CI runs `make validate`, `make assure`, and `make test` on pushes and pull requests.
 
 The first Phase 1 workstream is fixture-first source ingestion; it is offline, deterministic, and covered by tests before any live connector work.
 

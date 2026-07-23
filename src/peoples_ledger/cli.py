@@ -9,12 +9,14 @@ from .decision_ledger import DecisionLedger
 from .source_registry import SourceRegistry
 from .source_registry import load_source_snapshots
 from .source_ingestion import validate_source_ingestion_fixtures
+from .assurance import run_assurance_gate
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="The People's Ledger POC")
     subcommands = parser.add_subparsers(dest="command", required=True)
     subcommands.add_parser("validate", help="validate bundled schemas and exemplar data")
+    subcommands.add_parser("assure", help="run the publication assurance gate")
     subcommands.add_parser("summarize-tcja", help="run deterministic TCJA exemplar summary")
     args = parser.parse_args()
 
@@ -25,6 +27,23 @@ def main() -> int:
         unit = load_analysis_unit()
         print(json.dumps({"status": "ok", "analysis_unit": unit["id"]}, sort_keys=True))
         return 0
+
+    if args.command == "assure":
+        report = run_assurance_gate()
+        print(
+            json.dumps(
+                {
+                    "status": "ok" if report.passed else "blocked",
+                    "publication_allowed": report.publication_allowed,
+                    "publication_state": report.publication_state,
+                    "risk_tier": report.risk_tier,
+                    "review_triggers": report.review_triggers,
+                    "checks": [check.__dict__ for check in report.checks],
+                },
+                sort_keys=True,
+            )
+        )
+        return 0 if report.passed else 1
 
     if args.command == "summarize-tcja":
         unit = load_analysis_unit()
