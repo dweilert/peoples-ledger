@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The People's Ledger POC</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <h1>The People's Ledger</h1>
+        <p>Milestones 1 and 2 proof of concept</p>
+      </div>
+      <button id="refresh" type="button">Refresh</button>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h2>TCJA Analysis Unit</h2>
+        <div id="analysis" class="content">Start the backend with <code>make run</code>.</div>
+      </section>
+      <section class="panel">
+        <h2>Source Registry</h2>
+        <div id="sources" class="content"></div>
+      </section>
+      <section class="panel">
+        <h2>AI Decision Ledger</h2>
+        <div class="toolbar">
+          <button id="summarize" type="button">Run deterministic summary</button>
+        </div>
+        <pre id="ledger" class="content"></pre>
+      </section>
+      <section class="panel" data-local-only="household-privacy-prototype">
+        <h2>Local Privacy Check</h2>
+        <div class="local-grid">
+          <label>
+            Filing unit
+            <select id="filing-unit" data-local-only="true" autocomplete="off">
+              <option value="single">Single</option>
+              <option value="married">Married filing jointly</option>
+              <option value="head">Head of household</option>
+            </select>
+          </label>
+          <label>
+            Dependents
+            <input id="dependents" data-local-only="true" type="number" min="0" max="12" value="0" autocomplete="off">
+          </label>
+          <label class="checkbox-row">
+            <input id="itemizes" data-local-only="true" type="checkbox" autocomplete="off">
+            Itemizes deductions
+          </label>
+          <button id="clear-local" type="button">Clear local inputs</button>
+        </div>
+        <p id="local-result" class="content"></p>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

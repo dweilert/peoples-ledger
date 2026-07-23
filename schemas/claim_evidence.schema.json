@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "claim_evidence.schema.json",
+  "title": "Claim and Evidence",
+  "type": "object",
+  "required": ["id", "claim", "claim_type", "confidence", "publication_state", "evidence"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]+$" },
+    "claim": { "type": "string", "minLength": 1 },
+    "claim_type": { "type": "string", "enum": ["descriptive", "distributional", "procedural", "uncertainty"] },
+    "confidence": { "type": "string", "enum": ["low", "medium", "high"] },
+    "publication_state": {
+      "type": "string",
+      "enum": ["source_verified", "machine_parsed", "provisional_analysis", "analyst_verified", "expert_reviewed", "corrected", "superseded"]
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["source_record_id", "locator", "support"],
+        "additionalProperties": false,
+        "properties": {
+          "source_record_id": { "type": "string", "minLength": 1 },
+          "locator": { "type": "string", "minLength": 1 },
+          "support": { "type": "string", "enum": ["supports", "qualifies", "contradicts"] }
+        }
+      }
+    }
+  }
+}

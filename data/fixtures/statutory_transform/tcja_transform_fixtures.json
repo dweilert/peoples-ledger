@@ -1,0 +1,106 @@
+[
+  {
+    "id": "fixture_replace_corporate_rate",
+    "operation": "replace_text",
+    "current_text": "Section 11(b) imposes graduated corporate rates with a highest rate of 35 percent.",
+    "target_text": "graduated corporate rates with a highest rate of 35 percent",
+    "replacement_text": "a flat corporate rate of 21 percent",
+    "expected_after_text": "Section 11(b) imposes a flat corporate rate of 21 percent.",
+    "authoritative_after_text": "Section 11(b) imposes a flat corporate rate of 21 percent.",
+    "expected_round_trip_text": "Section 11(b) imposes graduated corporate rates with a highest rate of 35 percent.",
+    "source_span": {
+      "source_record_id": "pl115_97_public_law",
+      "locator": "Section 13001",
+      "text_hash": "manual-span-sec-13001-corporate-rate"
+    },
+    "affected_authority": [
+      {
+        "type": "usc",
+        "citation": "26 USC 11"
+      }
+    ]
+  },
+  {
+    "id": "fixture_insert_salt_cap",
+    "operation": "insert_after",
+    "current_text": "Section 164 allows a deduction for specified state and local taxes.",
+    "target_text": "specified state and local taxes",
+    "insertion_text": ", subject to a 10000 dollar limitation for the covered period",
+    "expected_after_text": "Section 164 allows a deduction for specified state and local taxes, subject to a 10000 dollar limitation for the covered period.",
+    "authoritative_after_text": "Section 164 allows a deduction for specified state and local taxes, subject to a 10000 dollar limitation for the covered period.",
+    "expected_round_trip_text": "Section 164 allows a deduction for specified state and local taxes.",
+    "source_span": {
+      "source_record_id": "pl115_97_public_law",
+      "locator": "Section 11042",
+      "text_hash": "manual-span-sec-11042-salt-cap"
+    },
+    "affected_authority": [
+      {
+        "type": "usc",
+        "citation": "26 USC 164"
+      }
+    ]
+  },
+  {
+    "id": "fixture_delete_personal_exemption",
+    "operation": "delete_text",
+    "current_text": "Section 151 allows a deduction for personal exemptions for the taxable year.",
+    "target_text": "a deduction for personal exemptions",
+    "expected_after_text": "Section 151 allows  for the taxable year.",
+    "authoritative_after_text": "Section 151 allows  for the taxable year.",
+    "expected_round_trip_text": null,
+    "source_span": {
+      "source_record_id": "pl115_97_public_law",
+      "locator": "Section 11041",
+      "text_hash": "manual-span-sec-11041-personal-exemption"
+    },
+    "affected_authority": [
+      {
+        "type": "usc",
+        "citation": "26 USC 151"
+      }
+    ]
+  },
+  {
+    "id": "fixture_renumber_international_rule",
+    "operation": "renumber_text",
+    "current_text": "Subpart F includes section 951A after section 951.",
+    "target_text": "section 951A",
+    "replacement_text": "section 951B",
+    "expected_after_text": "Subpart F includes section 951B after section 951.",
+    "authoritative_after_text": "Subpart F includes section 951B after section 951.",
+    "expected_round_trip_text": "Subpart F includes section 951A after section 951.",
+    "source_span": {
+      "source_record_id": "pl115_97_public_law",
+      "locator": "Section 14201",
+      "text_hash": "manual-span-sec-14201-gilti"
+    },
+    "affected_authority": [
+      {
+        "type": "usc",
+        "citation": "26 USC 951A"
+      }
+    ]
+  },
+  {
+    "id": "fixture_replace_effective_date_window",
+    "operation": "replace_text",
+    "current_text": "The amendment applies to taxable years beginning after December 31, 2017 and before January 1, 2026.",
+    "target_text": "before January 1, 2026",
+    "replacement_text": "before January 1, 2027",
+    "expected_after_text": "The amendment applies to taxable years beginning after December 31, 2017 and before January 1, 2027.",
+    "authoritative_after_text": "The amendment applies to taxable years beginning after December 31, 2017 and before January 1, 2027.",
+    "expected_round_trip_text": "The amendment applies to taxable years beginning after December 31, 2017 and before January 1, 2026.",
+    "source_span": {
+      "source_record_id": "pl115_97_public_law",
+      "locator": "Selected temporary effective-date language",
+      "text_hash": "manual-span-effective-date-window"
+    },
+    "affected_authority": [
+      {
+        "type": "usc",
+        "citation": "26 USC temporary effective-date provisions"
+      }
+    ]
+  }
+]

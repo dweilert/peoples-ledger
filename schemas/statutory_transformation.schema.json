@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "statutory_transformation.schema.json",
+  "title": "Statutory Transformation",
+  "type": "object",
+  "required": [
+    "id",
+    "analysis_unit_id",
+    "operation",
+    "source_span",
+    "affected_authority",
+    "before_text_hash",
+    "after_text_hash",
+    "validation"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]+$" },
+    "analysis_unit_id": { "type": "string", "minLength": 1 },
+    "operation": { "type": "string", "enum": ["add", "modify", "delete", "renumber", "manual_snapshot"] },
+    "source_span": {
+      "type": "object",
+      "required": ["source_record_id", "locator", "text_hash"],
+      "additionalProperties": false,
+      "properties": {
+        "source_record_id": { "type": "string", "minLength": 1 },
+        "locator": { "type": "string", "minLength": 1 },
+        "text_hash": { "type": "string", "minLength": 1 }
+      }
+    },
+    "affected_authority": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["type", "citation"],
+        "additionalProperties": false,
+        "properties": {
+          "type": { "type": "string", "enum": ["usc", "public_law", "cfr", "program", "other"] },
+          "citation": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "before_text_hash": { "type": ["string", "null"] },
+    "after_text_hash": { "type": "string", "minLength": 1 },
+    "validation": {
+      "type": "object",
+      "required": ["deterministic", "round_trip_valid", "reconciled", "unresolved_reason"],
+      "additionalProperties": false,
+      "properties": {
+        "deterministic": { "type": "boolean" },
+        "round_trip_valid": { "type": "boolean" },
+        "reconciled": { "type": "boolean" },
+        "unresolved_reason": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

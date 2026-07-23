@@ -1,0 +1,427 @@
+{
+  "id": "tcja_2017_representative_provisions",
+  "title": "TCJA 2017 representative federal tax provision subset",
+  "status": "manual_exemplar",
+  "legislative_document": {
+    "id": "pl115_97",
+    "title": "Public Law 115-97: Tax Cuts and Jobs Act",
+    "jurisdiction": "United States",
+    "session": "115th Congress",
+    "document_type": "public_law",
+    "source_record_ids": ["pl115_97_public_law"]
+  },
+  "provisions": [
+    {
+      "id": "tcja_individual_rate_brackets",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "legislative_document_id": "pl115_97",
+      "label": "Individual income tax rate brackets",
+      "summary": "Changes federal individual income tax rates and bracket structure for tax years beginning after 2017 and before 2026.",
+      "policy_area": "individual income tax rates",
+      "baseline_id": "current-law-2017-11-01",
+      "effective_window": { "start": "2018-01-01", "end": "2025-12-31" },
+      "source_record_ids": ["pl115_97_public_law", "jct_tcja_distribution_2017"],
+      "source_spans": [
+        { "source_record_id": "pl115_97_public_law", "locator": "Section 11001", "text_hash": "manual-span-sec-11001-rate-brackets" }
+      ],
+      "publication_state": "provisional_analysis",
+      "decision_ids": ["adl_manual_tcja_representative_subset"]
+    },
+    {
+      "id": "tcja_standard_deduction_personal_exemption",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "legislative_document_id": "pl115_97",
+      "label": "Standard deduction increase and personal exemption suspension",
+      "summary": "Increases the standard deduction and suspends personal exemptions during the same individual tax window.",
+      "policy_area": "individual income tax deductions",
+      "baseline_id": "current-law-2017-11-01",
+      "effective_window": { "start": "2018-01-01", "end": "2025-12-31" },
+      "source_record_ids": ["pl115_97_public_law", "jct_tcja_distribution_2017"],
+      "source_spans": [
+        { "source_record_id": "pl115_97_public_law", "locator": "Sections 11021 and 11041", "text_hash": "manual-span-sec-11021-11041-standard-exemption" }
+      ],
+      "publication_state": "provisional_analysis",
+      "decision_ids": ["adl_manual_tcja_representative_subset"]
+    },
+    {
+      "id": "tcja_child_tax_credit",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "legislative_document_id": "pl115_97",
+      "label": "Child Tax Credit changes",
+      "summary": "Modifies the Child Tax Credit, related family credit rules, refundability, and phaseout parameters for the individual tax window.",
+      "policy_area": "family tax credits",
+      "baseline_id": "current-law-2017-11-01",
+      "effective_window": { "start": "2018-01-01", "end": "2025-12-31" },
+      "source_record_ids": ["pl115_97_public_law", "jct_tcja_distribution_2017"],
+      "source_spans": [
+        { "source_record_id": "pl115_97_public_law", "locator": "Section 11022", "text_hash": "manual-span-sec-11022-child-tax-credit" }
+      ],
+      "publication_state": "provisional_analysis",
+      "decision_ids": ["adl_manual_tcja_representative_subset"]
+    },
+    {
+      "id": "tcja_salt_cap_10000",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "legislative_document_id": "pl115_97",
+      "label": "Cap on state and local tax deduction",
+      "summary": "Limits the itemized deduction for state and local taxes to 10000 dollars for most filers during the individual tax window.",
+      "policy_area": "individual income tax deductions",
+      "baseline_id": "current-law-2017-11-01",
+      "effective_window": { "start": "2018-01-01", "end": "2025-12-31" },
+      "source_record_ids": ["pl115_97_public_law", "crs_salt_cap_2018"],
+      "source_spans": [
+        { "source_record_id": "pl115_97_public_law", "locator": "Section 11042", "text_hash": "manual-span-sec-11042-salt-cap" },
+        { "source_record_id": "crs_salt_cap_2018", "locator": "Overview and policy discussion", "text_hash": "manual-span-crs-salt-overview" }
+      ],
+      "publication_state": "provisional_analysis",
+      "decision_ids": ["adl_manual_tcja_representative_subset"]
+    },
+    {
+      "id": "tcja_qbi_deduction",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "legislative_document_id": "pl115_97",
+      "label": "Qualified Business Income deduction",
+      "summary": "Creates a deduction for certain pass-through business income, with limits and specified-service trade or business rules.",
+      "policy_area": "business and individual income tax",
+      "baseline_id": "current-law-2017-11-01",
+      "effective_window": { "start": "2018-01-01", "end": "2025-12-31" },
+      "source_record_ids": ["pl115_97_public_law", "jct_tcja_distribution_2017"],
+      "source_spans": [
+        { "source_record_id": "pl115_97_public_law", "locator": "Section 11011", "text_hash": "manual-span-sec-11011-qbi" }
+      ],
+      "publication_state": "provisional_analysis",
+      "decision_ids": ["adl_manual_tcja_representative_subset"]
+    },
+    {
+      "id": "tcja_corporate_rate",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "legislative_document_id": "pl115_97",
+      "label": "Corporate income tax rate",
+      "summary": "Changes the federal corporate income tax rate structure to a flat 21 percent rate.",
+      "policy_area": "corporate income tax",
+      "baseline_id": "current-law-2017-11-01",
+      "effective_window": { "start": "2018-01-01", "end": null },
+      "source_record_ids": ["pl115_97_public_law", "jct_tcja_distribution_2017"],
+      "source_spans": [
+        { "source_record_id": "pl115_97_public_law", "locator": "Section 13001", "text_hash": "manual-span-sec-13001-corporate-rate" }
+      ],
+      "publication_state": "provisional_analysis",
+      "decision_ids": ["adl_manual_tcja_representative_subset"]
+    },
+    {
+      "id": "tcja_bonus_depreciation",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "legislative_document_id": "pl115_97",
+      "label": "Bonus depreciation expansion",
+      "summary": "Expands immediate expensing for qualified property and sets phase-down timing rules.",
+      "policy_area": "business investment deductions",
+      "baseline_id": "current-law-2017-11-01",
+      "effective_window": { "start": "2017-09-27", "end": "2026-12-31" },
+      "source_record_ids": ["pl115_97_public_law", "jct_tcja_distribution_2017"],
+      "source_spans": [
+        { "source_record_id": "pl115_97_public_law", "locator": "Section 13201", "text_hash": "manual-span-sec-13201-bonus-depreciation" }
+      ],
+      "publication_state": "provisional_analysis",
+      "decision_ids": ["adl_manual_tcja_representative_subset"]
+    },
+    {
+      "id": "tcja_estate_tax_exemption",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "legislative_document_id": "pl115_97",
+      "label": "Estate and gift tax exemption increase",
+      "summary": "Temporarily increases the estate and gift tax basic exclusion amount.",
+      "policy_area": "estate and gift tax",
+      "baseline_id": "current-law-2017-11-01",
+      "effective_window": { "start": "2018-01-01", "end": "2025-12-31" },
+      "source_record_ids": ["pl115_97_public_law", "jct_tcja_distribution_2017"],
+      "source_spans": [
+        { "source_record_id": "pl115_97_public_law", "locator": "Section 11061", "text_hash": "manual-span-sec-11061-estate-tax" }
+      ],
+      "publication_state": "provisional_analysis",
+      "decision_ids": ["adl_manual_tcja_representative_subset"]
+    },
+    {
+      "id": "tcja_international_transition_tax",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "legislative_document_id": "pl115_97",
+      "label": "Transition tax on deferred foreign income",
+      "summary": "Requires certain U.S. shareholders to include accumulated post-1986 deferred foreign income under transition rules.",
+      "policy_area": "international business tax",
+      "baseline_id": "current-law-2017-11-01",
+      "effective_window": { "start": "2017-12-22", "end": null },
+      "source_record_ids": ["pl115_97_public_law", "jct_tcja_distribution_2017"],
+      "source_spans": [
+        { "source_record_id": "pl115_97_public_law", "locator": "Section 14103", "text_hash": "manual-span-sec-14103-transition-tax" }
+      ],
+      "publication_state": "provisional_analysis",
+      "decision_ids": ["adl_manual_tcja_representative_subset"]
+    },
+    {
+      "id": "tcja_gilti_fdii_beats",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "legislative_document_id": "pl115_97",
+      "label": "Selected international base-protection rules",
+      "summary": "Creates or modifies selected international tax rules including GILTI, FDII, and BEAT as part of the post-TCJA international regime.",
+      "policy_area": "international business tax",
+      "baseline_id": "current-law-2017-11-01",
+      "effective_window": { "start": "2018-01-01", "end": null },
+      "source_record_ids": ["pl115_97_public_law", "jct_tcja_distribution_2017"],
+      "source_spans": [
+        { "source_record_id": "pl115_97_public_law", "locator": "Sections 14201, 14202, and 14401", "text_hash": "manual-span-sec-14201-14202-14401-international-rules" }
+      ],
+      "publication_state": "provisional_analysis",
+      "decision_ids": ["adl_manual_tcja_representative_subset"]
+    }
+  ],
+  "statutory_transformations": [
+    {
+      "id": "transform_tcja_individual_rate_brackets",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "operation": "manual_snapshot",
+      "source_span": { "source_record_id": "pl115_97_public_law", "locator": "Section 11001", "text_hash": "manual-span-sec-11001-rate-brackets" },
+      "affected_authority": [{ "type": "usc", "citation": "26 USC 1" }],
+      "before_text_hash": "manual-current-law-2017-11-01-26usc1",
+      "after_text_hash": "manual-pl115-97-sec11001-26usc1",
+      "validation": { "deterministic": true, "round_trip_valid": true, "reconciled": true, "unresolved_reason": null }
+    },
+    {
+      "id": "transform_tcja_standard_deduction_personal_exemption",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "operation": "manual_snapshot",
+      "source_span": { "source_record_id": "pl115_97_public_law", "locator": "Sections 11021 and 11041", "text_hash": "manual-span-sec-11021-11041-standard-exemption" },
+      "affected_authority": [{ "type": "usc", "citation": "26 USC 63 and 26 USC 151" }],
+      "before_text_hash": "manual-current-law-2017-11-01-26usc63-151",
+      "after_text_hash": "manual-pl115-97-sec11021-11041-26usc63-151",
+      "validation": { "deterministic": true, "round_trip_valid": true, "reconciled": true, "unresolved_reason": null }
+    },
+    {
+      "id": "transform_tcja_child_tax_credit",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "operation": "manual_snapshot",
+      "source_span": { "source_record_id": "pl115_97_public_law", "locator": "Section 11022", "text_hash": "manual-span-sec-11022-child-tax-credit" },
+      "affected_authority": [{ "type": "usc", "citation": "26 USC 24" }],
+      "before_text_hash": "manual-current-law-2017-11-01-26usc24",
+      "after_text_hash": "manual-pl115-97-sec11022-26usc24",
+      "validation": { "deterministic": true, "round_trip_valid": true, "reconciled": true, "unresolved_reason": null }
+    },
+    {
+      "id": "transform_tcja_salt_cap_10000",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "operation": "manual_snapshot",
+      "source_span": { "source_record_id": "pl115_97_public_law", "locator": "Section 11042", "text_hash": "manual-span-sec-11042-salt-cap" },
+      "affected_authority": [{ "type": "usc", "citation": "26 USC 164" }],
+      "before_text_hash": "manual-current-law-2017-11-01-26usc164",
+      "after_text_hash": "manual-pl115-97-sec11042-26usc164",
+      "validation": { "deterministic": true, "round_trip_valid": true, "reconciled": true, "unresolved_reason": null }
+    },
+    {
+      "id": "transform_tcja_qbi_deduction",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "operation": "manual_snapshot",
+      "source_span": { "source_record_id": "pl115_97_public_law", "locator": "Section 11011", "text_hash": "manual-span-sec-11011-qbi" },
+      "affected_authority": [{ "type": "usc", "citation": "26 USC 199A" }],
+      "before_text_hash": null,
+      "after_text_hash": "manual-pl115-97-sec11011-26usc199a",
+      "validation": { "deterministic": true, "round_trip_valid": true, "reconciled": true, "unresolved_reason": null }
+    },
+    {
+      "id": "transform_tcja_corporate_rate",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "operation": "manual_snapshot",
+      "source_span": { "source_record_id": "pl115_97_public_law", "locator": "Section 13001", "text_hash": "manual-span-sec-13001-corporate-rate" },
+      "affected_authority": [{ "type": "usc", "citation": "26 USC 11" }],
+      "before_text_hash": "manual-current-law-2017-11-01-26usc11",
+      "after_text_hash": "manual-pl115-97-sec13001-26usc11",
+      "validation": { "deterministic": true, "round_trip_valid": true, "reconciled": true, "unresolved_reason": null }
+    },
+    {
+      "id": "transform_tcja_bonus_depreciation",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "operation": "manual_snapshot",
+      "source_span": { "source_record_id": "pl115_97_public_law", "locator": "Section 13201", "text_hash": "manual-span-sec-13201-bonus-depreciation" },
+      "affected_authority": [{ "type": "usc", "citation": "26 USC 168" }],
+      "before_text_hash": "manual-current-law-2017-11-01-26usc168",
+      "after_text_hash": "manual-pl115-97-sec13201-26usc168",
+      "validation": { "deterministic": true, "round_trip_valid": true, "reconciled": true, "unresolved_reason": null }
+    },
+    {
+      "id": "transform_tcja_estate_tax_exemption",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "operation": "manual_snapshot",
+      "source_span": { "source_record_id": "pl115_97_public_law", "locator": "Section 11061", "text_hash": "manual-span-sec-11061-estate-tax" },
+      "affected_authority": [{ "type": "usc", "citation": "26 USC 2010" }],
+      "before_text_hash": "manual-current-law-2017-11-01-26usc2010",
+      "after_text_hash": "manual-pl115-97-sec11061-26usc2010",
+      "validation": { "deterministic": true, "round_trip_valid": true, "reconciled": true, "unresolved_reason": null }
+    },
+    {
+      "id": "transform_tcja_international_transition_tax",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "operation": "manual_snapshot",
+      "source_span": { "source_record_id": "pl115_97_public_law", "locator": "Section 14103", "text_hash": "manual-span-sec-14103-transition-tax" },
+      "affected_authority": [{ "type": "usc", "citation": "26 USC 965" }],
+      "before_text_hash": "manual-current-law-2017-11-01-26usc965",
+      "after_text_hash": "manual-pl115-97-sec14103-26usc965",
+      "validation": { "deterministic": true, "round_trip_valid": true, "reconciled": true, "unresolved_reason": null }
+    },
+    {
+      "id": "transform_tcja_gilti_fdii_beats",
+      "analysis_unit_id": "tcja_2017_representative_provisions",
+      "operation": "manual_snapshot",
+      "source_span": { "source_record_id": "pl115_97_public_law", "locator": "Sections 14201, 14202, and 14401", "text_hash": "manual-span-sec-14201-14202-14401-international-rules" },
+      "affected_authority": [{ "type": "usc", "citation": "26 USC 250, 26 USC 951A, and 26 USC 59A" }],
+      "before_text_hash": "manual-current-law-2017-11-01-international-rules",
+      "after_text_hash": "manual-pl115-97-sec14201-14202-14401-international-rules",
+      "validation": { "deterministic": true, "round_trip_valid": true, "reconciled": true, "unresolved_reason": null }
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_representative_subset_scope",
+      "claim": "The manual exemplar covers ten representative TCJA provisions across individual, business, estate, and international tax areas without claiming complete analysis of the law.",
+      "claim_type": "descriptive",
+      "confidence": "high",
+      "publication_state": "source_verified",
+      "evidence": [
+        { "source_record_id": "pl115_97_public_law", "locator": "Sections 11001, 11011, 11021, 11022, 11041, 11042, 11061, 13001, 13201, 14103, 14201, 14202, and 14401", "support": "supports" }
+      ]
+    },
+    {
+      "id": "claim_distribution_varies",
+      "claim": "Expected effects vary across taxpayer groups, filing choices, business forms, asset ownership, and international exposure, so the POC records uncertainty rather than estimating household outcomes.",
+      "claim_type": "distributional",
+      "confidence": "medium",
+      "publication_state": "provisional_analysis",
+      "evidence": [
+        { "source_record_id": "jct_tcja_distribution_2017", "locator": "Distributional tables and accompanying notes", "support": "supports" },
+        { "source_record_id": "crs_salt_cap_2018", "locator": "Overview and policy discussion", "support": "qualifies" }
+      ]
+    },
+    {
+      "id": "claim_sunset_interactions",
+      "claim": "Several individual provisions are temporary while selected business and international provisions have different timing, creating interaction and budget-window questions for later modeling.",
+      "claim_type": "uncertainty",
+      "confidence": "medium",
+      "publication_state": "provisional_analysis",
+      "evidence": [
+        { "source_record_id": "pl115_97_public_law", "locator": "Effective-date and sunset language in selected provisions", "support": "supports" },
+        { "source_record_id": "jct_tcja_distribution_2017", "locator": "Conference agreement distributional analysis", "support": "qualifies" }
+      ]
+    }
+  ],
+  "narrow_benefit_indicators": [
+    {
+      "id": "indicator_geographic_concentration",
+      "label": "Geographic concentration",
+      "signal": "possible",
+      "rationale": "The SALT deduction cap is connected to state and local tax exposure, so benefits and burdens may be geographically uneven.",
+      "evidence_ids": ["claim_distribution_varies"]
+    },
+    {
+      "id": "indicator_entity_form_advantage",
+      "label": "Entity-form advantage",
+      "signal": "possible",
+      "rationale": "The QBI deduction and selected business provisions may make legal form and business classification material to outcomes.",
+      "evidence_ids": ["claim_distribution_varies"]
+    },
+    {
+      "id": "indicator_sunset_budget_window",
+      "label": "Sunset / budget-window effect",
+      "signal": "strong",
+      "rationale": "Multiple individual provisions in the exemplar have temporary effective windows, making sunset treatment central to interpretation.",
+      "evidence_ids": ["claim_sunset_interactions"]
+    },
+    {
+      "id": "indicator_household_specific_exclusion",
+      "label": "Household-specific exclusion",
+      "signal": "unknown",
+      "rationale": "The POC does not evaluate household records and therefore cannot classify individual household effects.",
+      "evidence_ids": ["claim_representative_subset_scope"]
+    }
+  ],
+  "model_scenarios": [
+    {
+      "id": "canonical_base_v1",
+      "label": "Canonical current-law base qualitative screen",
+      "version": "1.0",
+      "methods_owner": "The People's Ledger methods group",
+      "baseline_id": "current-law-2017-11-01",
+      "data_vintage": "2017-11",
+      "time_horizons": [1, 5, 10],
+      "model_type": "qualitative",
+      "assumptions": [
+        "Only public statutory text and public aggregate analyses are used.",
+        "No household financial records are collected, transmitted, or stored.",
+        "The scenario identifies questions for later modeling rather than estimating household tax liability.",
+        "Provision interactions are recorded as qualitative dependencies until deterministic models exist."
+      ],
+      "outputs": [
+        "Flag representative provisions for aggregate distributional review.",
+        "Record uncertainty around timing, sunsets, itemization, business form, asset ownership, and international exposure.",
+        "Preserve source spans and statutory-transformation records for each provision."
+      ],
+      "uses_household_financial_data": false,
+      "approval_record": "methods-approval-poc-001",
+      "limitations": [
+        "This scenario identifies qualitative questions only.",
+        "It does not estimate taxpayer liability or distributional magnitudes.",
+        "It is not a complete analysis of Public Law 115-97."
+      ]
+    }
+  ],
+  "perspective_profiles": [
+    {
+      "id": "profile_general_public",
+      "label": "General public reader",
+      "version": "1.0",
+      "author": "The People's Ledger methods group",
+      "source_documents": ["Peoples_Ledger_Foundational_Design_v0.3.pdf"],
+      "priorities": { "plain_language_traceability": 1.0, "uncertainty_clarity": 0.8, "technical_depth": 0.4 },
+      "questions": ["What changed?", "Who might be affected in broad public terms?", "What evidence supports the answer?"],
+      "reporting_emphasis": { "preferred_horizons": [1, 5, 10] },
+      "permitted_model_scenarios": ["canonical_base_v1"],
+      "hard_constraints": ["Do not alter common evidence", "Do not alter statutory transformations", "Do not alter model-scenario parameters", "Do not suppress material counterevidence"],
+      "limitations": ["This profile is explanatory and does not provide personal advice."],
+      "weighting_notes": "Prioritize plain-language traceability and clear uncertainty labels."
+    },
+    {
+      "id": "profile_policy_reviewer",
+      "label": "Policy reviewer",
+      "version": "1.0",
+      "author": "The People's Ledger methods group",
+      "source_documents": ["Peoples_Ledger_Foundational_Design_v0.3.pdf"],
+      "priorities": { "source_traceability": 1.0, "method_integrity": 1.0, "plain_language_traceability": 0.5 },
+      "questions": ["Which provision text anchors the claim?", "Which public analyses qualify or support the distributional interpretation?", "What work is explicitly out of scope for this POC?"],
+      "reporting_emphasis": { "preferred_horizons": [1, 10] },
+      "permitted_model_scenarios": ["canonical_base_v1"],
+      "hard_constraints": ["Do not alter common evidence", "Do not alter statutory transformations", "Do not alter model-scenario parameters", "Do not suppress material counterevidence"],
+      "limitations": ["This profile supports review workflow and is not a final legal analysis."],
+      "weighting_notes": "Prioritize source traceability, schema compliance, and out-of-scope boundaries."
+    },
+    {
+      "id": "profile_fiscal_restraint",
+      "label": "Fiscal restraint",
+      "version": "1.0",
+      "author": "The People's Ledger methods group",
+      "source_documents": ["Peoples_Ledger_Foundational_Design_v0.3.pdf"],
+      "priorities": { "ten_year_budget_effect": 1.0, "administrative_cost": 0.6, "distributional_equity": 0.3 },
+      "questions": ["How should the provision be understood relative to current-law budget treatment?", "Which fiscal uncertainties should remain visible?", "Does the public evidence support a verified impact claim yet?"],
+      "reporting_emphasis": { "preferred_horizons": [5, 10] },
+      "permitted_model_scenarios": ["canonical_base_v1"],
+      "hard_constraints": ["Do not alter common evidence", "Do not alter statutory transformations", "Do not alter model-scenario parameters", "Do not suppress material counterevidence"],
+      "limitations": ["This profile may emphasize fiscal questions but cannot modify evidence or scenario parameters."],
+      "weighting_notes": "Prioritize budget visibility while retaining the common evidence layer."
+    }
+  ],
+  "expected_outputs": {
+    "plain_language_summary": "Public Law 115-97 made many federal tax changes. This Phase 0 POC records ten representative TCJA provisions, evidence, statutory-transformation snapshots, uncertainty, and qualitative distribution questions without household-level tax modeling.",
+    "known_limits": [
+      "No broad bill ingestion is performed.",
+      "No full tax microsimulation is performed.",
+      "No live congressional monitoring is performed.",
+      "No state-level modeling is performed.",
+      "No household financial data is transmitted or stored.",
+      "The exemplar is representative and does not claim complete analysis of Public Law 115-97."
+    ]
+  }
+}

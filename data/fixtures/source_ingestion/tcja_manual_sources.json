@@ -1,0 +1,41 @@
+[
+  {
+    "id": "pl115_97_public_law",
+    "title": "Public Law 115-97: Tax Cuts and Jobs Act",
+    "publisher": "U.S. Government Publishing Office",
+    "url": "https://www.govinfo.gov/app/details/PLAW-115publ97",
+    "snapshot_date": "2026-07-22",
+    "retrieved_at": "2026-07-22T00:00:00+00:00",
+    "source_type": "statute",
+    "snapshot_method": "manual",
+    "locator_policy": "Manual POC locators use public law section numbers and stable source-record identifiers.",
+    "raw_snapshot_text": "POC fixture metadata for Public Law 115-97 sections used in the representative TCJA exemplar.",
+    "expected_content_hash": "sha256:84a38d53f5195abdea5f6b98fbbf9d0e068b18dd90a46312a5d897b67b6cc1e8"
+  },
+  {
+    "id": "jct_tcja_distribution_2017",
+    "title": "Distributional Effects Of The Conference Agreement For H.R. 1, The Tax Cuts And Jobs Act",
+    "publisher": "Joint Committee on Taxation",
+    "url": "https://www.jct.gov/publications/2017/jcx-68-17/",
+    "snapshot_date": "2026-07-22",
+    "retrieved_at": "2026-07-22T00:00:00+00:00",
+    "source_type": "government_analysis",
+    "snapshot_method": "manual",
+    "locator_policy": "Manual POC locators use report sections, table labels, and accompanying-note references.",
+    "raw_snapshot_text": "POC fixture metadata for JCT distributional analysis used to qualify representative TCJA claims.",
+    "expected_content_hash": "sha256:7ba5acb078699a4ac9d07064ffbfda839f168533feb9aae1159c32af3ae338d1"
+  },
+  {
+    "id": "crs_salt_cap_2018",
+    "title": "The State and Local Tax Deduction for Individuals",
+    "publisher": "Congressional Research Service",
+    "url": "https://crsreports.congress.gov/product/pdf/IF/IF11098",
+    "snapshot_date": "2026-07-22",
+    "retrieved_at": "2026-07-22T00:00:00+00:00",
+    "source_type": "government_analysis",
+    "snapshot_method": "manual",
+    "locator_policy": "Manual POC locators use report headings and topical sections.",
+    "raw_snapshot_text": "POC fixture metadata for CRS background on state and local tax deduction policy context.",
+    "expected_content_hash": "sha256:e98d083fefc77f202da30329cb50d42154e077e378bf284bc7165f71f31f9cbf"
+  }
+]

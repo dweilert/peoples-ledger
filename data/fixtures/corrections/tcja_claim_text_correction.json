@@ -1,0 +1,13 @@
+{
+  "id": "corr_tcja_claim_text_scope_poc",
+  "analysis_unit_id": "tcja_2017_representative_provisions",
+  "target_ref": "claim_representative_subset_scope",
+  "correction_type": "claim_text",
+  "root_cause": "POC regression fixture for preserving correction provenance when a claim is clarified without changing its cited evidence.",
+  "previous_output_ref": "claim_representative_subset_scope#pre-clarification",
+  "corrected_output_ref": "claim_representative_subset_scope#clarified",
+  "regression_test_ref": "tests/test_corrections.py::CorrectionTests::test_all_correction_fixtures_validate_and_preserve_unique_targets",
+  "supersedes_decision_id": "adl_manual_tcja_representative_subset",
+  "source_record_ids": ["pl115_97_public_law", "jct_tcja_distribution_2017"],
+  "publication_state": "corrected"
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "source_snapshot.schema.json",
+  "title": "Source Snapshot",
+  "type": "object",
+  "required": ["source_record_id", "retrieved_at", "url", "content_hash", "locator_policy", "storage"],
+  "additionalProperties": false,
+  "properties": {
+    "source_record_id": { "type": "string", "minLength": 1 },
+    "retrieved_at": { "type": "string", "minLength": 1 },
+    "url": { "type": "string", "minLength": 1 },
+    "content_hash": { "type": "string", "minLength": 1 },
+    "locator_policy": { "type": "string", "minLength": 1 },
+    "storage": {
+      "type": "object",
+      "required": ["mode", "path"],
+      "additionalProperties": false,
+      "properties": {
+        "mode": { "type": "string", "enum": ["metadata_only", "local_file", "external_pointer"] },
+        "path": { "type": ["string", "null"] }
+      }
+    }
+  }
+}
