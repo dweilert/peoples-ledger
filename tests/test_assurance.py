@@ -31,6 +31,7 @@ class AssuranceTests(unittest.TestCase):
             "candidate_extraction_policy_registry",
             "candidate_extraction_ledger_stub",
             "candidate_review_records",
+            "candidate_review_ledger_stub",
             "prompt_template_registry",
             "decision_ledger_integrity",
             "privacy_payload_guard",

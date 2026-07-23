@@ -8,7 +8,7 @@ from .candidate_extraction import validate_candidate_extraction_stub
 from .candidate_extraction_policy import CandidateExtractionPolicyRegistry, validate_candidate_extraction_policy_registry
 from .candidate_promotion import evaluate_candidate_promotion, validate_candidate_promotion_gate_reports
 from .candidate_queue import load_candidate_analysis_queue, validate_candidate_analysis_queue
-from .candidate_review import load_candidate_review_records, validate_candidate_review_records
+from .candidate_review import load_candidate_review_records, validate_candidate_review_ledger_stub, validate_candidate_review_records
 from .candidate_status import build_candidate_status
 from .paths import REPO_ROOT
 from .reporting import build_public_report
@@ -40,6 +40,7 @@ def run_phase2_acceptance() -> Phase2AcceptanceReport:
         _run_check("candidate_extraction_policy_registry", _candidate_extraction_policy_registry),
         _run_check("candidate_extraction_stub_validates", _candidate_extraction_stub_validates),
         _run_check("candidate_review_records_block", _candidate_review_records_block),
+        _run_check("candidate_review_ledger_stub_validates", _candidate_review_ledger_stub_validates),
         _run_check("candidate_status_surfaces_blockers", _candidate_status_surfaces_blockers),
         _run_check("frontend_candidate_status_target_defined", _frontend_candidate_status_target_defined),
         _run_check("public_report_excludes_candidates", _public_report_excludes_candidates),
@@ -121,6 +122,10 @@ def _candidate_review_records_block() -> None:
         _require(record["promotion_recommendation"] == "blocked", f"candidate review does not block promotion: {record['id']}")
         _require(record["publication_state_after_review"] == "draft", f"candidate review does not keep draft state: {record['id']}")
         _require(record["ledger_entry_required"], f"candidate review does not require ledger entry: {record['id']}")
+
+
+def _candidate_review_ledger_stub_validates() -> None:
+    validate_candidate_review_ledger_stub(load_candidate_review_records())
 
 
 def _candidate_status_surfaces_blockers() -> None:
