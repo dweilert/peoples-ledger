@@ -15,7 +15,7 @@ This repository establishes executable foundations for:
 
 The POC is aligned to the Foundational Product and System Design v0.3 acceptance criteria for the bounded manual exemplar: a representative 8-12 provision TCJA subset, source spans, deterministic statutory-transformation records, governed model scenarios, three perspective profiles, perspective invariance checks, and complete AI Decision Ledger provenance fields.
 
-See `docs/phase-0-acceptance-checklist.md` for the Phase 0 acceptance mapping, `docs/testing-strategy.md` for the integrated testing approach, `docs/phase-1-boundary.md` and `docs/phase-1-status.md` for Phase 1, and `docs/phase-2-boundary.md`, `docs/phase-2-status.md`, plus `docs/phase-2-promotion-contract.md` for Phase 2.
+See `docs/phase-0-acceptance-checklist.md` for the Phase 0 acceptance mapping, `docs/testing-strategy.md` for the integrated testing approach, `docs/phase-1-boundary.md` and `docs/phase-1-status.md` for Phase 1, and `docs/phase-2-boundary.md`, `docs/phase-2-status.md`, `docs/phase-2-promotion-contract.md`, plus `docs/phase-2-closure-checklist.md` for Phase 2.
 
 Licensing and intellectual-property decisions are intentionally deferred.
 
@@ -78,6 +78,8 @@ A blocked promotion decision AI Decision Ledger entry exists as an offline fixtu
 An internal promotion audit cross-check compares candidate status, promotion requests, source promotion manifests, review records, and decision stubs for consistent blockers and source refs.
 
 The same promotion audit cross-check is exposed through the read-only `promotion-audit-status` CLI command, `/candidates/promotion-audit` backend endpoint, and frontend promotion audit panel.
+
+Phase 2 is complete for the bounded POC. The closure checklist records the exit criteria, remaining intentional blockers, and Phase 3 entry criteria without starting Phase 3 work.
 
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
 

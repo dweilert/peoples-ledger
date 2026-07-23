@@ -4,7 +4,7 @@ This status page tracks the Phase 2 boundary defined in `docs/phase-2-boundary.m
 
 ## Current Checkpoint
 
-Status: candidate pipeline checkpoint implemented for one additional federal-tax source set.
+Status: complete for the bounded Phase 2 POC.
 
 Run the checkpoint with:
 
@@ -20,6 +20,15 @@ make test-browser
 ```
 
 ## Completed Slices
+
+### Phase 2 Closure
+
+Status: complete and covered by executable closure tests.
+
+- `docs/phase-2-closure-checklist.md` records the Phase 2 exit criteria.
+- Closure confirms the IRA 2022 source and candidate pipeline is fixture-only, draft-only, and blocked from public reporting.
+- Closure keeps promotion, public candidate reporting, live providers, broad ingestion, microsimulation, live monitoring, state modeling, household financial data handling, and final licensing/IP decisions blocked.
+- Phase 3 entry criteria are documented without starting Phase 3 work.
 
 ### Fixture-Only Source Acquisition
 
@@ -191,4 +200,4 @@ These are intentionally blocked in the current POC:
 
 ## Recommended Next Work
 
-The next useful unit is a Phase 2 closure checklist. It should declare Phase 2 complete for the bounded POC, list remaining intentional blockers, and define Phase 3 entry criteria without starting Phase 3 work.
+The next useful unit is Phase 3 planning only. It should choose a narrow, disabled-by-default promotion-gate planning slice without implementing promotion, public candidate reporting, live providers, or broader modeling.
