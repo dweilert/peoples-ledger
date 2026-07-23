@@ -68,6 +68,8 @@ The frontend includes a small Phase 2 candidate-status panel that displays draft
 
 The candidate-to-exemplar promotion contract is documented and covered by executable tests. It defines future schema, source, prompt, privacy, review, ledger, report, and risk gates while keeping promotion disabled in the current POC.
 
+Candidate promotion requests are represented as fixture-only blocked records. The schema and assurance gates disallow execution, public-report inclusion, ledger appends, live providers, and household financial data.
+
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
 
 The first report assembly slice emits a public JSON report with source traces, decision trace, model scenarios, perspective profiles, and assurance status.

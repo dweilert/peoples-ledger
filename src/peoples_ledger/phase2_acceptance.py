@@ -8,6 +8,7 @@ from .candidate_audit import build_candidate_audit_bundle, validate_candidate_au
 from .candidate_extraction import validate_candidate_extraction_stub
 from .candidate_extraction_policy import CandidateExtractionPolicyRegistry, validate_candidate_extraction_policy_registry
 from .candidate_promotion import evaluate_candidate_promotion, validate_candidate_promotion_gate_reports
+from .candidate_promotion_request import load_candidate_promotion_requests, validate_candidate_promotion_requests
 from .candidate_queue import load_candidate_analysis_queue, validate_candidate_analysis_queue
 from .candidate_review import load_candidate_review_records, validate_candidate_review_ledger_stub, validate_candidate_review_records
 from .candidate_status import build_candidate_status
@@ -38,6 +39,7 @@ def run_phase2_acceptance() -> Phase2AcceptanceReport:
         _run_check("source_acquisition_candidates_validate", _source_acquisition_candidates_validate),
         _run_check("candidate_queue_draft_only", _candidate_queue_draft_only),
         _run_check("candidate_promotion_reports_block", _candidate_promotion_reports_block),
+        _run_check("candidate_promotion_request_stub_validates", _candidate_promotion_request_stub_validates),
         _run_check("candidate_extraction_policy_registry", _candidate_extraction_policy_registry),
         _run_check("candidate_extraction_stub_validates", _candidate_extraction_stub_validates),
         _run_check("candidate_review_records_block", _candidate_review_records_block),
@@ -93,6 +95,30 @@ def _candidate_promotion_reports_block() -> None:
         _require(report["publication_state_after_evaluation"] == "draft", f"candidate did not remain draft: {candidate['id']}")
         blocker_gates = {blocker["gate"] for blocker in report["blockers"]}
         _require("promotion_disabled" in blocker_gates, f"promotion-disabled blocker missing: {candidate['id']}")
+
+
+def _candidate_promotion_request_stub_validates() -> None:
+    validate_candidate_promotion_requests()
+    requests = load_candidate_promotion_requests()
+    _require(requests, "candidate promotion request fixture is empty")
+    for request in requests:
+        _require(request["request_status"] == "blocked", f"promotion request is not blocked: {request['id']}")
+        _require(
+            not request["execution_policy"]["promotion_execution_allowed"],
+            f"promotion request allows execution: {request['id']}",
+        )
+        _require(
+            not request["execution_policy"]["public_report_inclusion_allowed"],
+            f"promotion request allows public report inclusion: {request['id']}",
+        )
+        _require(
+            not request["execution_policy"]["ledger_append_allowed"],
+            f"promotion request allows ledger append: {request['id']}",
+        )
+        _require(
+            not request["execution_policy"]["household_financial_data_allowed"],
+            f"promotion request allows household financial data: {request['id']}",
+        )
 
 
 def _candidate_extraction_stub_validates() -> None:

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "promotion_request_candidate_ira_2022_energy_tax_provisions_v1",
+    "candidate_analysis_unit_id": "candidate_ira_2022_energy_tax_provisions",
+    "phase": "phase2_promotion_request_stub",
+    "request_status": "blocked",
+    "target_publication_state": "provisional_analysis",
+    "requested_at": "2026-07-22T00:00:00Z",
+    "requested_by": "phase2_fixture",
+    "promotion_contract_ref": "docs/phase-2-promotion-contract.md",
+    "required_gates": [
+      "schema",
+      "source",
+      "extraction_prompt",
+      "privacy",
+      "human_review",
+      "ledger",
+      "public_report",
+      "risk"
+    ],
+    "current_blockers": [
+      {
+        "gate": "prompt_template",
+        "reason": "No promotion-specific prompt template is approved for candidate-to-exemplar use."
+      },
+      {
+        "gate": "human_review",
+        "reason": "Candidate review records are blocking stubs and cannot approve promotion."
+      },
+      {
+        "gate": "ledger",
+        "reason": "No promotion decision AI Decision Ledger entry exists."
+      },
+      {
+        "gate": "promotion_disabled",
+        "reason": "Phase 2 promotion request execution is disabled in the current POC."
+      }
+    ],
+    "candidate_source_refs": [
+      {
+        "source_record_id": "pl117_169_public_law",
+        "content_hash": "sha256:a4a55051c90ebbe990660bdfff380a2f4f593f2b60ae2893e9fd71339bb30837"
+      },
+      {
+        "source_record_id": "jct_ira_estimated_budget_effects_2022",
+        "content_hash": "sha256:8dd8c3105b6465097429ac3d39e71ad9c916c7dc9651b253c286be437aade014"
+      }
+    ],
+    "execution_policy": {
+      "promotion_execution_allowed": false,
+      "public_report_inclusion_allowed": false,
+      "ledger_append_allowed": false,
+      "live_provider_allowed": false,
+      "household_financial_data_allowed": false
+    },
+    "privacy": {
+      "uses_household_financial_data": false,
+      "egress_allowed": false,
+      "notes": "Promotion request fixtures contain only public source refs, blockers, and governance metadata."
+    }
+  }
+]
