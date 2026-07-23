@@ -170,3 +170,5 @@ Candidate frontend status tests validate the new API path is allowlisted, browse
 Phase 2 acceptance tests execute the current Phase 2 boundary as code: source acquisition, draft candidate queue, promotion blockers, extraction dry run, status surfaces, public-report exclusion, privacy boundaries, scope boundaries, assurance success, and CI gate presence.
 
 Candidate extraction policy tests validate dry-run policy records, deterministic-only providers, live-provider rejection, promotion-use rejection, required candidate source refs, missing source-ref rejection, and task allowlisting.
+
+Candidate review tests validate review-record schemas, candidate/source/provision linkage, blocking findings, ledger-entry requirements, draft preservation, household-data rejection, and rejection of approval or ready-for-promotion recommendations.

@@ -33,6 +33,9 @@ class CandidateStatusTests(unittest.TestCase):
         self.assertFalse(candidate["egress_allowed"])
         self.assertFalse(candidate["promotable"])
         self.assertIn("promotion_disabled", {blocker["gate"] for blocker in candidate["promotion_blockers"]})
+        self.assertEqual(candidate["review_status"], "review_required")
+        self.assertEqual(candidate["review_promotion_recommendation"], "blocked")
+        self.assertIn("blocking", {finding["severity"] for finding in candidate["review_findings"]})
 
     def test_candidate_status_cli_outputs_json(self) -> None:
         result = subprocess.run(

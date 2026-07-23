@@ -11,6 +11,7 @@ from .candidate_extraction_policy import validate_candidate_extraction_policy_re
 from .candidate_promotion import validate_candidate_promotion_gate_reports
 from .candidate_queue import validate_candidate_analysis_queue
 from .candidate_queue import load_candidate_analysis_queue
+from .candidate_review import validate_candidate_review_records
 from .candidate_status import build_candidate_status
 from .decision_ledger import DecisionLedger
 from .source_registry import SourceRegistry
@@ -53,6 +54,7 @@ def main() -> int:
         validate_candidate_promotion_gate_reports(load_candidate_analysis_queue())
         validate_candidate_extraction_policy_registry()
         validate_candidate_extraction_stub(load_candidate_analysis_queue())
+        validate_candidate_review_records()
         unit = load_analysis_unit()
         print(json.dumps({"status": "ok", "analysis_unit": unit["id"]}, sort_keys=True))
         return 0

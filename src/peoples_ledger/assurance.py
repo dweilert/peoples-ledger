@@ -9,6 +9,7 @@ from .candidate_extraction_policy import validate_candidate_extraction_policy_re
 from .candidate_promotion import validate_candidate_promotion_gate_reports
 from .candidate_queue import validate_candidate_analysis_queue
 from .candidate_queue import load_candidate_analysis_queue
+from .candidate_review import validate_candidate_review_records
 from .decision_ledger import DecisionLedger
 from .paths import TCJA_ANALYSIS_UNIT_PATH
 from .privacy import assert_no_household_financial_data
@@ -49,6 +50,7 @@ def run_assurance_gate() -> AssuranceReport:
         _run_check("candidate_promotion_gate_reports", lambda: validate_candidate_promotion_gate_reports(load_candidate_analysis_queue())),
         _run_check("candidate_extraction_policy_registry", validate_candidate_extraction_policy_registry),
         _run_check("candidate_extraction_ledger_stub", lambda: validate_candidate_extraction_stub(load_candidate_analysis_queue())),
+        _run_check("candidate_review_records", validate_candidate_review_records),
         _run_check("prompt_template_registry", validate_prompt_template_registry),
         _run_check("decision_ledger_integrity", lambda: DecisionLedger().read_all()),
         _run_check("privacy_payload_guard", lambda: assert_no_household_financial_data(_public_payload_probe())),

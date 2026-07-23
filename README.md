@@ -53,6 +53,8 @@ Candidate locator extraction is represented by a deterministic ledger stub. It w
 
 Candidate extraction policy is checked in separately from public prompt templates. It is dry-run-only, deterministic-provider-only, tied to candidate source refs, and disallowed for promotion use.
 
+Candidate review records are human-review stubs: they document blocking findings and required followups without approving promotion or changing draft candidate state.
+
 `candidate-status` prints draft Phase 2 candidate status and promotion blockers without appending ledger entries or changing public reports.
 
 The backend also exposes the same read-only payload at `/candidates/status` for local inspection without ledger writes or public-report changes.
