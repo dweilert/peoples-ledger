@@ -160,3 +160,5 @@ The first candidate queue tests validate draft-only candidate analysis units, de
 The first promotion gate tests validate structured blocker reports, non-mutating evaluation, schema failure reporting, source-snapshot failure reporting, privacy failure reporting, missing prompt-template/human-review/ledger gates, and continued draft state even when nominal requirements are set true.
 
 The first candidate extraction tests validate restricted AI Decision Ledger entries, source snapshot hashes, review triggers, no live-provider calls, non-mutating draft candidates, household-data rejection, and assurance-time dry-run ledger validation.
+
+Candidate status tests validate read-only CLI inspection, JSON output shape, draft publication states, promotion blockers, no public-report inclusion, and no real AI Decision Ledger append.

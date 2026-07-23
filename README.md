@@ -26,6 +26,7 @@ make test
 make validate
 make assure
 make phase1-acceptance
+PYTHONPATH=src python3 -m peoples_ledger.cli candidate-status
 make test-browser
 make report
 make report-html
@@ -46,6 +47,8 @@ The Phase 2 candidate queue is also fixture-first: draft analysis candidates lin
 Promotion gate evaluation has begun as a read-only report: it explains blocking schema, source, prompt-template, privacy, human-review, ledger, and implementation gates while keeping candidates in draft.
 
 Candidate locator extraction is represented by a deterministic ledger stub. It writes restricted AI Decision Ledger entries in tests or explicit calls, while assurance uses a temporary ledger and no live provider.
+
+`candidate-status` prints draft Phase 2 candidate status and promotion blockers without appending ledger entries or changing public reports.
 
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
 

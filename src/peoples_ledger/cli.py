@@ -10,6 +10,7 @@ from .candidate_extraction import validate_candidate_extraction_stub
 from .candidate_promotion import validate_candidate_promotion_gate_reports
 from .candidate_queue import validate_candidate_analysis_queue
 from .candidate_queue import load_candidate_analysis_queue
+from .candidate_status import build_candidate_status
 from .decision_ledger import DecisionLedger
 from .source_registry import SourceRegistry
 from .source_registry import load_source_snapshots
@@ -29,6 +30,7 @@ def main() -> int:
     subcommands.add_parser("validate", help="validate bundled schemas and exemplar data")
     subcommands.add_parser("assure", help="run the publication assurance gate")
     subcommands.add_parser("phase1-acceptance", help="run executable Phase 1 acceptance checks")
+    subcommands.add_parser("candidate-status", help="print Phase 2 draft candidate status and promotion blockers")
     subcommands.add_parser("report", help="build the public POC report JSON")
     subcommands.add_parser("report-html", help="build the public POC report HTML")
     export_parser = subcommands.add_parser("export-report", help="write report JSON, HTML, and artifact manifest")
@@ -80,6 +82,10 @@ def main() -> int:
             )
         )
         return 0 if report.passed else 1
+
+    if args.command == "candidate-status":
+        print(json.dumps(build_candidate_status(), sort_keys=True))
+        return 0
 
     if args.command == "report":
         print(json.dumps(build_public_report(), sort_keys=True))

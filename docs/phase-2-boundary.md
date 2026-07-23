@@ -68,6 +68,8 @@ Initial status: started with a read-only promotion gate report. It returns deter
 
 Initial status: started with a deterministic candidate locator-extraction ledger stub. It records restricted AI Decision Ledger entries against a temporary ledger during assurance, does not call live providers, and does not promote or publicly report candidate content.
 
+Initial status: added `candidate-status` as a read-only CLI inspection command for draft candidates, source references, and promotion blockers. It does not append to the AI Decision Ledger or expose candidates through public reports.
+
 ## Out Of Scope
 
 Phase 2 should not include:
