@@ -8,6 +8,7 @@ from .candidate_audit import validate_candidate_audit_bundle
 from .candidate_extraction import validate_candidate_extraction_stub
 from .candidate_extraction_policy import validate_candidate_extraction_policy_registry
 from .candidate_promotion import validate_candidate_promotion_gate_reports
+from .candidate_promotion_request import validate_candidate_promotion_requests
 from .candidate_queue import validate_candidate_analysis_queue
 from .candidate_queue import load_candidate_analysis_queue
 from .candidate_review import load_candidate_review_records, validate_candidate_review_ledger_stub, validate_candidate_review_records
@@ -49,6 +50,7 @@ def run_assurance_gate() -> AssuranceReport:
         _run_check("source_acquisition_manifest", validate_source_acquisition_manifest),
         _run_check("candidate_analysis_queue", validate_candidate_analysis_queue),
         _run_check("candidate_promotion_gate_reports", lambda: validate_candidate_promotion_gate_reports(load_candidate_analysis_queue())),
+        _run_check("candidate_promotion_requests", validate_candidate_promotion_requests),
         _run_check("candidate_extraction_policy_registry", validate_candidate_extraction_policy_registry),
         _run_check("candidate_extraction_ledger_stub", lambda: validate_candidate_extraction_stub(load_candidate_analysis_queue())),
         _run_check("candidate_review_records", validate_candidate_review_records),

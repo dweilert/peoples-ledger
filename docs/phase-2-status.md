@@ -115,6 +115,18 @@ Status: documented and covered by executable contract tests.
 - The contract names schema, source, extraction/prompt, privacy, human review, ledger, public report, and risk gates.
 - Skipped future tests define the expected promotion behavior without enabling promotion in the current POC.
 
+### Candidate Promotion Request Stub
+
+Status: implemented as fixture-only blocked requests.
+
+- `candidate_promotion_request` schema exists.
+- The IRA 2022 candidate promotion request fixture validates against the schema.
+- Promotion request fixtures must remain `blocked`.
+- Execution, public-report inclusion, ledger append, live provider use, and household financial data are disallowed by schema and validation.
+- Promotion request source refs must match candidate source snapshot refs.
+- Promotion request blockers must include the current candidate promotion gate report blockers.
+- Assurance and Phase 2 acceptance both validate promotion request fixtures.
+
 ## Still Blocked
 
 These are intentionally blocked in the current POC:
@@ -133,4 +145,4 @@ These are intentionally blocked in the current POC:
 
 ## Recommended Next Work
 
-The next useful unit is a candidate promotion request schema stub and fixture-only validation tests. It should represent a requested promotion without executing it, changing draft candidate state, appending public report material, or approving any current review record.
+The next useful unit is a source promotion manifest stub and fixture-only validation tests. It should describe how candidate source records could be proposed for the public registry later, while keeping the public registry unchanged and candidates excluded from reports.
