@@ -40,6 +40,7 @@ class BrowserPrivacyHardeningTests(unittest.TestCase):
             for (const selector of [
               "#analysis",
               "#sources",
+              "#candidate-status",
               "#ledger",
               "#refresh",
               "#summarize",
@@ -89,6 +90,20 @@ class BrowserPrivacyHardeningTests(unittest.TestCase):
                     if (url.endsWith("/reports/tcja-2017-representative-provisions")) {
                       return { report_id: "report" };
                     }
+                    if (url.endsWith("/candidates/status")) {
+                      return {
+                        candidates: [
+                          {
+                            title: "candidate",
+                            publication_state: "draft",
+                            promotable: false,
+                            source_record_ids: ["source"],
+                            candidate_provision_ids: ["candidate_provision"],
+                            promotion_blockers: [{ gate: "promotion_disabled", reason: "disabled" }]
+                          }
+                        ]
+                      };
+                    }
                     return {};
                   }
                 };
@@ -100,8 +115,8 @@ class BrowserPrivacyHardeningTests(unittest.TestCase):
               vm.runInContext(appJs, context);
               await new Promise((resolve) => setImmediate(resolve));
               const initialCallCount = calls.length;
-              if (initialCallCount !== 4) {
-                throw new Error(`expected four initial allowlisted fetches, got ${initialCallCount}`);
+              if (initialCallCount !== 5) {
+                throw new Error(`expected five initial allowlisted fetches, got ${initialCallCount}`);
               }
 
               calls.length = 0;

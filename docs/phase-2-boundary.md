@@ -72,6 +72,8 @@ Initial status: added `candidate-status` as a read-only CLI inspection command f
 
 Initial status: added `/candidates/status` as a read-only backend endpoint with the same safe payload as the CLI status command. It does not append to the AI Decision Ledger, promote candidates, or add candidates to public report responses.
 
+Initial status: added a minimal frontend candidate-status panel that reads `/candidates/status` and displays draft state and blockers without sending local privacy-control values or adding candidates to public report content.
+
 ## Out Of Scope
 
 Phase 2 should not include:

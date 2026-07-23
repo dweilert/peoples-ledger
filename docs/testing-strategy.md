@@ -164,3 +164,5 @@ The first candidate extraction tests validate restricted AI Decision Ledger entr
 Candidate status tests validate read-only CLI inspection, JSON output shape, draft publication states, promotion blockers, no public-report inclusion, and no real AI Decision Ledger append.
 
 Candidate backend status tests validate the read-only `/candidates/status` endpoint, draft-only payloads, promotion blockers, no household-data flags, and no AI Decision Ledger append.
+
+Candidate frontend status tests validate the new API path is allowlisted, browser fixtures include candidate status, and local-only privacy controls still trigger no network calls or household-value egress.

@@ -9,6 +9,7 @@ const allowedApiPaths = new Set([
   "/sources",
   "/ai-decision-ledger",
   "/reports/tcja-2017-representative-provisions",
+  "/candidates/status",
 ]);
 
 function fixturePayload(pathname) {
@@ -27,6 +28,20 @@ function fixturePayload(pathname) {
   }
   if (pathname === "/reports/tcja-2017-representative-provisions") {
     return { report_id: "fixture_report" };
+  }
+  if (pathname === "/candidates/status") {
+    return {
+      candidates: [
+        {
+          title: "candidate",
+          publication_state: "draft",
+          promotable: false,
+          source_record_ids: ["source"],
+          candidate_provision_ids: ["candidate_provision"],
+          promotion_blockers: [{ gate: "promotion_disabled", reason: "disabled" }],
+        },
+      ],
+    };
   }
   return {};
 }

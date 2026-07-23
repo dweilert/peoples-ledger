@@ -37,6 +37,7 @@ class FrontendPrivacyTests(unittest.TestCase):
                 "/sources",
                 "/ai-decision-ledger",
                 "/reports/tcja-2017-representative-provisions",
+                "/candidates/status",
                 "/analysis-units/tcja-2017-representative-provisions/summarize",
             },
         )

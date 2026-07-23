@@ -52,6 +52,8 @@ Candidate locator extraction is represented by a deterministic ledger stub. It w
 
 The backend also exposes the same read-only payload at `/candidates/status` for local inspection without ledger writes or public-report changes.
 
+The frontend includes a small Phase 2 candidate-status panel that displays draft candidates and blockers from `/candidates/status` without collecting or transmitting household financial data.
+
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
 
 The first report assembly slice emits a public JSON report with source traces, decision trace, model scenarios, perspective profiles, and assurance status.
