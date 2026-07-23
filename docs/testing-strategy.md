@@ -143,4 +143,6 @@ The first publication-state tests verify advancement on passing assurance, block
 
 The first correction workflow tests validate correction records, require regression-test references, verify superseding AI Decision Ledger entries, and assert corrections appear in public reports.
 
+Correction fixture tests now cover multiple correction types and require unique correction targets.
+
 The first risk-scoring tests cover current POC risk, assurance failures, blocking challenge disagreement, and under-representative coverage.

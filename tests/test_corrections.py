@@ -7,7 +7,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from peoples_ledger.corrections import load_correction_record, record_correction
+from peoples_ledger.corrections import load_correction_record, load_correction_records, record_correction
 from peoples_ledger.decision_ledger import DecisionLedger
 from peoples_ledger.paths import SCHEMA_DIR
 from peoples_ledger.reporting import build_public_report
@@ -21,6 +21,15 @@ class CorrectionTests(unittest.TestCase):
         self.assertEqual(correction["publication_state"], "corrected")
         self.assertIn("tests/test_corrections.py", correction["regression_test_ref"])
         self.assertEqual(correction["supersedes_decision_id"], "adl_manual_tcja_representative_subset")
+
+    def test_all_correction_fixtures_validate_and_preserve_unique_targets(self) -> None:
+        corrections = load_correction_records()
+        self.assertEqual(len(corrections), 2)
+        self.assertEqual(len({correction["id"] for correction in corrections}), 2)
+        self.assertEqual(len({correction["target_ref"] for correction in corrections}), 2)
+        self.assertEqual({correction["correction_type"] for correction in corrections}, {"source_locator", "indicator"})
+        for correction in corrections:
+            self.assertIn("tests/test_corrections.py", correction["regression_test_ref"])
 
     def test_record_correction_writes_superseding_ledger_entry(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -36,9 +45,12 @@ class CorrectionTests(unittest.TestCase):
 
     def test_public_report_surfaces_correction_records(self) -> None:
         report = build_public_report()
-        self.assertEqual(len(report["corrections"]), 1)
-        self.assertEqual(report["corrections"][0]["id"], "corr_tcja_salt_locator_poc")
-        self.assertEqual(report["corrections"][0]["publication_state"], "corrected")
+        self.assertEqual(len(report["corrections"]), 2)
+        self.assertEqual(
+            {correction["id"] for correction in report["corrections"]},
+            {"corr_tcja_salt_locator_poc", "corr_tcja_indicator_signal_poc"},
+        )
+        self.assertEqual({correction["publication_state"] for correction in report["corrections"]}, {"corrected"})
 
 
 if __name__ == "__main__":

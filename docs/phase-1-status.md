@@ -79,7 +79,8 @@ Status: implemented for first rules.
 Status: implemented for first regression fixture.
 
 - A correction-record schema exists.
-- A POC correction fixture preserves target, root cause, previous output, corrected output, superseded decision, and regression-test reference.
+- POC correction fixtures preserve target, root cause, previous output, corrected output, superseded decision, and regression-test reference.
+- Source-locator and indicator correction fixture types are represented.
 - Correction recording writes a hash-chained AI Decision Ledger entry with `publication_state: corrected`.
 - Public reports surface correction records.
 
@@ -99,7 +100,7 @@ These are useful but no longer block the first Phase 1 POC slice:
 - add more statutory transformation operation fixtures
 - add authoritative post-enactment round-trip fixtures
 - add downloadable report bundle archive if artifact distribution is needed
-- add more correction workflow fixtures and correction-derived regression tests
+- add more correction workflow fixture types as real corrections occur
 - add more risk scoring dimensions as new automation paths create new risks
 - add live-model challenge agents after governance and prompt-template controls exist
 

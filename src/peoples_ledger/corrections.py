@@ -11,7 +11,8 @@ from .schema_validator import SchemaRegistry
 from .source_registry import SourceRegistry
 
 
-DEFAULT_CORRECTION_FIXTURE_PATH = Path(__file__).resolve().parents[2] / "data" / "fixtures" / "corrections" / "tcja_locator_correction.json"
+CORRECTION_FIXTURE_DIR = Path(__file__).resolve().parents[2] / "data" / "fixtures" / "corrections"
+DEFAULT_CORRECTION_FIXTURE_PATH = CORRECTION_FIXTURE_DIR / "tcja_locator_correction.json"
 
 
 def load_correction_record(path: Path = DEFAULT_CORRECTION_FIXTURE_PATH) -> dict[str, Any]:
@@ -22,6 +23,13 @@ def load_correction_record(path: Path = DEFAULT_CORRECTION_FIXTURE_PATH) -> dict
     for source_id in correction["source_record_ids"]:
         source_registry.require(source_id)
     return correction
+
+
+def load_correction_records(directory: Path = CORRECTION_FIXTURE_DIR) -> list[dict[str, Any]]:
+    return [
+        load_correction_record(path)
+        for path in sorted(directory.glob("*.json"))
+    ]
 
 
 def record_correction(

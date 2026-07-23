@@ -1,0 +1,13 @@
+{
+  "id": "corr_tcja_indicator_signal_poc",
+  "analysis_unit_id": "tcja_2017_representative_provisions",
+  "target_ref": "indicator_household_specific_exclusion",
+  "correction_type": "indicator",
+  "root_cause": "POC regression fixture for preserving correction provenance when an indicator signal or rationale is revised.",
+  "previous_output_ref": "indicator_household_specific_exclusion#unknown",
+  "corrected_output_ref": "indicator_household_specific_exclusion#unknown",
+  "regression_test_ref": "tests/test_corrections.py::CorrectionTests::test_all_correction_fixtures_validate_and_preserve_unique_targets",
+  "supersedes_decision_id": "adl_manual_tcja_representative_subset",
+  "source_record_ids": ["pl115_97_public_law"],
+  "publication_state": "corrected"
+}

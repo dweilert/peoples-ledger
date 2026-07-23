@@ -6,7 +6,7 @@ from html import escape
 from .analysis import load_analysis_unit
 from .assurance import run_assurance_gate
 from .decision_ledger import DecisionLedger
-from .corrections import load_correction_record
+from .corrections import load_correction_records
 from .publication import decide_publication_state
 from .risk import score_risk
 from .source_registry import SourceRegistry, load_source_snapshots
@@ -37,7 +37,7 @@ def build_public_report() -> dict[str, Any]:
         "perspective_profiles": [_perspective_view(profile) for profile in unit["perspective_profiles"]],
         "source_manifest": [_source_view(source, snapshots[source["id"]]) for source in sources.all()],
         "decision_trace": [_decision_view(entry) for entry in ledger_entries],
-        "corrections": [load_correction_record()],
+        "corrections": load_correction_records(),
         "assurance": {
             "checks": [check.__dict__ for check in assurance.checks],
             "review_triggers": assurance.review_triggers,
