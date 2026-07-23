@@ -4,6 +4,8 @@ This checklist maps Phase 0 to the Foundational Product and System Design v0.3 A
 
 Testing is integrated into the acceptance approach. The testing layers and future gates are defined in `docs/testing-strategy.md`.
 
+The proposed next-phase scope is bounded in `docs/phase-1-boundary.md`.
+
 ## Evidence
 
 Status: implemented for the manual exemplar.
