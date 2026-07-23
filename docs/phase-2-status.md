@@ -151,6 +151,16 @@ Status: implemented as an offline fixture only.
 - The fixture must remain absent from the live append-oriented AI Decision Ledger.
 - Assurance and Phase 2 acceptance both validate the ledger-stub fixture.
 
+### Promotion Audit Cross-Check
+
+Status: implemented for internal audit consistency.
+
+- The promotion audit cross-check compares candidate status, promotion gate reports, promotion request fixtures, source promotion manifests, review records, and promotion-decision ledger stubs.
+- Cross-checks require matching candidate IDs, blocker gates, and candidate source refs.
+- Cross-checks verify candidates remain draft, review remains blocked, source promotion remains blocked, decision stubs remain out of the live ledger, and public reports exclude candidates.
+- The internal candidate audit bundle includes the promotion audit cross-check result.
+- Assurance and Phase 2 acceptance both validate the cross-check.
+
 ## Still Blocked
 
 These are intentionally blocked in the current POC:
@@ -169,4 +179,4 @@ These are intentionally blocked in the current POC:
 
 ## Recommended Next Work
 
-The next useful unit is a Phase 2 promotion audit cross-check. It should prove candidate status, promotion request, source promotion manifest, review records, and promotion-decision ledger stubs agree on the same blockers and source refs without changing candidate/public-report state.
+The next useful unit is a small read-only CLI/backend status addition for the promotion audit cross-check. It should expose the same safe internal status summary without appending ledger entries, mutating candidates, or adding candidate records to public reports.

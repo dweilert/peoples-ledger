@@ -7,6 +7,7 @@ from typing import Any
 
 from .candidate_extraction import record_candidate_locator_extraction
 from .candidate_promotion import evaluate_candidate_queue_promotion
+from .candidate_promotion_audit import build_candidate_promotion_audit_cross_check
 from .candidate_queue import load_candidate_analysis_queue
 from .candidate_review import load_candidate_review_records, record_candidate_review_decision
 from .candidate_status import build_candidate_status
@@ -36,6 +37,7 @@ def build_candidate_audit_bundle() -> dict[str, Any]:
         "public_report_includes_candidates": public_report_analysis_unit_id in candidate_ids,
         "candidate_status": build_candidate_status(),
         "promotion_gate_reports": evaluate_candidate_queue_promotion(candidates),
+        "promotion_audit_cross_check": build_candidate_promotion_audit_cross_check(),
         "review_records": review_records,
         "dry_run_ledger_summaries": {
             "candidate_extraction": extraction_entries,
@@ -70,6 +72,14 @@ def validate_candidate_audit_bundle() -> None:
         raise ValueError("candidate audit bundle publication scope is unsafe")
     if bundle["public_report_includes_candidates"]:
         raise ValueError("candidate audit bundle includes public-report candidate leakage")
+    cross_check = bundle["promotion_audit_cross_check"]
+    if not cross_check["candidate_ids_match"]:
+        raise ValueError("candidate audit bundle promotion cross-check candidate ids do not match")
+    if cross_check["public_report_includes_candidates"]:
+        raise ValueError("candidate audit bundle promotion cross-check found public-report leakage")
+    for summary in cross_check["candidate_summaries"]:
+        if not summary["blockers_match"] or not summary["source_refs_match"]:
+            raise ValueError("candidate audit bundle promotion cross-check found inconsistent promotion artifacts")
 
 
 def _dry_run_entry(record_fn: Any) -> dict[str, Any]:

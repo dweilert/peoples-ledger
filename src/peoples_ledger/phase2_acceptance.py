@@ -8,6 +8,7 @@ from .candidate_audit import build_candidate_audit_bundle, validate_candidate_au
 from .candidate_extraction import validate_candidate_extraction_stub
 from .candidate_extraction_policy import CandidateExtractionPolicyRegistry, validate_candidate_extraction_policy_registry
 from .candidate_promotion import evaluate_candidate_promotion, validate_candidate_promotion_gate_reports
+from .candidate_promotion_audit import build_candidate_promotion_audit_cross_check, validate_candidate_promotion_audit_cross_check
 from .candidate_promotion_decision import (
     load_candidate_promotion_decision_ledger_stubs,
     validate_candidate_promotion_decision_ledger_stubs,
@@ -48,6 +49,7 @@ def run_phase2_acceptance() -> Phase2AcceptanceReport:
         _run_check("candidate_promotion_reports_block", _candidate_promotion_reports_block),
         _run_check("candidate_promotion_request_stub_validates", _candidate_promotion_request_stub_validates),
         _run_check("candidate_promotion_decision_ledger_stub_validates", _candidate_promotion_decision_ledger_stub_validates),
+        _run_check("candidate_promotion_audit_cross_check", _candidate_promotion_audit_cross_check),
         _run_check("candidate_extraction_policy_registry", _candidate_extraction_policy_registry),
         _run_check("candidate_extraction_stub_validates", _candidate_extraction_stub_validates),
         _run_check("candidate_review_records_block", _candidate_review_records_block),
@@ -160,6 +162,22 @@ def _candidate_promotion_decision_ledger_stub_validates() -> None:
         _require(not output["live_ledger_append_allowed"], f"promotion decision stub allows live append: {entry['id']}")
         _require(output["publication_state_after_decision"] == "draft", f"promotion decision did not keep draft: {entry['id']}")
         _require(entry["disclosure_class"] == "restricted", f"promotion decision stub is public: {entry['id']}")
+
+
+def _candidate_promotion_audit_cross_check() -> None:
+    validate_candidate_promotion_audit_cross_check()
+    cross_check = build_candidate_promotion_audit_cross_check()
+    _require(cross_check["candidate_ids_match"], "promotion audit candidate ids do not match")
+    _require(not cross_check["public_report_includes_candidates"], "promotion audit found candidate public-report leakage")
+    _require(cross_check["source_promotion_state"] == "blocked", "promotion audit source promotion is not blocked")
+    _require(not cross_check["source_registry_update_allowed"], "promotion audit allows source registry updates")
+    for summary in cross_check["candidate_summaries"]:
+        _require(summary["blockers_match"], f"promotion audit blockers do not match: {summary['candidate_analysis_unit_id']}")
+        _require(summary["source_refs_match"], f"promotion audit source refs do not match: {summary['candidate_analysis_unit_id']}")
+        _require(
+            not summary["decision_stub_in_live_ledger"],
+            f"promotion audit found decision stub in live ledger: {summary['candidate_analysis_unit_id']}",
+        )
 
 
 def _candidate_extraction_stub_validates() -> None:

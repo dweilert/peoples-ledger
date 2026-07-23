@@ -40,6 +40,7 @@ class Phase2StatusTests(unittest.TestCase):
             "Candidate Promotion Request Stub",
             "Source Promotion Manifest Stub",
             "Promotion Decision Ledger Stub",
+            "Promotion Audit Cross-Check",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, body)
