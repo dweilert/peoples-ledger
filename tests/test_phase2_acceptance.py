@@ -28,6 +28,7 @@ class Phase2AcceptanceTests(unittest.TestCase):
                 "candidate_promotion_reports_block",
                 "candidate_extraction_policy_registry",
                 "candidate_extraction_stub_validates",
+                "candidate_review_records_block",
                 "candidate_status_surfaces_blockers",
                 "frontend_candidate_status_target_defined",
                 "public_report_excludes_candidates",

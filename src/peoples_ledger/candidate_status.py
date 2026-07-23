@@ -4,13 +4,16 @@ from typing import Any
 
 from .candidate_promotion import evaluate_candidate_promotion
 from .candidate_queue import load_candidate_analysis_queue
+from .candidate_review import candidate_review_summary
 
 
 def build_candidate_status() -> dict[str, Any]:
     candidates = load_candidate_analysis_queue()
+    review_by_candidate_id = candidate_review_summary()
     candidate_views = []
     for candidate in candidates:
         promotion = evaluate_candidate_promotion(candidate)
+        review = review_by_candidate_id.get(candidate["id"])
         candidate_views.append(
             {
                 "id": candidate["id"],
@@ -25,6 +28,9 @@ def build_candidate_status() -> dict[str, Any]:
                 "egress_allowed": candidate["privacy"]["egress_allowed"],
                 "promotable": promotion["promotable"],
                 "promotion_blockers": promotion["blockers"],
+                "review_status": review["review_status"] if review else "review_required",
+                "review_findings": review["findings"] if review else [],
+                "review_promotion_recommendation": review["promotion_recommendation"] if review else "blocked",
             }
         )
     return {

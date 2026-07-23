@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "candidate_review_record.schema.json",
+  "title": "Candidate Review Record",
+  "type": "object",
+  "required": [
+    "id",
+    "candidate_analysis_unit_id",
+    "reviewer",
+    "review_type",
+    "review_status",
+    "reviewed_at",
+    "source_snapshot_ids",
+    "candidate_provision_ids",
+    "findings",
+    "required_followups",
+    "promotion_recommendation",
+    "publication_state_after_review",
+    "ledger_entry_required",
+    "uses_household_financial_data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^candidate_review_[a-z0-9_-]+$" },
+    "candidate_analysis_unit_id": { "type": "string", "minLength": 1 },
+    "reviewer": { "type": "string", "minLength": 1 },
+    "review_type": {
+      "type": "string",
+      "enum": ["human_review_stub"]
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["review_required", "blocked", "approved"]
+    },
+    "reviewed_at": { "type": "string", "minLength": 1 },
+    "source_snapshot_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "candidate_provision_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "findings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "severity", "message"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]+$" },
+          "severity": { "type": "string", "enum": ["blocking", "nonblocking"] },
+          "message": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "required_followups": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "promotion_recommendation": {
+      "type": "string",
+      "enum": ["blocked", "ready_for_promotion"]
+    },
+    "publication_state_after_review": {
+      "type": "string",
+      "enum": ["draft"]
+    },
+    "ledger_entry_required": { "type": "boolean" },
+    "uses_household_financial_data": { "type": "boolean" }
+  }
+}

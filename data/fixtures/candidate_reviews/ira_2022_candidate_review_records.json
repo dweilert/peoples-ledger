@@ -1,0 +1,39 @@
+[
+  {
+    "id": "candidate_review_ira_2022_energy_tax_provisions_initial",
+    "candidate_analysis_unit_id": "candidate_ira_2022_energy_tax_provisions",
+    "reviewer": "deterministic-human-review-stub",
+    "review_type": "human_review_stub",
+    "review_status": "review_required",
+    "reviewed_at": "2026-07-23T00:00:00+00:00",
+    "source_snapshot_ids": [
+      "pl117_169_public_law",
+      "jct_ira_estimated_budget_effects_2022"
+    ],
+    "candidate_provision_ids": [
+      "candidate_ira_energy_credit_extensions",
+      "candidate_ira_corporate_minimum_tax"
+    ],
+    "findings": [
+      {
+        "id": "review_required_prompt_template",
+        "severity": "blocking",
+        "message": "Candidate extraction policy is approved only for dry-run locator extraction and cannot support promotion."
+      },
+      {
+        "id": "review_required_ledger",
+        "severity": "blocking",
+        "message": "A human-reviewed promotion decision ledger entry has not been recorded."
+      }
+    ],
+    "required_followups": [
+      "Approve a promotion-specific prompt template before extraction outputs can advance.",
+      "Record a human-reviewed promotion decision in the AI Decision Ledger.",
+      "Keep candidate content excluded from public reports until promotion gates exist."
+    ],
+    "promotion_recommendation": "blocked",
+    "publication_state_after_review": "draft",
+    "ledger_entry_required": true,
+    "uses_household_financial_data": false
+  }
+]

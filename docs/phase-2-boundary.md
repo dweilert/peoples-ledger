@@ -78,6 +78,8 @@ Initial status: added `phase2-acceptance` as an executable checklist covering so
 
 Initial status: added a candidate extraction policy registry for dry-run-only deterministic locator extraction. Candidate extraction policies must use deterministic providers, disable live providers, reference candidate source records, and remain disallowed for promotion use.
 
+Initial status: added candidate review records as human-review stubs. These records document blocking findings and required followups while keeping candidates draft-only and disallowing promotion approval.
+
 ## Out Of Scope
 
 Phase 2 should not include:

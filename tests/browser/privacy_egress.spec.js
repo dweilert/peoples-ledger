@@ -39,6 +39,9 @@ function fixturePayload(pathname) {
           source_record_ids: ["source"],
           candidate_provision_ids: ["candidate_provision"],
           promotion_blockers: [{ gate: "promotion_disabled", reason: "disabled" }],
+          review_status: "review_required",
+          review_findings: [{ severity: "blocking", message: "review required" }],
+          review_promotion_recommendation: "blocked",
         },
       ],
     };
