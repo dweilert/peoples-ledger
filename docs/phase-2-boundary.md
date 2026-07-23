@@ -64,6 +64,8 @@ Required tests:
 - live-provider attempts fail without explicit authorization
 - human-review-required states are represented in AI Decision Ledger entries
 
+Initial status: started with a read-only promotion gate report. It returns deterministic blockers for schema, source-snapshot, prompt-template, privacy, human-review, ledger, and implementation-disabled gates, while leaving candidate publication state as `draft`.
+
 ## Out Of Scope
 
 Phase 2 should not include:

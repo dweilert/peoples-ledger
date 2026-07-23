@@ -156,3 +156,5 @@ The first risk-scoring tests cover current POC risk, assurance failures, blockin
 Phase 2 tests begin with source-acquisition manifest fixtures for a second federal-tax source set, candidate draft records, deterministic content-hash checks, live-retrieval rejection, and public-report exclusion for unpromoted candidates. See `docs/phase-2-boundary.md`.
 
 The first candidate queue tests validate draft-only candidate analysis units, deterministic candidate IDs, source-snapshot linkage, missing snapshot rejection, snapshot hash mismatch rejection, unknown source rejection, disabled model and perspective policies, promotion blocking, and public-report exclusion.
+
+The first promotion gate tests validate structured blocker reports, non-mutating evaluation, schema failure reporting, source-snapshot failure reporting, privacy failure reporting, missing prompt-template/human-review/ledger gates, and continued draft state even when nominal requirements are set true.
