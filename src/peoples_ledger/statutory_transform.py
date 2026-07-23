@@ -9,7 +9,7 @@ from .schema_validator import SchemaRegistry
 
 
 TransformStatus = Literal["applied", "abstained"]
-TransformOperation = Literal["replace_text", "insert_after"]
+TransformOperation = Literal["replace_text", "insert_after", "delete_text"]
 
 
 @dataclass(frozen=True)
@@ -69,6 +69,9 @@ def apply_transform(request: TransformRequest) -> TransformResult:
             return _abstain(request, "insertion_text_required")
         after_text = request.current_text.replace(request.target_text, request.target_text + request.insertion_text, 1)
         schema_operation = "add"
+    elif request.operation == "delete_text":
+        after_text = request.current_text.replace(request.target_text, "", 1)
+        schema_operation = "delete"
     else:
         return _abstain(request, "unsupported_operation")
 
@@ -110,6 +113,8 @@ def _round_trip_valid(request: TransformRequest, after_text: str) -> bool:
         return after_text.replace(request.replacement_text, request.target_text, 1) == request.current_text
     if request.operation == "insert_after" and request.insertion_text is not None:
         return after_text.replace(request.target_text + request.insertion_text, request.target_text, 1) == request.current_text
+    if request.operation == "delete_text":
+        return request.target_text not in after_text
     return False
 
 

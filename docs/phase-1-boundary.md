@@ -35,7 +35,7 @@ Required tests:
 - Produce before/after hashes, operation records, reconciliation status, and review triggers.
 - Keep LLM usage limited to candidate extraction or explanation; deterministic validators decide publishability.
 
-Initial status: started with fixture-backed `replace_text` and `insert_after` operations. Successful operations emit schema-compatible statutory-transformation records; unmatched, ambiguous, or incomplete operations abstain with review triggers and do not produce valid transformation records.
+Initial status: started with fixture-backed `replace_text`, `insert_after`, and `delete_text` operations. Successful operations emit schema-compatible statutory-transformation records; unmatched, ambiguous, or incomplete operations abstain with review triggers and do not produce valid transformation records.
 
 Required tests:
 

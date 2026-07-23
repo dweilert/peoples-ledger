@@ -20,6 +20,7 @@ Status: implemented for first operations.
 
 - `replace_text` is supported.
 - `insert_after` is supported.
+- `delete_text` is supported.
 - Successful operations emit schema-compatible statutory-transformation records.
 - Before/after hashes are stable.
 - Unmatched, ambiguous, and incomplete operations abstain with review triggers.

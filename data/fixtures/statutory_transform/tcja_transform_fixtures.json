@@ -36,5 +36,23 @@
         "citation": "26 USC 164"
       }
     ]
+  },
+  {
+    "id": "fixture_delete_personal_exemption",
+    "operation": "delete_text",
+    "current_text": "Section 151 allows a deduction for personal exemptions for the taxable year.",
+    "target_text": "a deduction for personal exemptions",
+    "expected_after_text": "Section 151 allows  for the taxable year.",
+    "source_span": {
+      "source_record_id": "pl115_97_public_law",
+      "locator": "Section 11041",
+      "text_hash": "manual-span-sec-11041-personal-exemption"
+    },
+    "affected_authority": [
+      {
+        "type": "usc",
+        "citation": "26 USC 151"
+      }
+    ]
   }
 ]
