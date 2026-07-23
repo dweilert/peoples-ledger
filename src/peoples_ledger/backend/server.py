@@ -46,6 +46,7 @@ class Handler(BaseHTTPRequestHandler):
                 task="summarize_analysis_unit",
                 prompt=unit["expected_outputs"]["plain_language_summary"],
                 source_refs=unit["legislative_document"]["source_record_ids"],
+                prompt_template_version="plain-language-summary-poc-v1",
             )
         )
         ledger_entry = DecisionLedger().append(

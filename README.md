@@ -8,6 +8,7 @@ This repository establishes executable foundations for:
 - an initial source registry
 - an append-oriented AI Decision Ledger
 - a provider-neutral AI adapter with deterministic test doubles
+- an approved prompt-template registry for AI governance
 - one manually curated TCJA analysis unit with expected outputs
 - a small local backend and static frontend
 - unit, schema, regression, and integration tests
@@ -44,6 +45,8 @@ The first report assembly slice emits a public JSON report with source traces, d
 Browser-local privacy hardening includes a dependency-free JavaScript runtime test and an explicit Playwright request-interception test that proves local-only controls do not trigger network calls or transmit local values.
 
 Challenge-agent disagreement recording has begun with a deterministic test double that can write complete AI Decision Ledger entries.
+
+Prompt-template governance is offline and enforceable: `make assure` validates the approved template registry, and adapter requests with prompt-template versions require approved provider, task, and source refs.
 
 Report artifact packaging writes JSON, HTML, a manifest with `sha256:` hashes, and a downloadable zip bundle.
 

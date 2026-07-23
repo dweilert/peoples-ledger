@@ -25,6 +25,7 @@ class AssuranceTests(unittest.TestCase):
             "source_registry",
             "source_snapshots",
             "source_ingestion_fixtures",
+            "prompt_template_registry",
             "decision_ledger_integrity",
             "privacy_payload_guard",
         })

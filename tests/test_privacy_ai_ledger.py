@@ -20,7 +20,14 @@ class PrivacyAiLedgerTests(unittest.TestCase):
 
     def test_deterministic_ai_adapter_returns_stable_output(self) -> None:
         adapter = ProviderNeutralAIAdapter(DeterministicTCJAProvider())
-        response = adapter.complete(AIRequest(task="summarize", prompt="Summarize.", source_refs=["pl115_97_public_law"]))
+        response = adapter.complete(
+            AIRequest(
+                task="summarize",
+                prompt="Summarize.",
+                source_refs=["pl115_97_public_law"],
+                prompt_template_version="plain-language-summary-poc-v1",
+            )
+        )
         self.assertEqual(response.provider, "deterministic-test-double")
         self.assertEqual(response.model_version, "1.0")
         self.assertIn("ten representative federal tax provisions", response.text)

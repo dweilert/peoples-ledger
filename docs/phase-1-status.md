@@ -34,6 +34,7 @@ Status: implemented for first operations.
 Status: implemented for current POC.
 
 - `make assure` runs named checks.
+- `make assure` validates the approved prompt-template registry.
 - The gate reports publication allowance, publication state, risk tier, and review triggers.
 - CI runs `make validate`, `make assure`, and `make test`.
 
@@ -69,6 +70,7 @@ Status: implemented with deterministic test doubles.
 - Nonblocking disagreement is represented.
 - Under-representative coverage blocks in tests.
 - Challenge reviews and multi-agent comparisons can write complete AI Decision Ledger records.
+- Prompt-template governance requires approved provider, task, and source refs before adapter calls that identify a prompt-template version.
 
 ### Publication-State Advancement Policy
 
@@ -104,7 +106,7 @@ These are useful but no longer block the first Phase 1 POC slice:
 - add more statutory transformation operation fixtures when new TCJA provision patterns need them
 - add more correction workflow fixture types as real corrections occur
 - add more risk scoring dimensions as new automation paths create new risks
-- add live-model challenge agents after governance and prompt-template controls exist
+- add live-model challenge agents only after provider credentials, human-review policy, and prompt-template approvals are explicitly authorized
 
 ## Still Out Of Scope
 

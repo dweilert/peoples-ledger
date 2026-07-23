@@ -1,0 +1,54 @@
+[
+  {
+    "id": "plain_language_summary",
+    "version": "plain-language-summary-poc-v1",
+    "status": "approved",
+    "approved_providers": ["deterministic-test-double"],
+    "allowed_tasks": ["summarize_analysis_unit", "summarize"],
+    "required_source_refs": ["pl115_97_public_law"],
+    "template": "Summarize the bounded TCJA analysis unit using only cited public source records. Preserve uncertainty, source limits, and the fact that this POC does not run household-level tax calculations.",
+    "privacy_constraints": [
+      "Do not request, infer, transmit, or store household financial data.",
+      "Do not produce household-specific tax calculations."
+    ]
+  },
+  {
+    "id": "challenge_review",
+    "version": "challenge-review-poc-v1",
+    "status": "approved",
+    "approved_providers": ["deterministic-challenge-agent"],
+    "allowed_tasks": ["challenge_review"],
+    "required_source_refs": ["pl115_97_public_law", "jct_tcja_distribution_2017"],
+    "template": "Review the bounded TCJA analysis unit for coverage gaps, unresolved uncertainty, and source-traceability issues without adding external facts or household financial data.",
+    "privacy_constraints": [
+      "Do not request, infer, transmit, or store household financial data.",
+      "Use public source references only."
+    ]
+  },
+  {
+    "id": "challenge_comparison",
+    "version": "challenge-comparison-poc-v1",
+    "status": "approved",
+    "approved_providers": ["deterministic-challenge-comparison"],
+    "allowed_tasks": ["challenge_comparison"],
+    "required_source_refs": ["pl115_97_public_law", "jct_tcja_distribution_2017", "crs_salt_cap_2018"],
+    "template": "Compare deterministic challenge-agent reviews for disagreement, blocking triggers, and source-coverage concerns using only the bounded TCJA exemplar.",
+    "privacy_constraints": [
+      "Do not request, infer, transmit, or store household financial data.",
+      "Do not call live providers."
+    ]
+  },
+  {
+    "id": "correction_record",
+    "version": "correction-record-poc-v1",
+    "status": "approved",
+    "approved_providers": ["deterministic-correction-recorder"],
+    "allowed_tasks": ["record_correction"],
+    "required_source_refs": ["pl115_97_public_law"],
+    "template": "Record correction provenance, supersession, affected output references, source references, and regression-test references for the bounded TCJA exemplar.",
+    "privacy_constraints": [
+      "Do not request, infer, transmit, or store household financial data.",
+      "Correction payloads must remain public-record provenance only."
+    ]
+  }
+]

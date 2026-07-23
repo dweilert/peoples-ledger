@@ -58,6 +58,8 @@ Challenge-agent status: started with a deterministic challenge-agent test double
 
 Multi-agent status: started with deterministic challenge-agent comparison across general coverage and source-coverage agents.
 
+Prompt-governance status: started with an approved prompt-template registry and adapter enforcement for approved provider, task, and source refs. Live-model agents remain deferred.
+
 Publication-state status: started with an explicit decision policy that blocks advancement on assurance failure, challenge-agent blocking disagreement, or high-risk review thresholds.
 
 Correction status: started with a correction-record schema, regression fixture, ledger recording path, and report visibility.

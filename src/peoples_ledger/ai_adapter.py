@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import Protocol
 
 from .privacy import assert_no_household_financial_data
+from .prompt_templates import PromptTemplateRegistry
 
 
 @dataclass(frozen=True)
@@ -11,6 +12,7 @@ class AIRequest:
     task: str
     prompt: str
     source_refs: list[str]
+    prompt_template_version: str | None = None
 
 
 @dataclass(frozen=True)
@@ -36,6 +38,13 @@ class ProviderNeutralAIAdapter:
 
     def complete(self, request: AIRequest) -> AIResponse:
         assert_no_household_financial_data(request.__dict__)
+        if request.prompt_template_version is not None:
+            PromptTemplateRegistry.load().require_approved(
+                version=request.prompt_template_version,
+                provider=getattr(self.provider, "name"),
+                task=request.task,
+                source_refs=request.source_refs,
+            )
         return self.provider.complete(request)
 
 
