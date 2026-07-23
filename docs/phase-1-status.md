@@ -71,6 +71,7 @@ Status: implemented with deterministic test doubles.
 - Under-representative coverage blocks in tests.
 - Challenge reviews and multi-agent comparisons can write complete AI Decision Ledger records.
 - Prompt-template governance requires approved provider, task, and source refs before adapter calls that identify a prompt-template version.
+- Prompt-template governance rejects live providers unless the template record explicitly authorizes live-provider use.
 
 ### Publication-State Advancement Policy
 

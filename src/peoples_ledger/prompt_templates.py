@@ -36,6 +36,16 @@ class PromptTemplateRegistry:
                 source_registry.require(source_id)
             if record["status"] == "approved" and not record["approved_providers"]:
                 raise PromptTemplateRegistryError(f"approved template has no providers: {record['version']}")
+            if not record["live_provider_authorized"]:
+                live_providers = [
+                    provider
+                    for provider in record["approved_providers"]
+                    if not provider.startswith("deterministic-")
+                ]
+                if live_providers:
+                    raise PromptTemplateRegistryError(
+                        f"live providers require explicit authorization for {record['version']}: {live_providers}"
+                    )
         return cls({record["version"]: record for record in records})
 
     def require_approved(self, version: str, provider: str, task: str, source_refs: list[str]) -> dict[str, Any]:

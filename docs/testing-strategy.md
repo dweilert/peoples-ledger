@@ -141,7 +141,7 @@ The first challenge-agent tests use a deterministic test double and verify nonbl
 
 Multi-agent challenge tests compare deterministic agents, aggregate disagreement, and verify comparison entries are recorded in the AI Decision Ledger.
 
-Prompt-template governance tests validate the approved template registry, require approved provider and task combinations, require source refs, reject duplicate versions, and verify the AI adapter enforces approved templates when a request names a prompt-template version.
+Prompt-template governance tests validate the approved template registry, require approved provider and task combinations, require source refs, reject duplicate versions, reject unauthorized live providers, and verify the AI adapter enforces approved templates when a request names a prompt-template version.
 
 The first publication-state tests verify advancement on passing assurance, blocking on assurance failure, blocking on challenge disagreement, and review-required behavior for high-risk outputs.
 

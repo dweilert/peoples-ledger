@@ -63,6 +63,16 @@ class PromptTemplateTests(unittest.TestCase):
             with self.assertRaises(PromptTemplateRegistryError):
                 PromptTemplateRegistry.load(path)
 
+    def test_registry_rejects_live_provider_without_authorization(self) -> None:
+        records = [dict(record) for record in PromptTemplateRegistry.load().templates.values()]
+        records[0]["approved_providers"] = ["live-provider"]
+        records[0]["live_provider_authorized"] = False
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "prompt_templates.json"
+            path.write_text(json.dumps(records), encoding="utf-8")
+            with self.assertRaises(PromptTemplateRegistryError):
+                PromptTemplateRegistry.load(path)
+
 
 if __name__ == "__main__":
     unittest.main()

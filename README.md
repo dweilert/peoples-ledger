@@ -46,7 +46,7 @@ Browser-local privacy hardening includes a dependency-free JavaScript runtime te
 
 Challenge-agent disagreement recording has begun with a deterministic test double that can write complete AI Decision Ledger entries.
 
-Prompt-template governance is offline and enforceable: `make assure` validates the approved template registry, and adapter requests with prompt-template versions require approved provider, task, and source refs.
+Prompt-template governance is offline and enforceable: `make assure` validates the approved template registry, adapter requests with prompt-template versions require approved provider, task, and source refs, and live providers are rejected unless explicitly authorized in the template record.
 
 Report artifact packaging writes JSON, HTML, a manifest with `sha256:` hashes, and a downloadable zip bundle.
 
