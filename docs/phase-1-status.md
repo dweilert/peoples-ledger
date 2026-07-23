@@ -49,12 +49,13 @@ Status: implemented for JSON and static HTML report.
 
 ### Browser-Local Privacy Hardening
 
-Status: implemented without external browser dependencies.
+Status: implemented with both dependency-light and browser-runtime tests.
 
 - Frontend local-only controls have static privacy tests.
 - A Node-backed test executes frontend JavaScript with a stubbed DOM and fetch layer.
 - Local-only control changes do not trigger network calls.
-- Full Playwright request interception remains a later enhancement when browser dependencies are added.
+- `make test-browser` uses Playwright request interception to prove local privacy-control values are not transmitted from Chromium.
+- Browser test artifacts are ignored through `test-results/`.
 
 ### Challenge-Agent Disagreement Recording
 

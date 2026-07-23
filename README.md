@@ -24,6 +24,7 @@ Licensing and intellectual-property decisions are intentionally deferred.
 make test
 make validate
 make assure
+make test-browser
 make report
 make report-html
 make export-report
@@ -32,7 +33,7 @@ make run
 
 Then open `frontend/index.html` or call the local API at `http://127.0.0.1:8787`.
 
-CI runs `make validate`, `make assure`, and `make test` on pushes and pull requests.
+CI runs `make validate`, `make assure`, and `make test` on pushes and pull requests. `make test-browser` is an explicit local browser-privacy check that requires the Playwright CLI and a Chromium browser install.
 
 The first Phase 1 workstream is fixture-first source ingestion; it is offline, deterministic, and covered by tests before any live connector work.
 
@@ -40,7 +41,7 @@ The first statutory transformation slice is also fixture-first: supported operat
 
 The first report assembly slice emits a public JSON report with source traces, decision trace, model scenarios, perspective profiles, and assurance status.
 
-Browser-local privacy hardening has begun with a dependency-free JavaScript runtime test that proves local-only controls do not trigger network calls.
+Browser-local privacy hardening includes a dependency-free JavaScript runtime test and an explicit Playwright request-interception test that proves local-only controls do not trigger network calls or transmit local values.
 
 Challenge-agent disagreement recording has begun with a deterministic test double that can write complete AI Decision Ledger entries.
 

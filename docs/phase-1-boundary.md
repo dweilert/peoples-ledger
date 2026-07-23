@@ -98,9 +98,11 @@ Required tests:
 
 Initial status: started with a dependency-free JavaScript runtime test that executes the frontend code with a stubbed DOM and fetch layer. It verifies local-only privacy controls do not create network calls and preserve the no-transmission message.
 
+Browser status: started with `make test-browser`, which uses Playwright request interception to load the static frontend in Chromium, fulfill only allowlisted local API calls, and fail if local privacy-control values create network requests.
+
 Required tests:
 
-- Playwright or equivalent request interception proves local inputs are not transmitted
+- Playwright request interception proves local inputs are not transmitted
 - server logs do not receive local values
 - frontend remains on an allowlisted endpoint set
 

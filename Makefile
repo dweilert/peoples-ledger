@@ -1,7 +1,10 @@
-.PHONY: test validate assure report report-html export-report run
+.PHONY: test test-browser validate assure report report-html export-report run
 
 test:
 	PYTHONPATH=src python3 -m unittest discover -s tests
+
+test-browser:
+	NODE_PATH=$$(npm root -g) playwright test tests/browser/privacy_egress.spec.js --reporter=line
 
 validate:
 	PYTHONPATH=src python3 -m peoples_ledger.cli validate
