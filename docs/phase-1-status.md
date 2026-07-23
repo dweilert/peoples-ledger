@@ -25,6 +25,8 @@ Status: implemented for first operations.
 - Successful operations emit schema-compatible statutory-transformation records.
 - Before/after hashes are stable.
 - Round-trip fixture expectations are recorded for reversible operations.
+- Authoritative-after-text fixture expectations are reconciled for known post-enactment snapshots.
+- Authoritative-after-text mismatches add review triggers instead of silently publishing as reconciled.
 - Unmatched, ambiguous, and incomplete operations abstain with review triggers.
 
 ### Automated Assurance Gate
@@ -100,7 +102,6 @@ Status: implemented for first deterministic dimensions.
 These are useful but no longer block the first Phase 1 POC slice:
 
 - add more statutory transformation operation fixtures when new TCJA provision patterns need them
-- add authoritative post-enactment round-trip fixtures
 - add more correction workflow fixture types as real corrections occur
 - add more risk scoring dimensions as new automation paths create new risks
 - add live-model challenge agents after governance and prompt-template controls exist

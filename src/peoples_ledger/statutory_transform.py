@@ -36,6 +36,7 @@ class TransformRequest:
     target_text: str
     replacement_text: str | None = None
     insertion_text: str | None = None
+    authoritative_after_text: str | None = None
 
 
 @dataclass(frozen=True)
@@ -80,6 +81,10 @@ def apply_transform(request: TransformRequest) -> TransformResult:
     else:
         return _abstain(request, "unsupported_operation")
 
+    reconciled = request.authoritative_after_text is None or after_text == request.authoritative_after_text
+    unresolved_reason = None if reconciled else "authoritative_after_text_mismatch"
+    review_triggers = [] if reconciled else ["statutory_transform_review:authoritative_after_text_mismatch"]
+
     transformation = {
         "id": request.id,
         "analysis_unit_id": request.analysis_unit_id,
@@ -98,8 +103,8 @@ def apply_transform(request: TransformRequest) -> TransformResult:
         "validation": {
             "deterministic": True,
             "round_trip_valid": _round_trip_valid(request, after_text),
-            "reconciled": True,
-            "unresolved_reason": None,
+            "reconciled": reconciled,
+            "unresolved_reason": unresolved_reason,
         },
     }
     SchemaRegistry(SCHEMA_DIR).validate("statutory_transformation", transformation)
@@ -108,8 +113,8 @@ def apply_transform(request: TransformRequest) -> TransformResult:
         before_text=request.current_text,
         after_text=after_text,
         transformation=transformation,
-        review_triggers=[],
-        unresolved_reason=None,
+        review_triggers=review_triggers,
+        unresolved_reason=unresolved_reason,
     )
 
 

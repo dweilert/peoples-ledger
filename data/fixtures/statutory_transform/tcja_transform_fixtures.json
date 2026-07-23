@@ -6,6 +6,7 @@
     "target_text": "graduated corporate rates with a highest rate of 35 percent",
     "replacement_text": "a flat corporate rate of 21 percent",
     "expected_after_text": "Section 11(b) imposes a flat corporate rate of 21 percent.",
+    "authoritative_after_text": "Section 11(b) imposes a flat corporate rate of 21 percent.",
     "expected_round_trip_text": "Section 11(b) imposes graduated corporate rates with a highest rate of 35 percent.",
     "source_span": {
       "source_record_id": "pl115_97_public_law",
@@ -26,6 +27,7 @@
     "target_text": "specified state and local taxes",
     "insertion_text": ", subject to a 10000 dollar limitation for the covered period",
     "expected_after_text": "Section 164 allows a deduction for specified state and local taxes, subject to a 10000 dollar limitation for the covered period.",
+    "authoritative_after_text": "Section 164 allows a deduction for specified state and local taxes, subject to a 10000 dollar limitation for the covered period.",
     "expected_round_trip_text": "Section 164 allows a deduction for specified state and local taxes.",
     "source_span": {
       "source_record_id": "pl115_97_public_law",
@@ -45,6 +47,7 @@
     "current_text": "Section 151 allows a deduction for personal exemptions for the taxable year.",
     "target_text": "a deduction for personal exemptions",
     "expected_after_text": "Section 151 allows  for the taxable year.",
+    "authoritative_after_text": "Section 151 allows  for the taxable year.",
     "expected_round_trip_text": null,
     "source_span": {
       "source_record_id": "pl115_97_public_law",
@@ -65,6 +68,7 @@
     "target_text": "section 951A",
     "replacement_text": "section 951B",
     "expected_after_text": "Subpart F includes section 951B after section 951.",
+    "authoritative_after_text": "Subpart F includes section 951B after section 951.",
     "expected_round_trip_text": "Subpart F includes section 951A after section 951.",
     "source_span": {
       "source_record_id": "pl115_97_public_law",

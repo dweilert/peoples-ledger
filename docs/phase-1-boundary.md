@@ -37,6 +37,8 @@ Required tests:
 
 Initial status: started with fixture-backed `replace_text`, `insert_after`, `delete_text`, and `renumber_text` operations. Successful operations emit schema-compatible statutory-transformation records; unmatched, ambiguous, or incomplete operations abstain with review triggers and do not produce valid transformation records.
 
+Reconciliation status: started with authoritative-after-text fixture checks. Matching post-enactment snapshots set `reconciled: true`; mismatches keep the deterministic transform record but add a review trigger and unresolved reason.
+
 Required tests:
 
 - supported operations produce expected before/after fixtures
