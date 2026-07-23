@@ -28,6 +28,7 @@ class Phase1AcceptanceTests(unittest.TestCase):
                 "report_traceability",
                 "ledger_validation_fields",
                 "browser_privacy_target_defined",
+                "scope_boundaries_preserved",
                 "ci_standard_gates_defined",
                 "assurance_gate_passes",
             },
@@ -40,6 +41,21 @@ class Phase1AcceptanceTests(unittest.TestCase):
         failures = [check for check in report.checks if not check.passed]
         self.assertEqual(failures[0].name, "fixture_ingestion_validates")
         self.assertEqual(failures[0].detail, "bad fixture")
+
+    def test_phase1_acceptance_fails_when_scope_boundaries_are_breached(self) -> None:
+        unit = {
+            "model_scenarios": [
+                {
+                    "id": "bad_scenario",
+                    "uses_household_financial_data": True,
+                    "model_type": "microsimulation_stub",
+                }
+            ]
+        }
+        with patch("peoples_ledger.phase1_acceptance.load_analysis_unit", return_value=unit):
+            report = run_phase1_acceptance()
+        failures = [check for check in report.checks if not check.passed]
+        self.assertIn("scope_boundaries_preserved", {failure.name for failure in failures})
 
     def test_phase1_acceptance_cli_outputs_status(self) -> None:
         result = subprocess.run(

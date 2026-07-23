@@ -36,7 +36,7 @@ Status: implemented for current POC.
 
 - `make assure` runs named checks.
 - `make assure` validates the approved prompt-template registry.
-- `make phase1-acceptance` runs executable checks for the Phase 1 exit criteria.
+- `make phase1-acceptance` runs executable checks for the Phase 1 exit criteria and out-of-scope boundaries.
 - The gate reports publication allowance, publication state, risk tier, and review triggers.
 - CI runs `make validate`, `make assure`, `make phase1-acceptance`, and `make test`.
 

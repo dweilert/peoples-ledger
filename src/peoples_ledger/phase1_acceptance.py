@@ -5,8 +5,10 @@ from pathlib import Path
 from typing import Callable
 
 from .assurance import run_assurance_gate
+from .analysis import load_analysis_unit
 from .decision_ledger import DecisionLedger
 from .paths import REPO_ROOT
+from .prompt_templates import PromptTemplateRegistry
 from .reporting import build_public_report
 from .source_ingestion import validate_source_ingestion_fixtures
 from .statutory_transform import AffectedAuthority, SourceSpan, TransformRequest, apply_transform
@@ -36,6 +38,7 @@ def run_phase1_acceptance() -> Phase1AcceptanceReport:
         _run_check("report_traceability", _report_traceability),
         _run_check("ledger_validation_fields", _ledger_validation_fields),
         _run_check("browser_privacy_target_defined", _browser_privacy_target_defined),
+        _run_check("scope_boundaries_preserved", _scope_boundaries_preserved),
         _run_check("ci_standard_gates_defined", _ci_standard_gates_defined),
         _run_check("assurance_gate_passes", lambda: _require(run_assurance_gate().passed, "assurance gate did not pass")),
     ]
@@ -136,6 +139,25 @@ def _ci_standard_gates_defined() -> None:
     workflow = _read_repo_file(".github/workflows/ci.yml")
     for target in ("make validate", "make assure", "make test", "make phase1-acceptance"):
         _require(target in workflow, f"CI missing {target}")
+
+
+def _scope_boundaries_preserved() -> None:
+    unit = load_analysis_unit()
+    for scenario in unit["model_scenarios"]:
+        _require(not scenario["uses_household_financial_data"], f"scenario uses household financial data: {scenario['id']}")
+        _require(scenario["model_type"] != "microsimulation_stub", f"microsimulation remains out of scope: {scenario['id']}")
+
+    registry = PromptTemplateRegistry.load()
+    for template in registry.templates.values():
+        _require(not template["live_provider_authorized"], f"live provider authorization remains out of scope: {template['version']}")
+
+    forbidden_paths = [
+        "src/peoples_ledger/state_modeling.py",
+        "src/peoples_ledger/live_congressional_monitoring.py",
+        "src/peoples_ledger/microsimulation.py",
+    ]
+    for relative_path in forbidden_paths:
+        _require(not (REPO_ROOT / relative_path).exists(), f"out-of-scope module exists: {relative_path}")
 
 
 def _read_repo_file(relative_path: str) -> str:
