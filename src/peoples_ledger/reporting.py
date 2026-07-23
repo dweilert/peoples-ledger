@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import Any
+from html import escape
 
 from .analysis import load_analysis_unit
 from .assurance import run_assurance_gate
@@ -42,6 +43,61 @@ def build_public_report() -> dict[str, Any]:
             "review_triggers": assurance.review_triggers,
         },
     }
+
+
+def build_public_report_html(report: dict[str, Any] | None = None) -> str:
+    report = report or build_public_report()
+    provisions = "\n".join(
+        f"<li><strong>{escape(provision['label'])}</strong>: {escape(provision['summary'])}</li>"
+        for provision in report["provisions"]
+    )
+    sources = "\n".join(
+        f"<li><a href=\"{escape(source['url'])}\">{escape(source['title'])}</a> "
+        f"({escape(source['publisher'])})</li>"
+        for source in report["source_manifest"]
+    )
+    perspectives = "\n".join(
+        f"<li>{escape(profile['label'])} v{escape(profile['version'])}</li>"
+        for profile in report["perspective_profiles"]
+    )
+    corrections = "\n".join(
+        f"<li>{escape(correction['id'])}: {escape(correction['root_cause'])}</li>"
+        for correction in report["corrections"]
+    )
+    return f"""<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{escape(report['title'])}</title>
+  </head>
+  <body>
+    <main>
+      <h1>{escape(report['title'])}</h1>
+      <p data-report-id="{escape(report['report_id'])}">{escape(report['summary'])}</p>
+      <section>
+        <h2>Publication</h2>
+        <p>{escape(report['publication']['state'])} / risk tier {report['risk']['tier']}</p>
+      </section>
+      <section>
+        <h2>Provisions</h2>
+        <ul>{provisions}</ul>
+      </section>
+      <section>
+        <h2>Sources</h2>
+        <ul>{sources}</ul>
+      </section>
+      <section>
+        <h2>Perspectives</h2>
+        <ul>{perspectives}</ul>
+      </section>
+      <section>
+        <h2>Corrections</h2>
+        <ul>{corrections}</ul>
+      </section>
+    </main>
+  </body>
+</html>
+"""
 
 
 def _provision_view(provision: dict[str, Any]) -> dict[str, Any]:

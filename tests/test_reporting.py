@@ -7,7 +7,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from peoples_ledger.reporting import build_public_report
+from peoples_ledger.reporting import build_public_report, build_public_report_html
 
 
 class ReportingTests(unittest.TestCase):
@@ -114,6 +114,16 @@ class ReportingTests(unittest.TestCase):
                 sort_keys=True,
             ),
         )
+
+    def test_public_report_html_contains_core_trace_sections(self) -> None:
+        html = build_public_report_html(build_public_report())
+        self.assertIn("<h1>TCJA 2017 representative federal tax provision subset</h1>", html)
+        self.assertIn("<h2>Publication</h2>", html)
+        self.assertIn("<h2>Provisions</h2>", html)
+        self.assertIn("<h2>Sources</h2>", html)
+        self.assertIn("<h2>Perspectives</h2>", html)
+        self.assertIn("<h2>Corrections</h2>", html)
+        self.assertIn("report_tcja_2017_representative_provisions_phase1_poc", html)
 
 
 if __name__ == "__main__":

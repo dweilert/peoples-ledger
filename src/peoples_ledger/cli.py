@@ -10,7 +10,7 @@ from .source_registry import SourceRegistry
 from .source_registry import load_source_snapshots
 from .source_ingestion import validate_source_ingestion_fixtures
 from .assurance import run_assurance_gate
-from .reporting import build_public_report
+from .reporting import build_public_report, build_public_report_html
 from .challenge_agents import record_challenge_review
 from .corrections import record_correction
 
@@ -21,6 +21,7 @@ def main() -> int:
     subcommands.add_parser("validate", help="validate bundled schemas and exemplar data")
     subcommands.add_parser("assure", help="run the publication assurance gate")
     subcommands.add_parser("report", help="build the public POC report JSON")
+    subcommands.add_parser("report-html", help="build the public POC report HTML")
     subcommands.add_parser("challenge-review", help="record a deterministic challenge-agent review")
     subcommands.add_parser("record-correction", help="record the deterministic correction fixture")
     subcommands.add_parser("summarize-tcja", help="run deterministic TCJA exemplar summary")
@@ -53,6 +54,10 @@ def main() -> int:
 
     if args.command == "report":
         print(json.dumps(build_public_report(), sort_keys=True))
+        return 0
+
+    if args.command == "report-html":
+        print(build_public_report_html())
         return 0
 
     if args.command == "challenge-review":

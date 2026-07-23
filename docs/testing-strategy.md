@@ -127,6 +127,8 @@ The first statutory-transformation tests are fixture-backed: they cover successf
 
 The first report assembly tests snapshot the public report shape and verify provisions, sources, snapshots, decisions, publication state, model scenario, and perspective IDs remain traceable.
 
+Static report tests verify the generated HTML contains the core trace sections and stable report identifier.
+
 The first browser privacy hardening test executes the frontend JavaScript with a stubbed DOM and fetch layer, then verifies local-only controls do not create network calls. A full Playwright request-interception test remains the target once browser dependencies are added.
 
 The first challenge-agent tests use a deterministic test double and verify nonblocking disagreement, blocking under-representative coverage, and complete AI Decision Ledger recording.

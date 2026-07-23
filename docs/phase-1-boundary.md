@@ -75,6 +75,8 @@ Required tests:
 
 Initial status: started with a public JSON report assembled from the exemplar, source manifest, decision trace, model scenarios, perspective profiles, and assurance status. The report is available through `make report` and the local backend.
 
+HTML status: started with `make report-html` and a backend HTML report endpoint generated from the same public report data.
+
 Required tests:
 
 - generated report snapshots are stable

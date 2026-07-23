@@ -34,10 +34,12 @@ Status: implemented for current POC.
 
 ### Public Report Assembly
 
-Status: implemented for JSON report.
+Status: implemented for JSON and static HTML report.
 
 - `make report` emits a public JSON report.
+- `make report-html` emits a static HTML report.
 - The backend exposes `/reports/tcja-2017-representative-provisions`.
+- The backend exposes `/reports/tcja-2017-representative-provisions.html`.
 - Report output includes source manifest, decision trace, model scenarios, perspective profiles, publication decision, and assurance checks.
 - Snapshot-style tests protect the report shape.
 
@@ -92,7 +94,7 @@ These are useful but no longer block the first Phase 1 POC slice:
 - add real Playwright browser request-interception tests
 - add more statutory transformation operation fixtures
 - add authoritative post-enactment round-trip fixtures
-- add generated static HTML report, not only JSON
+- add richer static HTML styling and downloadable artifact packaging
 - add more correction workflow fixtures and correction-derived regression tests
 - add more risk scoring dimensions as new automation paths create new risks
 - add challenge-agent disagreement comparison across multiple deterministic agents

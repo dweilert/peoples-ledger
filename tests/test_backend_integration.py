@@ -42,6 +42,11 @@ class BackendIntegrationTests(unittest.TestCase):
         payload = self.get_json("/sources")
         self.assertGreaterEqual(len(payload["sources"]), 3)
 
+    def test_html_report_endpoint(self) -> None:
+        with urllib.request.urlopen(f"{self.base_url}/reports/tcja-2017-representative-provisions.html", timeout=3) as response:
+            body = response.read().decode("utf-8")
+        self.assertIn("<h1>TCJA 2017 representative federal tax provision subset</h1>", body)
+
 
 if __name__ == "__main__":
     unittest.main()

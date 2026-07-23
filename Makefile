@@ -12,5 +12,8 @@ assure:
 report:
 	PYTHONPATH=src python3 -m peoples_ledger.cli report
 
+report-html:
+	PYTHONPATH=src python3 -m peoples_ledger.cli report-html
+
 run:
 	PYTHONPATH=src python3 -m peoples_ledger.backend.server

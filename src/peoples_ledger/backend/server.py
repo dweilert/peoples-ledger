@@ -7,7 +7,7 @@ from typing import Any
 from peoples_ledger.ai_adapter import AIRequest, DeterministicTCJAProvider, ProviderNeutralAIAdapter
 from peoples_ledger.analysis import load_analysis_unit
 from peoples_ledger.decision_ledger import DecisionLedger
-from peoples_ledger.reporting import build_public_report
+from peoples_ledger.reporting import build_public_report, build_public_report_html
 from peoples_ledger.source_registry import SourceRegistry
 
 
@@ -28,6 +28,8 @@ class Handler(BaseHTTPRequestHandler):
             self._json({"entries": DecisionLedger().read_all()})
         elif self.path == "/reports/tcja-2017-representative-provisions":
             self._json(build_public_report())
+        elif self.path == "/reports/tcja-2017-representative-provisions.html":
+            self._html(build_public_report_html())
         else:
             self._json({"error": "not found"}, status=404)
 
@@ -80,6 +82,15 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("access-control-allow-origin", "*")
         self.send_header("access-control-allow-methods", "GET, POST, OPTIONS")
         self.send_header("access-control-allow-headers", "content-type")
+
+    def _html(self, body_text: str, status: int = 200) -> None:
+        body = body_text.encode("utf-8")
+        self.send_response(status)
+        self.send_header("content-type", "text/html; charset=utf-8")
+        self.send_header("content-length", str(len(body)))
+        self.send_header("access-control-allow-origin", "*")
+        self.end_headers()
+        self.wfile.write(body)
 
     def log_message(self, format: str, *args: Any) -> None:
         return
