@@ -45,7 +45,7 @@ Browser-local privacy hardening includes a dependency-free JavaScript runtime te
 
 Challenge-agent disagreement recording has begun with a deterministic test double that can write complete AI Decision Ledger entries.
 
-Report artifact packaging writes JSON, HTML, and a manifest with `sha256:` hashes.
+Report artifact packaging writes JSON, HTML, a manifest with `sha256:` hashes, and a downloadable zip bundle.
 
 ## Scope Boundaries
 

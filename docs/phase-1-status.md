@@ -41,7 +41,7 @@ Status: implemented for JSON and static HTML report.
 
 - `make report` emits a public JSON report.
 - `make report-html` emits a static HTML report.
-- `make export-report` writes JSON, HTML, and a manifest with artifact hashes.
+- `make export-report` writes JSON, HTML, a manifest with artifact hashes, and a downloadable zip bundle.
 - The backend exposes `/reports/tcja-2017-representative-provisions`.
 - The backend exposes `/reports/tcja-2017-representative-provisions.html`.
 - Report output includes source manifest, decision trace, model scenarios, perspective profiles, publication decision, and assurance checks.
@@ -99,10 +99,8 @@ Status: implemented for first deterministic dimensions.
 
 These are useful but no longer block the first Phase 1 POC slice:
 
-- add real Playwright browser request-interception tests
 - add more statutory transformation operation fixtures when new TCJA provision patterns need them
 - add authoritative post-enactment round-trip fixtures
-- add downloadable report bundle archive if artifact distribution is needed
 - add more correction workflow fixture types as real corrections occur
 - add more risk scoring dimensions as new automation paths create new risks
 - add live-model challenge agents after governance and prompt-template controls exist

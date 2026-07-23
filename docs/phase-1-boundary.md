@@ -81,7 +81,7 @@ HTML status: started with `make report-html` and a backend HTML report endpoint 
 
 HTML styling status: improved with self-contained CSS, summary metrics, trace sections, and assurance check display while remaining script-free.
 
-Artifact status: started with `make export-report`, which writes report JSON, HTML, and a manifest containing artifact hashes.
+Artifact status: started with `make export-report`, which writes report JSON, HTML, a manifest containing artifact hashes, and a downloadable zip bundle.
 
 Required tests:
 

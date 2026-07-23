@@ -4,6 +4,7 @@ import json
 import sys
 import tempfile
 import unittest
+import zipfile
 from hashlib import sha256
 from pathlib import Path
 
@@ -34,6 +35,27 @@ class ReportArtifactTests(unittest.TestCase):
         self.assertEqual(saved["report_id"], "report_tcja_2017_representative_provisions_phase1_poc")
         self.assertNotIn("manifest_path", saved)
         self.assertEqual(len(saved["artifacts"]), 2)
+
+    def test_export_report_artifacts_writes_downloadable_bundle(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            manifest = export_report_artifacts(Path(tmpdir))
+            bundle = manifest["bundle"]
+            bundle_path = Path(bundle["path"])
+            bundle_body = bundle_path.read_bytes()
+
+            self.assertTrue(bundle_path.exists())
+            self.assertEqual(bundle["kind"], "zip")
+            self.assertEqual(bundle["bytes"], len(bundle_body))
+            self.assertEqual(bundle["content_hash"], "sha256:" + sha256(bundle_body).hexdigest())
+            with zipfile.ZipFile(bundle_path) as archive:
+                self.assertEqual(
+                    set(archive.namelist()),
+                    {
+                        "report_tcja_2017_representative_provisions_phase1_poc.json",
+                        "report_tcja_2017_representative_provisions_phase1_poc.html",
+                        "report_tcja_2017_representative_provisions_phase1_poc.manifest.json",
+                    },
+                )
 
 
 if __name__ == "__main__":

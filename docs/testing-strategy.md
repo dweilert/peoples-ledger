@@ -131,7 +131,7 @@ Static report tests verify the generated HTML contains the core trace sections a
 
 Static report safety tests verify the HTML is self-contained, script-free, and has no network-fetch path.
 
-Report artifact tests verify exported JSON, HTML, byte counts, and `sha256:` hashes in the artifact manifest.
+Report artifact tests verify exported JSON, HTML, byte counts, `sha256:` hashes in the artifact manifest, and downloadable zip bundle contents.
 
 The first browser privacy hardening tests execute the frontend JavaScript with a stubbed DOM and fetch layer, then use Playwright request interception in Chromium to verify local-only controls do not create network calls or transmit local values.
 
