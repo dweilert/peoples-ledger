@@ -79,6 +79,8 @@ Initial status: started with a public JSON report assembled from the exemplar, s
 
 HTML status: started with `make report-html` and a backend HTML report endpoint generated from the same public report data.
 
+HTML styling status: improved with self-contained CSS, summary metrics, trace sections, and assurance check display while remaining script-free.
+
 Artifact status: started with `make export-report`, which writes report JSON, HTML, and a manifest containing artifact hashes.
 
 Required tests:

@@ -123,7 +123,16 @@ class ReportingTests(unittest.TestCase):
         self.assertIn("<h2>Sources</h2>", html)
         self.assertIn("<h2>Perspectives</h2>", html)
         self.assertIn("<h2>Corrections</h2>", html)
+        self.assertIn("<h2>Assurance Checks</h2>", html)
         self.assertIn("report_tcja_2017_representative_provisions_phase1_poc", html)
+
+    def test_public_report_html_is_static_and_self_contained(self) -> None:
+        html = build_public_report_html(build_public_report())
+        self.assertIn("<style>", html)
+        self.assertNotIn("<script", html.lower())
+        self.assertNotIn("fetch(", html)
+        self.assertNotIn("analytics", html.lower())
+        self.assertIn("aria-label=\"Report metrics\"", html)
 
 
 if __name__ == "__main__":

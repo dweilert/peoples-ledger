@@ -129,6 +129,8 @@ The first report assembly tests snapshot the public report shape and verify prov
 
 Static report tests verify the generated HTML contains the core trace sections and stable report identifier.
 
+Static report safety tests verify the HTML is self-contained, script-free, and has no network-fetch path.
+
 Report artifact tests verify exported JSON, HTML, byte counts, and `sha256:` hashes in the artifact manifest.
 
 The first browser privacy hardening test executes the frontend JavaScript with a stubbed DOM and fetch layer, then verifies local-only controls do not create network calls. A full Playwright request-interception test remains the target once browser dependencies are added.

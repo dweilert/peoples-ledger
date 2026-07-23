@@ -98,7 +98,7 @@ These are useful but no longer block the first Phase 1 POC slice:
 - add real Playwright browser request-interception tests
 - add more statutory transformation operation fixtures
 - add authoritative post-enactment round-trip fixtures
-- add richer static HTML styling
+- add downloadable report bundle archive if artifact distribution is needed
 - add more correction workflow fixtures and correction-derived regression tests
 - add more risk scoring dimensions as new automation paths create new risks
 - add live-model challenge agents after governance and prompt-template controls exist
