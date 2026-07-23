@@ -30,6 +30,7 @@ class Phase2StatusTests(unittest.TestCase):
         body = PHASE2_STATUS_PATH.read_text(encoding="utf-8")
         for phrase in (
             "Fixture-Only Source Acquisition",
+            "Phase 2 Closure",
             "Draft Candidate Analysis Queue",
             "Promotion Gate Reports",
             "Candidate Extraction Governance",
