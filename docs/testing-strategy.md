@@ -119,3 +119,5 @@ Phase 0 tests prove schema validity, traceability, privacy boundaries, ledger in
 Phase 1 tests should add deterministic statutory transformation fixtures, source-ingestion fixtures, abstention/escalation cases, challenge-agent disagreement cases, stronger source snapshot verification, report snapshot tests, and browser-level privacy egress tests. See `docs/phase-1-boundary.md`.
 
 The first Phase 1 source-ingestion tests are fixture-first: they validate generated source records and snapshots, assert expected content hashes, and include negative coverage for hash mismatch and missing metadata.
+
+The first statutory-transformation tests are fixture-backed: they cover successful replacement, successful insertion, stable before/after hashes, schema-compatible transformation records, and abstention for unmatched, ambiguous, or incomplete operations.

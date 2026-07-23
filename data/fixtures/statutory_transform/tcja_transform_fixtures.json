@@ -1,0 +1,40 @@
+[
+  {
+    "id": "fixture_replace_corporate_rate",
+    "operation": "replace_text",
+    "current_text": "Section 11(b) imposes graduated corporate rates with a highest rate of 35 percent.",
+    "target_text": "graduated corporate rates with a highest rate of 35 percent",
+    "replacement_text": "a flat corporate rate of 21 percent",
+    "expected_after_text": "Section 11(b) imposes a flat corporate rate of 21 percent.",
+    "source_span": {
+      "source_record_id": "pl115_97_public_law",
+      "locator": "Section 13001",
+      "text_hash": "manual-span-sec-13001-corporate-rate"
+    },
+    "affected_authority": [
+      {
+        "type": "usc",
+        "citation": "26 USC 11"
+      }
+    ]
+  },
+  {
+    "id": "fixture_insert_salt_cap",
+    "operation": "insert_after",
+    "current_text": "Section 164 allows a deduction for specified state and local taxes.",
+    "target_text": "specified state and local taxes",
+    "insertion_text": ", subject to a 10000 dollar limitation for the covered period",
+    "expected_after_text": "Section 164 allows a deduction for specified state and local taxes, subject to a 10000 dollar limitation for the covered period.",
+    "source_span": {
+      "source_record_id": "pl115_97_public_law",
+      "locator": "Section 11042",
+      "text_hash": "manual-span-sec-11042-salt-cap"
+    },
+    "affected_authority": [
+      {
+        "type": "usc",
+        "citation": "26 USC 164"
+      }
+    ]
+  }
+]

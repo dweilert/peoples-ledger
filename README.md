@@ -32,6 +32,8 @@ CI runs the same `make validate` and `make test` targets on pushes and pull requ
 
 The first Phase 1 workstream is fixture-first source ingestion; it is offline, deterministic, and covered by tests before any live connector work.
 
+The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
+
 ## Scope Boundaries
 
 This POC does not implement broad bill ingestion, full tax microsimulation, live congressional monitoring, or state-level modeling.
