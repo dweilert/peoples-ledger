@@ -2,6 +2,8 @@
 
 This checklist maps Phase 0 to the Foundational Product and System Design v0.3 Appendix H. Phase 0 remains a bounded manual exemplar and does not start broad ingestion, live monitoring, full tax microsimulation, state modeling, or final licensing/IP decisions.
 
+Testing is integrated into the acceptance approach. The testing layers and future gates are defined in `docs/testing-strategy.md`.
+
 ## Evidence
 
 Status: implemented for the manual exemplar.

@@ -9,10 +9,13 @@
 - `data/sources/snapshots.json`: source snapshot manifest.
 - `data/exemplars/tcja_2017_representative_provisions_analysis_unit.json`: manually curated TCJA analysis unit.
 - `tests/`: unit, schema, regression, and integration tests.
+- `docs/testing-strategy.md`: integrated testing approach and future merge gates.
 
 ## Version 0.3 Alignment
 
 The manual exemplar uses a ten-provision representative TCJA subset and includes v0.3 acceptance scaffolding for deterministic statutory transformation records, source spans, publication states, governed model scenarios, three perspective profiles, perspective invariance checks, and complete AI Decision Ledger retention, disclosure, redaction, and supersession fields.
+
+Testing is treated as part of the implementation contract. Each future feature, schema change, data fixture, model scenario, AI workflow, privacy boundary, or publication path should land with tests that state the trust claim being proven.
 
 ## Explicit Non-Goals
 
