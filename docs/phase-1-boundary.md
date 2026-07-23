@@ -48,6 +48,8 @@ Required tests:
 
 Initial status: started with `make assure`, which runs the bundled assurance gate and reports named check results, risk tier, publication state, publication allowance, and review triggers.
 
+Challenge-agent status: started with a deterministic challenge-agent test double that records model disagreement, findings, validation results, risk, and review triggers into the AI Decision Ledger.
+
 Required tests:
 
 - failed validators block publication-state advancement

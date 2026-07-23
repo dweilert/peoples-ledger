@@ -40,6 +40,8 @@ The first report assembly slice emits a public JSON report with source traces, d
 
 Browser-local privacy hardening has begun with a dependency-free JavaScript runtime test that proves local-only controls do not trigger network calls.
 
+Challenge-agent disagreement recording has begun with a deterministic test double that can write complete AI Decision Ledger entries.
+
 ## Scope Boundaries
 
 This POC does not implement broad bill ingestion, full tax microsimulation, live congressional monitoring, or state-level modeling.
