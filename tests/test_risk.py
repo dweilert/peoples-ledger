@@ -22,6 +22,8 @@ class RiskTests(unittest.TestCase):
         self.assertEqual(score.dimensions["unknown_indicator_count"], 2)
         self.assertEqual(score.dimensions["source_diversity"], 1)
         self.assertEqual(score.dimensions["provision_source_spans"], 1)
+        self.assertEqual(score.dimensions["official_source_mix"], 1)
+        self.assertEqual(score.dimensions["publication_readiness"], 1)
         self.assertIn("unknown_indicator_count:2", score.rationale)
 
     def test_assurance_failure_increases_risk(self) -> None:
@@ -81,6 +83,37 @@ class RiskTests(unittest.TestCase):
         score = score_risk(unit, run_assurance_gate())
 
         self.assertEqual(score.dimensions["provision_source_spans"], 3)
+        self.assertEqual(score.tier, 3)
+
+    def test_non_official_source_mix_increases_risk(self) -> None:
+        unit = load_analysis_unit()
+        source_records = {
+            "pl115_97_public_law": {"source_type": "statute"},
+            "jct_tcja_distribution_2017": {"source_type": "government_analysis"},
+            "crs_salt_cap_2018": {"source_type": "other"},
+        }
+
+        score = score_risk(unit, run_assurance_gate(), source_records=source_records)
+
+        self.assertEqual(score.dimensions["official_source_mix"], 3)
+        self.assertEqual(score.tier, 3)
+
+    def test_draft_analysis_increases_publication_readiness_risk(self) -> None:
+        unit = load_analysis_unit()
+        unit["status"] = "draft"
+
+        score = score_risk(unit, run_assurance_gate())
+
+        self.assertEqual(score.dimensions["publication_readiness"], 2)
+        self.assertEqual(score.tier, 2)
+
+    def test_superseded_publication_state_blocks_publication_readiness(self) -> None:
+        unit = load_analysis_unit()
+        unit["claims"][0]["publication_state"] = "superseded"
+
+        score = score_risk(unit, run_assurance_gate())
+
+        self.assertEqual(score.dimensions["publication_readiness"], 3)
         self.assertEqual(score.tier, 3)
 
 

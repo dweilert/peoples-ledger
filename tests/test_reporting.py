@@ -99,7 +99,9 @@ class ReportingTests(unittest.TestCase):
                         "dimensions": {
                             "assurance_failures": 1,
                             "challenge_disagreement": 1,
+                            "official_source_mix": 1,
                             "provision_source_spans": 1,
+                            "publication_readiness": 1,
                             "representative_coverage": 1,
                             "source_diversity": 1,
                             "unknown_indicator_count": 2,
