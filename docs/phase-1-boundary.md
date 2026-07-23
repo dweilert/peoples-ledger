@@ -60,7 +60,7 @@ Publication-state status: started with an explicit decision policy that blocks a
 
 Correction status: started with a correction-record schema, regression fixture, ledger recording path, and report visibility.
 
-Risk status: started with deterministic dimensions for assurance failures, challenge disagreement, unknown indicators, and representative coverage.
+Risk status: started with deterministic dimensions for assurance failures, challenge disagreement, unknown indicators, representative coverage, source diversity, and provision source-span coverage.
 
 Required tests:
 

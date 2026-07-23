@@ -145,4 +145,4 @@ The first correction workflow tests validate correction records, require regress
 
 Correction fixture tests now cover multiple correction types and require unique correction targets.
 
-The first risk-scoring tests cover current POC risk, assurance failures, blocking challenge disagreement, and under-representative coverage.
+The first risk-scoring tests cover current POC risk, assurance failures, blocking challenge disagreement, under-representative coverage, single-source analysis, and missing provision source spans.

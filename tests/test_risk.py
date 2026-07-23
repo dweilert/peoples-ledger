@@ -20,6 +20,8 @@ class RiskTests(unittest.TestCase):
         self.assertEqual(score.tier, 2)
         self.assertEqual(score.dimensions["assurance_failures"], 1)
         self.assertEqual(score.dimensions["unknown_indicator_count"], 2)
+        self.assertEqual(score.dimensions["source_diversity"], 1)
+        self.assertEqual(score.dimensions["provision_source_spans"], 1)
         self.assertIn("unknown_indicator_count:2", score.rationale)
 
     def test_assurance_failure_increases_risk(self) -> None:
@@ -49,6 +51,36 @@ class RiskTests(unittest.TestCase):
         unit["provisions"] = unit["provisions"][:3]
         score = score_risk(unit, run_assurance_gate())
         self.assertEqual(score.dimensions["representative_coverage"], 3)
+        self.assertEqual(score.tier, 3)
+
+    def test_single_source_analysis_increases_risk(self) -> None:
+        unit = load_analysis_unit()
+        unit["source_record_ids"] = ["pl115_97_public_law"]
+        for provision in unit["provisions"]:
+            provision["source_record_ids"] = ["pl115_97_public_law"]
+            provision["source_spans"] = [
+                span for span in provision["source_spans"]
+                if span["source_record_id"] == "pl115_97_public_law"
+            ]
+        for claim in unit["claims"]:
+            claim["evidence"] = [
+                evidence for evidence in claim["evidence"]
+                if evidence["source_record_id"] == "pl115_97_public_law"
+            ]
+
+        score = score_risk(unit, run_assurance_gate())
+
+        self.assertEqual(score.dimensions["source_diversity"], 3)
+        self.assertEqual(score.tier, 3)
+
+    def test_missing_provision_source_spans_increase_risk(self) -> None:
+        unit = load_analysis_unit()
+        for provision in unit["provisions"][:3]:
+            provision["source_spans"] = []
+
+        score = score_risk(unit, run_assurance_gate())
+
+        self.assertEqual(score.dimensions["provision_source_spans"], 3)
         self.assertEqual(score.tier, 3)
 
 

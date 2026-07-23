@@ -88,9 +88,9 @@ Status: implemented for first regression fixture.
 
 Status: implemented for first deterministic dimensions.
 
-- Risk scoring includes assurance failures, challenge disagreement, unknown indicator count, and representative coverage.
+- Risk scoring includes assurance failures, challenge disagreement, unknown indicator count, representative coverage, source diversity, and provision source-span coverage.
 - Public reports include risk dimensions, rationale, and tier.
-- Tests cover current POC risk, assurance failure, blocking challenge disagreement, and under-representative coverage.
+- Tests cover current POC risk, assurance failure, blocking challenge disagreement, under-representative coverage, single-source analysis, and missing provision source spans.
 
 ## Remaining Phase 1 Enhancements
 
