@@ -30,6 +30,8 @@ class CandidateAuditTests(unittest.TestCase):
         self.assertEqual(bundle["candidate_status"]["candidate_count"], 1)
         self.assertFalse(bundle["candidate_status"]["candidates"][0]["promotable"])
         self.assertTrue(bundle["promotion_gate_reports"][0]["blockers"])
+        self.assertTrue(bundle["promotion_audit_cross_check"]["candidate_ids_match"])
+        self.assertFalse(bundle["promotion_audit_cross_check"]["public_report_includes_candidates"])
         self.assertEqual(bundle["review_records"][0]["promotion_recommendation"], "blocked")
 
     def test_candidate_audit_bundle_contains_dry_run_ledger_summaries_only(self) -> None:
