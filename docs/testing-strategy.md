@@ -135,6 +135,8 @@ Report artifact tests verify exported JSON, HTML, byte counts, and `sha256:` has
 
 The first browser privacy hardening tests execute the frontend JavaScript with a stubbed DOM and fetch layer, then use Playwright request interception in Chromium to verify local-only controls do not create network calls or transmit local values.
 
+Backend privacy integration tests submit sentinel household-like values to API endpoints and verify those values do not appear in responses, AI Decision Ledger entries, or captured server logs.
+
 The first challenge-agent tests use a deterministic test double and verify nonblocking disagreement, blocking under-representative coverage, and complete AI Decision Ledger recording.
 
 Multi-agent challenge tests compare deterministic agents, aggregate disagreement, and verify comparison entries are recorded in the AI Decision Ledger.

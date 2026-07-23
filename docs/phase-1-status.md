@@ -55,6 +55,7 @@ Status: implemented with both dependency-light and browser-runtime tests.
 - A Node-backed test executes frontend JavaScript with a stubbed DOM and fetch layer.
 - Local-only control changes do not trigger network calls.
 - `make test-browser` uses Playwright request interception to prove local privacy-control values are not transmitted from Chromium.
+- Backend integration tests submit sentinel household-like values and verify they do not enter responses, ledger entries, or captured server logs.
 - Browser test artifacts are ignored through `test-results/`.
 
 ### Challenge-Agent Disagreement Recording

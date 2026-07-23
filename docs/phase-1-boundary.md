@@ -100,6 +100,8 @@ Initial status: started with a dependency-free JavaScript runtime test that exec
 
 Browser status: started with `make test-browser`, which uses Playwright request interception to load the static frontend in Chromium, fulfill only allowlisted local API calls, and fail if local privacy-control values create network requests.
 
+Backend log status: started with an integration regression that submits sentinel household-like values to the summarize endpoint and verifies those values do not appear in the response, AI Decision Ledger entry, or captured server logs.
+
 Required tests:
 
 - Playwright request interception proves local inputs are not transmitted
