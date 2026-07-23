@@ -164,12 +164,14 @@ Status: implemented for internal audit consistency.
 
 ### Promotion Audit Status Surfaces
 
-Status: implemented for CLI and backend inspection.
+Status: implemented for CLI, backend, and frontend inspection.
 
 - `promotion-audit-status` prints the read-only promotion audit cross-check.
 - `/candidates/promotion-audit` exposes the same blocked cross-check payload.
+- The frontend displays a minimal Phase 2 promotion audit panel.
 - Status surfaces do not append to the AI Decision Ledger.
 - Status surfaces do not mutate candidate records, promote candidates, or add candidates to public reports.
+- Browser privacy tests allowlist the promotion-audit endpoint and still prove local-only controls do not transmit values.
 
 ## Still Blocked
 
@@ -189,4 +191,4 @@ These are intentionally blocked in the current POC:
 
 ## Recommended Next Work
 
-The next useful unit is a minimal frontend panel for the promotion audit cross-check. It should read the safe backend status endpoint without collecting household financial data or adding candidates to public report content.
+The next useful unit is a Phase 2 closure checklist. It should declare Phase 2 complete for the bounded POC, list remaining intentional blockers, and define Phase 3 entry criteria without starting Phase 3 work.

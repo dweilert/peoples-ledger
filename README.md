@@ -77,7 +77,7 @@ A blocked promotion decision AI Decision Ledger entry exists as an offline fixtu
 
 An internal promotion audit cross-check compares candidate status, promotion requests, source promotion manifests, review records, and decision stubs for consistent blockers and source refs.
 
-The same promotion audit cross-check is exposed through the read-only `promotion-audit-status` CLI command and `/candidates/promotion-audit` backend endpoint.
+The same promotion audit cross-check is exposed through the read-only `promotion-audit-status` CLI command, `/candidates/promotion-audit` backend endpoint, and frontend promotion audit panel.
 
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
 

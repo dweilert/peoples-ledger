@@ -41,6 +41,7 @@ class BrowserPrivacyHardeningTests(unittest.TestCase):
               "#analysis",
               "#sources",
               "#candidate-status",
+              "#promotion-audit",
               "#ledger",
               "#refresh",
               "#summarize",
@@ -107,6 +108,25 @@ class BrowserPrivacyHardeningTests(unittest.TestCase):
                         ]
                       };
                     }
+                    if (url.endsWith("/candidates/promotion-audit")) {
+                      return {
+                        candidate_ids_match: true,
+                        public_report_includes_candidates: false,
+                        source_promotion_state: "blocked",
+                        source_registry_update_allowed: false,
+                        candidate_summaries: [
+                          {
+                            candidate_analysis_unit_id: "candidate",
+                            publication_state: "draft",
+                            promotion_decision: "blocked",
+                            blocker_gates: ["promotion_disabled"],
+                            blockers_match: true,
+                            source_refs_match: true,
+                            public_report_includes_candidate: false
+                          }
+                        ]
+                      };
+                    }
                     return {};
                   }
                 };
@@ -118,8 +138,8 @@ class BrowserPrivacyHardeningTests(unittest.TestCase):
               vm.runInContext(appJs, context);
               await new Promise((resolve) => setImmediate(resolve));
               const initialCallCount = calls.length;
-              if (initialCallCount !== 5) {
-                throw new Error(`expected five initial allowlisted fetches, got ${initialCallCount}`);
+              if (initialCallCount !== 6) {
+                throw new Error(`expected six initial allowlisted fetches, got ${initialCallCount}`);
               }
 
               calls.length = 0;

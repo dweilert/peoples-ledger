@@ -10,6 +10,7 @@ const allowedApiPaths = new Set([
   "/ai-decision-ledger",
   "/reports/tcja-2017-representative-provisions",
   "/candidates/status",
+  "/candidates/promotion-audit",
 ]);
 
 function fixturePayload(pathname) {
@@ -42,6 +43,25 @@ function fixturePayload(pathname) {
           review_status: "review_required",
           review_findings: [{ severity: "blocking", message: "review required" }],
           review_promotion_recommendation: "blocked",
+        },
+      ],
+    };
+  }
+  if (pathname === "/candidates/promotion-audit") {
+    return {
+      candidate_ids_match: true,
+      public_report_includes_candidates: false,
+      source_promotion_state: "blocked",
+      source_registry_update_allowed: false,
+      candidate_summaries: [
+        {
+          candidate_analysis_unit_id: "candidate",
+          publication_state: "draft",
+          promotion_decision: "blocked",
+          blocker_gates: ["promotion_disabled"],
+          blockers_match: true,
+          source_refs_match: true,
+          public_report_includes_candidate: false,
         },
       ],
     };

@@ -50,19 +50,44 @@ function renderCandidateStatus(payload) {
   document.querySelector("#candidate-status").innerHTML = rows || "<p>No draft candidates.</p>";
 }
 
+function renderPromotionAudit(payload) {
+  const summaries = payload.candidate_summaries
+    .map((summary) => {
+      const blockers = summary.blocker_gates.join(", ");
+      return `
+        <article class="candidate-item">
+          <h3>${summary.candidate_analysis_unit_id}</h3>
+          <dl>
+            <dt>Candidate IDs match</dt><dd>${payload.candidate_ids_match ? "yes" : "no"}</dd>
+            <dt>Publication state</dt><dd>${summary.publication_state}</dd>
+            <dt>Promotion decision</dt><dd>${summary.promotion_decision}</dd>
+            <dt>Blockers match</dt><dd>${summary.blockers_match ? "yes" : "no"}</dd>
+            <dt>Source refs match</dt><dd>${summary.source_refs_match ? "yes" : "no"}</dd>
+            <dt>Public report includes candidate</dt><dd>${summary.public_report_includes_candidate ? "yes" : "no"}</dd>
+          </dl>
+          <p>${blockers}</p>
+        </article>
+      `;
+    })
+    .join("");
+  document.querySelector("#promotion-audit").innerHTML = summaries || "<p>No promotion audit records.</p>";
+}
+
 async function refresh() {
   try {
-    const [unit, sources, ledger, _report, candidateStatus] = await Promise.all([
+    const [unit, sources, ledger, _report, candidateStatus, promotionAudit] = await Promise.all([
       fetchJson("/analysis-units/tcja-2017-representative-provisions"),
       fetchJson("/sources"),
       fetchJson("/ai-decision-ledger"),
       fetchJson("/reports/tcja-2017-representative-provisions"),
-      fetchJson("/candidates/status")
+      fetchJson("/candidates/status"),
+      fetchJson("/candidates/promotion-audit")
     ]);
     renderAnalysis(unit);
     renderSources(sources);
     renderLedger(ledger);
     renderCandidateStatus(candidateStatus);
+    renderPromotionAudit(promotionAudit);
   } catch (error) {
     document.querySelector("#analysis").textContent = `${error.message}. Start the backend with make run.`;
   }
