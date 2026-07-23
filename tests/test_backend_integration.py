@@ -46,6 +46,40 @@ class BackendIntegrationTests(unittest.TestCase):
         payload = self.get_json("/sources")
         self.assertGreaterEqual(len(payload["sources"]), 3)
 
+    def test_candidate_status_endpoint_is_read_only_and_draft_only(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            ledger_path = Path(tmpdir) / "ledger.jsonl"
+
+            def ledger_factory() -> DecisionLedger:
+                return DecisionLedger(ledger_path)
+
+            with patch("peoples_ledger.backend.server.DecisionLedger", side_effect=ledger_factory):
+                server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+                base_url = f"http://127.0.0.1:{server.server_port}"
+                thread = threading.Thread(target=server.serve_forever, daemon=True)
+                thread.start()
+                try:
+                    with urllib.request.urlopen(f"{base_url}/candidates/status", timeout=3) as response:
+                        payload = json.loads(response.read().decode("utf-8"))
+                finally:
+                    server.shutdown()
+                    thread.join(timeout=2)
+                    server.server_close()
+
+            entries = DecisionLedger(ledger_path).read_all()
+
+        self.assertEqual(entries, [])
+        self.assertEqual(payload["status"], "ok")
+        self.assertEqual(payload["candidate_count"], 1)
+        self.assertFalse(payload["public_report_includes_candidates"])
+        self.assertFalse(payload["ledger_appended"])
+        candidate = payload["candidates"][0]
+        self.assertEqual(candidate["publication_state"], "draft")
+        self.assertFalse(candidate["uses_household_financial_data"])
+        self.assertFalse(candidate["egress_allowed"])
+        self.assertFalse(candidate["promotable"])
+        self.assertIn("promotion_disabled", {blocker["gate"] for blocker in candidate["promotion_blockers"]})
+
     def test_html_report_endpoint(self) -> None:
         with urllib.request.urlopen(f"{self.base_url}/reports/tcja-2017-representative-provisions.html", timeout=3) as response:
             body = response.read().decode("utf-8")

@@ -6,9 +6,15 @@ from pathlib import Path
 
 from .ai_adapter import AIRequest, DeterministicTCJAProvider, ProviderNeutralAIAdapter
 from .analysis import load_analysis_unit
+from .candidate_extraction import validate_candidate_extraction_stub
+from .candidate_promotion import validate_candidate_promotion_gate_reports
+from .candidate_queue import validate_candidate_analysis_queue
+from .candidate_queue import load_candidate_analysis_queue
+from .candidate_status import build_candidate_status
 from .decision_ledger import DecisionLedger
 from .source_registry import SourceRegistry
 from .source_registry import load_source_snapshots
+from .source_acquisition import validate_source_acquisition_manifest
 from .source_ingestion import validate_source_ingestion_fixtures
 from .assurance import run_assurance_gate
 from .reporting import build_public_report, build_public_report_html
@@ -16,6 +22,7 @@ from .report_artifacts import export_report_artifacts
 from .challenge_agents import record_challenge_comparison, record_challenge_review
 from .corrections import record_correction
 from .phase1_acceptance import run_phase1_acceptance
+from .phase2_acceptance import run_phase2_acceptance
 
 
 def main() -> int:
@@ -24,6 +31,8 @@ def main() -> int:
     subcommands.add_parser("validate", help="validate bundled schemas and exemplar data")
     subcommands.add_parser("assure", help="run the publication assurance gate")
     subcommands.add_parser("phase1-acceptance", help="run executable Phase 1 acceptance checks")
+    subcommands.add_parser("phase2-acceptance", help="run executable Phase 2 acceptance checks")
+    subcommands.add_parser("candidate-status", help="print Phase 2 draft candidate status and promotion blockers")
     subcommands.add_parser("report", help="build the public POC report JSON")
     subcommands.add_parser("report-html", help="build the public POC report HTML")
     export_parser = subcommands.add_parser("export-report", help="write report JSON, HTML, and artifact manifest")
@@ -38,6 +47,10 @@ def main() -> int:
         SourceRegistry.load()
         load_source_snapshots()
         validate_source_ingestion_fixtures()
+        validate_source_acquisition_manifest()
+        validate_candidate_analysis_queue()
+        validate_candidate_promotion_gate_reports(load_candidate_analysis_queue())
+        validate_candidate_extraction_stub(load_candidate_analysis_queue())
         unit = load_analysis_unit()
         print(json.dumps({"status": "ok", "analysis_unit": unit["id"]}, sort_keys=True))
         return 0
@@ -71,6 +84,23 @@ def main() -> int:
             )
         )
         return 0 if report.passed else 1
+
+    if args.command == "phase2-acceptance":
+        report = run_phase2_acceptance()
+        print(
+            json.dumps(
+                {
+                    "status": "ok" if report.passed else "blocked",
+                    "checks": [check.__dict__ for check in report.checks],
+                },
+                sort_keys=True,
+            )
+        )
+        return 0 if report.passed else 1
+
+    if args.command == "candidate-status":
+        print(json.dumps(build_candidate_status(), sort_keys=True))
+        return 0
 
     if args.command == "report":
         print(json.dumps(build_public_report(), sort_keys=True))

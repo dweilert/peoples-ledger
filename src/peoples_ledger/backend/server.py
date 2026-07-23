@@ -6,6 +6,7 @@ from typing import Any
 
 from peoples_ledger.ai_adapter import AIRequest, DeterministicTCJAProvider, ProviderNeutralAIAdapter
 from peoples_ledger.analysis import load_analysis_unit
+from peoples_ledger.candidate_status import build_candidate_status
 from peoples_ledger.decision_ledger import DecisionLedger
 from peoples_ledger.reporting import build_public_report, build_public_report_html
 from peoples_ledger.source_registry import SourceRegistry
@@ -26,6 +27,8 @@ class Handler(BaseHTTPRequestHandler):
             self._json(load_analysis_unit())
         elif self.path == "/ai-decision-ledger":
             self._json({"entries": DecisionLedger().read_all()})
+        elif self.path == "/candidates/status":
+            self._json(build_candidate_status())
         elif self.path == "/reports/tcja-2017-representative-provisions":
             self._json(build_public_report())
         elif self.path == "/reports/tcja-2017-representative-provisions.html":

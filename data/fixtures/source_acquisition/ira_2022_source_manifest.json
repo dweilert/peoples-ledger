@@ -1,0 +1,40 @@
+{
+  "id": "ira_2022_federal_tax_source_set",
+  "label": "Inflation Reduction Act 2022 federal tax source acquisition fixture",
+  "phase": "phase2_source_acquisition",
+  "candidate_publication_state": "draft",
+  "report_visibility": "excluded_until_promoted",
+  "retrieval_policy": {
+    "mode": "fixture_only",
+    "network_allowed": false,
+    "storage_mode": "metadata_only"
+  },
+  "sources": [
+    {
+      "id": "pl117_169_public_law",
+      "title": "Public Law 117-169: Inflation Reduction Act",
+      "publisher": "U.S. Government Publishing Office",
+      "url": "https://www.govinfo.gov/app/details/PLAW-117publ169",
+      "snapshot_date": "2026-07-23",
+      "retrieved_at": "2026-07-23T00:00:00+00:00",
+      "source_type": "statute",
+      "snapshot_method": "manual",
+      "locator_policy": "Phase 2 fixture locators use public law section numbers and stable source-record identifiers.",
+      "raw_snapshot_text": "Phase 2 fixture metadata for Public Law 117-169 sections containing federal tax and revenue provisions used only for source-acquisition validation.",
+      "expected_content_hash": "sha256:a4a55051c90ebbe990660bdfff380a2f4f593f2b60ae2893e9fd71339bb30837"
+    },
+    {
+      "id": "jct_ira_estimated_budget_effects_2022",
+      "title": "Estimated Budget Effects Of Public Law 117-169",
+      "publisher": "Joint Committee on Taxation",
+      "url": "https://www.jct.gov/publications/2022/",
+      "snapshot_date": "2026-07-23",
+      "retrieved_at": "2026-07-23T00:00:00+00:00",
+      "source_type": "government_analysis",
+      "snapshot_method": "manual",
+      "locator_policy": "Phase 2 fixture locators use JCT publication tables and line-item references.",
+      "raw_snapshot_text": "Phase 2 fixture metadata for Joint Committee on Taxation estimated budget effects of Public Law 117-169 federal tax provisions.",
+      "expected_content_hash": "sha256:8dd8c3105b6465097429ac3d39e71ad9c916c7dc9651b253c286be437aade014"
+    }
+  ]
+}

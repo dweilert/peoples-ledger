@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "candidate_analysis_unit.schema.json",
+  "title": "Candidate Analysis Unit",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "phase",
+    "status",
+    "publication_state",
+    "source_acquisition_manifest_id",
+    "legislative_document",
+    "source_snapshot_refs",
+    "candidate_provisions",
+    "model_scenario_policy",
+    "perspective_policy",
+    "promotion_requirements",
+    "privacy"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]+$" },
+    "title": { "type": "string", "minLength": 1 },
+    "phase": { "type": "string", "enum": ["phase2_candidate_queue"] },
+    "status": { "type": "string", "enum": ["draft"] },
+    "publication_state": { "type": "string", "enum": ["draft"] },
+    "source_acquisition_manifest_id": { "type": "string", "minLength": 1 },
+    "legislative_document": { "$ref": "legislative_document.schema.json" },
+    "source_snapshot_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["source_record_id", "content_hash"],
+        "additionalProperties": false,
+        "properties": {
+          "source_record_id": { "type": "string", "minLength": 1 },
+          "content_hash": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "candidate_provisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "source_record_ids", "locator_hints", "extraction_state"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]+$" },
+          "label": { "type": "string", "minLength": 1 },
+          "source_record_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "locator_hints": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "extraction_state": {
+            "type": "string",
+            "enum": ["not_extracted", "candidate_locator_only", "machine_parsed"]
+          }
+        }
+      }
+    },
+    "model_scenario_policy": {
+      "type": "object",
+      "required": ["allowed", "reason"],
+      "additionalProperties": false,
+      "properties": {
+        "allowed": { "type": "boolean" },
+        "reason": { "type": "string", "minLength": 1 }
+      }
+    },
+    "perspective_policy": {
+      "type": "object",
+      "required": ["allowed", "reason"],
+      "additionalProperties": false,
+      "properties": {
+        "allowed": { "type": "boolean" },
+        "reason": { "type": "string", "minLength": 1 }
+      }
+    },
+    "promotion_requirements": {
+      "type": "object",
+      "required": [
+        "schema_valid",
+        "source_snapshots_verified",
+        "prompt_template_approved",
+        "privacy_checked",
+        "human_reviewed",
+        "ledger_entry_recorded"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "schema_valid": { "type": "boolean" },
+        "source_snapshots_verified": { "type": "boolean" },
+        "prompt_template_approved": { "type": "boolean" },
+        "privacy_checked": { "type": "boolean" },
+        "human_reviewed": { "type": "boolean" },
+        "ledger_entry_recorded": { "type": "boolean" }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "required": ["uses_household_financial_data", "egress_allowed", "notes"],
+      "additionalProperties": false,
+      "properties": {
+        "uses_household_financial_data": { "type": "boolean" },
+        "egress_allowed": { "type": "boolean" },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

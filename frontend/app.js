@@ -28,17 +28,41 @@ function renderLedger(payload) {
   document.querySelector("#ledger").textContent = JSON.stringify(payload.entries, null, 2);
 }
 
+function renderCandidateStatus(payload) {
+  const rows = payload.candidates
+    .map((candidate) => {
+      const blockers = candidate.promotion_blockers.map((blocker) => `<li>${blocker.gate}: ${blocker.reason}</li>`).join("");
+      const provisions = candidate.candidate_provision_ids.join(", ");
+      return `
+        <article class="candidate-item">
+          <h3>${candidate.title}</h3>
+          <dl>
+            <dt>Publication state</dt><dd>${candidate.publication_state}</dd>
+            <dt>Promotable</dt><dd>${candidate.promotable ? "yes" : "no"}</dd>
+            <dt>Sources</dt><dd>${candidate.source_record_ids.length}</dd>
+            <dt>Candidate provisions</dt><dd>${provisions}</dd>
+          </dl>
+          <ul>${blockers}</ul>
+        </article>
+      `;
+    })
+    .join("");
+  document.querySelector("#candidate-status").innerHTML = rows || "<p>No draft candidates.</p>";
+}
+
 async function refresh() {
   try {
-    const [unit, sources, ledger] = await Promise.all([
+    const [unit, sources, ledger, _report, candidateStatus] = await Promise.all([
       fetchJson("/analysis-units/tcja-2017-representative-provisions"),
       fetchJson("/sources"),
       fetchJson("/ai-decision-ledger"),
-      fetchJson("/reports/tcja-2017-representative-provisions")
+      fetchJson("/reports/tcja-2017-representative-provisions"),
+      fetchJson("/candidates/status")
     ]);
     renderAnalysis(unit);
     renderSources(sources);
     renderLedger(ledger);
+    renderCandidateStatus(candidateStatus);
   } catch (error) {
     document.querySelector("#analysis").textContent = `${error.message}. Start the backend with make run.`;
   }

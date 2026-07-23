@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "candidate_promotion_gate_report.schema.json",
+  "title": "Candidate Promotion Gate Report",
+  "type": "object",
+  "required": [
+    "candidate_analysis_unit_id",
+    "policy_version",
+    "target_publication_state",
+    "publication_state_after_evaluation",
+    "promotable",
+    "blockers"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "candidate_analysis_unit_id": { "type": "string", "minLength": 1 },
+    "policy_version": { "type": "string", "minLength": 1 },
+    "target_publication_state": {
+      "type": "string",
+      "enum": ["provisional_analysis"]
+    },
+    "publication_state_after_evaluation": {
+      "type": "string",
+      "enum": ["draft"]
+    },
+    "promotable": { "type": "boolean" },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["gate", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "gate": {
+            "type": "string",
+            "enum": [
+              "schema",
+              "source_snapshots",
+              "prompt_template",
+              "privacy",
+              "human_review",
+              "ledger",
+              "promotion_disabled"
+            ]
+          },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

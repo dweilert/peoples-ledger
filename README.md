@@ -26,6 +26,8 @@ make test
 make validate
 make assure
 make phase1-acceptance
+make phase2-acceptance
+PYTHONPATH=src python3 -m peoples_ledger.cli candidate-status
 make test-browser
 make report
 make report-html
@@ -37,7 +39,23 @@ Then open `frontend/index.html` or call the local API at `http://127.0.0.1:8787`
 
 CI runs `make validate`, `make assure`, `make phase1-acceptance`, and `make test` on pushes and pull requests. `make test-browser` is an explicit local browser-privacy check that requires the Playwright CLI and a Chromium browser install.
 
+Phase 2 acceptance is executable with `make phase2-acceptance` and is included in CI while Phase 2 work is active.
+
 The first Phase 1 workstream is fixture-first source ingestion; it is offline, deterministic, and covered by tests before any live connector work.
+
+Phase 2 has begun with fixture-only source-acquisition manifests for a second federal-tax source set. These records are candidate-only, deterministic, and excluded from public reports until promotion gates exist.
+
+The Phase 2 candidate queue is also fixture-first: draft analysis candidates link to acquired source snapshots, disable model/perspective rendering, and cannot be promoted or reported until explicit gates are implemented.
+
+Promotion gate evaluation has begun as a read-only report: it explains blocking schema, source, prompt-template, privacy, human-review, ledger, and implementation gates while keeping candidates in draft.
+
+Candidate locator extraction is represented by a deterministic ledger stub. It writes restricted AI Decision Ledger entries in tests or explicit calls, while assurance uses a temporary ledger and no live provider.
+
+`candidate-status` prints draft Phase 2 candidate status and promotion blockers without appending ledger entries or changing public reports.
+
+The backend also exposes the same read-only payload at `/candidates/status` for local inspection without ledger writes or public-report changes.
+
+The frontend includes a small Phase 2 candidate-status panel that displays draft candidates and blockers from `/candidates/status` without collecting or transmitting household financial data.
 
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
 

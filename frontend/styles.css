@@ -46,6 +46,11 @@ h2 {
   margin-bottom: 12px;
 }
 
+h3 {
+  font-size: 15px;
+  margin: 0 0 10px;
+}
+
 p {
   color: var(--muted);
   margin-top: 4px;
@@ -125,6 +130,27 @@ button:hover {
 ul {
   margin: 0;
   padding-left: 20px;
+}
+
+dl {
+  display: grid;
+  gap: 6px 12px;
+  grid-template-columns: minmax(130px, auto) 1fr;
+  margin: 0 0 12px;
+}
+
+dt {
+  color: var(--muted);
+}
+
+dd {
+  margin: 0;
+}
+
+.candidate-item {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 14px;
 }
 
 pre {

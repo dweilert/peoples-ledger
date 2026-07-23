@@ -153,4 +153,18 @@ Correction fixture tests now cover source-locator, indicator, and claim-text cor
 
 The first risk-scoring tests cover current POC risk, assurance failures, blocking challenge disagreement, under-representative coverage, single-source analysis, missing provision source spans, non-official source mix, draft status, and superseded publication states.
 
-Phase 2 tests should begin with source-acquisition manifest fixtures, candidate draft records, candidate promotion gates, live-provider rejection, and public-report exclusion for unpromoted candidates. See `docs/phase-2-boundary.md`.
+Phase 2 tests begin with source-acquisition manifest fixtures for a second federal-tax source set, candidate draft records, deterministic content-hash checks, live-retrieval rejection, and public-report exclusion for unpromoted candidates. See `docs/phase-2-boundary.md`.
+
+The first candidate queue tests validate draft-only candidate analysis units, deterministic candidate IDs, source-snapshot linkage, missing snapshot rejection, snapshot hash mismatch rejection, unknown source rejection, disabled model and perspective policies, promotion blocking, and public-report exclusion.
+
+The first promotion gate tests validate structured blocker reports, non-mutating evaluation, schema failure reporting, source-snapshot failure reporting, privacy failure reporting, missing prompt-template/human-review/ledger gates, and continued draft state even when nominal requirements are set true.
+
+The first candidate extraction tests validate restricted AI Decision Ledger entries, source snapshot hashes, review triggers, no live-provider calls, non-mutating draft candidates, household-data rejection, and assurance-time dry-run ledger validation.
+
+Candidate status tests validate read-only CLI inspection, JSON output shape, draft publication states, promotion blockers, no public-report inclusion, and no real AI Decision Ledger append.
+
+Candidate backend status tests validate the read-only `/candidates/status` endpoint, draft-only payloads, promotion blockers, no household-data flags, and no AI Decision Ledger append.
+
+Candidate frontend status tests validate the new API path is allowlisted, browser fixtures include candidate status, and local-only privacy controls still trigger no network calls or household-value egress.
+
+Phase 2 acceptance tests execute the current Phase 2 boundary as code: source acquisition, draft candidate queue, promotion blockers, extraction dry run, status surfaces, public-report exclusion, privacy boundaries, scope boundaries, assurance success, and CI gate presence.

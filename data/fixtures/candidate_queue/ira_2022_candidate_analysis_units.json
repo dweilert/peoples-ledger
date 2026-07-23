@@ -1,0 +1,71 @@
+[
+  {
+    "id": "candidate_ira_2022_energy_tax_provisions",
+    "title": "Inflation Reduction Act 2022 energy-related federal tax provision candidates",
+    "phase": "phase2_candidate_queue",
+    "status": "draft",
+    "publication_state": "draft",
+    "source_acquisition_manifest_id": "ira_2022_federal_tax_source_set",
+    "legislative_document": {
+      "id": "pl117_169_candidate_document",
+      "title": "Public Law 117-169: Inflation Reduction Act",
+      "jurisdiction": "United States federal",
+      "session": "117th Congress",
+      "document_type": "public_law",
+      "source_record_ids": [
+        "pl117_169_public_law",
+        "jct_ira_estimated_budget_effects_2022"
+      ]
+    },
+    "source_snapshot_refs": [
+      {
+        "source_record_id": "pl117_169_public_law",
+        "content_hash": "sha256:a4a55051c90ebbe990660bdfff380a2f4f593f2b60ae2893e9fd71339bb30837"
+      },
+      {
+        "source_record_id": "jct_ira_estimated_budget_effects_2022",
+        "content_hash": "sha256:8dd8c3105b6465097429ac3d39e71ad9c916c7dc9651b253c286be437aade014"
+      }
+    ],
+    "candidate_provisions": [
+      {
+        "id": "candidate_ira_energy_credit_extensions",
+        "label": "Energy credit extensions and modifications",
+        "source_record_ids": ["pl117_169_public_law"],
+        "locator_hints": ["Public Law 117-169 energy and tax title sections"],
+        "extraction_state": "candidate_locator_only"
+      },
+      {
+        "id": "candidate_ira_corporate_minimum_tax",
+        "label": "Corporate alternative minimum tax candidate",
+        "source_record_ids": [
+          "pl117_169_public_law",
+          "jct_ira_estimated_budget_effects_2022"
+        ],
+        "locator_hints": ["Public Law 117-169 revenue provisions", "JCT budget-effects line items"],
+        "extraction_state": "candidate_locator_only"
+      }
+    ],
+    "model_scenario_policy": {
+      "allowed": false,
+      "reason": "Phase 2 queue records cannot run model scenarios before deterministic promotion gates exist."
+    },
+    "perspective_policy": {
+      "allowed": false,
+      "reason": "Perspective rendering is disabled for draft candidate analysis units."
+    },
+    "promotion_requirements": {
+      "schema_valid": true,
+      "source_snapshots_verified": true,
+      "prompt_template_approved": false,
+      "privacy_checked": true,
+      "human_reviewed": false,
+      "ledger_entry_recorded": false
+    },
+    "privacy": {
+      "uses_household_financial_data": false,
+      "egress_allowed": false,
+      "notes": "Candidate queue fixtures contain only public source metadata and locator hints."
+    }
+  }
+]

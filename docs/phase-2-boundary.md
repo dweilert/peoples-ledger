@@ -28,6 +28,8 @@ The first unit should:
 - Start with checked-in fixtures and deterministic hash verification.
 - Preserve source snapshots as the control plane for accepted material.
 
+Initial status: started with a fixture-only IRA 2022 federal-tax source manifest that emits candidate source records and snapshots while remaining draft-only and excluded from public reports.
+
 Required tests:
 
 - manifests validate against schema
@@ -48,6 +50,8 @@ Required tests:
 - missing source snapshots block candidate advancement
 - candidate IDs, source refs, and publication states are deterministic
 
+Initial status: started with a draft-only IRA 2022 candidate queue fixture. The queue validates source-snapshot links against the source-acquisition manifest, disables model scenarios and perspective rendering, and remains absent from public reports.
+
 ### Review And Promotion Gates
 
 - Extend the assurance gate for candidate-to-exemplar promotion.
@@ -59,6 +63,18 @@ Required tests:
 - candidate promotion fails on schema, source, prompt, privacy, or ledger errors
 - live-provider attempts fail without explicit authorization
 - human-review-required states are represented in AI Decision Ledger entries
+
+Initial status: started with a read-only promotion gate report. It returns deterministic blockers for schema, source-snapshot, prompt-template, privacy, human-review, ledger, and implementation-disabled gates, while leaving candidate publication state as `draft`.
+
+Initial status: started with a deterministic candidate locator-extraction ledger stub. It records restricted AI Decision Ledger entries against a temporary ledger during assurance, does not call live providers, and does not promote or publicly report candidate content.
+
+Initial status: added `candidate-status` as a read-only CLI inspection command for draft candidates, source references, and promotion blockers. It does not append to the AI Decision Ledger or expose candidates through public reports.
+
+Initial status: added `/candidates/status` as a read-only backend endpoint with the same safe payload as the CLI status command. It does not append to the AI Decision Ledger, promote candidates, or add candidates to public report responses.
+
+Initial status: added a minimal frontend candidate-status panel that reads `/candidates/status` and displays draft state and blockers without sending local privacy-control values or adding candidates to public report content.
+
+Initial status: added `phase2-acceptance` as an executable checklist covering source acquisition, candidate queue, promotion blockers, extraction dry run, CLI/backend/frontend status, privacy, public-report exclusion, scope boundaries, assurance, and CI gating.
 
 ## Out Of Scope
 

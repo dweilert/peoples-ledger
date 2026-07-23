@@ -4,10 +4,15 @@ from dataclasses import dataclass
 from typing import Callable
 
 from .analysis import load_analysis_unit
+from .candidate_extraction import validate_candidate_extraction_stub
+from .candidate_promotion import validate_candidate_promotion_gate_reports
+from .candidate_queue import validate_candidate_analysis_queue
+from .candidate_queue import load_candidate_analysis_queue
 from .decision_ledger import DecisionLedger
 from .paths import TCJA_ANALYSIS_UNIT_PATH
 from .privacy import assert_no_household_financial_data
 from .prompt_templates import validate_prompt_template_registry
+from .source_acquisition import validate_source_acquisition_manifest
 from .source_ingestion import validate_source_ingestion_fixtures
 from .source_registry import SourceRegistry, load_source_snapshots
 
@@ -38,6 +43,10 @@ def run_assurance_gate() -> AssuranceReport:
         _run_check("source_registry", SourceRegistry.load),
         _run_check("source_snapshots", load_source_snapshots),
         _run_check("source_ingestion_fixtures", validate_source_ingestion_fixtures),
+        _run_check("source_acquisition_manifest", validate_source_acquisition_manifest),
+        _run_check("candidate_analysis_queue", validate_candidate_analysis_queue),
+        _run_check("candidate_promotion_gate_reports", lambda: validate_candidate_promotion_gate_reports(load_candidate_analysis_queue())),
+        _run_check("candidate_extraction_ledger_stub", lambda: validate_candidate_extraction_stub(load_candidate_analysis_queue())),
         _run_check("prompt_template_registry", validate_prompt_template_registry),
         _run_check("decision_ledger_integrity", lambda: DecisionLedger().read_all()),
         _run_check("privacy_payload_guard", lambda: assert_no_household_financial_data(_public_payload_probe())),
