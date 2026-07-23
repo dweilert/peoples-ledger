@@ -9,6 +9,7 @@ from .analysis import load_analysis_unit
 from .decision_ledger import DecisionLedger
 from .source_registry import SourceRegistry
 from .source_registry import load_source_snapshots
+from .source_acquisition import validate_source_acquisition_manifest
 from .source_ingestion import validate_source_ingestion_fixtures
 from .assurance import run_assurance_gate
 from .reporting import build_public_report, build_public_report_html
@@ -38,6 +39,7 @@ def main() -> int:
         SourceRegistry.load()
         load_source_snapshots()
         validate_source_ingestion_fixtures()
+        validate_source_acquisition_manifest()
         unit = load_analysis_unit()
         print(json.dumps({"status": "ok", "analysis_unit": unit["id"]}, sort_keys=True))
         return 0

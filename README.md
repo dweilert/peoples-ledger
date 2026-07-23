@@ -39,6 +39,8 @@ CI runs `make validate`, `make assure`, `make phase1-acceptance`, and `make test
 
 The first Phase 1 workstream is fixture-first source ingestion; it is offline, deterministic, and covered by tests before any live connector work.
 
+Phase 2 has begun with fixture-only source-acquisition manifests for a second federal-tax source set. These records are candidate-only, deterministic, and excluded from public reports until promotion gates exist.
+
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
 
 The first report assembly slice emits a public JSON report with source traces, decision trace, model scenarios, perspective profiles, and assurance status.

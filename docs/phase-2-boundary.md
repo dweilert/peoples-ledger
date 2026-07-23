@@ -28,6 +28,8 @@ The first unit should:
 - Start with checked-in fixtures and deterministic hash verification.
 - Preserve source snapshots as the control plane for accepted material.
 
+Initial status: started with a fixture-only IRA 2022 federal-tax source manifest that emits candidate source records and snapshots while remaining draft-only and excluded from public reports.
+
 Required tests:
 
 - manifests validate against schema

@@ -8,6 +8,7 @@ from .decision_ledger import DecisionLedger
 from .paths import TCJA_ANALYSIS_UNIT_PATH
 from .privacy import assert_no_household_financial_data
 from .prompt_templates import validate_prompt_template_registry
+from .source_acquisition import validate_source_acquisition_manifest
 from .source_ingestion import validate_source_ingestion_fixtures
 from .source_registry import SourceRegistry, load_source_snapshots
 
@@ -38,6 +39,7 @@ def run_assurance_gate() -> AssuranceReport:
         _run_check("source_registry", SourceRegistry.load),
         _run_check("source_snapshots", load_source_snapshots),
         _run_check("source_ingestion_fixtures", validate_source_ingestion_fixtures),
+        _run_check("source_acquisition_manifest", validate_source_acquisition_manifest),
         _run_check("prompt_template_registry", validate_prompt_template_registry),
         _run_check("decision_ledger_integrity", lambda: DecisionLedger().read_all()),
         _run_check("privacy_payload_guard", lambda: assert_no_household_financial_data(_public_payload_probe())),
