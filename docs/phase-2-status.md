@@ -106,6 +106,15 @@ Status: implemented and included in CI.
 - CI runs `make phase2-acceptance`.
 - Acceptance covers source acquisition, draft queue behavior, promotion blockers, extraction governance, review governance, status surfaces, audit bundles, public-report exclusion, privacy, scope boundaries, and assurance.
 
+### Candidate-To-Exemplar Promotion Contract
+
+Status: documented and covered by executable contract tests.
+
+- `docs/phase-2-promotion-contract.md` defines the future gates required before a draft candidate can become public/provisional analysis.
+- Current promotion remains blocked by `promotion_disabled`, missing promotion-specific prompt-template approval, blocking human review, missing promotion decision ledger entries, and public-report exclusion.
+- The contract names schema, source, extraction/prompt, privacy, human review, ledger, public report, and risk gates.
+- Skipped future tests define the expected promotion behavior without enabling promotion in the current POC.
+
 ## Still Blocked
 
 These are intentionally blocked in the current POC:
@@ -124,4 +133,4 @@ These are intentionally blocked in the current POC:
 
 ## Recommended Next Work
 
-The next useful unit is a narrow candidate-to-exemplar promotion design document plus failing tests for the future promotion path. It should define the exact gates required before any candidate can become public report material, without implementing promotion yet.
+The next useful unit is a candidate promotion request schema stub and fixture-only validation tests. It should represent a requested promotion without executing it, changing draft candidate state, appending public report material, or approving any current review record.

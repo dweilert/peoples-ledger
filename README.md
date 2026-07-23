@@ -15,7 +15,7 @@ This repository establishes executable foundations for:
 
 The POC is aligned to the Foundational Product and System Design v0.3 acceptance criteria for the bounded manual exemplar: a representative 8-12 provision TCJA subset, source spans, deterministic statutory-transformation records, governed model scenarios, three perspective profiles, perspective invariance checks, and complete AI Decision Ledger provenance fields.
 
-See `docs/phase-0-acceptance-checklist.md` for the Phase 0 acceptance mapping, `docs/testing-strategy.md` for the integrated testing approach, `docs/phase-1-boundary.md` and `docs/phase-1-status.md` for Phase 1, and `docs/phase-2-boundary.md` plus `docs/phase-2-status.md` for Phase 2.
+See `docs/phase-0-acceptance-checklist.md` for the Phase 0 acceptance mapping, `docs/testing-strategy.md` for the integrated testing approach, `docs/phase-1-boundary.md` and `docs/phase-1-status.md` for Phase 1, and `docs/phase-2-boundary.md`, `docs/phase-2-status.md`, plus `docs/phase-2-promotion-contract.md` for Phase 2.
 
 Licensing and intellectual-property decisions are intentionally deferred.
 
@@ -65,6 +65,8 @@ Candidate audit bundles are local artifacts exported with `make export-candidate
 The backend also exposes the same read-only payload at `/candidates/status` for local inspection without ledger writes or public-report changes.
 
 The frontend includes a small Phase 2 candidate-status panel that displays draft candidates and blockers from `/candidates/status` without collecting or transmitting household financial data.
+
+The candidate-to-exemplar promotion contract is documented and covered by executable tests. It defines future schema, source, prompt, privacy, review, ledger, report, and risk gates while keeping promotion disabled in the current POC.
 
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
 
