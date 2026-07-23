@@ -24,10 +24,13 @@ class CorrectionTests(unittest.TestCase):
 
     def test_all_correction_fixtures_validate_and_preserve_unique_targets(self) -> None:
         corrections = load_correction_records()
-        self.assertEqual(len(corrections), 2)
-        self.assertEqual(len({correction["id"] for correction in corrections}), 2)
-        self.assertEqual(len({correction["target_ref"] for correction in corrections}), 2)
-        self.assertEqual({correction["correction_type"] for correction in corrections}, {"source_locator", "indicator"})
+        self.assertEqual(len(corrections), 3)
+        self.assertEqual(len({correction["id"] for correction in corrections}), len(corrections))
+        self.assertEqual(len({correction["target_ref"] for correction in corrections}), len(corrections))
+        self.assertEqual(
+            {correction["correction_type"] for correction in corrections},
+            {"source_locator", "indicator", "claim_text"},
+        )
         for correction in corrections:
             self.assertIn("tests/test_corrections.py", correction["regression_test_ref"])
 
@@ -45,10 +48,14 @@ class CorrectionTests(unittest.TestCase):
 
     def test_public_report_surfaces_correction_records(self) -> None:
         report = build_public_report()
-        self.assertEqual(len(report["corrections"]), 2)
+        self.assertEqual(len(report["corrections"]), 3)
         self.assertEqual(
             {correction["id"] for correction in report["corrections"]},
-            {"corr_tcja_salt_locator_poc", "corr_tcja_indicator_signal_poc"},
+            {
+                "corr_tcja_salt_locator_poc",
+                "corr_tcja_indicator_signal_poc",
+                "corr_tcja_claim_text_scope_poc",
+            },
         )
         self.assertEqual({correction["publication_state"] for correction in report["corrections"]}, {"corrected"})
 

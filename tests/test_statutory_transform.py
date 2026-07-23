@@ -87,6 +87,27 @@ class StatutoryTransformTests(unittest.TestCase):
         self.assertEqual(reverse_transform(request_from_fixture(fixture), result.after_text), fixture["expected_round_trip_text"])
         SchemaRegistry(SCHEMA_DIR).validate("statutory_transformation", result.transformation)
 
+    def test_effective_date_replacement_fixture_applies_deterministically(self) -> None:
+        fixture = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))[4]
+        result = apply_transform(request_from_fixture(fixture))
+        self.assertEqual(result.status, "applied")
+        self.assertEqual(result.after_text, fixture["expected_after_text"])
+        self.assertEqual(result.transformation["operation"], "modify")
+        self.assertTrue(result.transformation["validation"]["round_trip_valid"])
+        self.assertTrue(result.transformation["validation"]["reconciled"])
+        self.assertEqual(reverse_transform(request_from_fixture(fixture), result.after_text), fixture["expected_round_trip_text"])
+        SchemaRegistry(SCHEMA_DIR).validate("statutory_transformation", result.transformation)
+
+    def test_all_transform_fixtures_have_unique_ids_and_authoritative_checks(self) -> None:
+        fixtures = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+        self.assertEqual(len(fixtures), 5)
+        self.assertEqual(len({fixture["id"] for fixture in fixtures}), len(fixtures))
+        for fixture in fixtures:
+            self.assertIn("authoritative_after_text", fixture)
+            result = apply_transform(request_from_fixture(fixture))
+            self.assertEqual(result.status, "applied")
+            self.assertTrue(result.transformation["validation"]["reconciled"])
+
     def test_authoritative_after_text_mismatch_flags_review(self) -> None:
         fixture = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))[0]
         fixture["authoritative_after_text"] = "Section 11(b) imposes a mismatched post-enactment snapshot."

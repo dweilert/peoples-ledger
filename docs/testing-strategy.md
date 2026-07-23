@@ -123,7 +123,7 @@ The first Phase 1 source-ingestion tests are fixture-first: they validate genera
 
 Source snapshot tests now also compare fixture-generated source records and snapshots against the checked-in registry and snapshot manifest.
 
-The first statutory-transformation tests are fixture-backed: they cover successful replacement, insertion, deletion, renumbering, stable before/after hashes, explicit round-trip fixture expectations, authoritative-after-text reconciliation, schema-compatible transformation records, review triggers for reconciliation mismatch, and abstention for unmatched, ambiguous, or incomplete operations.
+The first statutory-transformation tests are fixture-backed: they cover successful replacement, insertion, deletion, renumbering, effective-date window replacement, stable before/after hashes, explicit round-trip fixture expectations, authoritative-after-text reconciliation, schema-compatible transformation records, review triggers for reconciliation mismatch, unique fixture IDs, and abstention for unmatched, ambiguous, or incomplete operations.
 
 The first report assembly tests snapshot the public report shape and verify provisions, sources, snapshots, decisions, publication state, model scenario, and perspective IDs remain traceable.
 
@@ -147,6 +147,6 @@ The first publication-state tests verify advancement on passing assurance, block
 
 The first correction workflow tests validate correction records, require regression-test references, verify superseding AI Decision Ledger entries, and assert corrections appear in public reports.
 
-Correction fixture tests now cover multiple correction types and require unique correction targets.
+Correction fixture tests now cover source-locator, indicator, and claim-text correction types and require unique correction targets.
 
 The first risk-scoring tests cover current POC risk, assurance failures, blocking challenge disagreement, under-representative coverage, single-source analysis, missing provision source spans, non-official source mix, draft status, and superseded publication states.

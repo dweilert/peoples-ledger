@@ -81,5 +81,26 @@
         "citation": "26 USC 951A"
       }
     ]
+  },
+  {
+    "id": "fixture_replace_effective_date_window",
+    "operation": "replace_text",
+    "current_text": "The amendment applies to taxable years beginning after December 31, 2017 and before January 1, 2026.",
+    "target_text": "before January 1, 2026",
+    "replacement_text": "before January 1, 2027",
+    "expected_after_text": "The amendment applies to taxable years beginning after December 31, 2017 and before January 1, 2027.",
+    "authoritative_after_text": "The amendment applies to taxable years beginning after December 31, 2017 and before January 1, 2027.",
+    "expected_round_trip_text": "The amendment applies to taxable years beginning after December 31, 2017 and before January 1, 2026.",
+    "source_span": {
+      "source_record_id": "pl115_97_public_law",
+      "locator": "Selected temporary effective-date language",
+      "text_hash": "manual-span-effective-date-window"
+    },
+    "affected_authority": [
+      {
+        "type": "usc",
+        "citation": "26 USC temporary effective-date provisions"
+      }
+    ]
   }
 ]

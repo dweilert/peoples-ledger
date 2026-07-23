@@ -26,6 +26,7 @@ Status: implemented for first operations.
 - Before/after hashes are stable.
 - Round-trip fixture expectations are recorded for reversible operations.
 - Authoritative-after-text fixture expectations are reconciled for known post-enactment snapshots.
+- Effective-date window replacement is covered by a deterministic fixture.
 - Authoritative-after-text mismatches add review triggers instead of silently publishing as reconciled.
 - Unmatched, ambiguous, and incomplete operations abstain with review triggers.
 
@@ -84,11 +85,11 @@ Status: implemented for first rules.
 
 ### Correction Workflow Fixture
 
-Status: implemented for first regression fixture.
+Status: implemented for first regression fixtures.
 
 - A correction-record schema exists.
 - POC correction fixtures preserve target, root cause, previous output, corrected output, superseded decision, and regression-test reference.
-- Source-locator and indicator correction fixture types are represented.
+- Source-locator, indicator, and claim-text correction fixture types are represented.
 - Correction recording writes a hash-chained AI Decision Ledger entry with `publication_state: corrected`.
 - Public reports surface correction records.
 
