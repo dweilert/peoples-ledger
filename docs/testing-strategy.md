@@ -152,3 +152,5 @@ The first correction workflow tests validate correction records, require regress
 Correction fixture tests now cover source-locator, indicator, and claim-text correction types and require unique correction targets.
 
 The first risk-scoring tests cover current POC risk, assurance failures, blocking challenge disagreement, under-representative coverage, single-source analysis, missing provision source spans, non-official source mix, draft status, and superseded publication states.
+
+Phase 2 tests should begin with source-acquisition manifest fixtures, candidate draft records, candidate promotion gates, live-provider rejection, and public-report exclusion for unpromoted candidates. See `docs/phase-2-boundary.md`.
