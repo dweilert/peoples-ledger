@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import Callable
 
 from .assurance import run_assurance_gate
+from .candidate_audit import build_candidate_audit_bundle, validate_candidate_audit_bundle
 from .candidate_extraction import validate_candidate_extraction_stub
 from .candidate_extraction_policy import CandidateExtractionPolicyRegistry, validate_candidate_extraction_policy_registry
 from .candidate_promotion import evaluate_candidate_promotion, validate_candidate_promotion_gate_reports
@@ -41,6 +42,7 @@ def run_phase2_acceptance() -> Phase2AcceptanceReport:
         _run_check("candidate_extraction_stub_validates", _candidate_extraction_stub_validates),
         _run_check("candidate_review_records_block", _candidate_review_records_block),
         _run_check("candidate_review_ledger_stub_validates", _candidate_review_ledger_stub_validates),
+        _run_check("candidate_audit_bundle_validates", _candidate_audit_bundle_validates),
         _run_check("candidate_status_surfaces_blockers", _candidate_status_surfaces_blockers),
         _run_check("frontend_candidate_status_target_defined", _frontend_candidate_status_target_defined),
         _run_check("public_report_excludes_candidates", _public_report_excludes_candidates),
@@ -126,6 +128,15 @@ def _candidate_review_records_block() -> None:
 
 def _candidate_review_ledger_stub_validates() -> None:
     validate_candidate_review_ledger_stub(load_candidate_review_records())
+
+
+def _candidate_audit_bundle_validates() -> None:
+    validate_candidate_audit_bundle()
+    bundle = build_candidate_audit_bundle()
+    _require(bundle["publication_scope"] == "internal_candidate_audit_only", "candidate audit bundle has unsafe scope")
+    _require(not bundle["public_report_includes_candidates"], "candidate audit bundle detected candidate report leakage")
+    _require(bundle["dry_run_ledger_summaries"]["candidate_extraction"], "candidate audit bundle missing extraction ledger summaries")
+    _require(bundle["dry_run_ledger_summaries"]["candidate_review"], "candidate audit bundle missing review ledger summaries")
 
 
 def _candidate_status_surfaces_blockers() -> None:

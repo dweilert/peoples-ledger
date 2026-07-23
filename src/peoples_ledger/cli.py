@@ -6,6 +6,7 @@ from pathlib import Path
 
 from .ai_adapter import AIRequest, DeterministicTCJAProvider, ProviderNeutralAIAdapter
 from .analysis import load_analysis_unit
+from .candidate_audit import export_candidate_audit_bundle, validate_candidate_audit_bundle
 from .candidate_extraction import validate_candidate_extraction_stub
 from .candidate_extraction_policy import validate_candidate_extraction_policy_registry
 from .candidate_promotion import validate_candidate_promotion_gate_reports
@@ -39,6 +40,8 @@ def main() -> int:
     subcommands.add_parser("report-html", help="build the public POC report HTML")
     export_parser = subcommands.add_parser("export-report", help="write report JSON, HTML, and artifact manifest")
     export_parser.add_argument("--output-dir", default=None, help="directory for generated report artifacts")
+    audit_parser = subcommands.add_parser("export-candidate-audit", help="write local Phase 2 candidate audit bundle")
+    audit_parser.add_argument("--output-dir", default=None, help="directory for generated candidate audit artifacts")
     subcommands.add_parser("challenge-review", help="record a deterministic challenge-agent review")
     subcommands.add_parser("challenge-compare", help="record deterministic multi-agent challenge comparison")
     subcommands.add_parser("record-correction", help="record the deterministic correction fixture")
@@ -56,6 +59,7 @@ def main() -> int:
         validate_candidate_extraction_stub(load_candidate_analysis_queue())
         validate_candidate_review_records()
         validate_candidate_review_ledger_stub(load_candidate_review_records())
+        validate_candidate_audit_bundle()
         unit = load_analysis_unit()
         print(json.dumps({"status": "ok", "analysis_unit": unit["id"]}, sort_keys=True))
         return 0
@@ -118,6 +122,12 @@ def main() -> int:
     if args.command == "export-report":
         output_dir = Path(args.output_dir) if args.output_dir else None
         manifest = export_report_artifacts(output_dir) if output_dir else export_report_artifacts()
+        print(json.dumps(manifest, sort_keys=True))
+        return 0
+
+    if args.command == "export-candidate-audit":
+        output_dir = Path(args.output_dir) if args.output_dir else None
+        manifest = export_candidate_audit_bundle(output_dir) if output_dir else export_candidate_audit_bundle()
         print(json.dumps(manifest, sort_keys=True))
         return 0
 
