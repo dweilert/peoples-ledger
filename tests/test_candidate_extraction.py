@@ -34,6 +34,7 @@ class CandidateExtractionTests(unittest.TestCase):
             self.assertTrue(entry["human_review_required"])
             self.assertFalse(entry["structured_output"]["live_provider_called"])
             self.assertFalse(entry["structured_output"]["prompt_template_approved_for_promotion"])
+            self.assertEqual(entry["structured_output"]["candidate_extraction_policy_status"], "approved_for_dry_run")
             self.assertIn("candidate_promotion:disabled", entry["review_triggers"])
             self.assertEqual(ledger.read_all()[0]["id"], entry["id"])
 

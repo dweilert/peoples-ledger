@@ -1,0 +1,25 @@
+[
+  {
+    "id": "candidate_locator_extraction",
+    "version": "candidate-locator-extraction-poc-v1",
+    "status": "approved_for_dry_run",
+    "provider": "deterministic-candidate-extractor",
+    "model": {
+      "name": "candidate-locator-poc",
+      "version": "1.0"
+    },
+    "live_provider_authorized": false,
+    "allowed_tasks": ["candidate_locator_extraction"],
+    "required_candidate_source_refs": [
+      "pl117_169_public_law",
+      "jct_ira_estimated_budget_effects_2022"
+    ],
+    "template": "Create locator-only candidate extraction records from the Phase 2 candidate source set. Do not produce public claims, model scenarios, perspective outputs, or publishable provision analysis.",
+    "privacy_constraints": [
+      "Do not request, infer, transmit, or store household financial data.",
+      "Do not call live providers.",
+      "Do not produce public-report content from draft candidates."
+    ],
+    "promotion_use_allowed": false
+  }
+]

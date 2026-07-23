@@ -4,6 +4,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+from .candidate_extraction_policy import CandidateExtractionPolicyRegistry
 from .candidate_promotion import evaluate_candidate_promotion
 from .decision_ledger import DecisionLedger
 from .privacy import assert_no_household_financial_data
@@ -21,6 +22,11 @@ def record_candidate_locator_extraction(candidate: dict[str, Any], ledger: Decis
     ledger = ledger or DecisionLedger()
     source_snapshot_ids = [ref["source_record_id"] for ref in candidate["source_snapshot_refs"]]
     source_hashes = [ref["content_hash"] for ref in candidate["source_snapshot_refs"]]
+    policy = CandidateExtractionPolicyRegistry.load().require_dry_run(
+        version=PROMPT_TEMPLATE_VERSION,
+        task="candidate_locator_extraction",
+        source_refs=source_snapshot_ids,
+    )
     provision_outputs = [
         {
             "candidate_provision_id": provision["id"],
@@ -37,8 +43,8 @@ def record_candidate_locator_extraction(candidate: dict[str, Any], ledger: Decis
         actor=DETERMINISTIC_PROVIDER,
         action="candidate_locator_extraction",
         decision_type="candidate_extraction_request",
-        model={"provider": DETERMINISTIC_PROVIDER, "name": "candidate-locator-poc", "version": "1.0"},
-        prompt_template_version=PROMPT_TEMPLATE_VERSION,
+        model={"provider": policy["provider"], "name": policy["model"]["name"], "version": policy["model"]["version"]},
+        prompt_template_version=policy["version"],
         source_snapshot_ids=source_snapshot_ids,
         source_hashes=source_hashes,
         baseline_id="phase2_candidate_no_model",
@@ -47,6 +53,7 @@ def record_candidate_locator_extraction(candidate: dict[str, Any], ledger: Decis
             "candidate_analysis_unit_id": candidate["id"],
             "candidate_provisions": provision_outputs,
             "prompt_template_approved_for_promotion": False,
+            "candidate_extraction_policy_status": policy["status"],
             "live_provider_called": False,
             "promotion_gate_report": promotion_report,
         },

@@ -7,6 +7,7 @@ from pathlib import Path
 from .ai_adapter import AIRequest, DeterministicTCJAProvider, ProviderNeutralAIAdapter
 from .analysis import load_analysis_unit
 from .candidate_extraction import validate_candidate_extraction_stub
+from .candidate_extraction_policy import validate_candidate_extraction_policy_registry
 from .candidate_promotion import validate_candidate_promotion_gate_reports
 from .candidate_queue import validate_candidate_analysis_queue
 from .candidate_queue import load_candidate_analysis_queue
@@ -50,6 +51,7 @@ def main() -> int:
         validate_source_acquisition_manifest()
         validate_candidate_analysis_queue()
         validate_candidate_promotion_gate_reports(load_candidate_analysis_queue())
+        validate_candidate_extraction_policy_registry()
         validate_candidate_extraction_stub(load_candidate_analysis_queue())
         unit = load_analysis_unit()
         print(json.dumps({"status": "ok", "analysis_unit": unit["id"]}, sort_keys=True))
