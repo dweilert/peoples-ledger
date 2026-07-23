@@ -8,6 +8,7 @@ from .analysis import load_analysis_unit
 from .decision_ledger import DecisionLedger
 from .source_registry import SourceRegistry
 from .source_registry import load_source_snapshots
+from .source_ingestion import validate_source_ingestion_fixtures
 
 
 def main() -> int:
@@ -20,6 +21,7 @@ def main() -> int:
     if args.command == "validate":
         SourceRegistry.load()
         load_source_snapshots()
+        validate_source_ingestion_fixtures()
         unit = load_analysis_unit()
         print(json.dumps({"status": "ok", "analysis_unit": unit["id"]}, sort_keys=True))
         return 0

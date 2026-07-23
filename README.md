@@ -30,6 +30,8 @@ Then open `frontend/index.html` or call the local API at `http://127.0.0.1:8787`
 
 CI runs the same `make validate` and `make test` targets on pushes and pull requests.
 
+The first Phase 1 workstream is fixture-first source ingestion; it is offline, deterministic, and covered by tests before any live connector work.
+
 ## Scope Boundaries
 
 This POC does not implement broad bill ingestion, full tax microsimulation, live congressional monitoring, or state-level modeling.
