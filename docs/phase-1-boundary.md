@@ -2,6 +2,8 @@
 
 Phase 1 should begin only after Phase 0 is accepted as the executable trust foundation. The goal is to add the first real automation paths while preserving the same evidence, privacy, provenance, and testing discipline.
 
+Current implementation status is tracked in `docs/phase-1-status.md`.
+
 ## Phase 1 Goal
 
 Prototype controlled source ingestion and deterministic statutory transformation for a narrow federal-tax slice, using fixture-backed workflows before any live monitoring or broad bill coverage.
