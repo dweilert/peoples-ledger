@@ -56,6 +56,7 @@ def run_phase2_acceptance() -> Phase2AcceptanceReport:
         _run_check("candidate_review_ledger_stub_validates", _candidate_review_ledger_stub_validates),
         _run_check("candidate_audit_bundle_validates", _candidate_audit_bundle_validates),
         _run_check("candidate_status_surfaces_blockers", _candidate_status_surfaces_blockers),
+        _run_check("promotion_audit_status_surfaces_defined", _promotion_audit_status_surfaces_defined),
         _run_check("frontend_candidate_status_target_defined", _frontend_candidate_status_target_defined),
         _run_check("public_report_excludes_candidates", _public_report_excludes_candidates),
         _run_check("phase2_privacy_boundaries_preserved", _phase2_privacy_boundaries_preserved),
@@ -235,6 +236,17 @@ def _candidate_status_surfaces_blockers() -> None:
         _require(not candidate["promotable"], f"candidate status promotable: {candidate['id']}")
         _require(candidate["promotion_blockers"], f"candidate status missing blockers: {candidate['id']}")
         _require(candidate["review_status"] in {"review_required", "blocked"}, f"candidate status review is not blocking: {candidate['id']}")
+
+
+def _promotion_audit_status_surfaces_defined() -> None:
+    cli = _read_repo_file("src/peoples_ledger/cli.py")
+    server = _read_repo_file("src/peoples_ledger/backend/server.py")
+    backend_test = _read_repo_file("tests/test_backend_integration.py")
+    cli_test = _read_repo_file("tests/test_candidate_promotion_audit.py")
+    _require("promotion-audit-status" in cli, "CLI missing promotion-audit-status")
+    _require("/candidates/promotion-audit" in server, "backend missing promotion audit endpoint")
+    _require("/candidates/promotion-audit" in backend_test, "backend test missing promotion audit endpoint")
+    _require("promotion-audit-status" in cli_test, "CLI test missing promotion audit status command")
 
 
 def _frontend_candidate_status_target_defined() -> None:

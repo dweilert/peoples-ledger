@@ -13,6 +13,7 @@ make validate
 make assure
 make phase2-acceptance
 PYTHONPATH=src python3 -m peoples_ledger.cli candidate-status
+PYTHONPATH=src python3 -m peoples_ledger.cli promotion-audit-status
 make export-candidate-audit
 make test
 make test-browser
@@ -161,6 +162,15 @@ Status: implemented for internal audit consistency.
 - The internal candidate audit bundle includes the promotion audit cross-check result.
 - Assurance and Phase 2 acceptance both validate the cross-check.
 
+### Promotion Audit Status Surfaces
+
+Status: implemented for CLI and backend inspection.
+
+- `promotion-audit-status` prints the read-only promotion audit cross-check.
+- `/candidates/promotion-audit` exposes the same blocked cross-check payload.
+- Status surfaces do not append to the AI Decision Ledger.
+- Status surfaces do not mutate candidate records, promote candidates, or add candidates to public reports.
+
 ## Still Blocked
 
 These are intentionally blocked in the current POC:
@@ -179,4 +189,4 @@ These are intentionally blocked in the current POC:
 
 ## Recommended Next Work
 
-The next useful unit is a small read-only CLI/backend status addition for the promotion audit cross-check. It should expose the same safe internal status summary without appending ledger entries, mutating candidates, or adding candidate records to public reports.
+The next useful unit is a minimal frontend panel for the promotion audit cross-check. It should read the safe backend status endpoint without collecting household financial data or adding candidates to public report content.

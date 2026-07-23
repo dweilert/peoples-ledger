@@ -80,6 +80,43 @@ class BackendIntegrationTests(unittest.TestCase):
         self.assertFalse(candidate["promotable"])
         self.assertIn("promotion_disabled", {blocker["gate"] for blocker in candidate["promotion_blockers"]})
 
+    def test_promotion_audit_endpoint_is_read_only_and_blocked(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            ledger_path = Path(tmpdir) / "ledger.jsonl"
+
+            def ledger_factory() -> DecisionLedger:
+                return DecisionLedger(ledger_path)
+
+            with (
+                patch("peoples_ledger.backend.server.DecisionLedger", side_effect=ledger_factory),
+                patch("peoples_ledger.candidate_promotion_audit.DecisionLedger", side_effect=ledger_factory),
+            ):
+                server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+                base_url = f"http://127.0.0.1:{server.server_port}"
+                thread = threading.Thread(target=server.serve_forever, daemon=True)
+                thread.start()
+                try:
+                    with urllib.request.urlopen(f"{base_url}/candidates/promotion-audit", timeout=3) as response:
+                        payload = json.loads(response.read().decode("utf-8"))
+                finally:
+                    server.shutdown()
+                    thread.join(timeout=2)
+                    server.server_close()
+
+            entries = DecisionLedger(ledger_path).read_all()
+
+        self.assertEqual(entries, [])
+        self.assertTrue(payload["candidate_ids_match"])
+        self.assertFalse(payload["public_report_includes_candidates"])
+        self.assertEqual(payload["source_promotion_state"], "blocked")
+        self.assertFalse(payload["source_registry_update_allowed"])
+        summary = payload["candidate_summaries"][0]
+        self.assertEqual(summary["publication_state"], "draft")
+        self.assertEqual(summary["promotion_decision"], "blocked")
+        self.assertTrue(summary["blockers_match"])
+        self.assertTrue(summary["source_refs_match"])
+        self.assertFalse(summary["decision_stub_in_live_ledger"])
+
     def test_html_report_endpoint(self) -> None:
         with urllib.request.urlopen(f"{self.base_url}/reports/tcja-2017-representative-provisions.html", timeout=3) as response:
             body = response.read().decode("utf-8")

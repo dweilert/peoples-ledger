@@ -18,6 +18,7 @@ class Phase2StatusTests(unittest.TestCase):
             "make assure",
             "make phase2-acceptance",
             "candidate-status",
+            "promotion-audit-status",
             "make export-candidate-audit",
             "make test",
             "make test-browser",
@@ -41,6 +42,7 @@ class Phase2StatusTests(unittest.TestCase):
             "Source Promotion Manifest Stub",
             "Promotion Decision Ledger Stub",
             "Promotion Audit Cross-Check",
+            "Promotion Audit Status Surfaces",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, body)

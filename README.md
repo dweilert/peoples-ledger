@@ -28,6 +28,7 @@ make assure
 make phase1-acceptance
 make phase2-acceptance
 PYTHONPATH=src python3 -m peoples_ledger.cli candidate-status
+PYTHONPATH=src python3 -m peoples_ledger.cli promotion-audit-status
 make test-browser
 make report
 make report-html
@@ -75,6 +76,8 @@ Candidate source promotion is also represented as a fixture-only blocked manifes
 A blocked promotion decision AI Decision Ledger entry exists as an offline fixture. It validates the future ledger payload shape and hash while remaining absent from the live append-oriented ledger.
 
 An internal promotion audit cross-check compares candidate status, promotion requests, source promotion manifests, review records, and decision stubs for consistent blockers and source refs.
+
+The same promotion audit cross-check is exposed through the read-only `promotion-audit-status` CLI command and `/candidates/promotion-audit` backend endpoint.
 
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
 
