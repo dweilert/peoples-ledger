@@ -25,6 +25,7 @@ Licensing and intellectual-property decisions are intentionally deferred.
 make test
 make validate
 make assure
+make phase1-acceptance
 make test-browser
 make report
 make report-html
@@ -34,7 +35,7 @@ make run
 
 Then open `frontend/index.html` or call the local API at `http://127.0.0.1:8787`.
 
-CI runs `make validate`, `make assure`, and `make test` on pushes and pull requests. `make test-browser` is an explicit local browser-privacy check that requires the Playwright CLI and a Chromium browser install.
+CI runs `make validate`, `make assure`, `make phase1-acceptance`, and `make test` on pushes and pull requests. `make test-browser` is an explicit local browser-privacy check that requires the Playwright CLI and a Chromium browser install.
 
 The first Phase 1 workstream is fixture-first source ingestion; it is offline, deterministic, and covered by tests before any live connector work.
 

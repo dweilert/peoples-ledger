@@ -15,6 +15,7 @@ from .reporting import build_public_report, build_public_report_html
 from .report_artifacts import export_report_artifacts
 from .challenge_agents import record_challenge_comparison, record_challenge_review
 from .corrections import record_correction
+from .phase1_acceptance import run_phase1_acceptance
 
 
 def main() -> int:
@@ -22,6 +23,7 @@ def main() -> int:
     subcommands = parser.add_subparsers(dest="command", required=True)
     subcommands.add_parser("validate", help="validate bundled schemas and exemplar data")
     subcommands.add_parser("assure", help="run the publication assurance gate")
+    subcommands.add_parser("phase1-acceptance", help="run executable Phase 1 acceptance checks")
     subcommands.add_parser("report", help="build the public POC report JSON")
     subcommands.add_parser("report-html", help="build the public POC report HTML")
     export_parser = subcommands.add_parser("export-report", help="write report JSON, HTML, and artifact manifest")
@@ -50,6 +52,19 @@ def main() -> int:
                     "publication_state": report.publication_state,
                     "risk_tier": report.risk_tier,
                     "review_triggers": report.review_triggers,
+                    "checks": [check.__dict__ for check in report.checks],
+                },
+                sort_keys=True,
+            )
+        )
+        return 0 if report.passed else 1
+
+    if args.command == "phase1-acceptance":
+        report = run_phase1_acceptance()
+        print(
+            json.dumps(
+                {
+                    "status": "ok" if report.passed else "blocked",
                     "checks": [check.__dict__ for check in report.checks],
                 },
                 sort_keys=True,

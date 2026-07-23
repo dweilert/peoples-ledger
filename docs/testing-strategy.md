@@ -143,6 +143,8 @@ Multi-agent challenge tests compare deterministic agents, aggregate disagreement
 
 Prompt-template governance tests validate the approved template registry, require approved provider and task combinations, require source refs, reject duplicate versions, reject unauthorized live providers, and verify the AI adapter enforces approved templates when a request names a prompt-template version.
 
+Phase 1 acceptance tests execute the POC exit criteria as code: fixture ingestion, deterministic transform success, ambiguous transform abstention, report traceability, ledger validation fields, browser privacy test target presence, CI gate presence, and assurance gate success.
+
 The first publication-state tests verify advancement on passing assurance, blocking on assurance failure, blocking on challenge disagreement, and review-required behavior for high-risk outputs.
 
 The first correction workflow tests validate correction records, require regression-test references, verify superseding AI Decision Ledger entries, and assert corrections appear in public reports.

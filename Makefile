@@ -1,4 +1,4 @@
-.PHONY: test test-browser validate assure report report-html export-report run
+.PHONY: test test-browser validate assure phase1-acceptance report report-html export-report run
 
 test:
 	PYTHONPATH=src python3 -m unittest discover -s tests
@@ -11,6 +11,9 @@ validate:
 
 assure:
 	PYTHONPATH=src python3 -m peoples_ledger.cli assure
+
+phase1-acceptance:
+	PYTHONPATH=src python3 -m peoples_ledger.cli phase1-acceptance
 
 report:
 	PYTHONPATH=src python3 -m peoples_ledger.cli report

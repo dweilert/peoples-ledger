@@ -25,5 +25,8 @@ jobs:
       - name: Run assurance gate
         run: make assure
 
+      - name: Run Phase 1 acceptance checks
+        run: make phase1-acceptance
+
       - name: Run tests
         run: make test
