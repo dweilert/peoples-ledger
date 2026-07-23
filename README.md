@@ -24,6 +24,7 @@ Licensing and intellectual-property decisions are intentionally deferred.
 make test
 make validate
 make assure
+make report
 make run
 ```
 
@@ -34,6 +35,8 @@ CI runs `make validate`, `make assure`, and `make test` on pushes and pull reque
 The first Phase 1 workstream is fixture-first source ingestion; it is offline, deterministic, and covered by tests before any live connector work.
 
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
+
+The first report assembly slice emits a public JSON report with source traces, decision trace, model scenarios, perspective profiles, and assurance status.
 
 ## Scope Boundaries
 

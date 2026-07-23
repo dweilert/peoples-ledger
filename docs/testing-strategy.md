@@ -122,3 +122,5 @@ Phase 1 tests should add deterministic statutory transformation fixtures, source
 The first Phase 1 source-ingestion tests are fixture-first: they validate generated source records and snapshots, assert expected content hashes, and include negative coverage for hash mismatch and missing metadata.
 
 The first statutory-transformation tests are fixture-backed: they cover successful replacement, successful insertion, stable before/after hashes, schema-compatible transformation records, and abstention for unmatched, ambiguous, or incomplete operations.
+
+The first report assembly tests snapshot the public report shape and verify provisions, sources, snapshots, decisions, publication state, model scenario, and perspective IDs remain traceable.

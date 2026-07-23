@@ -61,6 +61,8 @@ Required tests:
 - Preserve the distinction between fact, estimate, flag, finding, opinion, publication state, model scenario, and perspective.
 - Keep downloadable data traceable to schemas and source snapshots.
 
+Initial status: started with a public JSON report assembled from the exemplar, source manifest, decision trace, model scenarios, perspective profiles, and assurance status. The report is available through `make report` and the local backend.
+
 Required tests:
 
 - generated report snapshots are stable

@@ -33,7 +33,8 @@ async function refresh() {
     const [unit, sources, ledger] = await Promise.all([
       fetchJson("/analysis-units/tcja-2017-representative-provisions"),
       fetchJson("/sources"),
-      fetchJson("/ai-decision-ledger")
+      fetchJson("/ai-decision-ledger"),
+      fetchJson("/reports/tcja-2017-representative-provisions")
     ]);
     renderAnalysis(unit);
     renderSources(sources);

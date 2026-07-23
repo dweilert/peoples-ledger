@@ -10,6 +10,7 @@ from .source_registry import SourceRegistry
 from .source_registry import load_source_snapshots
 from .source_ingestion import validate_source_ingestion_fixtures
 from .assurance import run_assurance_gate
+from .reporting import build_public_report
 
 
 def main() -> int:
@@ -17,6 +18,7 @@ def main() -> int:
     subcommands = parser.add_subparsers(dest="command", required=True)
     subcommands.add_parser("validate", help="validate bundled schemas and exemplar data")
     subcommands.add_parser("assure", help="run the publication assurance gate")
+    subcommands.add_parser("report", help="build the public POC report JSON")
     subcommands.add_parser("summarize-tcja", help="run deterministic TCJA exemplar summary")
     args = parser.parse_args()
 
@@ -44,6 +46,10 @@ def main() -> int:
             )
         )
         return 0 if report.passed else 1
+
+    if args.command == "report":
+        print(json.dumps(build_public_report(), sort_keys=True))
+        return 0
 
     if args.command == "summarize-tcja":
         unit = load_analysis_unit()
