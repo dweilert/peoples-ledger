@@ -124,3 +124,5 @@ The first Phase 1 source-ingestion tests are fixture-first: they validate genera
 The first statutory-transformation tests are fixture-backed: they cover successful replacement, successful insertion, stable before/after hashes, schema-compatible transformation records, and abstention for unmatched, ambiguous, or incomplete operations.
 
 The first report assembly tests snapshot the public report shape and verify provisions, sources, snapshots, decisions, publication state, model scenario, and perspective IDs remain traceable.
+
+The first browser privacy hardening test executes the frontend JavaScript with a stubbed DOM and fetch layer, then verifies local-only controls do not create network calls. A full Playwright request-interception test remains the target once browser dependencies are added.

@@ -38,6 +38,8 @@ The first statutory transformation slice is also fixture-first: supported operat
 
 The first report assembly slice emits a public JSON report with source traces, decision trace, model scenarios, perspective profiles, and assurance status.
 
+Browser-local privacy hardening has begun with a dependency-free JavaScript runtime test that proves local-only controls do not trigger network calls.
+
 ## Scope Boundaries
 
 This POC does not implement broad bill ingestion, full tax microsimulation, live congressional monitoring, or state-level modeling.

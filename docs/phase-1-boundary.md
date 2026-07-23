@@ -76,6 +76,8 @@ Required tests:
 - Intercept network requests and fail if local values leave the browser.
 - Keep third-party scripts absent unless explicitly reviewed.
 
+Initial status: started with a dependency-free JavaScript runtime test that executes the frontend code with a stubbed DOM and fetch layer. It verifies local-only privacy controls do not create network calls and preserve the no-transmission message.
+
 Required tests:
 
 - Playwright or equivalent request interception proves local inputs are not transmitted
