@@ -158,3 +158,5 @@ Phase 2 tests begin with source-acquisition manifest fixtures for a second feder
 The first candidate queue tests validate draft-only candidate analysis units, deterministic candidate IDs, source-snapshot linkage, missing snapshot rejection, snapshot hash mismatch rejection, unknown source rejection, disabled model and perspective policies, promotion blocking, and public-report exclusion.
 
 The first promotion gate tests validate structured blocker reports, non-mutating evaluation, schema failure reporting, source-snapshot failure reporting, privacy failure reporting, missing prompt-template/human-review/ledger gates, and continued draft state even when nominal requirements are set true.
+
+The first candidate extraction tests validate restricted AI Decision Ledger entries, source snapshot hashes, review triggers, no live-provider calls, non-mutating draft candidates, household-data rejection, and assurance-time dry-run ledger validation.

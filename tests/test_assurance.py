@@ -28,6 +28,7 @@ class AssuranceTests(unittest.TestCase):
             "source_acquisition_manifest",
             "candidate_analysis_queue",
             "candidate_promotion_gate_reports",
+            "candidate_extraction_ledger_stub",
             "prompt_template_registry",
             "decision_ledger_integrity",
             "privacy_payload_guard",

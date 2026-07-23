@@ -66,6 +66,8 @@ Required tests:
 
 Initial status: started with a read-only promotion gate report. It returns deterministic blockers for schema, source-snapshot, prompt-template, privacy, human-review, ledger, and implementation-disabled gates, while leaving candidate publication state as `draft`.
 
+Initial status: started with a deterministic candidate locator-extraction ledger stub. It records restricted AI Decision Ledger entries against a temporary ledger during assurance, does not call live providers, and does not promote or publicly report candidate content.
+
 ## Out Of Scope
 
 Phase 2 should not include:

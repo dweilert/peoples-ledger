@@ -45,6 +45,8 @@ The Phase 2 candidate queue is also fixture-first: draft analysis candidates lin
 
 Promotion gate evaluation has begun as a read-only report: it explains blocking schema, source, prompt-template, privacy, human-review, ledger, and implementation gates while keeping candidates in draft.
 
+Candidate locator extraction is represented by a deterministic ledger stub. It writes restricted AI Decision Ledger entries in tests or explicit calls, while assurance uses a temporary ledger and no live provider.
+
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
 
 The first report assembly slice emits a public JSON report with source traces, decision trace, model scenarios, perspective profiles, and assurance status.
