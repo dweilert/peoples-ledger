@@ -27,6 +27,8 @@ class SchemaAndExemplarTests(unittest.TestCase):
     def test_source_snapshot_manifest_matches_registry(self) -> None:
         snapshots = load_source_snapshots()
         self.assertEqual({snapshot["source_record_id"] for snapshot in snapshots}, set(SourceRegistry.load().records))
+        for snapshot in snapshots:
+            self.assertTrue(snapshot["content_hash"].startswith("sha256:"))
 
     def test_tcja_analysis_unit_validates_and_links_sources(self) -> None:
         unit = load_analysis_unit()

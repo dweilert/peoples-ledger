@@ -17,6 +17,7 @@ from peoples_ledger.source_ingestion import (
     ingest_source_fixtures,
     load_source_ingestion_fixtures,
 )
+from peoples_ledger.source_registry import SourceRegistry, load_source_snapshots
 
 
 class SourceIngestionTests(unittest.TestCase):
@@ -36,6 +37,17 @@ class SourceIngestionTests(unittest.TestCase):
         for fixture in load_source_ingestion_fixtures():
             with self.subTest(fixture=fixture["id"]):
                 self.assertEqual(fixture["expected_content_hash"], content_hash(fixture["raw_snapshot_text"]))
+
+    def test_fixture_ingestion_matches_checked_in_registry_and_snapshot_manifest(self) -> None:
+        generated_records, generated_snapshots = ingest_source_fixtures()
+        registry_records = SourceRegistry.load().records
+        manifest_snapshots = {snapshot["source_record_id"]: snapshot for snapshot in load_source_snapshots()}
+        for record in generated_records:
+            with self.subTest(record=record["id"]):
+                self.assertEqual(record, registry_records[record["id"]])
+        for snapshot in generated_snapshots:
+            with self.subTest(snapshot=snapshot["source_record_id"]):
+                self.assertEqual(snapshot, manifest_snapshots[snapshot["source_record_id"]])
 
     def test_hash_mismatch_fails_ingestion(self) -> None:
         fixtures = load_source_ingestion_fixtures()

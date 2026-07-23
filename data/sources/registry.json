@@ -8,7 +8,7 @@
     "source_type": "statute",
     "integrity": {
       "snapshot_method": "manual",
-      "content_hash": "manual-snapshot-pl115-97-2026-07-22"
+      "content_hash": "sha256:84a38d53f5195abdea5f6b98fbbf9d0e068b18dd90a46312a5d897b67b6cc1e8"
     }
   },
   {
@@ -20,7 +20,7 @@
     "source_type": "government_analysis",
     "integrity": {
       "snapshot_method": "manual",
-      "content_hash": "manual-snapshot-jcx-68-17-2026-07-22"
+      "content_hash": "sha256:7ba5acb078699a4ac9d07064ffbfda839f168533feb9aae1159c32af3ae338d1"
     }
   },
   {
@@ -32,7 +32,7 @@
     "source_type": "government_analysis",
     "integrity": {
       "snapshot_method": "manual",
-      "content_hash": "manual-snapshot-crs-if11098-2026-07-22"
+      "content_hash": "sha256:e98d083fefc77f202da30329cb50d42154e077e378bf284bc7165f71f31f9cbf"
     }
   }
 ]

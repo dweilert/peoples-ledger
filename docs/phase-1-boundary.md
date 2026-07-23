@@ -17,6 +17,8 @@ Prototype controlled source ingestion and deterministic statutory transformation
 
 Initial status: started with offline TCJA source-ingestion fixtures. The first implementation validates fixture metadata, computes stable content hashes, emits source records and snapshot records, and fails when fixture text no longer matches the expected hash.
 
+Snapshot verification status: strengthened so checked-in source registry and snapshot-manifest hashes must match deterministic fixture-ingestion output.
+
 Required tests:
 
 - fixture ingestion produces stable source records

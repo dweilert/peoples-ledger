@@ -54,7 +54,7 @@ class Handler(BaseHTTPRequestHandler):
             model={"provider": response.provider, "name": response.model, "version": response.model_version},
             prompt_template_version="plain-language-summary-poc-v1",
             source_snapshot_ids=response.source_refs,
-            source_hashes=["manual-snapshot-pl115-97-2026-07-22"],
+            source_hashes=[SourceRegistry.load().require(source_id)["integrity"]["content_hash"] for source_id in response.source_refs],
             baseline_id=unit["model_scenarios"][0]["baseline_id"],
             model_scenario_id=unit["model_scenarios"][0]["id"],
             structured_output={"summary": response.text},
