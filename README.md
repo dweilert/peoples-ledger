@@ -70,6 +70,8 @@ The candidate-to-exemplar promotion contract is documented and covered by execut
 
 Candidate promotion requests are represented as fixture-only blocked records. The schema and assurance gates disallow execution, public-report inclusion, ledger appends, live providers, and household financial data.
 
+Candidate source promotion is also represented as a fixture-only blocked manifest. It validates proposed source records and snapshots against source-acquisition output while keeping the public source registry unchanged.
+
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
 
 The first report assembly slice emits a public JSON report with source traces, decision trace, model scenarios, perspective profiles, and assurance status.

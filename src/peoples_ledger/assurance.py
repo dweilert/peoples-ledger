@@ -18,6 +18,7 @@ from .privacy import assert_no_household_financial_data
 from .prompt_templates import validate_prompt_template_registry
 from .source_acquisition import validate_source_acquisition_manifest
 from .source_ingestion import validate_source_ingestion_fixtures
+from .source_promotion import validate_source_promotion_manifest
 from .source_registry import SourceRegistry, load_source_snapshots
 
 
@@ -48,6 +49,7 @@ def run_assurance_gate() -> AssuranceReport:
         _run_check("source_snapshots", load_source_snapshots),
         _run_check("source_ingestion_fixtures", validate_source_ingestion_fixtures),
         _run_check("source_acquisition_manifest", validate_source_acquisition_manifest),
+        _run_check("source_promotion_manifest", validate_source_promotion_manifest),
         _run_check("candidate_analysis_queue", validate_candidate_analysis_queue),
         _run_check("candidate_promotion_gate_reports", lambda: validate_candidate_promotion_gate_reports(load_candidate_analysis_queue())),
         _run_check("candidate_promotion_requests", validate_candidate_promotion_requests),

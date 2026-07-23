@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "source_promotion_manifest.schema.json",
+  "title": "Source Promotion Manifest",
+  "type": "object",
+  "required": [
+    "id",
+    "phase",
+    "source_acquisition_manifest_id",
+    "promotion_state",
+    "target_registry",
+    "registry_update_allowed",
+    "public_report_inclusion_allowed",
+    "ledger_append_allowed",
+    "required_gates",
+    "proposed_sources",
+    "privacy"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]+$" },
+    "phase": { "type": "string", "enum": ["phase2_source_promotion_stub"] },
+    "source_acquisition_manifest_id": { "type": "string", "minLength": 1 },
+    "promotion_state": { "type": "string", "enum": ["blocked"] },
+    "target_registry": { "type": "string", "enum": ["public_source_registry"] },
+    "registry_update_allowed": { "type": "boolean", "enum": [false] },
+    "public_report_inclusion_allowed": { "type": "boolean", "enum": [false] },
+    "ledger_append_allowed": { "type": "boolean", "enum": [false] },
+    "required_gates": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "type": "string",
+        "enum": [
+          "source_hash",
+          "locator_policy",
+          "human_review",
+          "ledger",
+          "public_registry_diff",
+          "privacy"
+        ]
+      }
+    },
+    "proposed_sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "source_record",
+          "source_snapshot",
+          "registry_action",
+          "review_status",
+          "blockers"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "source_record": { "$ref": "source_record.schema.json" },
+          "source_snapshot": { "$ref": "source_snapshot.schema.json" },
+          "registry_action": { "type": "string", "enum": ["proposed_noop"] },
+          "review_status": { "type": "string", "enum": ["review_required"] },
+          "blockers": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["gate", "reason"],
+              "additionalProperties": false,
+              "properties": {
+                "gate": {
+                  "type": "string",
+                  "enum": ["human_review", "ledger", "public_registry_diff", "promotion_disabled"]
+                },
+                "reason": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "required": ["uses_household_financial_data", "egress_allowed", "notes"],
+      "additionalProperties": false,
+      "properties": {
+        "uses_household_financial_data": { "type": "boolean", "enum": [false] },
+        "egress_allowed": { "type": "boolean", "enum": [false] },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
