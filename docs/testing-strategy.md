@@ -162,3 +162,5 @@ The first promotion gate tests validate structured blocker reports, non-mutating
 The first candidate extraction tests validate restricted AI Decision Ledger entries, source snapshot hashes, review triggers, no live-provider calls, non-mutating draft candidates, household-data rejection, and assurance-time dry-run ledger validation.
 
 Candidate status tests validate read-only CLI inspection, JSON output shape, draft publication states, promotion blockers, no public-report inclusion, and no real AI Decision Ledger append.
+
+Candidate backend status tests validate the read-only `/candidates/status` endpoint, draft-only payloads, promotion blockers, no household-data flags, and no AI Decision Ledger append.

@@ -70,6 +70,8 @@ Initial status: started with a deterministic candidate locator-extraction ledger
 
 Initial status: added `candidate-status` as a read-only CLI inspection command for draft candidates, source references, and promotion blockers. It does not append to the AI Decision Ledger or expose candidates through public reports.
 
+Initial status: added `/candidates/status` as a read-only backend endpoint with the same safe payload as the CLI status command. It does not append to the AI Decision Ledger, promote candidates, or add candidates to public report responses.
+
 ## Out Of Scope
 
 Phase 2 should not include:
