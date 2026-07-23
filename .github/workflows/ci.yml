@@ -28,5 +28,8 @@ jobs:
       - name: Run Phase 1 acceptance checks
         run: make phase1-acceptance
 
+      - name: Run Phase 2 acceptance checks
+        run: make phase2-acceptance
+
       - name: Run tests
         run: make test

@@ -74,6 +74,8 @@ Initial status: added `/candidates/status` as a read-only backend endpoint with 
 
 Initial status: added a minimal frontend candidate-status panel that reads `/candidates/status` and displays draft state and blockers without sending local privacy-control values or adding candidates to public report content.
 
+Initial status: added `phase2-acceptance` as an executable checklist covering source acquisition, candidate queue, promotion blockers, extraction dry run, CLI/backend/frontend status, privacy, public-report exclusion, scope boundaries, assurance, and CI gating.
+
 ## Out Of Scope
 
 Phase 2 should not include:

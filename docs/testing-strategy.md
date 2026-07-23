@@ -166,3 +166,5 @@ Candidate status tests validate read-only CLI inspection, JSON output shape, dra
 Candidate backend status tests validate the read-only `/candidates/status` endpoint, draft-only payloads, promotion blockers, no household-data flags, and no AI Decision Ledger append.
 
 Candidate frontend status tests validate the new API path is allowlisted, browser fixtures include candidate status, and local-only privacy controls still trigger no network calls or household-value egress.
+
+Phase 2 acceptance tests execute the current Phase 2 boundary as code: source acquisition, draft candidate queue, promotion blockers, extraction dry run, status surfaces, public-report exclusion, privacy boundaries, scope boundaries, assurance success, and CI gate presence.

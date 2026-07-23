@@ -26,6 +26,7 @@ make test
 make validate
 make assure
 make phase1-acceptance
+make phase2-acceptance
 PYTHONPATH=src python3 -m peoples_ledger.cli candidate-status
 make test-browser
 make report
@@ -37,6 +38,8 @@ make run
 Then open `frontend/index.html` or call the local API at `http://127.0.0.1:8787`.
 
 CI runs `make validate`, `make assure`, `make phase1-acceptance`, and `make test` on pushes and pull requests. `make test-browser` is an explicit local browser-privacy check that requires the Playwright CLI and a Chromium browser install.
+
+Phase 2 acceptance is executable with `make phase2-acceptance` and is included in CI while Phase 2 work is active.
 
 The first Phase 1 workstream is fixture-first source ingestion; it is offline, deterministic, and covered by tests before any live connector work.
 
