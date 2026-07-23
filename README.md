@@ -15,7 +15,7 @@ This repository establishes executable foundations for:
 
 The POC is aligned to the Foundational Product and System Design v0.3 acceptance criteria for the bounded manual exemplar: a representative 8-12 provision TCJA subset, source spans, deterministic statutory-transformation records, governed model scenarios, three perspective profiles, perspective invariance checks, and complete AI Decision Ledger provenance fields.
 
-See `docs/phase-0-acceptance-checklist.md` for the Phase 0 acceptance mapping, `docs/testing-strategy.md` for the integrated testing approach, `docs/phase-1-boundary.md` and `docs/phase-1-status.md` for Phase 1, and `docs/phase-2-boundary.md` for the next planned work.
+See `docs/phase-0-acceptance-checklist.md` for the Phase 0 acceptance mapping, `docs/testing-strategy.md` for the integrated testing approach, `docs/phase-1-boundary.md` and `docs/phase-1-status.md` for Phase 1, and `docs/phase-2-boundary.md` plus `docs/phase-2-status.md` for Phase 2.
 
 Licensing and intellectual-property decisions are intentionally deferred.
 
