@@ -134,3 +134,5 @@ The first challenge-agent tests use a deterministic test double and verify nonbl
 The first publication-state tests verify advancement on passing assurance, blocking on assurance failure, blocking on challenge disagreement, and review-required behavior for high-risk outputs.
 
 The first correction workflow tests validate correction records, require regression-test references, verify superseding AI Decision Ledger entries, and assert corrections appear in public reports.
+
+The first risk-scoring tests cover current POC risk, assurance failures, blocking challenge disagreement, and under-representative coverage.

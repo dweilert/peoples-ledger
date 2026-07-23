@@ -77,6 +77,14 @@ Status: implemented for first regression fixture.
 - Correction recording writes a hash-chained AI Decision Ledger entry with `publication_state: corrected`.
 - Public reports surface correction records.
 
+### Risk Scoring Dimensions
+
+Status: implemented for first deterministic dimensions.
+
+- Risk scoring includes assurance failures, challenge disagreement, unknown indicator count, and representative coverage.
+- Public reports include risk dimensions, rationale, and tier.
+- Tests cover current POC risk, assurance failure, blocking challenge disagreement, and under-representative coverage.
+
 ## Remaining Phase 1 Enhancements
 
 These are useful but no longer block the first Phase 1 POC slice:
@@ -86,7 +94,7 @@ These are useful but no longer block the first Phase 1 POC slice:
 - add authoritative post-enactment round-trip fixtures
 - add generated static HTML report, not only JSON
 - add more correction workflow fixtures and correction-derived regression tests
-- add richer risk scoring dimensions
+- add more risk scoring dimensions as new automation paths create new risks
 - add challenge-agent disagreement comparison across multiple deterministic agents
 
 ## Still Out Of Scope

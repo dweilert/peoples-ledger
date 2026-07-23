@@ -7,6 +7,7 @@ from .assurance import run_assurance_gate
 from .decision_ledger import DecisionLedger
 from .corrections import load_correction_record
 from .publication import decide_publication_state
+from .risk import score_risk
 from .source_registry import SourceRegistry, load_source_snapshots
 
 
@@ -17,12 +18,14 @@ def build_public_report() -> dict[str, Any]:
     ledger_entries = DecisionLedger().read_all()
     assurance = run_assurance_gate()
     publication = decide_publication_state(assurance)
+    risk = score_risk(unit, assurance)
 
     return {
         "report_id": f"report_{unit['id']}_phase1_poc",
         "analysis_unit_id": unit["id"],
         "title": unit["title"],
         "publication": publication.__dict__,
+        "risk": risk.__dict__,
         "summary": unit["expected_outputs"]["plain_language_summary"],
         "known_limits": unit["expected_outputs"]["known_limits"],
         "legislative_document": unit["legislative_document"],

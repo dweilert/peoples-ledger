@@ -16,6 +16,8 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(report["analysis_unit_id"], "tcja_2017_representative_provisions")
         self.assertEqual(report["publication"]["state"], "provisional_analysis")
         self.assertTrue(report["publication"]["allowed"])
+        self.assertEqual(report["risk"]["tier"], 2)
+        self.assertIn("unknown_indicator_count", report["risk"]["dimensions"])
         self.assertEqual(len(report["provisions"]), 10)
         self.assertEqual(len(report["perspective_profiles"]), 3)
         for provision in report["provisions"]:
@@ -44,6 +46,7 @@ class ReportingTests(unittest.TestCase):
             "report_id": report["report_id"],
             "analysis_unit_id": report["analysis_unit_id"],
             "publication": report["publication"],
+            "risk": report["risk"],
             "provision_ids": [provision["id"] for provision in report["provisions"]],
             "claim_ids": [claim["id"] for claim in report["claims"]],
             "indicator_ids": [indicator["id"] for indicator in report["narrow_benefit_indicators"]],
@@ -92,6 +95,16 @@ class ReportingTests(unittest.TestCase):
                         "state": "provisional_analysis",
                     },
                     "report_id": "report_tcja_2017_representative_provisions_phase1_poc",
+                    "risk": {
+                        "dimensions": {
+                            "assurance_failures": 1,
+                            "challenge_disagreement": 1,
+                            "representative_coverage": 1,
+                            "unknown_indicator_count": 2,
+                        },
+                        "rationale": ["unknown_indicator_count:2"],
+                        "tier": 2,
+                    },
                     "source_ids": [
                         "pl115_97_public_law",
                         "jct_tcja_distribution_2017",
