@@ -14,3 +14,4 @@ TCJA_ANALYSIS_UNIT_PATH = DATA_DIR / "exemplars" / "tcja_2017_representative_pro
 SOURCE_SNAPSHOT_MANIFEST_PATH = DATA_DIR / "sources" / "snapshots.json"
 PROMPT_TEMPLATE_REGISTRY_PATH = DATA_DIR / "ai" / "prompt_templates.json"
 SOURCE_ACQUISITION_MANIFEST_PATH = DATA_DIR / "fixtures" / "source_acquisition" / "ira_2022_source_manifest.json"
+CANDIDATE_ANALYSIS_QUEUE_PATH = DATA_DIR / "fixtures" / "candidate_queue" / "ira_2022_candidate_analysis_units.json"

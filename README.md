@@ -41,6 +41,8 @@ The first Phase 1 workstream is fixture-first source ingestion; it is offline, d
 
 Phase 2 has begun with fixture-only source-acquisition manifests for a second federal-tax source set. These records are candidate-only, deterministic, and excluded from public reports until promotion gates exist.
 
+The Phase 2 candidate queue is also fixture-first: draft analysis candidates link to acquired source snapshots, disable model/perspective rendering, and cannot be promoted or reported until explicit gates are implemented.
+
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
 
 The first report assembly slice emits a public JSON report with source traces, decision trace, model scenarios, perspective profiles, and assurance status.

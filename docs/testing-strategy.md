@@ -154,3 +154,5 @@ Correction fixture tests now cover source-locator, indicator, and claim-text cor
 The first risk-scoring tests cover current POC risk, assurance failures, blocking challenge disagreement, under-representative coverage, single-source analysis, missing provision source spans, non-official source mix, draft status, and superseded publication states.
 
 Phase 2 tests begin with source-acquisition manifest fixtures for a second federal-tax source set, candidate draft records, deterministic content-hash checks, live-retrieval rejection, and public-report exclusion for unpromoted candidates. See `docs/phase-2-boundary.md`.
+
+The first candidate queue tests validate draft-only candidate analysis units, deterministic candidate IDs, source-snapshot linkage, missing snapshot rejection, snapshot hash mismatch rejection, unknown source rejection, disabled model and perspective policies, promotion blocking, and public-report exclusion.

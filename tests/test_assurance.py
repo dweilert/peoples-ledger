@@ -26,6 +26,7 @@ class AssuranceTests(unittest.TestCase):
             "source_snapshots",
             "source_ingestion_fixtures",
             "source_acquisition_manifest",
+            "candidate_analysis_queue",
             "prompt_template_registry",
             "decision_ledger_integrity",
             "privacy_payload_guard",

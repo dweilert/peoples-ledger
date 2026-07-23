@@ -50,6 +50,8 @@ Required tests:
 - missing source snapshots block candidate advancement
 - candidate IDs, source refs, and publication states are deterministic
 
+Initial status: started with a draft-only IRA 2022 candidate queue fixture. The queue validates source-snapshot links against the source-acquisition manifest, disables model scenarios and perspective rendering, and remains absent from public reports.
+
 ### Review And Promotion Gates
 
 - Extend the assurance gate for candidate-to-exemplar promotion.

@@ -6,6 +6,7 @@ from pathlib import Path
 
 from .ai_adapter import AIRequest, DeterministicTCJAProvider, ProviderNeutralAIAdapter
 from .analysis import load_analysis_unit
+from .candidate_queue import validate_candidate_analysis_queue
 from .decision_ledger import DecisionLedger
 from .source_registry import SourceRegistry
 from .source_registry import load_source_snapshots
@@ -40,6 +41,7 @@ def main() -> int:
         load_source_snapshots()
         validate_source_ingestion_fixtures()
         validate_source_acquisition_manifest()
+        validate_candidate_analysis_queue()
         unit = load_analysis_unit()
         print(json.dumps({"status": "ok", "analysis_unit": unit["id"]}, sort_keys=True))
         return 0
