@@ -139,6 +139,18 @@ Status: implemented as a fixture-only blocked manifest.
 - Proposed candidate source IDs must not appear in the public source registry.
 - Assurance and Phase 2 acceptance both validate source promotion manifests.
 
+### Promotion Decision Ledger Stub
+
+Status: implemented as an offline fixture only.
+
+- A blocked promotion decision AI Decision Ledger entry fixture exists for the IRA 2022 candidate.
+- The fixture validates against `ai_decision_ledger_entry`.
+- The fixture hash is verified with the same hash function as live ledger entries.
+- The fixture links to the blocked candidate promotion request and candidate source refs.
+- Promotion execution, live provider calls, public-report inclusion, and live ledger append are false in structured output.
+- The fixture must remain absent from the live append-oriented AI Decision Ledger.
+- Assurance and Phase 2 acceptance both validate the ledger-stub fixture.
+
 ## Still Blocked
 
 These are intentionally blocked in the current POC:
@@ -157,4 +169,4 @@ These are intentionally blocked in the current POC:
 
 ## Recommended Next Work
 
-The next useful unit is a promotion decision ledger-entry stub. It should define the future ledger payload for a blocked promotion decision without appending it to the live AI Decision Ledger or changing candidate/public-report state.
+The next useful unit is a Phase 2 promotion audit cross-check. It should prove candidate status, promotion request, source promotion manifest, review records, and promotion-decision ledger stubs agree on the same blockers and source refs without changing candidate/public-report state.

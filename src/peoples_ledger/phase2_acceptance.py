@@ -8,10 +8,15 @@ from .candidate_audit import build_candidate_audit_bundle, validate_candidate_au
 from .candidate_extraction import validate_candidate_extraction_stub
 from .candidate_extraction_policy import CandidateExtractionPolicyRegistry, validate_candidate_extraction_policy_registry
 from .candidate_promotion import evaluate_candidate_promotion, validate_candidate_promotion_gate_reports
+from .candidate_promotion_decision import (
+    load_candidate_promotion_decision_ledger_stubs,
+    validate_candidate_promotion_decision_ledger_stubs,
+)
 from .candidate_promotion_request import load_candidate_promotion_requests, validate_candidate_promotion_requests
 from .candidate_queue import load_candidate_analysis_queue, validate_candidate_analysis_queue
 from .candidate_review import load_candidate_review_records, validate_candidate_review_ledger_stub, validate_candidate_review_records
 from .candidate_status import build_candidate_status
+from .decision_ledger import DecisionLedger
 from .paths import REPO_ROOT
 from .reporting import build_public_report
 from .source_acquisition import acquire_source_records_from_manifest, load_source_acquisition_manifest
@@ -42,6 +47,7 @@ def run_phase2_acceptance() -> Phase2AcceptanceReport:
         _run_check("candidate_queue_draft_only", _candidate_queue_draft_only),
         _run_check("candidate_promotion_reports_block", _candidate_promotion_reports_block),
         _run_check("candidate_promotion_request_stub_validates", _candidate_promotion_request_stub_validates),
+        _run_check("candidate_promotion_decision_ledger_stub_validates", _candidate_promotion_decision_ledger_stub_validates),
         _run_check("candidate_extraction_policy_registry", _candidate_extraction_policy_registry),
         _run_check("candidate_extraction_stub_validates", _candidate_extraction_stub_validates),
         _run_check("candidate_review_records_block", _candidate_review_records_block),
@@ -138,6 +144,22 @@ def _candidate_promotion_request_stub_validates() -> None:
             not request["execution_policy"]["household_financial_data_allowed"],
             f"promotion request allows household financial data: {request['id']}",
         )
+
+
+def _candidate_promotion_decision_ledger_stub_validates() -> None:
+    validate_candidate_promotion_decision_ledger_stubs()
+    entries = load_candidate_promotion_decision_ledger_stubs()
+    live_ledger_ids = {entry["id"] for entry in DecisionLedger().read_all()}
+    _require(entries, "candidate promotion decision ledger stub fixture is empty")
+    for entry in entries:
+        output = entry["structured_output"]
+        _require(entry["id"] not in live_ledger_ids, f"promotion decision stub is in live ledger: {entry['id']}")
+        _require(output["promotion_decision"] == "blocked", f"promotion decision stub is not blocked: {entry['id']}")
+        _require(not output["promotion_executed"], f"promotion decision stub executed promotion: {entry['id']}")
+        _require(not output["public_report_inclusion_allowed"], f"promotion decision stub allows reporting: {entry['id']}")
+        _require(not output["live_ledger_append_allowed"], f"promotion decision stub allows live append: {entry['id']}")
+        _require(output["publication_state_after_decision"] == "draft", f"promotion decision did not keep draft: {entry['id']}")
+        _require(entry["disclosure_class"] == "restricted", f"promotion decision stub is public: {entry['id']}")
 
 
 def _candidate_extraction_stub_validates() -> None:

@@ -20,3 +20,4 @@ SOURCE_PROMOTION_MANIFEST_PATH = DATA_DIR / "fixtures" / "source_promotion" / "i
 CANDIDATE_ANALYSIS_QUEUE_PATH = DATA_DIR / "fixtures" / "candidate_queue" / "ira_2022_candidate_analysis_units.json"
 CANDIDATE_REVIEW_RECORDS_PATH = DATA_DIR / "fixtures" / "candidate_reviews" / "ira_2022_candidate_review_records.json"
 CANDIDATE_PROMOTION_REQUESTS_PATH = DATA_DIR / "fixtures" / "candidate_promotions" / "ira_2022_candidate_promotion_requests.json"
+CANDIDATE_PROMOTION_DECISION_LEDGER_STUB_PATH = DATA_DIR / "fixtures" / "candidate_promotions" / "ira_2022_promotion_decision_ledger_stub.json"

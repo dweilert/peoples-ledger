@@ -28,6 +28,7 @@ class Phase2AcceptanceTests(unittest.TestCase):
                 "candidate_queue_draft_only",
                 "candidate_promotion_reports_block",
                 "candidate_promotion_request_stub_validates",
+                "candidate_promotion_decision_ledger_stub_validates",
                 "candidate_extraction_policy_registry",
                 "candidate_extraction_stub_validates",
                 "candidate_review_records_block",

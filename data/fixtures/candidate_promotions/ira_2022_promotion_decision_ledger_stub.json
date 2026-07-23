@@ -1,0 +1,81 @@
+[
+  {
+    "id": "adl_candidate_ira_2022_promotion_decision_blocked_stub_v1",
+    "timestamp": "2026-07-22T00:00:00+00:00",
+    "previous_entry_hash": null,
+    "analysis_unit_id": "candidate_ira_2022_energy_tax_provisions",
+    "actor": "deterministic-promotion-decision-stub",
+    "decision_type": "candidate_promotion_blocked",
+    "model": {
+      "provider": "deterministic-test-double",
+      "name": "promotion-decision-stub",
+      "version": "1.0"
+    },
+    "prompt_template_version": "candidate-promotion-decision-stub-v1",
+    "source_snapshot_ids": [
+      "pl117_169_public_law",
+      "jct_ira_estimated_budget_effects_2022"
+    ],
+    "source_hashes": [
+      "sha256:a4a55051c90ebbe990660bdfff380a2f4f593f2b60ae2893e9fd71339bb30837",
+      "sha256:8dd8c3105b6465097429ac3d39e71ad9c916c7dc9651b253c286be437aade014"
+    ],
+    "baseline_id": "phase2_candidate_no_model",
+    "model_scenario_id": "phase2_no_model_scenario",
+    "perspective_id": null,
+    "structured_input_pointer": "fixture://candidate_promotions/ira_2022_candidate_promotion_requests.json",
+    "input_storage_class": "public_summary",
+    "input_retention_days": 0,
+    "structured_output": {
+      "candidate_analysis_unit_id": "candidate_ira_2022_energy_tax_provisions",
+      "candidate_promotion_request_id": "promotion_request_candidate_ira_2022_energy_tax_provisions_v1",
+      "promotion_decision": "blocked",
+      "promotion_executed": false,
+      "publication_state_after_decision": "draft",
+      "live_provider_called": false,
+      "public_report_inclusion_allowed": false,
+      "live_ledger_append_allowed": false,
+      "blocker_gates": [
+        "prompt_template",
+        "human_review",
+        "ledger",
+        "promotion_disabled"
+      ]
+    },
+    "calibrated_confidence": 1.0,
+    "model_disagreement": 0.0,
+    "validation_results": {
+      "schema_valid": true,
+      "citations_valid": true,
+      "statutory_transform_valid": false,
+      "calculation_valid": true,
+      "privacy_egress_valid": true,
+      "perspective_invariance_valid": true
+    },
+    "risk_tier": 3,
+    "publication_lane": "provisional_analytical",
+    "publication_state": "machine_parsed",
+    "human_review_required": true,
+    "review_triggers": [
+      "candidate_promotion:blocked",
+      "candidate_publication:draft_only",
+      "candidate_promotion:disabled"
+    ],
+    "disclosure_class": "restricted",
+    "redaction_reason": "Phase 2 promotion decision stubs are not public report material and are not appended to the live ledger.",
+    "supersedes_decision_id": null,
+    "deletion_authorization": null,
+    "action": "candidate_promotion_decision_stub",
+    "input_refs": [
+      "promotion_request_candidate_ira_2022_energy_tax_provisions_v1",
+      "pl117_169_public_law",
+      "jct_ira_estimated_budget_effects_2022"
+    ],
+    "output_refs": [
+      "candidate_ira_2022_energy_tax_provisions"
+    ],
+    "rationale": "Deterministic Phase 2 fixture records the blocked promotion decision shape without executing promotion or appending to the live AI Decision Ledger.",
+    "household_financial_data_present": false,
+    "entry_hash": "sha256:1ea215ca0a219c9ba27d68af97e6ed25a4be186053c7918ae553c334ecfad45a"
+  }
+]
