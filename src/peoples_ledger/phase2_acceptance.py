@@ -255,9 +255,13 @@ def _frontend_candidate_status_target_defined() -> None:
     frontend_test = _read_repo_file("tests/test_frontend_privacy.py")
     browser_test = _read_repo_file("tests/browser/privacy_egress.spec.js")
     _require("/candidates/status" in app_js, "frontend does not fetch candidate status")
+    _require("/candidates/promotion-audit" in app_js, "frontend does not fetch promotion audit status")
     _require("candidate-status" in index_html, "frontend missing candidate status panel")
+    _require("promotion-audit" in index_html, "frontend missing promotion audit panel")
     _require("/candidates/status" in frontend_test, "frontend privacy allowlist missing candidate status")
+    _require("/candidates/promotion-audit" in frontend_test, "frontend privacy allowlist missing promotion audit status")
     _require("/candidates/status" in browser_test, "browser privacy spec missing candidate status fixture")
+    _require("/candidates/promotion-audit" in browser_test, "browser privacy spec missing promotion audit fixture")
 
 
 def _public_report_excludes_candidates() -> None:
