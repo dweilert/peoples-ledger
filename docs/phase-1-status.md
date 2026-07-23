@@ -23,6 +23,7 @@ Status: implemented for first operations.
 - `delete_text` is supported.
 - Successful operations emit schema-compatible statutory-transformation records.
 - Before/after hashes are stable.
+- Round-trip fixture expectations are recorded for reversible operations.
 - Unmatched, ambiguous, and incomplete operations abstain with review triggers.
 
 ### Automated Assurance Gate

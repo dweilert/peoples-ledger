@@ -123,7 +123,7 @@ The first Phase 1 source-ingestion tests are fixture-first: they validate genera
 
 Source snapshot tests now also compare fixture-generated source records and snapshots against the checked-in registry and snapshot manifest.
 
-The first statutory-transformation tests are fixture-backed: they cover successful replacement, insertion, deletion, stable before/after hashes, schema-compatible transformation records, and abstention for unmatched, ambiguous, or incomplete operations.
+The first statutory-transformation tests are fixture-backed: they cover successful replacement, insertion, deletion, stable before/after hashes, explicit round-trip fixture expectations, schema-compatible transformation records, and abstention for unmatched, ambiguous, or incomplete operations.
 
 The first report assembly tests snapshot the public report shape and verify provisions, sources, snapshots, decisions, publication state, model scenario, and perspective IDs remain traceable.
 

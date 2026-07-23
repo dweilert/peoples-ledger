@@ -14,6 +14,7 @@ from peoples_ledger.statutory_transform import (
     SourceSpan,
     TransformRequest,
     apply_transform,
+    reverse_transform,
     stable_text_hash,
 )
 
@@ -45,6 +46,7 @@ class StatutoryTransformTests(unittest.TestCase):
         self.assertEqual(result.transformation["before_text_hash"], stable_text_hash(fixture["current_text"]))
         self.assertEqual(result.transformation["after_text_hash"], stable_text_hash(fixture["expected_after_text"]))
         self.assertTrue(result.transformation["validation"]["round_trip_valid"])
+        self.assertEqual(reverse_transform(request_from_fixture(fixture), result.after_text), fixture["expected_round_trip_text"])
         SchemaRegistry(SCHEMA_DIR).validate("statutory_transformation", result.transformation)
 
     def test_insert_after_fixture_applies_deterministically(self) -> None:
@@ -54,6 +56,7 @@ class StatutoryTransformTests(unittest.TestCase):
         self.assertEqual(result.after_text, fixture["expected_after_text"])
         self.assertEqual(result.transformation["operation"], "add")
         self.assertTrue(result.transformation["validation"]["deterministic"])
+        self.assertEqual(reverse_transform(request_from_fixture(fixture), result.after_text), fixture["expected_round_trip_text"])
         SchemaRegistry(SCHEMA_DIR).validate("statutory_transformation", result.transformation)
 
     def test_delete_text_fixture_applies_deterministically(self) -> None:
@@ -65,7 +68,13 @@ class StatutoryTransformTests(unittest.TestCase):
         self.assertEqual(result.transformation["before_text_hash"], stable_text_hash(fixture["current_text"]))
         self.assertEqual(result.transformation["after_text_hash"], stable_text_hash(fixture["expected_after_text"]))
         self.assertTrue(result.transformation["validation"]["round_trip_valid"])
+        self.assertEqual(reverse_transform(request_from_fixture(fixture), result.after_text), fixture["expected_round_trip_text"])
         SchemaRegistry(SCHEMA_DIR).validate("statutory_transformation", result.transformation)
+
+    def test_reverse_transform_abstains_when_reverse_match_is_ambiguous(self) -> None:
+        fixture = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))[0]
+        request = request_from_fixture(fixture)
+        self.assertIsNone(reverse_transform(request, "a flat corporate rate of 21 percent and a flat corporate rate of 21 percent"))
 
     def test_unmatched_target_abstains(self) -> None:
         fixture = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))[0]

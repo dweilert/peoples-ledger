@@ -109,13 +109,25 @@ def apply_transform(request: TransformRequest) -> TransformResult:
 
 
 def _round_trip_valid(request: TransformRequest, after_text: str) -> bool:
-    if request.operation == "replace_text" and request.replacement_text is not None:
-        return after_text.replace(request.replacement_text, request.target_text, 1) == request.current_text
-    if request.operation == "insert_after" and request.insertion_text is not None:
-        return after_text.replace(request.target_text + request.insertion_text, request.target_text, 1) == request.current_text
+    restored = reverse_transform(request, after_text)
+    if restored is not None:
+        return restored == request.current_text
     if request.operation == "delete_text":
         return request.target_text not in after_text
     return False
+
+
+def reverse_transform(request: TransformRequest, after_text: str) -> str | None:
+    if request.operation == "replace_text" and request.replacement_text is not None:
+        if after_text.count(request.replacement_text) != 1:
+            return None
+        return after_text.replace(request.replacement_text, request.target_text, 1)
+    if request.operation == "insert_after" and request.insertion_text is not None:
+        inserted = request.target_text + request.insertion_text
+        if after_text.count(inserted) != 1:
+            return None
+        return after_text.replace(inserted, request.target_text, 1)
+    return None
 
 
 def _abstain(request: TransformRequest, reason: str) -> TransformResult:
