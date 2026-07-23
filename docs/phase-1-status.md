@@ -54,12 +54,13 @@ Status: implemented without external browser dependencies.
 
 ### Challenge-Agent Disagreement Recording
 
-Status: implemented with deterministic test double.
+Status: implemented with deterministic test doubles.
 
 - A deterministic challenge agent reviews the exemplar.
+- A source-coverage challenge agent checks public-law source spans and source diversity.
 - Nonblocking disagreement is represented.
 - Under-representative coverage blocks in tests.
-- Challenge reviews can write complete AI Decision Ledger records.
+- Challenge reviews and multi-agent comparisons can write complete AI Decision Ledger records.
 
 ### Publication-State Advancement Policy
 
@@ -97,7 +98,7 @@ These are useful but no longer block the first Phase 1 POC slice:
 - add richer static HTML styling and downloadable artifact packaging
 - add more correction workflow fixtures and correction-derived regression tests
 - add more risk scoring dimensions as new automation paths create new risks
-- add challenge-agent disagreement comparison across multiple deterministic agents
+- add live-model challenge agents after governance and prompt-template controls exist
 
 ## Still Out Of Scope
 

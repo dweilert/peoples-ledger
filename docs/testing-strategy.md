@@ -133,6 +133,8 @@ The first browser privacy hardening test executes the frontend JavaScript with a
 
 The first challenge-agent tests use a deterministic test double and verify nonblocking disagreement, blocking under-representative coverage, and complete AI Decision Ledger recording.
 
+Multi-agent challenge tests compare deterministic agents, aggregate disagreement, and verify comparison entries are recorded in the AI Decision Ledger.
+
 The first publication-state tests verify advancement on passing assurance, blocking on assurance failure, blocking on challenge disagreement, and review-required behavior for high-risk outputs.
 
 The first correction workflow tests validate correction records, require regression-test references, verify superseding AI Decision Ledger entries, and assert corrections appear in public reports.

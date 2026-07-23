@@ -11,7 +11,7 @@ from .source_registry import load_source_snapshots
 from .source_ingestion import validate_source_ingestion_fixtures
 from .assurance import run_assurance_gate
 from .reporting import build_public_report, build_public_report_html
-from .challenge_agents import record_challenge_review
+from .challenge_agents import record_challenge_comparison, record_challenge_review
 from .corrections import record_correction
 
 
@@ -23,6 +23,7 @@ def main() -> int:
     subcommands.add_parser("report", help="build the public POC report JSON")
     subcommands.add_parser("report-html", help="build the public POC report HTML")
     subcommands.add_parser("challenge-review", help="record a deterministic challenge-agent review")
+    subcommands.add_parser("challenge-compare", help="record deterministic multi-agent challenge comparison")
     subcommands.add_parser("record-correction", help="record the deterministic correction fixture")
     subcommands.add_parser("summarize-tcja", help="run deterministic TCJA exemplar summary")
     args = parser.parse_args()
@@ -62,6 +63,10 @@ def main() -> int:
 
     if args.command == "challenge-review":
         print(json.dumps(record_challenge_review(), sort_keys=True))
+        return 0
+
+    if args.command == "challenge-compare":
+        print(json.dumps(record_challenge_comparison(), sort_keys=True))
         return 0
 
     if args.command == "record-correction":

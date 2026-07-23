@@ -54,6 +54,8 @@ Initial status: started with `make assure`, which runs the bundled assurance gat
 
 Challenge-agent status: started with a deterministic challenge-agent test double that records model disagreement, findings, validation results, risk, and review triggers into the AI Decision Ledger.
 
+Multi-agent status: started with deterministic challenge-agent comparison across general coverage and source-coverage agents.
+
 Publication-state status: started with an explicit decision policy that blocks advancement on assurance failure, challenge-agent blocking disagreement, or high-risk review thresholds.
 
 Correction status: started with a correction-record schema, regression fixture, ledger recording path, and report visibility.
