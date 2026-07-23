@@ -3,8 +3,9 @@ from __future__ import annotations
 from typing import Any
 
 from .analysis import load_analysis_unit
-from .assurance import AssuranceReport, run_assurance_gate
+from .assurance import run_assurance_gate
 from .decision_ledger import DecisionLedger
+from .publication import decide_publication_state
 from .source_registry import SourceRegistry, load_source_snapshots
 
 
@@ -14,12 +15,13 @@ def build_public_report() -> dict[str, Any]:
     snapshots = {snapshot["source_record_id"]: snapshot for snapshot in load_source_snapshots()}
     ledger_entries = DecisionLedger().read_all()
     assurance = run_assurance_gate()
+    publication = decide_publication_state(assurance)
 
     return {
         "report_id": f"report_{unit['id']}_phase1_poc",
         "analysis_unit_id": unit["id"],
         "title": unit["title"],
-        "publication": _publication_block(assurance),
+        "publication": publication.__dict__,
         "summary": unit["expected_outputs"]["plain_language_summary"],
         "known_limits": unit["expected_outputs"]["known_limits"],
         "legislative_document": unit["legislative_document"],
@@ -34,15 +36,6 @@ def build_public_report() -> dict[str, Any]:
             "checks": [check.__dict__ for check in assurance.checks],
             "review_triggers": assurance.review_triggers,
         },
-    }
-
-
-def _publication_block(assurance: AssuranceReport) -> dict[str, Any]:
-    return {
-        "lane": "provisional_analytical",
-        "state": assurance.publication_state,
-        "allowed": assurance.publication_allowed,
-        "risk_tier": assurance.risk_tier,
     }
 
 

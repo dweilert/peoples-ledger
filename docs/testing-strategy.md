@@ -128,3 +128,5 @@ The first report assembly tests snapshot the public report shape and verify prov
 The first browser privacy hardening test executes the frontend JavaScript with a stubbed DOM and fetch layer, then verifies local-only controls do not create network calls. A full Playwright request-interception test remains the target once browser dependencies are added.
 
 The first challenge-agent tests use a deterministic test double and verify nonblocking disagreement, blocking under-representative coverage, and complete AI Decision Ledger recording.
+
+The first publication-state tests verify advancement on passing assurance, blocking on assurance failure, blocking on challenge disagreement, and review-required behavior for high-risk outputs.

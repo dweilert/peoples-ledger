@@ -86,6 +86,8 @@ class ReportingTests(unittest.TestCase):
                     "publication": {
                         "allowed": True,
                         "lane": "provisional_analytical",
+                        "rationale": "Assurance checks passed and no blocking disagreement was found.",
+                        "review_triggers": [],
                         "risk_tier": 1,
                         "state": "provisional_analysis",
                     },
