@@ -5,6 +5,7 @@ from typing import Callable
 
 from .assurance import run_assurance_gate
 from .candidate_extraction import validate_candidate_extraction_stub
+from .candidate_extraction_policy import CandidateExtractionPolicyRegistry, validate_candidate_extraction_policy_registry
 from .candidate_promotion import evaluate_candidate_promotion, validate_candidate_promotion_gate_reports
 from .candidate_queue import load_candidate_analysis_queue, validate_candidate_analysis_queue
 from .candidate_status import build_candidate_status
@@ -35,6 +36,7 @@ def run_phase2_acceptance() -> Phase2AcceptanceReport:
         _run_check("source_acquisition_candidates_validate", _source_acquisition_candidates_validate),
         _run_check("candidate_queue_draft_only", _candidate_queue_draft_only),
         _run_check("candidate_promotion_reports_block", _candidate_promotion_reports_block),
+        _run_check("candidate_extraction_policy_registry", _candidate_extraction_policy_registry),
         _run_check("candidate_extraction_stub_validates", _candidate_extraction_stub_validates),
         _run_check("candidate_status_surfaces_blockers", _candidate_status_surfaces_blockers),
         _run_check("frontend_candidate_status_target_defined", _frontend_candidate_status_target_defined),
@@ -90,6 +92,22 @@ def _candidate_promotion_reports_block() -> None:
 
 def _candidate_extraction_stub_validates() -> None:
     validate_candidate_extraction_stub(load_candidate_analysis_queue())
+
+
+def _candidate_extraction_policy_registry() -> None:
+    registry = validate_candidate_extraction_policy_registry()
+    for policy in registry.policies.values():
+        _require(policy["status"] == "approved_for_dry_run", f"candidate policy is not dry-run approved: {policy['version']}")
+        _require(policy["provider"].startswith("deterministic-"), f"candidate policy is not deterministic: {policy['version']}")
+        _require(not policy["live_provider_authorized"], f"candidate policy authorizes live provider: {policy['version']}")
+        _require(not policy["promotion_use_allowed"], f"candidate policy allows promotion use: {policy['version']}")
+    candidate = load_candidate_analysis_queue()[0]
+    source_refs = [ref["source_record_id"] for ref in candidate["source_snapshot_refs"]]
+    CandidateExtractionPolicyRegistry.load().require_dry_run(
+        "candidate-locator-extraction-poc-v1",
+        "candidate_locator_extraction",
+        source_refs,
+    )
 
 
 def _candidate_status_surfaces_blockers() -> None:

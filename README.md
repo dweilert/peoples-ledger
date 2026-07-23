@@ -51,6 +51,8 @@ Promotion gate evaluation has begun as a read-only report: it explains blocking 
 
 Candidate locator extraction is represented by a deterministic ledger stub. It writes restricted AI Decision Ledger entries in tests or explicit calls, while assurance uses a temporary ledger and no live provider.
 
+Candidate extraction policy is checked in separately from public prompt templates. It is dry-run-only, deterministic-provider-only, tied to candidate source refs, and disallowed for promotion use.
+
 `candidate-status` prints draft Phase 2 candidate status and promotion blockers without appending ledger entries or changing public reports.
 
 The backend also exposes the same read-only payload at `/candidates/status` for local inspection without ledger writes or public-report changes.

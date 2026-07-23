@@ -5,6 +5,7 @@ from typing import Callable
 
 from .analysis import load_analysis_unit
 from .candidate_extraction import validate_candidate_extraction_stub
+from .candidate_extraction_policy import validate_candidate_extraction_policy_registry
 from .candidate_promotion import validate_candidate_promotion_gate_reports
 from .candidate_queue import validate_candidate_analysis_queue
 from .candidate_queue import load_candidate_analysis_queue
@@ -46,6 +47,7 @@ def run_assurance_gate() -> AssuranceReport:
         _run_check("source_acquisition_manifest", validate_source_acquisition_manifest),
         _run_check("candidate_analysis_queue", validate_candidate_analysis_queue),
         _run_check("candidate_promotion_gate_reports", lambda: validate_candidate_promotion_gate_reports(load_candidate_analysis_queue())),
+        _run_check("candidate_extraction_policy_registry", validate_candidate_extraction_policy_registry),
         _run_check("candidate_extraction_ledger_stub", lambda: validate_candidate_extraction_stub(load_candidate_analysis_queue())),
         _run_check("prompt_template_registry", validate_prompt_template_registry),
         _run_check("decision_ledger_integrity", lambda: DecisionLedger().read_all()),

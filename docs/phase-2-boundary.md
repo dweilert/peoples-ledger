@@ -76,6 +76,8 @@ Initial status: added a minimal frontend candidate-status panel that reads `/can
 
 Initial status: added `phase2-acceptance` as an executable checklist covering source acquisition, candidate queue, promotion blockers, extraction dry run, CLI/backend/frontend status, privacy, public-report exclusion, scope boundaries, assurance, and CI gating.
 
+Initial status: added a candidate extraction policy registry for dry-run-only deterministic locator extraction. Candidate extraction policies must use deterministic providers, disable live providers, reference candidate source records, and remain disallowed for promotion use.
+
 ## Out Of Scope
 
 Phase 2 should not include:
