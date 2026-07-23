@@ -9,7 +9,7 @@ from .schema_validator import SchemaRegistry
 
 
 TransformStatus = Literal["applied", "abstained"]
-TransformOperation = Literal["replace_text", "insert_after", "delete_text"]
+TransformOperation = Literal["replace_text", "insert_after", "delete_text", "renumber_text"]
 
 
 @dataclass(frozen=True)
@@ -64,6 +64,11 @@ def apply_transform(request: TransformRequest) -> TransformResult:
             return _abstain(request, "replacement_text_required")
         after_text = request.current_text.replace(request.target_text, request.replacement_text, 1)
         schema_operation = "modify"
+    elif request.operation == "renumber_text":
+        if request.replacement_text is None:
+            return _abstain(request, "replacement_text_required")
+        after_text = request.current_text.replace(request.target_text, request.replacement_text, 1)
+        schema_operation = "renumber"
     elif request.operation == "insert_after":
         if request.insertion_text is None:
             return _abstain(request, "insertion_text_required")
@@ -118,7 +123,7 @@ def _round_trip_valid(request: TransformRequest, after_text: str) -> bool:
 
 
 def reverse_transform(request: TransformRequest, after_text: str) -> str | None:
-    if request.operation == "replace_text" and request.replacement_text is not None:
+    if request.operation in {"replace_text", "renumber_text"} and request.replacement_text is not None:
         if after_text.count(request.replacement_text) != 1:
             return None
         return after_text.replace(request.replacement_text, request.target_text, 1)

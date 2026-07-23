@@ -21,6 +21,7 @@ Status: implemented for first operations.
 - `replace_text` is supported.
 - `insert_after` is supported.
 - `delete_text` is supported.
+- `renumber_text` is supported.
 - Successful operations emit schema-compatible statutory-transformation records.
 - Before/after hashes are stable.
 - Round-trip fixture expectations are recorded for reversible operations.
@@ -97,7 +98,7 @@ Status: implemented for first deterministic dimensions.
 These are useful but no longer block the first Phase 1 POC slice:
 
 - add real Playwright browser request-interception tests
-- add more statutory transformation operation fixtures
+- add more statutory transformation operation fixtures when new TCJA provision patterns need them
 - add authoritative post-enactment round-trip fixtures
 - add downloadable report bundle archive if artifact distribution is needed
 - add more correction workflow fixture types as real corrections occur

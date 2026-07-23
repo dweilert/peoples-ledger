@@ -71,6 +71,17 @@ class StatutoryTransformTests(unittest.TestCase):
         self.assertEqual(reverse_transform(request_from_fixture(fixture), result.after_text), fixture["expected_round_trip_text"])
         SchemaRegistry(SCHEMA_DIR).validate("statutory_transformation", result.transformation)
 
+    def test_renumber_text_fixture_applies_deterministically(self) -> None:
+        fixture = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))[3]
+        result = apply_transform(request_from_fixture(fixture))
+        self.assertEqual(result.status, "applied")
+        self.assertEqual(result.after_text, fixture["expected_after_text"])
+        self.assertEqual(result.transformation["operation"], "renumber")
+        self.assertTrue(result.transformation["validation"]["deterministic"])
+        self.assertTrue(result.transformation["validation"]["round_trip_valid"])
+        self.assertEqual(reverse_transform(request_from_fixture(fixture), result.after_text), fixture["expected_round_trip_text"])
+        SchemaRegistry(SCHEMA_DIR).validate("statutory_transformation", result.transformation)
+
     def test_reverse_transform_abstains_when_reverse_match_is_ambiguous(self) -> None:
         fixture = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))[0]
         request = request_from_fixture(fixture)

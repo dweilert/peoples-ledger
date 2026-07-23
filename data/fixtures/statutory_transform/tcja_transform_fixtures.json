@@ -57,5 +57,25 @@
         "citation": "26 USC 151"
       }
     ]
+  },
+  {
+    "id": "fixture_renumber_international_rule",
+    "operation": "renumber_text",
+    "current_text": "Subpart F includes section 951A after section 951.",
+    "target_text": "section 951A",
+    "replacement_text": "section 951B",
+    "expected_after_text": "Subpart F includes section 951B after section 951.",
+    "expected_round_trip_text": "Subpart F includes section 951A after section 951.",
+    "source_span": {
+      "source_record_id": "pl115_97_public_law",
+      "locator": "Section 14201",
+      "text_hash": "manual-span-sec-14201-gilti"
+    },
+    "affected_authority": [
+      {
+        "type": "usc",
+        "citation": "26 USC 951A"
+      }
+    ]
   }
 ]
