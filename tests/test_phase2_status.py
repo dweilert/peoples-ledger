@@ -38,6 +38,7 @@ class Phase2StatusTests(unittest.TestCase):
             "Phase 2 Acceptance Gate",
             "Candidate-To-Exemplar Promotion Contract",
             "Candidate Promotion Request Stub",
+            "Source Promotion Manifest Stub",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, body)

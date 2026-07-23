@@ -24,6 +24,7 @@ class Phase2AcceptanceTests(unittest.TestCase):
             {check.name for check in report.checks},
             {
                 "source_acquisition_candidates_validate",
+                "source_promotion_manifest_blocks_registry_changes",
                 "candidate_queue_draft_only",
                 "candidate_promotion_reports_block",
                 "candidate_promotion_request_stub_validates",

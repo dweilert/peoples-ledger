@@ -15,6 +15,7 @@ from .candidate_status import build_candidate_status
 from .paths import REPO_ROOT
 from .reporting import build_public_report
 from .source_acquisition import acquire_source_records_from_manifest, load_source_acquisition_manifest
+from .source_promotion import load_source_promotion_manifest, validate_source_promotion_manifest
 from .source_registry import SourceRegistry
 
 
@@ -37,6 +38,7 @@ class Phase2AcceptanceReport:
 def run_phase2_acceptance() -> Phase2AcceptanceReport:
     checks = [
         _run_check("source_acquisition_candidates_validate", _source_acquisition_candidates_validate),
+        _run_check("source_promotion_manifest_blocks_registry_changes", _source_promotion_manifest_blocks_registry_changes),
         _run_check("candidate_queue_draft_only", _candidate_queue_draft_only),
         _run_check("candidate_promotion_reports_block", _candidate_promotion_reports_block),
         _run_check("candidate_promotion_request_stub_validates", _candidate_promotion_request_stub_validates),
@@ -73,6 +75,23 @@ def _source_acquisition_candidates_validate() -> None:
     _require({record["id"] for record in records} == {snapshot["source_record_id"] for snapshot in snapshots}, "source record/snapshot ids differ")
     public_source_ids = set(SourceRegistry.load().records)
     _require(not ({record["id"] for record in records} & public_source_ids), "candidate sources leaked into public source registry")
+
+
+def _source_promotion_manifest_blocks_registry_changes() -> None:
+    validate_source_promotion_manifest()
+    manifest = load_source_promotion_manifest()
+    _require(manifest["promotion_state"] == "blocked", "source promotion manifest is not blocked")
+    _require(not manifest["registry_update_allowed"], "source promotion manifest allows registry updates")
+    _require(not manifest["public_report_inclusion_allowed"], "source promotion manifest allows public reporting")
+    _require(not manifest["ledger_append_allowed"], "source promotion manifest allows ledger appends")
+    public_source_ids = set(SourceRegistry.load().records)
+    proposed_source_ids = {source["source_record"]["id"] for source in manifest["proposed_sources"]}
+    _require(not (public_source_ids & proposed_source_ids), "source promotion manifest leaked into public registry")
+    for proposed in manifest["proposed_sources"]:
+        _require(
+            proposed["registry_action"] == "proposed_noop",
+            f"source promotion action is not no-op: {proposed['source_record']['id']}",
+        )
 
 
 def _candidate_queue_draft_only() -> None:

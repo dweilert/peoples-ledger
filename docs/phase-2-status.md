@@ -127,6 +127,18 @@ Status: implemented as fixture-only blocked requests.
 - Promotion request blockers must include the current candidate promotion gate report blockers.
 - Assurance and Phase 2 acceptance both validate promotion request fixtures.
 
+### Source Promotion Manifest Stub
+
+Status: implemented as a fixture-only blocked manifest.
+
+- `source_promotion_manifest` schema exists.
+- The IRA 2022 source promotion manifest validates candidate source records and snapshots against source-acquisition output.
+- Source promotion manifests must remain `blocked`.
+- Registry updates, public-report inclusion, and ledger appends are disallowed by schema and validation.
+- Proposed source actions must remain `proposed_noop`.
+- Proposed candidate source IDs must not appear in the public source registry.
+- Assurance and Phase 2 acceptance both validate source promotion manifests.
+
 ## Still Blocked
 
 These are intentionally blocked in the current POC:
@@ -145,4 +157,4 @@ These are intentionally blocked in the current POC:
 
 ## Recommended Next Work
 
-The next useful unit is a source promotion manifest stub and fixture-only validation tests. It should describe how candidate source records could be proposed for the public registry later, while keeping the public registry unchanged and candidates excluded from reports.
+The next useful unit is a promotion decision ledger-entry stub. It should define the future ledger payload for a blocked promotion decision without appending it to the live AI Decision Ledger or changing candidate/public-report state.

@@ -1,0 +1,115 @@
+{
+  "id": "source_promotion_ira_2022_federal_tax_source_set_v1",
+  "phase": "phase2_source_promotion_stub",
+  "source_acquisition_manifest_id": "ira_2022_federal_tax_source_set",
+  "promotion_state": "blocked",
+  "target_registry": "public_source_registry",
+  "registry_update_allowed": false,
+  "public_report_inclusion_allowed": false,
+  "ledger_append_allowed": false,
+  "required_gates": [
+    "source_hash",
+    "locator_policy",
+    "human_review",
+    "ledger",
+    "public_registry_diff",
+    "privacy"
+  ],
+  "proposed_sources": [
+    {
+      "source_record": {
+        "id": "pl117_169_public_law",
+        "title": "Public Law 117-169: Inflation Reduction Act",
+        "publisher": "U.S. Government Publishing Office",
+        "url": "https://www.govinfo.gov/app/details/PLAW-117publ169",
+        "snapshot_date": "2026-07-23",
+        "source_type": "statute",
+        "integrity": {
+          "snapshot_method": "manual",
+          "content_hash": "sha256:a4a55051c90ebbe990660bdfff380a2f4f593f2b60ae2893e9fd71339bb30837"
+        }
+      },
+      "source_snapshot": {
+        "source_record_id": "pl117_169_public_law",
+        "retrieved_at": "2026-07-23T00:00:00+00:00",
+        "url": "https://www.govinfo.gov/app/details/PLAW-117publ169",
+        "content_hash": "sha256:a4a55051c90ebbe990660bdfff380a2f4f593f2b60ae2893e9fd71339bb30837",
+        "locator_policy": "Phase 2 fixture locators use public law section numbers and stable source-record identifiers.",
+        "storage": {
+          "mode": "metadata_only",
+          "path": null
+        }
+      },
+      "registry_action": "proposed_noop",
+      "review_status": "review_required",
+      "blockers": [
+        {
+          "gate": "human_review",
+          "reason": "Candidate source record has not completed human review for registry promotion."
+        },
+        {
+          "gate": "ledger",
+          "reason": "No source promotion AI Decision Ledger entry exists."
+        },
+        {
+          "gate": "public_registry_diff",
+          "reason": "No public registry diff has been approved."
+        },
+        {
+          "gate": "promotion_disabled",
+          "reason": "Source promotion is disabled in this POC slice."
+        }
+      ]
+    },
+    {
+      "source_record": {
+        "id": "jct_ira_estimated_budget_effects_2022",
+        "title": "Estimated Budget Effects Of Public Law 117-169",
+        "publisher": "Joint Committee on Taxation",
+        "url": "https://www.jct.gov/publications/2022/",
+        "snapshot_date": "2026-07-23",
+        "source_type": "government_analysis",
+        "integrity": {
+          "snapshot_method": "manual",
+          "content_hash": "sha256:8dd8c3105b6465097429ac3d39e71ad9c916c7dc9651b253c286be437aade014"
+        }
+      },
+      "source_snapshot": {
+        "source_record_id": "jct_ira_estimated_budget_effects_2022",
+        "retrieved_at": "2026-07-23T00:00:00+00:00",
+        "url": "https://www.jct.gov/publications/2022/",
+        "content_hash": "sha256:8dd8c3105b6465097429ac3d39e71ad9c916c7dc9651b253c286be437aade014",
+        "locator_policy": "Phase 2 fixture locators use JCT publication tables and line-item references.",
+        "storage": {
+          "mode": "metadata_only",
+          "path": null
+        }
+      },
+      "registry_action": "proposed_noop",
+      "review_status": "review_required",
+      "blockers": [
+        {
+          "gate": "human_review",
+          "reason": "Candidate source record has not completed human review for registry promotion."
+        },
+        {
+          "gate": "ledger",
+          "reason": "No source promotion AI Decision Ledger entry exists."
+        },
+        {
+          "gate": "public_registry_diff",
+          "reason": "No public registry diff has been approved."
+        },
+        {
+          "gate": "promotion_disabled",
+          "reason": "Source promotion is disabled in this POC slice."
+        }
+      ]
+    }
+  ],
+  "privacy": {
+    "uses_household_financial_data": false,
+    "egress_allowed": false,
+    "notes": "Source promotion stubs contain only public source metadata and blocked registry-governance state."
+  }
+}
