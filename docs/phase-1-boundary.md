@@ -56,6 +56,8 @@ Challenge-agent status: started with a deterministic challenge-agent test double
 
 Publication-state status: started with an explicit decision policy that blocks advancement on assurance failure, challenge-agent blocking disagreement, or high-risk review thresholds.
 
+Correction status: started with a correction-record schema, regression fixture, ledger recording path, and report visibility.
+
 Required tests:
 
 - failed validators block publication-state advancement

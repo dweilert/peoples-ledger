@@ -68,6 +68,15 @@ Status: implemented for first rules.
 - Blocking challenge disagreement prevents provisional advancement.
 - High-risk outputs require review.
 
+### Correction Workflow Fixture
+
+Status: implemented for first regression fixture.
+
+- A correction-record schema exists.
+- A POC correction fixture preserves target, root cause, previous output, corrected output, superseded decision, and regression-test reference.
+- Correction recording writes a hash-chained AI Decision Ledger entry with `publication_state: corrected`.
+- Public reports surface correction records.
+
 ## Remaining Phase 1 Enhancements
 
 These are useful but no longer block the first Phase 1 POC slice:
@@ -76,7 +85,7 @@ These are useful but no longer block the first Phase 1 POC slice:
 - add more statutory transformation operation fixtures
 - add authoritative post-enactment round-trip fixtures
 - add generated static HTML report, not only JSON
-- add correction workflow fixtures and correction-derived regression tests
+- add more correction workflow fixtures and correction-derived regression tests
 - add richer risk scoring dimensions
 - add challenge-agent disagreement comparison across multiple deterministic agents
 

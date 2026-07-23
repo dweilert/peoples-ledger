@@ -1,0 +1,13 @@
+{
+  "id": "corr_tcja_salt_locator_poc",
+  "analysis_unit_id": "tcja_2017_representative_provisions",
+  "target_ref": "claim_distribution_varies:evidence[1]",
+  "correction_type": "source_locator",
+  "root_cause": "POC regression fixture for preserving correction provenance when a source locator needs refinement.",
+  "previous_output_ref": "crs_salt_cap_2018#Overview and policy discussion",
+  "corrected_output_ref": "crs_salt_cap_2018#Overview and policy discussion",
+  "regression_test_ref": "tests/test_corrections.py::CorrectionTests::test_correction_fixture_validates_and_preserves_regression_reference",
+  "supersedes_decision_id": "adl_manual_tcja_representative_subset",
+  "source_record_ids": ["crs_salt_cap_2018"],
+  "publication_state": "corrected"
+}
