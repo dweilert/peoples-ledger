@@ -100,6 +100,7 @@ Current first Phase 3 planning slice:
 - `/candidates/promotion-evaluator` exposes the evaluator status as read-only backend JSON
 - the frontend displays `/candidates/promotion-evaluator` as a read-only Phase 3 evaluator panel with no promotion action
 - `data/fixtures/phase3/promotion_evaluator_status_contract.json` snapshots the evaluator status contract with blocked, fixture-only, no-mutation semantics
+- `schemas/phase3_promotion_evaluator_status.schema.json` validates the evaluator status contract and rejects promotion-enabled mutation flags
 - `tests/test_phase3_boundary.py` provides executable planning/documentation tests
 - `tests/test_phase3_promotion_evaluator_contract.py` covers the future evaluator contract
 - `tests/test_phase3_promotion_evaluator_fixtures.py` validates the fixture-only examples
@@ -129,6 +130,7 @@ Start by reading:
 - docs/phase-3-planning-closure-checklist.md
 - data/fixtures/phase3/promotion_evaluator_contract_examples.json
 - data/fixtures/phase3/promotion_evaluator_status_contract.json
+- schemas/phase3_promotion_evaluator_status.schema.json
 - docs/project-handoff.md
 
 Current status:
@@ -142,12 +144,12 @@ Current status:
   - make phase2-acceptance
   - make test
   - make test-browser
-- The full unit suite last passed with 259 tests and 3 intentionally skipped future-promotion contract tests.
+- The full unit suite last passed with 260 tests and 3 intentionally skipped future-promotion contract tests.
 
 Continue with disabled-by-default Phase 3 evaluator implementation only. Keep promotion execution disabled.
 
 Recommended next unit:
-Add a JSON Schema for the Phase 3 evaluator status payload and validate the checked contract snapshot against it. Keep promotion disabled. Do not implement promotion.
+Validate the `/candidates/promotion-evaluator` backend response against the Phase 3 evaluator status schema in integration tests. Keep promotion disabled. Do not implement promotion.
 
 Keep these out of scope:
 - candidate promotion execution
