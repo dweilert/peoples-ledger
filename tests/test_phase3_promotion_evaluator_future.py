@@ -93,11 +93,16 @@ class Phase3PromotionEvaluatorFutureTests(unittest.TestCase):
         self.assertFalse(result["public_report_changed"])
         self.assertFalse(result["live_provider_called"])
 
-    @unittest.skip("Future implementation intentionally blocked; unresolved risk trigger must fail risk.")
     def test_future_unresolved_risk_fails_risk_first(self) -> None:
         result = _future_evaluate("phase3_eval_example_unresolved_risk")
         self.assertEqual(result["first_failing_gate"], "risk")
         self.assertEqual(result["blockers"][0]["code"], "risk.unresolved_review_trigger")
+        self.assertIn("promotion_disabled.phase3_hard_stop", {blocker["code"] for blocker in result["blockers"]})
+        self.assertEqual(result["status"], "blocked")
+        self.assertFalse(result["mutation_performed"])
+        self.assertFalse(result["ledger_appended"])
+        self.assertFalse(result["public_report_changed"])
+        self.assertFalse(result["live_provider_called"])
 
     @unittest.skip("Future implementation intentionally blocked; otherwise clean request must still fail promotion_disabled.")
     def test_future_clean_request_still_fails_promotion_disabled(self) -> None:
