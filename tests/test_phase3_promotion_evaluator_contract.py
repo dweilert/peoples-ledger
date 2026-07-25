@@ -21,7 +21,7 @@ class Phase3PromotionEvaluatorContractTests(unittest.TestCase):
             "does not authorize promotion",
             "peoples_ledger.promotion_request_evaluator",
             "evaluate_promotion_request",
-            "schema and source fixture cases only",
+            "schema, source, and extraction-prompt fixture cases only",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, body)

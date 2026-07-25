@@ -11,6 +11,7 @@ CONTRACT_EXAMPLES_PATH = DATA_DIR / "fixtures" / "phase3" / "promotion_evaluator
 IMPLEMENTED_EXAMPLE_IDS = {
     "phase3_eval_example_schema_invalid_request",
     "phase3_eval_example_source_hash_mismatch",
+    "phase3_eval_example_prompt_unapproved",
 }
 
 
@@ -77,6 +78,8 @@ def _message_for_code(code: str) -> str:
         return "Promotion request fixture is missing required schema data."
     if code == "source.snapshot_hash_mismatch":
         return "Candidate source snapshot hash does not match the expected source fixture."
+    if code == "extraction_prompt.template_unapproved":
+        return "Promotion prompt template is not approved for candidate-to-exemplar use."
     if code == "promotion_disabled.phase3_hard_stop":
         return "Promotion remains disabled for the Phase 3 evaluator."
     return "Phase 3 evaluator gate is not implemented in this slice."
@@ -87,6 +90,8 @@ def _remediation_for_code(code: str) -> str:
         return "Provide a valid local promotion request fixture before later gates are evaluated."
     if code == "source.snapshot_hash_mismatch":
         return "Reconcile the local source snapshot hash before prompt, review, ledger, or report gates are evaluated."
+    if code == "extraction_prompt.template_unapproved":
+        return "Approve a promotion-specific prompt template in a later authorized scope before later gates are evaluated."
     if code == "promotion_disabled.phase3_hard_stop":
         return "Keep promotion disabled until a later approved scope removes this hard stop."
     return "Leave this gate skipped until its implementation slice is approved."
