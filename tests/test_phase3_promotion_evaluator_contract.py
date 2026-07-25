@@ -21,7 +21,7 @@ class Phase3PromotionEvaluatorContractTests(unittest.TestCase):
             "does not authorize promotion",
             "peoples_ledger.promotion_request_evaluator",
             "evaluate_promotion_request",
-            "schema-first fixture only",
+            "schema and source fixture cases only",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, body)
@@ -155,7 +155,7 @@ class Phase3PromotionEvaluatorContractTests(unittest.TestCase):
                     path.read_text(encoding="utf-8"),
                 )
 
-    def test_promotion_request_evaluator_is_schema_first_only(self) -> None:
+    def test_promotion_request_evaluator_is_limited_to_approved_fixture_cases(self) -> None:
         self.assertTrue((REPO_ROOT / "src" / "peoples_ledger" / "promotion_request_evaluator.py").exists())
         forbidden_paths = (REPO_ROOT / "src" / "peoples_ledger" / "candidate_promotion_evaluator.py",)
 

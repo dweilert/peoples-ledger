@@ -22,7 +22,7 @@ Future entry point, if implementation is later approved:
 evaluate_promotion_request(request_id: str, fixture_root: Path | None = None) -> PromotionEvaluationResult
 ```
 
-The initial approved Phase 3 implementation slice may create this module and entry point for the schema-first fixture only. Later gates remain skipped until their own approved implementation slices.
+Approved Phase 3 implementation slices may create this module and entry point for the schema and source fixture cases only. Later gates remain skipped until their own approved implementation slices.
 
 ## Required Inputs
 
@@ -154,14 +154,14 @@ These fixtures must remain local and candidate-only.
 Before evaluator code exists, executable documentation tests must assert:
 
 - this contract exists
-- the interface is limited to the approved schema-first implementation slice
+- the interface is limited to approved schema and source implementation slices
 - required input fixture names are present
 - result and blocker shapes are documented
 - stable blocker codes are documented
 - privacy failure precedence is documented
 - all mutation and egress outputs are forbidden
 - gate order matches the Phase 3 boundary
-- implementation module remains limited to the schema-first fixture case
+- implementation module remains limited to approved schema and source fixture cases
 
 Fixture-only examples are defined in `data/fixtures/phase3/promotion_evaluator_contract_examples.json`. They describe the expected first failing gate, primary blocker code, and no-mutation flags for each planned gate without creating an evaluator implementation.
 
@@ -175,7 +175,7 @@ This planning slice is complete when:
 - README and handoff point to it
 - executable documentation tests cover the contract
 - Phase 2 and Phase 3 boundary tests still pass
-- no promotion request evaluator implementation beyond the approved schema-first fixture case exists
+- no promotion request evaluator implementation beyond approved schema and source fixture cases exists
 - no candidate is promoted
 - no public report contains candidate content
 - no live provider path is enabled

@@ -85,7 +85,7 @@ class Phase3EvaluatorRiskReviewTests(unittest.TestCase):
             with self.subTest(path=path.name):
                 self.assertIn("docs/phase-3-evaluator-risk-review.md", path.read_text(encoding="utf-8"))
 
-    def test_evaluator_implementation_is_schema_first_only(self) -> None:
+    def test_evaluator_implementation_is_limited_to_approved_fixture_cases(self) -> None:
         self.assertTrue((REPO_ROOT / "src" / "peoples_ledger" / "promotion_request_evaluator.py").exists())
         self.assertFalse((REPO_ROOT / "src" / "peoples_ledger" / "candidate_promotion_evaluator.py").exists())
 

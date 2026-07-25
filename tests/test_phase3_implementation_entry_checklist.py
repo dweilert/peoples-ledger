@@ -117,7 +117,7 @@ class Phase3ImplementationEntryChecklistTests(unittest.TestCase):
                     path.read_text(encoding="utf-8"),
                 )
 
-    def test_evaluator_implementation_is_schema_first_only(self) -> None:
+    def test_evaluator_implementation_is_limited_to_approved_fixture_cases(self) -> None:
         self.assertTrue((REPO_ROOT / "src" / "peoples_ledger" / "promotion_request_evaluator.py").exists())
         self.assertFalse((REPO_ROOT / "src" / "peoples_ledger" / "candidate_promotion_evaluator.py").exists())
 

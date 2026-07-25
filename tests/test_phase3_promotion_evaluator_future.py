@@ -26,11 +26,16 @@ class Phase3PromotionEvaluatorFutureTests(unittest.TestCase):
         self.assertFalse(result["public_report_changed"])
         self.assertFalse(result["live_provider_called"])
 
-    @unittest.skip("Future implementation intentionally blocked; source fixture must fail source before later gates.")
     def test_future_source_hash_mismatch_fails_source_first(self) -> None:
         result = _future_evaluate("phase3_eval_example_source_hash_mismatch")
         self.assertEqual(result["first_failing_gate"], "source")
         self.assertEqual(result["blockers"][0]["code"], "source.snapshot_hash_mismatch")
+        self.assertIn("promotion_disabled.phase3_hard_stop", {blocker["code"] for blocker in result["blockers"]})
+        self.assertEqual(result["status"], "blocked")
+        self.assertFalse(result["mutation_performed"])
+        self.assertFalse(result["ledger_appended"])
+        self.assertFalse(result["public_report_changed"])
+        self.assertFalse(result["live_provider_called"])
 
     @unittest.skip("Future implementation intentionally blocked; unapproved prompt must fail extraction_prompt.")
     def test_future_unapproved_prompt_fails_extraction_prompt_first(self) -> None:
