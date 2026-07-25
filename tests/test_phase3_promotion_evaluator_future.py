@@ -48,12 +48,17 @@ class Phase3PromotionEvaluatorFutureTests(unittest.TestCase):
         self.assertFalse(result["public_report_changed"])
         self.assertFalse(result["live_provider_called"])
 
-    @unittest.skip("Future implementation intentionally blocked; household-data marker must fail privacy first.")
     def test_future_household_data_marker_fails_privacy_first(self) -> None:
         result = _future_evaluate("phase3_eval_example_privacy_marker")
         self.assertEqual(result["first_failing_gate"], "privacy")
         self.assertEqual(result["blockers"][0]["code"], "privacy.household_financial_data_detected")
+        self.assertIn("promotion_disabled.phase3_hard_stop", {blocker["code"] for blocker in result["blockers"]})
+        self.assertEqual(result["status"], "blocked")
         self.assertTrue(result["household_financial_data_detected"])
+        self.assertFalse(result["mutation_performed"])
+        self.assertFalse(result["ledger_appended"])
+        self.assertFalse(result["public_report_changed"])
+        self.assertFalse(result["live_provider_called"])
 
     @unittest.skip("Future implementation intentionally blocked; blocking review findings must fail human_review.")
     def test_future_blocking_review_fails_human_review_first(self) -> None:
