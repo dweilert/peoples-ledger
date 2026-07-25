@@ -81,13 +81,13 @@ The same promotion audit cross-check is exposed through the read-only `promotion
 
 Phase 2 is complete for the bounded POC. The closure checklist records the exit criteria, remaining intentional blockers, and Phase 3 entry criteria without starting Phase 3 work.
 
-Phase 3 implementation has started with approved schema, source, extraction-prompt, privacy, human-review, and ledger disabled-by-default promotion request evaluator slices. No candidate promotion execution is enabled.
+Phase 3 implementation has started with approved schema, source, extraction-prompt, privacy, human-review, ledger, and public-report disabled-by-default promotion request evaluator slices. No candidate promotion execution is enabled.
 
 The Phase 3 promotion request evaluator contract now defines the future read-only fixture inputs, deterministic gate order, result shape, blocker codes, privacy precedence, and mutation prohibitions while keeping the evaluator unimplemented.
 
 Phase 3 evaluator contract examples live at `data/fixtures/phase3/promotion_evaluator_contract_examples.json`. They cover each first-failing gate as fixture-only expected outputs and still do not promote candidates or alter public reports.
 
-Skipped future evaluator tests now name the required behavior for later fixture cases while schema, source, extraction-prompt, privacy, human-review, and ledger evaluator slices exist.
+Skipped future evaluator tests now name the required behavior for later fixture cases while schema, source, extraction-prompt, privacy, human-review, ledger, and public-report evaluator slices exist.
 
 The Phase 3 implementation-entry checklist at `docs/phase-3-implementation-entry-checklist.md` defines what must be true before any evaluator code can be started, including owner approval, test-first sequencing, read-only fixture scope, and privacy gates.
 
