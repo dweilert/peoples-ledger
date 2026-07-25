@@ -22,7 +22,7 @@ Future entry point, if implementation is later approved:
 evaluate_promotion_request(request_id: str, fixture_root: Path | None = None) -> PromotionEvaluationResult
 ```
 
-Approved Phase 3 implementation slices may create this module and entry point for the schema, source, extraction-prompt, privacy, human-review, ledger, and public-report fixture cases only. Later gates remain skipped until their own approved implementation slices.
+Approved Phase 3 implementation slices may create this module and entry point for the schema, source, extraction-prompt, privacy, human-review, ledger, public-report, and risk fixture cases only. The disabled hard-stop remains active until its own approved implementation slice.
 
 ## Required Inputs
 
@@ -154,14 +154,14 @@ These fixtures must remain local and candidate-only.
 Before evaluator code exists, executable documentation tests must assert:
 
 - this contract exists
-- the interface is limited to approved schema, source, extraction-prompt, privacy, human-review, ledger, and public-report implementation slices
+- the interface is limited to approved schema, source, extraction-prompt, privacy, human-review, ledger, public-report, and risk implementation slices
 - required input fixture names are present
 - result and blocker shapes are documented
 - stable blocker codes are documented
 - privacy failure precedence is documented
 - all mutation and egress outputs are forbidden
 - gate order matches the Phase 3 boundary
-- implementation module remains limited to approved schema, source, extraction-prompt, privacy, human-review, ledger, and public-report fixture cases
+- implementation module remains limited to approved schema, source, extraction-prompt, privacy, human-review, ledger, public-report, and risk fixture cases
 
 Fixture-only examples are defined in `data/fixtures/phase3/promotion_evaluator_contract_examples.json`. They describe the expected first failing gate, primary blocker code, and no-mutation flags for each planned gate without creating an evaluator implementation.
 
@@ -175,7 +175,7 @@ This planning slice is complete when:
 - README and handoff point to it
 - executable documentation tests cover the contract
 - Phase 2 and Phase 3 boundary tests still pass
-- no promotion request evaluator implementation beyond approved schema, source, extraction-prompt, privacy, human-review, ledger, and public-report fixture cases exists
+- no promotion request evaluator implementation beyond approved schema, source, extraction-prompt, privacy, human-review, ledger, public-report, and risk fixture cases exists
 - no candidate is promoted
 - no public report contains candidate content
 - no live provider path is enabled

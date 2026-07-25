@@ -16,6 +16,7 @@ IMPLEMENTED_EXAMPLE_IDS = {
     "phase3_eval_example_human_review_blocked",
     "phase3_eval_example_ledger_stub_missing",
     "phase3_eval_example_public_report_leak",
+    "phase3_eval_example_unresolved_risk",
 }
 
 
@@ -92,6 +93,8 @@ def _message_for_code(code: str) -> str:
         return "Promotion decision ledger stub is missing for the candidate request."
     if code == "public_report.candidate_leakage_detected":
         return "Candidate leak marker is present in the public-report check fixture."
+    if code == "risk.unresolved_review_trigger":
+        return "Risk review fixture still contains an unresolved review trigger."
     if code == "promotion_disabled.phase3_hard_stop":
         return "Promotion remains disabled for the Phase 3 evaluator."
     return "Phase 3 evaluator gate is not implemented in this slice."
@@ -112,6 +115,8 @@ def _remediation_for_code(code: str) -> str:
         return "Add a local blocked promotion decision ledger stub before report or risk gates are evaluated."
     if code == "public_report.candidate_leakage_detected":
         return "Remove candidate content from public report checks before risk gates are evaluated."
+    if code == "risk.unresolved_review_trigger":
+        return "Resolve risk review triggers before the disabled hard stop could be the first failing gate."
     if code == "promotion_disabled.phase3_hard_stop":
         return "Keep promotion disabled until a later approved scope removes this hard stop."
     return "Leave this gate skipped until its implementation slice is approved."
