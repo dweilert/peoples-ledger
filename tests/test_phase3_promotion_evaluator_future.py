@@ -104,11 +104,11 @@ class Phase3PromotionEvaluatorFutureTests(unittest.TestCase):
         self.assertFalse(result["public_report_changed"])
         self.assertFalse(result["live_provider_called"])
 
-    @unittest.skip("Future implementation intentionally blocked; otherwise clean request must still fail promotion_disabled.")
     def test_future_clean_request_still_fails_promotion_disabled(self) -> None:
         result = _future_evaluate("phase3_eval_example_disabled_hard_stop")
         self.assertEqual(result["first_failing_gate"], "promotion_disabled")
         self.assertEqual(result["blockers"][0]["code"], "promotion_disabled.phase3_hard_stop")
+        self.assertEqual(result["status"], "blocked")
         self.assertFalse(result["mutation_performed"])
         self.assertFalse(result["ledger_appended"])
         self.assertFalse(result["public_report_changed"])
