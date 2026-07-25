@@ -66,6 +66,8 @@ Candidate audit bundles are local artifacts exported with `make export-candidate
 
 The backend also exposes the same read-only payload at `/candidates/status` for local inspection without ledger writes or public-report changes.
 
+The backend exposes the Phase 3 evaluator status at `/candidates/promotion-evaluator`; it is read-only, fixture-only, blocked, and does not append ledger entries or change public reports.
+
 The frontend includes a small Phase 2 candidate-status panel that displays draft candidates and blockers from `/candidates/status` without collecting or transmitting household financial data.
 
 The candidate-to-exemplar promotion contract is documented and covered by executable tests. It defines future schema, source, prompt, privacy, review, ledger, report, and risk gates while keeping promotion disabled in the current POC.

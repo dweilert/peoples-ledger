@@ -117,6 +117,37 @@ class BackendIntegrationTests(unittest.TestCase):
         self.assertTrue(summary["source_refs_match"])
         self.assertFalse(summary["decision_stub_in_live_ledger"])
 
+    def test_promotion_evaluator_endpoint_is_read_only_and_blocked(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            ledger_path = Path(tmpdir) / "ledger.jsonl"
+
+            def ledger_factory() -> DecisionLedger:
+                return DecisionLedger(ledger_path)
+
+            with patch("peoples_ledger.backend.server.DecisionLedger", side_effect=ledger_factory):
+                server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+                base_url = f"http://127.0.0.1:{server.server_port}"
+                thread = threading.Thread(target=server.serve_forever, daemon=True)
+                thread.start()
+                try:
+                    with urllib.request.urlopen(f"{base_url}/candidates/promotion-evaluator", timeout=3) as response:
+                        payload = json.loads(response.read().decode("utf-8"))
+                finally:
+                    server.shutdown()
+                    thread.join(timeout=2)
+                    server.server_close()
+
+            entries = DecisionLedger(ledger_path).read_all()
+
+        self.assertEqual(entries, [])
+        self.assertEqual(payload["status"], "blocked")
+        self.assertEqual(payload["evaluation_count"], 9)
+        self.assertFalse(payload["promotion_execution_allowed"])
+        self.assertFalse(payload["ledger_appended"])
+        self.assertFalse(payload["public_report_changed"])
+        self.assertFalse(payload["live_provider_called"])
+        self.assertIn("promotion_disabled", payload["first_failing_gates"])
+
     def test_html_report_endpoint(self) -> None:
         with urllib.request.urlopen(f"{self.base_url}/reports/tcja-2017-representative-provisions.html", timeout=3) as response:
             body = response.read().decode("utf-8")
