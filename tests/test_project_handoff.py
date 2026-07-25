@@ -32,6 +32,7 @@ class ProjectHandoffTests(unittest.TestCase):
             "Continue work on The People's Ledger repository",
             "Do not implement promotion",
             "docs/phase-3-boundary.md",
+            "phase-3-evaluator-slice-completion-checklist.md",
             "promotion-evaluator-status",
             "/candidates/promotion-evaluator",
             "read-only Phase 3 evaluator panel",

@@ -36,6 +36,7 @@ class Phase3PlanningClosureTests(unittest.TestCase):
             "tests/test_phase3_promotion_evaluator_future.py",
             "docs/phase-3-implementation-entry-checklist.md",
             "docs/phase-3-evaluator-risk-review.md",
+            "docs/phase-3-evaluator-slice-completion-checklist.md",
         ):
             with self.subTest(path=path):
                 self.assertIn(path, body)
@@ -71,7 +72,7 @@ class Phase3PlanningClosureTests(unittest.TestCase):
             "make phase2-acceptance",
             "make test",
             "make test-browser",
-            "264 tests with 3 intentional future-promotion skips",
+            "269 tests with 3 intentional future-promotion skips",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, body)
