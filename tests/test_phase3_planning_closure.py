@@ -72,7 +72,7 @@ class Phase3PlanningClosureTests(unittest.TestCase):
             "make phase2-acceptance",
             "make test",
             "make test-browser",
-            "269 tests with 3 intentional future-promotion skips",
+            "271 tests with 3 intentional future-promotion skips",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, body)

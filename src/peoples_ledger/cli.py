@@ -27,7 +27,7 @@ from .challenge_agents import record_challenge_comparison, record_challenge_revi
 from .corrections import record_correction
 from .phase1_acceptance import run_phase1_acceptance
 from .phase2_acceptance import run_phase2_acceptance
-from .promotion_request_evaluator import build_promotion_evaluator_status
+from .promotion_request_evaluator import build_promotion_evaluator_status, export_promotion_evaluator_status_bundle
 
 
 def main() -> int:
@@ -40,6 +40,11 @@ def main() -> int:
     subcommands.add_parser("candidate-status", help="print Phase 2 draft candidate status and promotion blockers")
     subcommands.add_parser("promotion-audit-status", help="print Phase 2 promotion audit cross-check status")
     subcommands.add_parser("promotion-evaluator-status", help="print Phase 3 read-only promotion evaluator fixture status")
+    evaluator_export_parser = subcommands.add_parser(
+        "export-promotion-evaluator-status",
+        help="write local Phase 3 evaluator status diagnostic bundle",
+    )
+    evaluator_export_parser.add_argument("--output-dir", default=None, help="directory for generated evaluator status artifacts")
     subcommands.add_parser("report", help="build the public POC report JSON")
     subcommands.add_parser("report-html", help="build the public POC report HTML")
     export_parser = subcommands.add_parser("export-report", help="write report JSON, HTML, and artifact manifest")
@@ -121,6 +126,16 @@ def main() -> int:
 
     if args.command == "promotion-evaluator-status":
         print(json.dumps(build_promotion_evaluator_status(), sort_keys=True))
+        return 0
+
+    if args.command == "export-promotion-evaluator-status":
+        output_dir = Path(args.output_dir) if args.output_dir else None
+        manifest = (
+            export_promotion_evaluator_status_bundle(output_dir)
+            if output_dir
+            else export_promotion_evaluator_status_bundle()
+        )
+        print(json.dumps(manifest, sort_keys=True))
         return 0
 
     if args.command == "report":
