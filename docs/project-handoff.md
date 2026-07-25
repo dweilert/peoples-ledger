@@ -99,6 +99,7 @@ Current first Phase 3 planning slice:
 - `promotion-evaluator-status` exposes the evaluator status as read-only CLI JSON
 - `/candidates/promotion-evaluator` exposes the evaluator status as read-only backend JSON
 - the frontend displays `/candidates/promotion-evaluator` as a read-only Phase 3 evaluator panel with no promotion action
+- `tests/test_browser_privacy_hardening.py` verifies the frontend evaluator panel renders blocked status, first failing gates, and no-mutation flags
 - `data/fixtures/phase3/promotion_evaluator_status_contract.json` snapshots the evaluator status contract with blocked, fixture-only, no-mutation semantics
 - `schemas/phase3_promotion_evaluator_status.schema.json` validates the evaluator status contract and rejects promotion-enabled mutation flags
 - `tests/test_backend_integration.py` validates the `/candidates/promotion-evaluator` response against the status schema contract view
@@ -145,12 +146,12 @@ Current status:
   - make phase2-acceptance
   - make test
   - make test-browser
-- The full unit suite last passed with 261 tests and 3 intentionally skipped future-promotion contract tests.
+- The full unit suite last passed with 262 tests and 3 intentionally skipped future-promotion contract tests.
 
 Continue with disabled-by-default Phase 3 evaluator implementation only. Keep promotion execution disabled.
 
 Recommended next unit:
-Add a focused frontend rendering regression for the Phase 3 evaluator panel so blocked status, no-mutation flags, and first failing gates remain visible. Keep promotion disabled. Do not implement promotion.
+Add an assurance/checklist gate for the Phase 3 evaluator status contract so `make assure` catches schema or no-mutation drift. Keep promotion disabled. Do not implement promotion.
 
 Keep these out of scope:
 - candidate promotion execution
