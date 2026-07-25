@@ -8,8 +8,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from peoples_ledger.paths import DECISION_LEDGER_PATH
+from peoples_ledger.paths import DECISION_LEDGER_PATH, SCHEMA_DIR
 from peoples_ledger.promotion_request_evaluator import build_promotion_evaluator_status
+from peoples_ledger.schema_validator import SchemaRegistry, SchemaValidationError
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -110,6 +111,15 @@ class Phase3PromotionEvaluatorStatusTests(unittest.TestCase):
         expected = json.loads(STATUS_CONTRACT_PATH.read_text(encoding="utf-8"))
 
         self.assertEqual(_status_contract_view(build_promotion_evaluator_status()), expected)
+
+    def test_evaluator_status_contract_snapshot_validates_against_schema(self) -> None:
+        registry = SchemaRegistry(SCHEMA_DIR)
+        expected = json.loads(STATUS_CONTRACT_PATH.read_text(encoding="utf-8"))
+
+        registry.validate("phase3_promotion_evaluator_status", expected)
+        expected["mutation_flags"]["promotion_execution_allowed"] = True
+        with self.assertRaises(SchemaValidationError):
+            registry.validate("phase3_promotion_evaluator_status", expected)
 
 
 if __name__ == "__main__":

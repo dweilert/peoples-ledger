@@ -8,6 +8,7 @@ This checklist closes the documentation-only Phase 3 planning pass for the disab
 - `docs/phase-3-promotion-evaluator-contract.md`
 - `data/fixtures/phase3/promotion_evaluator_contract_examples.json`
 - `data/fixtures/phase3/promotion_evaluator_status_contract.json`
+- `schemas/phase3_promotion_evaluator_status.schema.json`
 - `tests/test_phase3_promotion_evaluator_future.py`
 - `docs/phase-3-implementation-entry-checklist.md`
 - `docs/phase-3-evaluator-risk-review.md`
@@ -36,7 +37,7 @@ make test
 make test-browser
 ```
 
-The full unit suite currently includes 259 tests with 3 intentional future-promotion skips.
+The full unit suite currently includes 260 tests with 3 intentional future-promotion skips.
 
 ## Still Blocked
 

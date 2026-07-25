@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phase3_promotion_evaluator_status.schema.json",
+  "title": "Phase 3 Promotion Evaluator Status",
+  "type": "object",
+  "required": [
+    "contract_ref",
+    "evaluation_count",
+    "evaluations",
+    "first_failing_gates",
+    "fixture_id",
+    "gate_order",
+    "household_financial_data_storage_allowed",
+    "id",
+    "mutation_flags",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "contract_ref": { "type": "string", "enum": ["docs/phase-3-promotion-evaluator-contract.md"] },
+    "evaluation_count": { "type": "integer", "enum": [9] },
+    "evaluations": {
+      "type": "array",
+      "minItems": 9,
+      "items": {
+        "type": "object",
+        "required": [
+          "blocker_codes",
+          "candidate_analysis_unit_id",
+          "first_failing_gate",
+          "household_financial_data_detected",
+          "mutation_flags",
+          "request_id",
+          "status"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "blocker_codes": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": [
+                "schema.invalid_request",
+                "source.snapshot_hash_mismatch",
+                "extraction_prompt.template_unapproved",
+                "privacy.household_financial_data_detected",
+                "human_review.blocking_findings_present",
+                "ledger.decision_stub_missing",
+                "public_report.candidate_leakage_detected",
+                "risk.unresolved_review_trigger",
+                "promotion_disabled.phase3_hard_stop"
+              ]
+            }
+          },
+          "candidate_analysis_unit_id": {
+            "anyOf": [
+              { "type": "null" },
+              { "type": "string", "enum": ["candidate_ira_2022_energy_tax_provisions"] }
+            ]
+          },
+          "first_failing_gate": {
+            "type": "string",
+            "enum": [
+              "schema",
+              "source",
+              "extraction_prompt",
+              "privacy",
+              "human_review",
+              "ledger",
+              "public_report",
+              "risk",
+              "promotion_disabled"
+            ]
+          },
+          "household_financial_data_detected": { "type": "boolean" },
+          "mutation_flags": {
+            "type": "object",
+            "required": [
+              "ledger_appended",
+              "live_provider_called",
+              "mutation_performed",
+              "public_report_changed"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "ledger_appended": { "type": "boolean", "enum": [false] },
+              "live_provider_called": { "type": "boolean", "enum": [false] },
+              "mutation_performed": { "type": "boolean", "enum": [false] },
+              "public_report_changed": { "type": "boolean", "enum": [false] }
+            }
+          },
+          "request_id": { "type": "string", "minLength": 1 },
+          "status": { "type": "string", "enum": ["blocked"] }
+        }
+      }
+    },
+    "first_failing_gates": {
+      "type": "array",
+      "minItems": 9,
+      "items": {
+        "type": "string",
+        "enum": [
+          "schema",
+          "source",
+          "extraction_prompt",
+          "privacy",
+          "human_review",
+          "ledger",
+          "public_report",
+          "risk",
+          "promotion_disabled"
+        ]
+      }
+    },
+    "fixture_id": { "type": "string", "enum": ["phase3_promotion_evaluator_contract_examples_v1"] },
+    "gate_order": {
+      "type": "array",
+      "minItems": 9,
+      "items": {
+        "type": "string",
+        "enum": [
+          "schema",
+          "source",
+          "extraction_prompt",
+          "privacy",
+          "human_review",
+          "ledger",
+          "public_report",
+          "risk",
+          "promotion_disabled"
+        ]
+      }
+    },
+    "household_financial_data_storage_allowed": { "type": "boolean", "enum": [false] },
+    "id": { "type": "string", "enum": ["phase3_promotion_evaluator_status_v1"] },
+    "mutation_flags": {
+      "type": "object",
+      "required": [
+        "ledger_appended",
+        "live_provider_called",
+        "promotion_execution_allowed",
+        "public_report_changed"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "ledger_appended": { "type": "boolean", "enum": [false] },
+        "live_provider_called": { "type": "boolean", "enum": [false] },
+        "promotion_execution_allowed": { "type": "boolean", "enum": [false] },
+        "public_report_changed": { "type": "boolean", "enum": [false] }
+      }
+    },
+    "status": { "type": "string", "enum": ["blocked"] }
+  }
+}
