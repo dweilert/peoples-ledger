@@ -60,11 +60,16 @@ class Phase3PromotionEvaluatorFutureTests(unittest.TestCase):
         self.assertFalse(result["public_report_changed"])
         self.assertFalse(result["live_provider_called"])
 
-    @unittest.skip("Future implementation intentionally blocked; blocking review findings must fail human_review.")
     def test_future_blocking_review_fails_human_review_first(self) -> None:
         result = _future_evaluate("phase3_eval_example_human_review_blocked")
         self.assertEqual(result["first_failing_gate"], "human_review")
         self.assertEqual(result["blockers"][0]["code"], "human_review.blocking_findings_present")
+        self.assertIn("promotion_disabled.phase3_hard_stop", {blocker["code"] for blocker in result["blockers"]})
+        self.assertEqual(result["status"], "blocked")
+        self.assertFalse(result["mutation_performed"])
+        self.assertFalse(result["ledger_appended"])
+        self.assertFalse(result["public_report_changed"])
+        self.assertFalse(result["live_provider_called"])
 
     @unittest.skip("Future implementation intentionally blocked; missing decision stub must fail ledger.")
     def test_future_missing_decision_stub_fails_ledger_first(self) -> None:
