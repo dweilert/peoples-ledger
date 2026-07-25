@@ -18,7 +18,7 @@ class ProjectHandoffTests(unittest.TestCase):
             "137f6a2 Add Phase 2 closure checklist (#16)",
             "Ran 197 tests",
             "OK (skipped=3)",
-            "Phase 3 planning only",
+            "Phase 3 planning has started",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, body)
@@ -30,6 +30,7 @@ class ProjectHandoffTests(unittest.TestCase):
         for phrase in (
             "Continue work on The People's Ledger repository",
             "Do not implement promotion",
+            "docs/phase-3-boundary.md",
             "candidate promotion execution",
             "household financial data transmission or storage",
             "Keep going autonomously unless user input is genuinely required",
