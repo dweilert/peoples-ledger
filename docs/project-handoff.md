@@ -91,8 +91,10 @@ Current first Phase 3 planning slice:
 
 - `docs/phase-3-boundary.md` defines one disabled-by-default promotion request evaluator plan
 - `docs/phase-3-promotion-evaluator-contract.md` defines the future evaluator contract without implementation
+- `data/fixtures/phase3/promotion_evaluator_contract_examples.json` defines fixture-only expected failures for each evaluator gate
 - `tests/test_phase3_boundary.py` provides executable planning/documentation tests
 - `tests/test_phase3_promotion_evaluator_contract.py` covers the future evaluator contract
+- `tests/test_phase3_promotion_evaluator_fixtures.py` validates the fixture-only examples
 - keep promotion, public candidate reporting, live providers, broad ingestion, microsimulation, live monitoring, state modeling, and household financial data handling out of scope
 
 ## Continuation Prompt
@@ -109,6 +111,7 @@ Start by reading:
 - docs/phase-2-promotion-contract.md
 - docs/phase-3-boundary.md
 - docs/phase-3-promotion-evaluator-contract.md
+- data/fixtures/phase3/promotion_evaluator_contract_examples.json
 - docs/project-handoff.md
 
 Current status:
@@ -126,7 +129,7 @@ Current status:
 Continue with Phase 3 planning only unless I explicitly approve implementation.
 
 Recommended next unit:
-Add fixture-only Phase 3 evaluator contract examples for each gate failure. These should be documentation fixtures or skipped future tests only. Do not implement promotion.
+Add skipped future implementation tests for the Phase 3 evaluator using the fixture examples. Keep them skipped until implementation is explicitly approved. Do not implement promotion.
 
 Keep these out of scope:
 - candidate promotion execution

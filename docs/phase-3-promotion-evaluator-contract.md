@@ -163,6 +163,8 @@ Before evaluator code exists, executable documentation tests must assert:
 - gate order matches the Phase 3 boundary
 - implementation module remains absent
 
+Fixture-only examples are defined in `data/fixtures/phase3/promotion_evaluator_contract_examples.json`. They describe the expected first failing gate, primary blocker code, and no-mutation flags for each planned gate without creating an evaluator implementation.
+
 When implementation is later approved, tests must be added before code for each fixture case listed above.
 
 ## Exit Criteria For This Contract Slice

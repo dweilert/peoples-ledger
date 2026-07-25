@@ -85,6 +85,8 @@ Phase 3 planning has started with a disabled-by-default promotion request evalua
 
 The Phase 3 promotion request evaluator contract now defines the future read-only fixture inputs, deterministic gate order, result shape, blocker codes, privacy precedence, and mutation prohibitions while keeping the evaluator unimplemented.
 
+Phase 3 evaluator contract examples live at `data/fixtures/phase3/promotion_evaluator_contract_examples.json`. They cover each first-failing gate as fixture-only expected outputs and still do not promote candidates or alter public reports.
+
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
 
 The first report assembly slice emits a public JSON report with source traces, decision trace, model scenarios, perspective profiles, and assurance status.
