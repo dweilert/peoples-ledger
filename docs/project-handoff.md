@@ -94,12 +94,14 @@ Current first Phase 3 planning slice:
 - `data/fixtures/phase3/promotion_evaluator_contract_examples.json` defines fixture-only expected failures for each evaluator gate
 - `docs/phase-3-implementation-entry-checklist.md` defines the conditions required before evaluator implementation can start
 - `docs/phase-3-evaluator-risk-review.md` records documentation-only risks and stop conditions for the evaluator boundary
+- `docs/phase-3-planning-closure-checklist.md` records the planning artifacts, validation standard, blocked scope, and implementation decision point
 - `tests/test_phase3_boundary.py` provides executable planning/documentation tests
 - `tests/test_phase3_promotion_evaluator_contract.py` covers the future evaluator contract
 - `tests/test_phase3_promotion_evaluator_fixtures.py` validates the fixture-only examples
 - `tests/test_phase3_promotion_evaluator_future.py` contains skipped future implementation tests for each fixture case
 - `tests/test_phase3_implementation_entry_checklist.py` validates the implementation-entry checklist
 - `tests/test_phase3_evaluator_risk_review.py` validates the risk review
+- `tests/test_phase3_planning_closure.py` validates the planning closure checklist
 - keep promotion, public candidate reporting, live providers, broad ingestion, microsimulation, live monitoring, state modeling, and household financial data handling out of scope
 
 ## Continuation Prompt
@@ -118,6 +120,7 @@ Start by reading:
 - docs/phase-3-promotion-evaluator-contract.md
 - docs/phase-3-implementation-entry-checklist.md
 - docs/phase-3-evaluator-risk-review.md
+- docs/phase-3-planning-closure-checklist.md
 - data/fixtures/phase3/promotion_evaluator_contract_examples.json
 - docs/project-handoff.md
 
@@ -131,12 +134,12 @@ Current status:
   - make phase2-acceptance
   - make test
   - make test-browser
-- The full unit suite last passed with 246 tests and 12 intentionally skipped future-promotion contract tests.
+- The full unit suite last passed with 253 tests and 12 intentionally skipped future-promotion contract tests.
 
 Continue with Phase 3 planning only unless I explicitly approve implementation.
 
 Recommended next unit:
-Pause before implementation unless the project owner explicitly approves evaluator implementation. If continuing documentation-only, add a concise Phase 3 planning closure checklist. Do not implement promotion.
+Pause before implementation unless the project owner explicitly approves evaluator implementation. The next implementation unit should unskip one schema-first evaluator test and keep promotion disabled. Do not implement promotion without that approval.
 
 Keep these out of scope:
 - candidate promotion execution
