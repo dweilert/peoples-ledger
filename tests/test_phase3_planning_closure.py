@@ -31,6 +31,7 @@ class Phase3PlanningClosureTests(unittest.TestCase):
             "docs/phase-3-boundary.md",
             "docs/phase-3-promotion-evaluator-contract.md",
             "data/fixtures/phase3/promotion_evaluator_contract_examples.json",
+            "data/fixtures/phase3/promotion_evaluator_status_contract.json",
             "tests/test_phase3_promotion_evaluator_future.py",
             "docs/phase-3-implementation-entry-checklist.md",
             "docs/phase-3-evaluator-risk-review.md",
@@ -47,6 +48,7 @@ class Phase3PlanningClosureTests(unittest.TestCase):
             "tests/test_phase3_promotion_evaluator_contract.py",
             "tests/test_phase3_promotion_evaluator_fixtures.py",
             "tests/test_phase3_promotion_evaluator_future.py",
+            "tests/test_phase3_promotion_evaluator_status.py",
             "tests/test_phase3_implementation_entry_checklist.py",
             "tests/test_phase3_evaluator_risk_review.py",
             "tests/test_project_handoff.py",
@@ -65,7 +67,7 @@ class Phase3PlanningClosureTests(unittest.TestCase):
             "make phase2-acceptance",
             "make test",
             "make test-browser",
-            "258 tests with 3 intentional future-promotion skips",
+            "259 tests with 3 intentional future-promotion skips",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, body)
