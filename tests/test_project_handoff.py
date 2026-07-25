@@ -33,6 +33,7 @@ class ProjectHandoffTests(unittest.TestCase):
             "Do not implement promotion",
             "docs/phase-3-boundary.md",
             "promotion-evaluator-status",
+            "/candidates/promotion-evaluator",
             "candidate promotion execution",
             "household financial data transmission or storage",
             "Keep going autonomously unless user input is genuinely required",
