@@ -9,48 +9,16 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from peoples_ledger.paths import DECISION_LEDGER_PATH, SCHEMA_DIR
-from peoples_ledger.promotion_request_evaluator import build_promotion_evaluator_status
+from peoples_ledger.promotion_request_evaluator import (
+    build_promotion_evaluator_status,
+    promotion_evaluator_status_contract_view,
+    validate_promotion_evaluator_status_contract,
+)
 from peoples_ledger.schema_validator import SchemaRegistry, SchemaValidationError
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 STATUS_CONTRACT_PATH = REPO_ROOT / "data" / "fixtures" / "phase3" / "promotion_evaluator_status_contract.json"
-
-
-def _status_contract_view(status: dict) -> dict:
-    return {
-        "contract_ref": status["contract_ref"],
-        "evaluation_count": status["evaluation_count"],
-        "evaluations": [
-            {
-                "blocker_codes": [blocker["code"] for blocker in evaluation["blockers"]],
-                "candidate_analysis_unit_id": evaluation["candidate_analysis_unit_id"],
-                "first_failing_gate": evaluation["first_failing_gate"],
-                "household_financial_data_detected": evaluation["household_financial_data_detected"],
-                "mutation_flags": {
-                    "ledger_appended": evaluation["ledger_appended"],
-                    "live_provider_called": evaluation["live_provider_called"],
-                    "mutation_performed": evaluation["mutation_performed"],
-                    "public_report_changed": evaluation["public_report_changed"],
-                },
-                "request_id": evaluation["request_id"],
-                "status": evaluation["status"],
-            }
-            for evaluation in status["evaluations"]
-        ],
-        "first_failing_gates": status["first_failing_gates"],
-        "fixture_id": status["fixture_id"],
-        "gate_order": status["gate_order"],
-        "household_financial_data_storage_allowed": status["household_financial_data_storage_allowed"],
-        "id": status["id"],
-        "mutation_flags": {
-            "ledger_appended": status["ledger_appended"],
-            "live_provider_called": status["live_provider_called"],
-            "promotion_execution_allowed": status["promotion_execution_allowed"],
-            "public_report_changed": status["public_report_changed"],
-        },
-        "status": status["status"],
-    }
 
 
 class Phase3PromotionEvaluatorStatusTests(unittest.TestCase):
@@ -110,7 +78,7 @@ class Phase3PromotionEvaluatorStatusTests(unittest.TestCase):
     def test_evaluator_status_matches_checked_contract_snapshot(self) -> None:
         expected = json.loads(STATUS_CONTRACT_PATH.read_text(encoding="utf-8"))
 
-        self.assertEqual(_status_contract_view(build_promotion_evaluator_status()), expected)
+        self.assertEqual(promotion_evaluator_status_contract_view(build_promotion_evaluator_status()), expected)
 
     def test_evaluator_status_contract_snapshot_validates_against_schema(self) -> None:
         registry = SchemaRegistry(SCHEMA_DIR)
@@ -120,6 +88,12 @@ class Phase3PromotionEvaluatorStatusTests(unittest.TestCase):
         expected["mutation_flags"]["promotion_execution_allowed"] = True
         with self.assertRaises(SchemaValidationError):
             registry.validate("phase3_promotion_evaluator_status", expected)
+
+    def test_evaluator_status_contract_validator_returns_blocked_snapshot(self) -> None:
+        snapshot = validate_promotion_evaluator_status_contract()
+
+        self.assertEqual(snapshot["status"], "blocked")
+        self.assertFalse(snapshot["mutation_flags"]["promotion_execution_allowed"])
 
 
 if __name__ == "__main__":

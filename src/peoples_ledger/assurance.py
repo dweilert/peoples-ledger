@@ -17,6 +17,7 @@ from .candidate_review import load_candidate_review_records, validate_candidate_
 from .decision_ledger import DecisionLedger
 from .paths import TCJA_ANALYSIS_UNIT_PATH
 from .privacy import assert_no_household_financial_data
+from .promotion_request_evaluator import validate_promotion_evaluator_status_contract
 from .prompt_templates import validate_prompt_template_registry
 from .source_acquisition import validate_source_acquisition_manifest
 from .source_ingestion import validate_source_ingestion_fixtures
@@ -62,6 +63,7 @@ def run_assurance_gate() -> AssuranceReport:
         _run_check("candidate_review_records", validate_candidate_review_records),
         _run_check("candidate_review_ledger_stub", lambda: validate_candidate_review_ledger_stub(load_candidate_review_records())),
         _run_check("candidate_audit_bundle", validate_candidate_audit_bundle),
+        _run_check("phase3_promotion_evaluator_status_contract", validate_promotion_evaluator_status_contract),
         _run_check("prompt_template_registry", validate_prompt_template_registry),
         _run_check("decision_ledger_integrity", lambda: DecisionLedger().read_all()),
         _run_check("privacy_payload_guard", lambda: assert_no_household_financial_data(_public_payload_probe())),

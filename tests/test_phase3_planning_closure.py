@@ -52,6 +52,7 @@ class Phase3PlanningClosureTests(unittest.TestCase):
             "tests/test_phase3_promotion_evaluator_status.py",
             "tests/test_backend_integration.py",
             "tests/test_browser_privacy_hardening.py",
+            "tests/test_assurance.py",
             "tests/test_phase3_implementation_entry_checklist.py",
             "tests/test_phase3_evaluator_risk_review.py",
             "tests/test_project_handoff.py",
@@ -70,7 +71,7 @@ class Phase3PlanningClosureTests(unittest.TestCase):
             "make phase2-acceptance",
             "make test",
             "make test-browser",
-            "262 tests with 3 intentional future-promotion skips",
+            "264 tests with 3 intentional future-promotion skips",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, body)
