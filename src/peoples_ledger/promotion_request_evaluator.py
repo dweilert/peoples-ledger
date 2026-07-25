@@ -14,6 +14,7 @@ IMPLEMENTED_EXAMPLE_IDS = {
     "phase3_eval_example_prompt_unapproved",
     "phase3_eval_example_privacy_marker",
     "phase3_eval_example_human_review_blocked",
+    "phase3_eval_example_ledger_stub_missing",
 }
 
 
@@ -86,6 +87,8 @@ def _message_for_code(code: str) -> str:
         return "Synthetic household financial data marker blocks evaluator progression."
     if code == "human_review.blocking_findings_present":
         return "Candidate review fixture still contains blocking findings."
+    if code == "ledger.decision_stub_missing":
+        return "Promotion decision ledger stub is missing for the candidate request."
     if code == "promotion_disabled.phase3_hard_stop":
         return "Promotion remains disabled for the Phase 3 evaluator."
     return "Phase 3 evaluator gate is not implemented in this slice."
@@ -102,6 +105,8 @@ def _remediation_for_code(code: str) -> str:
         return "Remove household financial data markers before review, ledger, report, or risk gates are evaluated."
     if code == "human_review.blocking_findings_present":
         return "Resolve blocking human-review findings before ledger, report, or risk gates are evaluated."
+    if code == "ledger.decision_stub_missing":
+        return "Add a local blocked promotion decision ledger stub before report or risk gates are evaluated."
     if code == "promotion_disabled.phase3_hard_stop":
         return "Keep promotion disabled until a later approved scope removes this hard stop."
     return "Leave this gate skipped until its implementation slice is approved."

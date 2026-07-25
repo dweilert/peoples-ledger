@@ -42,7 +42,7 @@ Ran 197 tests
 OK (skipped=3)
 ```
 
-At the original Phase 2 handoff, the 3 skipped tests were intentional future-promotion contract tests. Current Phase 3 implementation has 7 skipped tests, all of which define behavior that must stay blocked until a future phase explicitly implements later promotion gates.
+At the original Phase 2 handoff, the 3 skipped tests were intentional future-promotion contract tests. Current Phase 3 implementation has 6 skipped tests, all of which define behavior that must stay blocked until a future phase explicitly implements later promotion gates.
 
 ## What Is Complete
 
@@ -85,7 +85,7 @@ At the original Phase 2 handoff, the 3 skipped tests were intentional future-pro
 
 ## Recommended Next Step
 
-Phase 3 implementation has started with the approved schema, source, extraction-prompt, privacy, and human-review evaluator slices. Continue only with disabled-by-default, read-only fixture evaluation. Do not implement real promotion.
+Phase 3 implementation has started with the approved schema, source, extraction-prompt, privacy, human-review, and ledger evaluator slices. Continue only with disabled-by-default, read-only fixture evaluation. Do not implement real promotion.
 
 Current first Phase 3 planning slice:
 
@@ -95,7 +95,7 @@ Current first Phase 3 planning slice:
 - `docs/phase-3-implementation-entry-checklist.md` defines the conditions required before evaluator implementation can start
 - `docs/phase-3-evaluator-risk-review.md` records documentation-only risks and stop conditions for the evaluator boundary
 - `docs/phase-3-planning-closure-checklist.md` records the planning artifacts, validation standard, blocked scope, and implementation decision point
-- `src/peoples_ledger/promotion_request_evaluator.py` implements the schema, source, extraction-prompt, privacy, and human-review fixture examples only
+- `src/peoples_ledger/promotion_request_evaluator.py` implements the schema, source, extraction-prompt, privacy, human-review, and ledger fixture examples only
 - `tests/test_phase3_boundary.py` provides executable planning/documentation tests
 - `tests/test_phase3_promotion_evaluator_contract.py` covers the future evaluator contract
 - `tests/test_phase3_promotion_evaluator_fixtures.py` validates the fixture-only examples
@@ -127,7 +127,7 @@ Start by reading:
 
 Current status:
 - Phase 2 is complete for the bounded POC and merged to main.
-- Phase 3 schema, source, extraction-prompt, privacy, and human-review evaluator implementation has started.
+- Phase 3 schema, source, extraction-prompt, privacy, human-review, and ledger evaluator implementation has started.
 - Latest known Phase 2 closure commit: 137f6a2 Add Phase 2 closure checklist (#16).
 - The last complete validation passed:
   - make validate
@@ -136,12 +136,12 @@ Current status:
   - make phase2-acceptance
   - make test
   - make test-browser
-- The full unit suite last passed with 253 tests and 7 intentionally skipped future-promotion contract tests.
+- The full unit suite last passed with 253 tests and 6 intentionally skipped future-promotion contract tests.
 
 Continue with disabled-by-default Phase 3 evaluator implementation only. Keep promotion execution disabled.
 
 Recommended next unit:
-Unskip one ledger evaluator test and implement only the smallest read-only fixture path needed for that ledger failure. Keep promotion disabled. Do not implement promotion.
+Unskip one public-report evaluator test and implement only the smallest read-only fixture path needed for that report-leak failure. Keep promotion disabled. Do not implement promotion.
 
 Keep these out of scope:
 - candidate promotion execution
