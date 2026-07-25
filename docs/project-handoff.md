@@ -92,10 +92,12 @@ Current first Phase 3 planning slice:
 - `docs/phase-3-boundary.md` defines one disabled-by-default promotion request evaluator plan
 - `docs/phase-3-promotion-evaluator-contract.md` defines the future evaluator contract without implementation
 - `data/fixtures/phase3/promotion_evaluator_contract_examples.json` defines fixture-only expected failures for each evaluator gate
+- `docs/phase-3-implementation-entry-checklist.md` defines the conditions required before evaluator implementation can start
 - `tests/test_phase3_boundary.py` provides executable planning/documentation tests
 - `tests/test_phase3_promotion_evaluator_contract.py` covers the future evaluator contract
 - `tests/test_phase3_promotion_evaluator_fixtures.py` validates the fixture-only examples
 - `tests/test_phase3_promotion_evaluator_future.py` contains skipped future implementation tests for each fixture case
+- `tests/test_phase3_implementation_entry_checklist.py` validates the implementation-entry checklist
 - keep promotion, public candidate reporting, live providers, broad ingestion, microsimulation, live monitoring, state modeling, and household financial data handling out of scope
 
 ## Continuation Prompt
@@ -112,6 +114,7 @@ Start by reading:
 - docs/phase-2-promotion-contract.md
 - docs/phase-3-boundary.md
 - docs/phase-3-promotion-evaluator-contract.md
+- docs/phase-3-implementation-entry-checklist.md
 - data/fixtures/phase3/promotion_evaluator_contract_examples.json
 - docs/project-handoff.md
 
@@ -125,12 +128,12 @@ Current status:
   - make phase2-acceptance
   - make test
   - make test-browser
-- The full unit suite last passed with 232 tests and 12 intentionally skipped future-promotion contract tests.
+- The full unit suite last passed with 240 tests and 12 intentionally skipped future-promotion contract tests.
 
 Continue with Phase 3 planning only unless I explicitly approve implementation.
 
 Recommended next unit:
-Add a Phase 3 planning checklist that defines implementation entry criteria for the evaluator. Keep it documentation/test-only. Do not implement promotion.
+Prepare the first implementation PR only if explicitly approved by the project owner. Without approval, continue with documentation-only risk review for the evaluator boundary. Do not implement promotion.
 
 Keep these out of scope:
 - candidate promotion execution
