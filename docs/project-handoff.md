@@ -105,6 +105,7 @@ Current first Phase 3 planning slice:
 - `schemas/phase3_promotion_evaluator_status.schema.json` validates the evaluator status contract and rejects promotion-enabled mutation flags
 - `tests/test_backend_integration.py` validates the `/candidates/promotion-evaluator` response against the status schema contract view
 - `make assure` includes `phase3_promotion_evaluator_status_contract` to catch evaluator status schema or no-mutation drift
+- `make export-promotion-evaluator-status` writes a local internal diagnostic bundle with hashed evaluator status and contract-view artifacts
 - `tests/test_phase3_boundary.py` provides executable planning/documentation tests
 - `tests/test_phase3_promotion_evaluator_contract.py` covers the future evaluator contract
 - `tests/test_phase3_promotion_evaluator_fixtures.py` validates the fixture-only examples
@@ -149,12 +150,12 @@ Current status:
   - make phase2-acceptance
   - make test
   - make test-browser
-- The full unit suite last passed with 269 tests and 3 intentionally skipped future-promotion contract tests.
+- The full unit suite last passed with 271 tests and 3 intentionally skipped future-promotion contract tests.
 
 Continue with disabled-by-default Phase 3 evaluator implementation only. Keep promotion execution disabled.
 
 Recommended next unit:
-Optional final evaluator-slice cleanup: add a diagnostic export command for the evaluator status bundle if a local artifact is useful. Keep promotion disabled. Do not implement promotion.
+Stop for project-owner review of the completed disabled Phase 3 evaluator slice before any new phase or promotion-related implementation. Keep promotion disabled. Do not implement promotion.
 
 Keep these out of scope:
 - candidate promotion execution

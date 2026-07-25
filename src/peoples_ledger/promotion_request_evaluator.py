@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 import json
+from hashlib import sha256
 from pathlib import Path
 from typing import Any
 
-from peoples_ledger.paths import DATA_DIR, SCHEMA_DIR
+from peoples_ledger.paths import DATA_DIR, PHASE3_EVALUATOR_STATUS_ARTIFACT_DIR, SCHEMA_DIR
 from peoples_ledger.schema_validator import SchemaRegistry
 
 
@@ -89,6 +90,38 @@ def validate_promotion_evaluator_status_contract() -> dict[str, Any]:
     if expected["mutation_flags"]["promotion_execution_allowed"]:
         raise ValueError("Phase 3 evaluator status contract cannot allow promotion execution")
     return expected
+
+
+def export_promotion_evaluator_status_bundle(output_dir: Path = PHASE3_EVALUATOR_STATUS_ARTIFACT_DIR) -> dict[str, Any]:
+    status = build_promotion_evaluator_status()
+    contract_view = promotion_evaluator_status_contract_view(status)
+    SchemaRegistry(SCHEMA_DIR).validate("phase3_promotion_evaluator_status", contract_view)
+    if contract_view["mutation_flags"]["promotion_execution_allowed"]:
+        raise ValueError("Phase 3 evaluator export cannot allow promotion execution")
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    status_path = output_dir / "phase3_promotion_evaluator_status.json"
+    contract_path = output_dir / "phase3_promotion_evaluator_status_contract_view.json"
+    manifest_path = output_dir / "phase3_promotion_evaluator_status.manifest.json"
+    status_body = json.dumps(status, sort_keys=True, indent=2) + "\n"
+    contract_body = json.dumps(contract_view, sort_keys=True, indent=2) + "\n"
+    status_path.write_text(status_body, encoding="utf-8")
+    contract_path.write_text(contract_body, encoding="utf-8")
+    manifest = {
+        "bundle_id": "phase3_promotion_evaluator_status_bundle",
+        "publication_scope": "internal_phase3_evaluator_diagnostic_only",
+        "status": contract_view["status"],
+        "promotion_execution_allowed": contract_view["mutation_flags"]["promotion_execution_allowed"],
+        "public_report_changed": contract_view["mutation_flags"]["public_report_changed"],
+        "ledger_appended": contract_view["mutation_flags"]["ledger_appended"],
+        "live_provider_called": contract_view["mutation_flags"]["live_provider_called"],
+        "artifacts": [
+            _artifact_entry("phase3_evaluator_status_json", status_path, status_body),
+            _artifact_entry("phase3_evaluator_status_contract_view_json", contract_path, contract_body),
+        ],
+    }
+    manifest_path.write_text(json.dumps(manifest, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+    return {**manifest, "manifest_path": str(manifest_path)}
 
 
 def promotion_evaluator_status_contract_view(status: dict[str, Any]) -> dict[str, Any]:
@@ -193,3 +226,13 @@ def _remediation_for_code(code: str) -> str:
     if code == "promotion_disabled.phase3_hard_stop":
         return "Keep promotion disabled until a later approved scope removes this hard stop."
     return "Leave this gate skipped until its implementation slice is approved."
+
+
+def _artifact_entry(kind: str, path: Path, body: str) -> dict[str, Any]:
+    encoded = body.encode("utf-8")
+    return {
+        "kind": kind,
+        "path": str(path),
+        "content_hash": "sha256:" + sha256(encoded).hexdigest(),
+        "bytes": len(encoded),
+    }

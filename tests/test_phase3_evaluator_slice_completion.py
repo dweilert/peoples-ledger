@@ -22,6 +22,7 @@ class Phase3EvaluatorSliceCompletionTests(unittest.TestCase):
             "/candidates/promotion-evaluator",
             "Phase 3 evaluator status panel",
             "phase3_promotion_evaluator_status_contract",
+            "make export-promotion-evaluator-status",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, body)
@@ -52,7 +53,7 @@ class Phase3EvaluatorSliceCompletionTests(unittest.TestCase):
             "make phase2-acceptance",
             "make test",
             "make test-browser",
-            "269 tests with 3 intentional future-promotion skips",
+            "271 tests with 3 intentional future-promotion skips",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, body)

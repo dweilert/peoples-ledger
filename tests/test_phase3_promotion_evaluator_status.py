@@ -3,7 +3,9 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
+import tempfile
 import unittest
+from hashlib import sha256
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -11,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from peoples_ledger.paths import DECISION_LEDGER_PATH, SCHEMA_DIR
 from peoples_ledger.promotion_request_evaluator import (
     build_promotion_evaluator_status,
+    export_promotion_evaluator_status_bundle,
     promotion_evaluator_status_contract_view,
     validate_promotion_evaluator_status_contract,
 )
@@ -94,6 +97,49 @@ class Phase3PromotionEvaluatorStatusTests(unittest.TestCase):
 
         self.assertEqual(snapshot["status"], "blocked")
         self.assertFalse(snapshot["mutation_flags"]["promotion_execution_allowed"])
+
+    def test_export_promotion_evaluator_status_bundle_writes_local_artifacts(self) -> None:
+        before = DECISION_LEDGER_PATH.read_text(encoding="utf-8") if DECISION_LEDGER_PATH.exists() else ""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            manifest = export_promotion_evaluator_status_bundle(Path(tmpdir))
+            saved_manifest = json.loads(Path(manifest["manifest_path"]).read_text(encoding="utf-8"))
+            artifacts = saved_manifest["artifacts"]
+            bodies = {artifact["kind"]: Path(artifact["path"]).read_bytes() for artifact in artifacts}
+
+        after = DECISION_LEDGER_PATH.read_text(encoding="utf-8") if DECISION_LEDGER_PATH.exists() else ""
+        self.assertEqual(after, before)
+        self.assertEqual(saved_manifest["bundle_id"], "phase3_promotion_evaluator_status_bundle")
+        self.assertEqual(saved_manifest["publication_scope"], "internal_phase3_evaluator_diagnostic_only")
+        self.assertEqual(saved_manifest["status"], "blocked")
+        self.assertFalse(saved_manifest["promotion_execution_allowed"])
+        self.assertFalse(saved_manifest["public_report_changed"])
+        self.assertFalse(saved_manifest["ledger_appended"])
+        self.assertFalse(saved_manifest["live_provider_called"])
+        self.assertEqual(
+            {artifact["kind"] for artifact in artifacts},
+            {"phase3_evaluator_status_json", "phase3_evaluator_status_contract_view_json"},
+        )
+        for artifact in artifacts:
+            body = bodies[artifact["kind"]]
+            self.assertEqual(artifact["bytes"], len(body))
+            self.assertEqual(artifact["content_hash"], "sha256:" + sha256(body).hexdigest())
+
+    def test_export_promotion_evaluator_status_cli_outputs_manifest(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            result = subprocess.run(
+                [sys.executable, "-m", "peoples_ledger.cli", "export-promotion-evaluator-status", "--output-dir", tmpdir],
+                check=False,
+                capture_output=True,
+                cwd=REPO_ROOT,
+                env={"PYTHONPATH": "src"},
+                text=True,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["bundle_id"], "phase3_promotion_evaluator_status_bundle")
+            self.assertFalse(payload["promotion_execution_allowed"])
+            self.assertTrue(Path(payload["manifest_path"]).exists())
 
 
 if __name__ == "__main__":

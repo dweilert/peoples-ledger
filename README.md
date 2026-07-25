@@ -30,6 +30,7 @@ make phase2-acceptance
 PYTHONPATH=src python3 -m peoples_ledger.cli candidate-status
 PYTHONPATH=src python3 -m peoples_ledger.cli promotion-audit-status
 PYTHONPATH=src python3 -m peoples_ledger.cli promotion-evaluator-status
+make export-promotion-evaluator-status
 make test-browser
 make report
 make report-html
@@ -99,6 +100,8 @@ The evaluator fixture tests now cover schema, source, extraction-prompt, privacy
 The checked status contract snapshot at `data/fixtures/phase3/promotion_evaluator_status_contract.json` locks the evaluator API surface to blocked, fixture-only, no-mutation semantics.
 
 `schemas/phase3_promotion_evaluator_status.schema.json` validates that status snapshot and rejects any promotion-enabled mutation flag.
+
+`make export-promotion-evaluator-status` writes a local internal diagnostic bundle for the blocked evaluator status and checked contract view without appending to the AI Decision Ledger or changing public reports.
 
 The Phase 3 implementation-entry checklist at `docs/phase-3-implementation-entry-checklist.md` defines what must be true before any evaluator code can be started, including owner approval, test-first sequencing, read-only fixture scope, and privacy gates.
 

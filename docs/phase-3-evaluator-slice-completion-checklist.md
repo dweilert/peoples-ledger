@@ -11,6 +11,7 @@ This checklist records the current Phase 3 evaluator slice as implemented but di
 - `data/fixtures/phase3/promotion_evaluator_status_contract.json` snapshots the stable status contract view.
 - `schemas/phase3_promotion_evaluator_status.schema.json` validates the stable status contract view.
 - `make assure` includes `phase3_promotion_evaluator_status_contract`.
+- `make export-promotion-evaluator-status` writes an internal local diagnostic bundle for the blocked evaluator status and contract view.
 
 ## Required Invariants
 
@@ -37,7 +38,7 @@ make test
 make test-browser
 ```
 
-The full unit suite currently includes 269 tests with 3 intentional future-promotion skips.
+The full unit suite currently includes 271 tests with 3 intentional future-promotion skips.
 
 ## Still Out Of Scope
 
@@ -67,5 +68,6 @@ This evaluator slice is complete when:
 - `make assure` includes `phase3_promotion_evaluator_status_contract`
 - the backend evaluator endpoint validates against the status schema contract view
 - the frontend evaluator panel has rendering regression coverage
+- the local diagnostic export writes hashed internal artifacts
 - the checked status snapshot remains blocked and no-mutation
 - no promotion, public candidate reporting, live provider path, source registry mutation, or household-data storage is enabled
