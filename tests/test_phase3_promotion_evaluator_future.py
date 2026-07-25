@@ -82,11 +82,16 @@ class Phase3PromotionEvaluatorFutureTests(unittest.TestCase):
         self.assertFalse(result["public_report_changed"])
         self.assertFalse(result["live_provider_called"])
 
-    @unittest.skip("Future implementation intentionally blocked; public candidate leakage must fail public_report.")
     def test_future_candidate_leak_fails_public_report_first(self) -> None:
         result = _future_evaluate("phase3_eval_example_public_report_leak")
         self.assertEqual(result["first_failing_gate"], "public_report")
         self.assertEqual(result["blockers"][0]["code"], "public_report.candidate_leakage_detected")
+        self.assertIn("promotion_disabled.phase3_hard_stop", {blocker["code"] for blocker in result["blockers"]})
+        self.assertEqual(result["status"], "blocked")
+        self.assertFalse(result["mutation_performed"])
+        self.assertFalse(result["ledger_appended"])
+        self.assertFalse(result["public_report_changed"])
+        self.assertFalse(result["live_provider_called"])
 
     @unittest.skip("Future implementation intentionally blocked; unresolved risk trigger must fail risk.")
     def test_future_unresolved_risk_fails_risk_first(self) -> None:
