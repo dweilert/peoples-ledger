@@ -42,6 +42,7 @@ class BrowserPrivacyHardeningTests(unittest.TestCase):
               "#sources",
               "#candidate-status",
               "#promotion-audit",
+              "#promotion-evaluator",
               "#ledger",
               "#refresh",
               "#summarize",
@@ -127,6 +128,28 @@ class BrowserPrivacyHardeningTests(unittest.TestCase):
                         ]
                       };
                     }
+                    if (url.endsWith("/candidates/promotion-evaluator")) {
+                      return {
+                        status: "blocked",
+                        fixture_id: "fixture",
+                        evaluation_count: 1,
+                        first_failing_gates: ["promotion_disabled"],
+                        promotion_execution_allowed: false,
+                        ledger_appended: false,
+                        public_report_changed: false,
+                        live_provider_called: false,
+                        household_financial_data_storage_allowed: false,
+                        evaluations: [
+                          {
+                            request_id: "request",
+                            status: "blocked",
+                            first_failing_gate: "promotion_disabled",
+                            candidate_analysis_unit_id: "candidate",
+                            blockers: [{ code: "promotion_disabled.phase3_hard_stop" }]
+                          }
+                        ]
+                      };
+                    }
                     return {};
                   }
                 };
@@ -138,8 +161,8 @@ class BrowserPrivacyHardeningTests(unittest.TestCase):
               vm.runInContext(appJs, context);
               await new Promise((resolve) => setImmediate(resolve));
               const initialCallCount = calls.length;
-              if (initialCallCount !== 6) {
-                throw new Error(`expected six initial allowlisted fetches, got ${initialCallCount}`);
+              if (initialCallCount !== 7) {
+                throw new Error(`expected seven initial allowlisted fetches, got ${initialCallCount}`);
               }
 
               calls.length = 0;

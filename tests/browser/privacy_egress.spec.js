@@ -11,6 +11,7 @@ const allowedApiPaths = new Set([
   "/reports/tcja-2017-representative-provisions",
   "/candidates/status",
   "/candidates/promotion-audit",
+  "/candidates/promotion-evaluator",
 ]);
 
 function fixturePayload(pathname) {
@@ -62,6 +63,28 @@ function fixturePayload(pathname) {
           blockers_match: true,
           source_refs_match: true,
           public_report_includes_candidate: false,
+        },
+      ],
+    };
+  }
+  if (pathname === "/candidates/promotion-evaluator") {
+    return {
+      status: "blocked",
+      fixture_id: "fixture",
+      evaluation_count: 1,
+      first_failing_gates: ["promotion_disabled"],
+      promotion_execution_allowed: false,
+      ledger_appended: false,
+      public_report_changed: false,
+      live_provider_called: false,
+      household_financial_data_storage_allowed: false,
+      evaluations: [
+        {
+          request_id: "request",
+          status: "blocked",
+          first_failing_gate: "promotion_disabled",
+          candidate_analysis_unit_id: "candidate",
+          blockers: [{ code: "promotion_disabled.phase3_hard_stop" }],
         },
       ],
     };

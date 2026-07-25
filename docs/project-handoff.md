@@ -98,6 +98,7 @@ Current first Phase 3 planning slice:
 - `src/peoples_ledger/promotion_request_evaluator.py` implements all Phase 3 evaluator fixture examples while keeping every result blocked
 - `promotion-evaluator-status` exposes the evaluator status as read-only CLI JSON
 - `/candidates/promotion-evaluator` exposes the evaluator status as read-only backend JSON
+- the frontend displays `/candidates/promotion-evaluator` as a read-only Phase 3 evaluator panel with no promotion action
 - `tests/test_phase3_boundary.py` provides executable planning/documentation tests
 - `tests/test_phase3_promotion_evaluator_contract.py` covers the future evaluator contract
 - `tests/test_phase3_promotion_evaluator_fixtures.py` validates the fixture-only examples
@@ -139,12 +140,12 @@ Current status:
   - make phase2-acceptance
   - make test
   - make test-browser
-- The full unit suite last passed with 257 tests and 3 intentionally skipped future-promotion contract tests.
+- The full unit suite last passed with 258 tests and 3 intentionally skipped future-promotion contract tests.
 
 Continue with disabled-by-default Phase 3 evaluator implementation only. Keep promotion execution disabled.
 
 Recommended next unit:
-Add a frontend panel for Phase 3 evaluator status only if it remains read-only and fixture-only. Keep promotion disabled. Do not implement promotion.
+Add a checked API/status contract snapshot for the Phase 3 evaluator payload so future UI or backend changes cannot silently loosen blocked, fixture-only, no-mutation semantics. Keep promotion disabled. Do not implement promotion.
 
 Keep these out of scope:
 - candidate promotion execution

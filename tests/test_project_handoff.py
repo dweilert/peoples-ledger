@@ -34,6 +34,7 @@ class ProjectHandoffTests(unittest.TestCase):
             "docs/phase-3-boundary.md",
             "promotion-evaluator-status",
             "/candidates/promotion-evaluator",
+            "read-only Phase 3 evaluator panel",
             "candidate promotion execution",
             "household financial data transmission or storage",
             "Keep going autonomously unless user input is genuinely required",

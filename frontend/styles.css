@@ -153,6 +153,11 @@ dd {
   padding: 14px;
 }
 
+.stacked-list {
+  display: grid;
+  gap: 10px;
+}
+
 pre {
   white-space: pre-wrap;
 }

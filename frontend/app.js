@@ -73,21 +73,61 @@ function renderPromotionAudit(payload) {
   document.querySelector("#promotion-audit").innerHTML = summaries || "<p>No promotion audit records.</p>";
 }
 
+function renderPromotionEvaluator(payload) {
+  const safetyFlags = [
+    ["Promotion execution allowed", payload.promotion_execution_allowed],
+    ["Ledger appended", payload.ledger_appended],
+    ["Public report changed", payload.public_report_changed],
+    ["Live provider called", payload.live_provider_called],
+    ["Household financial data storage allowed", payload.household_financial_data_storage_allowed]
+  ]
+    .map(([label, value]) => `<dt>${label}</dt><dd>${value ? "yes" : "no"}`)
+    .join("");
+  const evaluations = payload.evaluations
+    .map((evaluation) => {
+      const blockerCodes = evaluation.blockers.map((blocker) => `<li>${blocker.code}</li>`).join("");
+      return `
+        <article class="candidate-item">
+          <h3>${evaluation.request_id}</h3>
+          <dl>
+            <dt>Status</dt><dd>${evaluation.status}</dd>
+            <dt>First failing gate</dt><dd>${evaluation.first_failing_gate}</dd>
+            <dt>Candidate</dt><dd>${evaluation.candidate_analysis_unit_id || "not supplied"}</dd>
+          </dl>
+          <ul>${blockerCodes}</ul>
+        </article>
+      `;
+    })
+    .join("");
+  document.querySelector("#promotion-evaluator").innerHTML = `
+    <dl>
+      <dt>Status</dt><dd>${payload.status}</dd>
+      <dt>Fixture</dt><dd>${payload.fixture_id}</dd>
+      <dt>Evaluations</dt><dd>${payload.evaluation_count}</dd>
+      <dt>First failing gates</dt><dd>${payload.first_failing_gates.join(", ")}</dd>
+      ${safetyFlags}
+    </dl>
+    <div class="stacked-list">${evaluations}</div>
+  `;
+}
+
 async function refresh() {
   try {
-    const [unit, sources, ledger, _report, candidateStatus, promotionAudit] = await Promise.all([
+    const [unit, sources, ledger, _report, candidateStatus, promotionAudit, promotionEvaluator] = await Promise.all([
       fetchJson("/analysis-units/tcja-2017-representative-provisions"),
       fetchJson("/sources"),
       fetchJson("/ai-decision-ledger"),
       fetchJson("/reports/tcja-2017-representative-provisions"),
       fetchJson("/candidates/status"),
-      fetchJson("/candidates/promotion-audit")
+      fetchJson("/candidates/promotion-audit"),
+      fetchJson("/candidates/promotion-evaluator")
     ]);
     renderAnalysis(unit);
     renderSources(sources);
     renderLedger(ledger);
     renderCandidateStatus(candidateStatus);
     renderPromotionAudit(promotionAudit);
+    renderPromotionEvaluator(promotionEvaluator);
   } catch (error) {
     document.querySelector("#analysis").textContent = `${error.message}. Start the backend with make run.`;
   }
