@@ -113,11 +113,9 @@ class Phase3PromotionEvaluatorFixtureTests(unittest.TestCase):
                     path.read_text(encoding="utf-8"),
                 )
 
-    def test_no_evaluator_implementation_was_added(self) -> None:
-        forbidden_paths = (
-            REPO_ROOT / "src" / "peoples_ledger" / "promotion_request_evaluator.py",
-            REPO_ROOT / "src" / "peoples_ledger" / "candidate_promotion_evaluator.py",
-        )
+    def test_evaluator_implementation_is_schema_first_only(self) -> None:
+        self.assertTrue((REPO_ROOT / "src" / "peoples_ledger" / "promotion_request_evaluator.py").exists())
+        forbidden_paths = (REPO_ROOT / "src" / "peoples_ledger" / "candidate_promotion_evaluator.py",)
 
         for path in forbidden_paths:
             with self.subTest(path=path.name):

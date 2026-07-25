@@ -57,7 +57,7 @@ Before any implementation PR is opened, the reviewer should verify:
 
 ## Residual Risk
 
-Residual risk remains high until implementation exists and is reviewed because documentation cannot enforce runtime behavior by itself. The current mitigation is to keep implementation absent, keep future tests skipped, and require explicit project-owner approval before any evaluator code begins.
+Residual risk remains high while implementation is partial because one approved gate does not enforce later runtime behavior. The current mitigation is to keep later gate tests skipped, keep promotion disabled, and require explicit project-owner approval before each additional evaluator gate begins.
 
 ## Exit Criteria For This Review
 
@@ -68,5 +68,5 @@ This risk-review slice is complete when:
 - README and handoff point to this review
 - implementation-entry checklist tests still pass
 - Phase 2 acceptance still passes
-- no evaluator implementation exists
+- no evaluator implementation exists beyond approved read-only fixture slices
 - no promotion, public candidate reporting, live provider path, source registry mutation, or household-data storage is enabled

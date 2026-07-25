@@ -97,5 +97,5 @@ This checklist slice is complete when:
 - README and handoff point to this checklist
 - Phase 3 contract and fixture tests still pass
 - Phase 2 acceptance still passes
-- no evaluator implementation exists
+- no evaluator implementation exists beyond approved read-only fixture slices
 - no candidate promotion, public report inclusion, live provider path, source registry mutation, or household-data storage is enabled

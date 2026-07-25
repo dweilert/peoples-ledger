@@ -13,13 +13,18 @@ class Phase3PromotionEvaluatorFutureTests(unittest.TestCase):
     def test_future_cases_are_defined_before_implementation(self) -> None:
         fixture = _load_fixture()
         self.assertEqual(len(fixture["examples"]), 9)
-        self.assertFalse((REPO_ROOT / "src" / "peoples_ledger" / "promotion_request_evaluator.py").exists())
+        self.assertTrue((REPO_ROOT / "src" / "peoples_ledger" / "promotion_request_evaluator.py").exists())
 
-    @unittest.skip("Future implementation intentionally blocked; schema fixture must fail schema first.")
     def test_future_invalid_request_fails_schema_first(self) -> None:
         result = _future_evaluate("phase3_eval_example_schema_invalid_request")
         self.assertEqual(result["first_failing_gate"], "schema")
         self.assertEqual(result["blockers"][0]["code"], "schema.invalid_request")
+        self.assertIn("promotion_disabled.phase3_hard_stop", {blocker["code"] for blocker in result["blockers"]})
+        self.assertEqual(result["status"], "blocked")
+        self.assertFalse(result["mutation_performed"])
+        self.assertFalse(result["ledger_appended"])
+        self.assertFalse(result["public_report_changed"])
+        self.assertFalse(result["live_provider_called"])
 
     @unittest.skip("Future implementation intentionally blocked; source fixture must fail source before later gates.")
     def test_future_source_hash_mismatch_fails_source_first(self) -> None:
