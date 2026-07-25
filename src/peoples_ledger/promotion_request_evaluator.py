@@ -55,6 +55,27 @@ def evaluate_contract_example(example_id: str, fixture_path: Path = CONTRACT_EXA
     }
 
 
+def build_promotion_evaluator_status(fixture_path: Path = CONTRACT_EXAMPLES_PATH) -> dict[str, Any]:
+    fixture = _load_fixture(fixture_path)
+    evaluations = [evaluate_contract_example(example["id"], fixture_path) for example in fixture["examples"]]
+
+    return {
+        "status": "blocked",
+        "id": "phase3_promotion_evaluator_status_v1",
+        "fixture_id": fixture["id"],
+        "contract_ref": fixture["contract_ref"],
+        "evaluation_count": len(evaluations),
+        "gate_order": fixture["gate_order"],
+        "first_failing_gates": [evaluation["first_failing_gate"] for evaluation in evaluations],
+        "promotion_execution_allowed": False,
+        "ledger_appended": False,
+        "public_report_changed": False,
+        "live_provider_called": False,
+        "household_financial_data_storage_allowed": False,
+        "evaluations": evaluations,
+    }
+
+
 def _load_fixture(path: Path) -> dict[str, Any]:
     fixture = json.loads(path.read_text(encoding="utf-8"))
     if fixture["implementation_status"] != "not_implemented":

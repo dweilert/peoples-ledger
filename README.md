@@ -29,6 +29,7 @@ make phase1-acceptance
 make phase2-acceptance
 PYTHONPATH=src python3 -m peoples_ledger.cli candidate-status
 PYTHONPATH=src python3 -m peoples_ledger.cli promotion-audit-status
+PYTHONPATH=src python3 -m peoples_ledger.cli promotion-evaluator-status
 make test-browser
 make report
 make report-html
@@ -88,6 +89,8 @@ The Phase 3 promotion request evaluator contract now defines the future read-onl
 Phase 3 evaluator contract examples live at `data/fixtures/phase3/promotion_evaluator_contract_examples.json`. They cover each first-failing gate as fixture-only expected outputs and still do not promote candidates or alter public reports.
 
 The evaluator fixture tests now cover schema, source, extraction-prompt, privacy, human-review, ledger, public-report, risk, and promotion-disabled outcomes while keeping all results blocked.
+
+`promotion-evaluator-status` prints the read-only Phase 3 evaluator fixture results without appending ledger entries, changing public reports, calling live providers, or storing household financial data.
 
 The Phase 3 implementation-entry checklist at `docs/phase-3-implementation-entry-checklist.md` defines what must be true before any evaluator code can be started, including owner approval, test-first sequencing, read-only fixture scope, and privacy gates.
 
