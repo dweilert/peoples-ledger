@@ -35,6 +35,7 @@ class ProjectHandoffTests(unittest.TestCase):
             "promotion-evaluator-status",
             "/candidates/promotion-evaluator",
             "read-only Phase 3 evaluator panel",
+            "promotion_evaluator_status_contract.json",
             "candidate promotion execution",
             "household financial data transmission or storage",
             "Keep going autonomously unless user input is genuinely required",

@@ -96,6 +96,8 @@ The evaluator fixture tests now cover schema, source, extraction-prompt, privacy
 
 `promotion-evaluator-status` prints the read-only Phase 3 evaluator fixture results without appending ledger entries, changing public reports, calling live providers, or storing household financial data.
 
+The checked status contract snapshot at `data/fixtures/phase3/promotion_evaluator_status_contract.json` locks the evaluator API surface to blocked, fixture-only, no-mutation semantics.
+
 The Phase 3 implementation-entry checklist at `docs/phase-3-implementation-entry-checklist.md` defines what must be true before any evaluator code can be started, including owner approval, test-first sequencing, read-only fixture scope, and privacy gates.
 
 The Phase 3 evaluator risk review at `docs/phase-3-evaluator-risk-review.md` records approval-confusion, privacy, fixture-creep, live-provider, ledger, public-report, and claim-overreach risks while later gates remain blocked.

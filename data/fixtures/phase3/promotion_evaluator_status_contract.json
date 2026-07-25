@@ -1,0 +1,190 @@
+{
+  "contract_ref": "docs/phase-3-promotion-evaluator-contract.md",
+  "evaluation_count": 9,
+  "evaluations": [
+    {
+      "blocker_codes": [
+        "schema.invalid_request",
+        "promotion_disabled.phase3_hard_stop"
+      ],
+      "candidate_analysis_unit_id": null,
+      "first_failing_gate": "schema",
+      "household_financial_data_detected": false,
+      "mutation_flags": {
+        "ledger_appended": false,
+        "live_provider_called": false,
+        "mutation_performed": false,
+        "public_report_changed": false
+      },
+      "request_id": "invalid_request_missing_candidate_ref",
+      "status": "blocked"
+    },
+    {
+      "blocker_codes": [
+        "source.snapshot_hash_mismatch",
+        "promotion_disabled.phase3_hard_stop"
+      ],
+      "candidate_analysis_unit_id": "candidate_ira_2022_energy_tax_provisions",
+      "first_failing_gate": "source",
+      "household_financial_data_detected": false,
+      "mutation_flags": {
+        "ledger_appended": false,
+        "live_provider_called": false,
+        "mutation_performed": false,
+        "public_report_changed": false
+      },
+      "request_id": "promotion_request_candidate_ira_2022_energy_tax_provisions_v1",
+      "status": "blocked"
+    },
+    {
+      "blocker_codes": [
+        "extraction_prompt.template_unapproved",
+        "promotion_disabled.phase3_hard_stop"
+      ],
+      "candidate_analysis_unit_id": "candidate_ira_2022_energy_tax_provisions",
+      "first_failing_gate": "extraction_prompt",
+      "household_financial_data_detected": false,
+      "mutation_flags": {
+        "ledger_appended": false,
+        "live_provider_called": false,
+        "mutation_performed": false,
+        "public_report_changed": false
+      },
+      "request_id": "promotion_request_candidate_ira_2022_energy_tax_provisions_v1",
+      "status": "blocked"
+    },
+    {
+      "blocker_codes": [
+        "privacy.household_financial_data_detected",
+        "promotion_disabled.phase3_hard_stop"
+      ],
+      "candidate_analysis_unit_id": "candidate_ira_2022_energy_tax_provisions",
+      "first_failing_gate": "privacy",
+      "household_financial_data_detected": true,
+      "mutation_flags": {
+        "ledger_appended": false,
+        "live_provider_called": false,
+        "mutation_performed": false,
+        "public_report_changed": false
+      },
+      "request_id": "promotion_request_candidate_ira_2022_energy_tax_provisions_v1",
+      "status": "blocked"
+    },
+    {
+      "blocker_codes": [
+        "human_review.blocking_findings_present",
+        "promotion_disabled.phase3_hard_stop"
+      ],
+      "candidate_analysis_unit_id": "candidate_ira_2022_energy_tax_provisions",
+      "first_failing_gate": "human_review",
+      "household_financial_data_detected": false,
+      "mutation_flags": {
+        "ledger_appended": false,
+        "live_provider_called": false,
+        "mutation_performed": false,
+        "public_report_changed": false
+      },
+      "request_id": "promotion_request_candidate_ira_2022_energy_tax_provisions_v1",
+      "status": "blocked"
+    },
+    {
+      "blocker_codes": [
+        "ledger.decision_stub_missing",
+        "promotion_disabled.phase3_hard_stop"
+      ],
+      "candidate_analysis_unit_id": "candidate_ira_2022_energy_tax_provisions",
+      "first_failing_gate": "ledger",
+      "household_financial_data_detected": false,
+      "mutation_flags": {
+        "ledger_appended": false,
+        "live_provider_called": false,
+        "mutation_performed": false,
+        "public_report_changed": false
+      },
+      "request_id": "promotion_request_candidate_ira_2022_energy_tax_provisions_v1",
+      "status": "blocked"
+    },
+    {
+      "blocker_codes": [
+        "public_report.candidate_leakage_detected",
+        "promotion_disabled.phase3_hard_stop"
+      ],
+      "candidate_analysis_unit_id": "candidate_ira_2022_energy_tax_provisions",
+      "first_failing_gate": "public_report",
+      "household_financial_data_detected": false,
+      "mutation_flags": {
+        "ledger_appended": false,
+        "live_provider_called": false,
+        "mutation_performed": false,
+        "public_report_changed": false
+      },
+      "request_id": "promotion_request_candidate_ira_2022_energy_tax_provisions_v1",
+      "status": "blocked"
+    },
+    {
+      "blocker_codes": [
+        "risk.unresolved_review_trigger",
+        "promotion_disabled.phase3_hard_stop"
+      ],
+      "candidate_analysis_unit_id": "candidate_ira_2022_energy_tax_provisions",
+      "first_failing_gate": "risk",
+      "household_financial_data_detected": false,
+      "mutation_flags": {
+        "ledger_appended": false,
+        "live_provider_called": false,
+        "mutation_performed": false,
+        "public_report_changed": false
+      },
+      "request_id": "promotion_request_candidate_ira_2022_energy_tax_provisions_v1",
+      "status": "blocked"
+    },
+    {
+      "blocker_codes": [
+        "promotion_disabled.phase3_hard_stop"
+      ],
+      "candidate_analysis_unit_id": "candidate_ira_2022_energy_tax_provisions",
+      "first_failing_gate": "promotion_disabled",
+      "household_financial_data_detected": false,
+      "mutation_flags": {
+        "ledger_appended": false,
+        "live_provider_called": false,
+        "mutation_performed": false,
+        "public_report_changed": false
+      },
+      "request_id": "promotion_request_candidate_ira_2022_energy_tax_provisions_v1",
+      "status": "blocked"
+    }
+  ],
+  "first_failing_gates": [
+    "schema",
+    "source",
+    "extraction_prompt",
+    "privacy",
+    "human_review",
+    "ledger",
+    "public_report",
+    "risk",
+    "promotion_disabled"
+  ],
+  "fixture_id": "phase3_promotion_evaluator_contract_examples_v1",
+  "gate_order": [
+    "schema",
+    "source",
+    "extraction_prompt",
+    "privacy",
+    "human_review",
+    "ledger",
+    "public_report",
+    "risk",
+    "promotion_disabled"
+  ],
+  "household_financial_data_storage_allowed": false,
+  "id": "phase3_promotion_evaluator_status_v1",
+  "mutation_flags": {
+    "ledger_appended": false,
+    "live_provider_called": false,
+    "promotion_execution_allowed": false,
+    "public_report_changed": false
+  },
+  "status": "blocked"
+}
