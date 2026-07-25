@@ -70,6 +70,8 @@ The backend exposes the Phase 3 evaluator status at `/candidates/promotion-evalu
 
 The frontend includes a small Phase 2 candidate-status panel that displays draft candidates and blockers from `/candidates/status` without collecting or transmitting household financial data.
 
+The frontend also displays the read-only Phase 3 evaluator status from `/candidates/promotion-evaluator`, including blocked gates and no-mutation flags, without adding any promotion action.
+
 The candidate-to-exemplar promotion contract is documented and covered by executable tests. It defines future schema, source, prompt, privacy, review, ledger, report, and risk gates while keeping promotion disabled in the current POC.
 
 Candidate promotion requests are represented as fixture-only blocked records. The schema and assurance gates disallow execution, public-report inclusion, ledger appends, live providers, and household financial data.
@@ -86,7 +88,7 @@ Phase 2 is complete for the bounded POC. The closure checklist records the exit 
 
 Phase 3 implementation has a disabled-by-default promotion request evaluator for all Phase 3 fixture gates. No candidate promotion execution is enabled.
 
-The Phase 3 promotion request evaluator contract now defines the future read-only fixture inputs, deterministic gate order, result shape, blocker codes, privacy precedence, and mutation prohibitions while keeping the evaluator unimplemented.
+The Phase 3 promotion request evaluator contract defines the read-only fixture inputs, deterministic gate order, result shape, blocker codes, privacy precedence, and mutation prohibitions for the disabled evaluator.
 
 Phase 3 evaluator contract examples live at `data/fixtures/phase3/promotion_evaluator_contract_examples.json`. They cover each first-failing gate as fixture-only expected outputs and still do not promote candidates or alter public reports.
 

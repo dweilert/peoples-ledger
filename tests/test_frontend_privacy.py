@@ -39,10 +39,23 @@ class FrontendPrivacyTests(unittest.TestCase):
                 "/reports/tcja-2017-representative-provisions",
                 "/candidates/status",
                 "/candidates/promotion-audit",
+                "/candidates/promotion-evaluator",
                 "/analysis-units/tcja-2017-representative-provisions/summarize",
             },
         )
         self.assertEqual(app_js.count("fetch("), 1)
+
+    def test_phase3_evaluator_panel_is_read_only_status_surface(self) -> None:
+        html = (REPO_ROOT / "frontend" / "index.html").read_text(encoding="utf-8")
+        app_js = (REPO_ROOT / "frontend" / "app.js").read_text(encoding="utf-8")
+
+        self.assertIn('id="promotion-evaluator"', html)
+        self.assertIn("/candidates/promotion-evaluator", app_js)
+        self.assertIn("renderPromotionEvaluator", app_js)
+        for forbidden in ("promote-candidate", "promotion-execute", "promotion-evaluator/execute"):
+            with self.subTest(forbidden=forbidden):
+                self.assertNotIn(forbidden, html)
+                self.assertNotIn(forbidden, app_js)
 
 
 if __name__ == "__main__":
