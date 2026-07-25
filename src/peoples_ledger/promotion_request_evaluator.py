@@ -4,10 +4,12 @@ import json
 from pathlib import Path
 from typing import Any
 
-from peoples_ledger.paths import DATA_DIR
+from peoples_ledger.paths import DATA_DIR, SCHEMA_DIR
+from peoples_ledger.schema_validator import SchemaRegistry
 
 
 CONTRACT_EXAMPLES_PATH = DATA_DIR / "fixtures" / "phase3" / "promotion_evaluator_contract_examples.json"
+STATUS_CONTRACT_PATH = DATA_DIR / "fixtures" / "phase3" / "promotion_evaluator_status_contract.json"
 IMPLEMENTED_EXAMPLE_IDS = {
     "phase3_eval_example_schema_invalid_request",
     "phase3_eval_example_source_hash_mismatch",
@@ -73,6 +75,55 @@ def build_promotion_evaluator_status(fixture_path: Path = CONTRACT_EXAMPLES_PATH
         "live_provider_called": False,
         "household_financial_data_storage_allowed": False,
         "evaluations": evaluations,
+    }
+
+
+def validate_promotion_evaluator_status_contract() -> dict[str, Any]:
+    expected = json.loads(STATUS_CONTRACT_PATH.read_text(encoding="utf-8"))
+    actual = promotion_evaluator_status_contract_view(build_promotion_evaluator_status())
+    if actual != expected:
+        raise ValueError("Phase 3 evaluator status contract snapshot mismatch")
+    SchemaRegistry(SCHEMA_DIR).validate("phase3_promotion_evaluator_status", expected)
+    if expected["status"] != "blocked":
+        raise ValueError("Phase 3 evaluator status contract must remain blocked")
+    if expected["mutation_flags"]["promotion_execution_allowed"]:
+        raise ValueError("Phase 3 evaluator status contract cannot allow promotion execution")
+    return expected
+
+
+def promotion_evaluator_status_contract_view(status: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "contract_ref": status["contract_ref"],
+        "evaluation_count": status["evaluation_count"],
+        "evaluations": [
+            {
+                "blocker_codes": [blocker["code"] for blocker in evaluation["blockers"]],
+                "candidate_analysis_unit_id": evaluation["candidate_analysis_unit_id"],
+                "first_failing_gate": evaluation["first_failing_gate"],
+                "household_financial_data_detected": evaluation["household_financial_data_detected"],
+                "mutation_flags": {
+                    "ledger_appended": evaluation["ledger_appended"],
+                    "live_provider_called": evaluation["live_provider_called"],
+                    "mutation_performed": evaluation["mutation_performed"],
+                    "public_report_changed": evaluation["public_report_changed"],
+                },
+                "request_id": evaluation["request_id"],
+                "status": evaluation["status"],
+            }
+            for evaluation in status["evaluations"]
+        ],
+        "first_failing_gates": status["first_failing_gates"],
+        "fixture_id": status["fixture_id"],
+        "gate_order": status["gate_order"],
+        "household_financial_data_storage_allowed": status["household_financial_data_storage_allowed"],
+        "id": status["id"],
+        "mutation_flags": {
+            "ledger_appended": status["ledger_appended"],
+            "live_provider_called": status["live_provider_called"],
+            "promotion_execution_allowed": status["promotion_execution_allowed"],
+            "public_report_changed": status["public_report_changed"],
+        },
+        "status": status["status"],
     }
 
 

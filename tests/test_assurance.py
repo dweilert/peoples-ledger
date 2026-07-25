@@ -37,6 +37,7 @@ class AssuranceTests(unittest.TestCase):
             "candidate_review_records",
             "candidate_review_ledger_stub",
             "candidate_audit_bundle",
+            "phase3_promotion_evaluator_status_contract",
             "prompt_template_registry",
             "decision_ledger_integrity",
             "privacy_payload_guard",
@@ -73,6 +74,13 @@ class AssuranceTests(unittest.TestCase):
                 report = run_assurance_gate()
         self.assertFalse(report.publication_allowed)
         self.assertIn("assurance_failed:decision_ledger_integrity", report.review_triggers)
+
+    def test_phase3_evaluator_status_contract_failure_blocks_publication_advancement(self) -> None:
+        with patch("peoples_ledger.assurance.validate_promotion_evaluator_status_contract", side_effect=ValueError("bad contract")):
+            report = run_assurance_gate()
+
+        self.assertFalse(report.publication_allowed)
+        self.assertIn("assurance_failed:phase3_promotion_evaluator_status_contract", report.review_triggers)
 
 
 if __name__ == "__main__":

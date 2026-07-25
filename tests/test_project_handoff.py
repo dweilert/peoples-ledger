@@ -39,6 +39,7 @@ class ProjectHandoffTests(unittest.TestCase):
             "promotion_evaluator_status_contract.json",
             "phase3_promotion_evaluator_status.schema.json",
             "status schema contract view",
+            "phase3_promotion_evaluator_status_contract",
             "candidate promotion execution",
             "household financial data transmission or storage",
             "Keep going autonomously unless user input is genuinely required",
