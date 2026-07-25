@@ -89,6 +89,8 @@ Phase 3 evaluator contract examples live at `data/fixtures/phase3/promotion_eval
 
 Skipped future evaluator tests now name the required behavior for each fixture case before any implementation exists.
 
+The Phase 3 implementation-entry checklist at `docs/phase-3-implementation-entry-checklist.md` defines what must be true before any evaluator code can be started, including owner approval, test-first sequencing, read-only fixture scope, and privacy gates.
+
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
 
 The first report assembly slice emits a public JSON report with source traces, decision trace, model scenarios, perspective profiles, and assurance status.
