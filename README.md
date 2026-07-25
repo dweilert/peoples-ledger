@@ -15,7 +15,7 @@ This repository establishes executable foundations for:
 
 The POC is aligned to the Foundational Product and System Design v0.3 acceptance criteria for the bounded manual exemplar: a representative 8-12 provision TCJA subset, source spans, deterministic statutory-transformation records, governed model scenarios, three perspective profiles, perspective invariance checks, and complete AI Decision Ledger provenance fields.
 
-See `docs/project-handoff.md` for the current handoff note, `docs/phase-0-acceptance-checklist.md` for the Phase 0 acceptance mapping, `docs/testing-strategy.md` for the integrated testing approach, `docs/phase-1-boundary.md` and `docs/phase-1-status.md` for Phase 1, `docs/phase-2-boundary.md`, `docs/phase-2-status.md`, `docs/phase-2-promotion-contract.md`, plus `docs/phase-2-closure-checklist.md` for Phase 2, and `docs/phase-3-boundary.md` for Phase 3 planning.
+See `docs/project-handoff.md` for the current handoff note, `docs/phase-0-acceptance-checklist.md` for the Phase 0 acceptance mapping, `docs/testing-strategy.md` for the integrated testing approach, `docs/phase-1-boundary.md` and `docs/phase-1-status.md` for Phase 1, `docs/phase-2-boundary.md`, `docs/phase-2-status.md`, `docs/phase-2-promotion-contract.md`, plus `docs/phase-2-closure-checklist.md` for Phase 2, and `docs/phase-3-boundary.md` plus `docs/phase-3-promotion-evaluator-contract.md` for Phase 3 planning.
 
 Licensing and intellectual-property decisions are intentionally deferred.
 
@@ -82,6 +82,8 @@ The same promotion audit cross-check is exposed through the read-only `promotion
 Phase 2 is complete for the bounded POC. The closure checklist records the exit criteria, remaining intentional blockers, and Phase 3 entry criteria without starting Phase 3 work.
 
 Phase 3 planning has started with a disabled-by-default promotion request evaluator boundary. No promotion implementation is enabled.
+
+The Phase 3 promotion request evaluator contract now defines the future read-only fixture inputs, deterministic gate order, result shape, blocker codes, privacy precedence, and mutation prohibitions while keeping the evaluator unimplemented.
 
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
 

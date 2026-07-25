@@ -90,7 +90,9 @@ Phase 3 planning has started. Continue planning only unless the project owner ex
 Current first Phase 3 planning slice:
 
 - `docs/phase-3-boundary.md` defines one disabled-by-default promotion request evaluator plan
+- `docs/phase-3-promotion-evaluator-contract.md` defines the future evaluator contract without implementation
 - `tests/test_phase3_boundary.py` provides executable planning/documentation tests
+- `tests/test_phase3_promotion_evaluator_contract.py` covers the future evaluator contract
 - keep promotion, public candidate reporting, live providers, broad ingestion, microsimulation, live monitoring, state modeling, and household financial data handling out of scope
 
 ## Continuation Prompt
@@ -106,6 +108,7 @@ Start by reading:
 - docs/phase-2-status.md
 - docs/phase-2-promotion-contract.md
 - docs/phase-3-boundary.md
+- docs/phase-3-promotion-evaluator-contract.md
 - docs/project-handoff.md
 
 Current status:
@@ -123,7 +126,7 @@ Current status:
 Continue with Phase 3 planning only unless I explicitly approve implementation.
 
 Recommended next unit:
-Extend Phase 3 planning with a disabled-by-default promotion request evaluator contract. Add executable documentation tests. Do not implement promotion.
+Add fixture-only Phase 3 evaluator contract examples for each gate failure. These should be documentation fixtures or skipped future tests only. Do not implement promotion.
 
 Keep these out of scope:
 - candidate promotion execution
