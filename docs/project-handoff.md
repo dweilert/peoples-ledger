@@ -96,6 +96,7 @@ Current first Phase 3 planning slice:
 - `docs/phase-3-evaluator-risk-review.md` records documentation-only risks and stop conditions for the evaluator boundary
 - `docs/phase-3-planning-closure-checklist.md` records the planning artifacts, validation standard, blocked scope, and implementation decision point
 - `src/peoples_ledger/promotion_request_evaluator.py` implements all Phase 3 evaluator fixture examples while keeping every result blocked
+- `promotion-evaluator-status` exposes the evaluator status as read-only CLI JSON
 - `tests/test_phase3_boundary.py` provides executable planning/documentation tests
 - `tests/test_phase3_promotion_evaluator_contract.py` covers the future evaluator contract
 - `tests/test_phase3_promotion_evaluator_fixtures.py` validates the fixture-only examples
@@ -103,6 +104,7 @@ Current first Phase 3 planning slice:
 - `tests/test_phase3_implementation_entry_checklist.py` validates the implementation-entry checklist
 - `tests/test_phase3_evaluator_risk_review.py` validates the risk review
 - `tests/test_phase3_planning_closure.py` validates the planning closure checklist
+- `tests/test_phase3_promotion_evaluator_status.py` validates the evaluator status builder and CLI
 - keep promotion, public candidate reporting, live providers, broad ingestion, microsimulation, live monitoring, state modeling, and household financial data handling out of scope
 
 ## Continuation Prompt
@@ -136,12 +138,12 @@ Current status:
   - make phase2-acceptance
   - make test
   - make test-browser
-- The full unit suite last passed with 253 tests and 3 intentionally skipped future-promotion contract tests.
+- The full unit suite last passed with 256 tests and 3 intentionally skipped future-promotion contract tests.
 
 Continue with disabled-by-default Phase 3 evaluator implementation only. Keep promotion execution disabled.
 
 Recommended next unit:
-Add a Phase 3 evaluator status surface or CLI only if it remains read-only and fixture-only. Keep promotion disabled. Do not implement promotion.
+Add a read-only backend endpoint for Phase 3 evaluator status only if it remains fixture-only. Keep promotion disabled. Do not implement promotion.
 
 Keep these out of scope:
 - candidate promotion execution
