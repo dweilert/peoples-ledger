@@ -42,7 +42,7 @@ Ran 197 tests
 OK (skipped=3)
 ```
 
-The 3 skipped tests are intentional future-promotion contract tests. They define behavior that must stay blocked until a future phase explicitly implements promotion gates.
+At the original Phase 2 handoff, the 3 skipped tests were intentional future-promotion contract tests. Current Phase 3 planning has 12 skipped tests, all of which define behavior that must stay blocked until a future phase explicitly implements promotion gates.
 
 ## What Is Complete
 
@@ -95,6 +95,7 @@ Current first Phase 3 planning slice:
 - `tests/test_phase3_boundary.py` provides executable planning/documentation tests
 - `tests/test_phase3_promotion_evaluator_contract.py` covers the future evaluator contract
 - `tests/test_phase3_promotion_evaluator_fixtures.py` validates the fixture-only examples
+- `tests/test_phase3_promotion_evaluator_future.py` contains skipped future implementation tests for each fixture case
 - keep promotion, public candidate reporting, live providers, broad ingestion, microsimulation, live monitoring, state modeling, and household financial data handling out of scope
 
 ## Continuation Prompt
@@ -124,12 +125,12 @@ Current status:
   - make phase2-acceptance
   - make test
   - make test-browser
-- The full unit suite last passed with 197 tests and 3 intentionally skipped future-promotion contract tests.
+- The full unit suite last passed with 232 tests and 12 intentionally skipped future-promotion contract tests.
 
 Continue with Phase 3 planning only unless I explicitly approve implementation.
 
 Recommended next unit:
-Add skipped future implementation tests for the Phase 3 evaluator using the fixture examples. Keep them skipped until implementation is explicitly approved. Do not implement promotion.
+Add a Phase 3 planning checklist that defines implementation entry criteria for the evaluator. Keep it documentation/test-only. Do not implement promotion.
 
 Keep these out of scope:
 - candidate promotion execution
