@@ -34,7 +34,7 @@ make test
 make test-browser
 ```
 
-The full unit suite currently includes 253 tests with 4 intentional future-promotion skips.
+The full unit suite currently includes 253 tests with 3 intentional future-promotion skips.
 
 ## Still Blocked
 

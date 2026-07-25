@@ -17,8 +17,8 @@ class ProjectHandoffTests(unittest.TestCase):
             "Phase 2 is complete for the bounded POC",
             "137f6a2 Add Phase 2 closure checklist (#16)",
             "Ran 197 tests",
-            "4 skipped tests",
-            "4 intentionally skipped future-promotion contract tests",
+            "3 skipped tests",
+            "3 intentionally skipped future-promotion contract tests",
             "Phase 3 implementation has started",
         ):
             with self.subTest(phrase=phrase):

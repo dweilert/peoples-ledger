@@ -17,6 +17,7 @@ IMPLEMENTED_EXAMPLE_IDS = {
     "phase3_eval_example_ledger_stub_missing",
     "phase3_eval_example_public_report_leak",
     "phase3_eval_example_unresolved_risk",
+    "phase3_eval_example_disabled_hard_stop",
 }
 
 
