@@ -106,6 +106,8 @@ The Phase 3 evaluator risk review at `docs/phase-3-evaluator-risk-review.md` rec
 
 The Phase 3 planning closure checklist at `docs/phase-3-planning-closure-checklist.md` records the current planning artifacts, validation standard, blocked scope, and implementation decision point.
 
+The Phase 3 evaluator slice completion checklist at `docs/phase-3-evaluator-slice-completion-checklist.md` records the current implemented-but-disabled evaluator status surface and remaining no-promotion invariants.
+
 The first statutory transformation slice is also fixture-first: supported operations produce validated transformation records, while ambiguous operations abstain instead of guessing.
 
 The first report assembly slice emits a public JSON report with source traces, decision trace, model scenarios, perspective profiles, and assurance status.

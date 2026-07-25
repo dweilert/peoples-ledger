@@ -95,6 +95,7 @@ Current first Phase 3 planning slice:
 - `docs/phase-3-implementation-entry-checklist.md` defines the conditions required before evaluator implementation can start
 - `docs/phase-3-evaluator-risk-review.md` records documentation-only risks and stop conditions for the evaluator boundary
 - `docs/phase-3-planning-closure-checklist.md` records the planning artifacts, validation standard, blocked scope, and implementation decision point
+- `docs/phase-3-evaluator-slice-completion-checklist.md` records the implemented-but-disabled evaluator status surface and completion invariants
 - `src/peoples_ledger/promotion_request_evaluator.py` implements all Phase 3 evaluator fixture examples while keeping every result blocked
 - `promotion-evaluator-status` exposes the evaluator status as read-only CLI JSON
 - `/candidates/promotion-evaluator` exposes the evaluator status as read-only backend JSON
@@ -131,6 +132,7 @@ Start by reading:
 - docs/phase-3-implementation-entry-checklist.md
 - docs/phase-3-evaluator-risk-review.md
 - docs/phase-3-planning-closure-checklist.md
+- docs/phase-3-evaluator-slice-completion-checklist.md
 - data/fixtures/phase3/promotion_evaluator_contract_examples.json
 - data/fixtures/phase3/promotion_evaluator_status_contract.json
 - schemas/phase3_promotion_evaluator_status.schema.json
@@ -147,12 +149,12 @@ Current status:
   - make phase2-acceptance
   - make test
   - make test-browser
-- The full unit suite last passed with 264 tests and 3 intentionally skipped future-promotion contract tests.
+- The full unit suite last passed with 269 tests and 3 intentionally skipped future-promotion contract tests.
 
 Continue with disabled-by-default Phase 3 evaluator implementation only. Keep promotion execution disabled.
 
 Recommended next unit:
-Tighten Phase 3 docs for the current "implemented but disabled" state and define the remaining completion checklist for this evaluator slice. Keep promotion disabled. Do not implement promotion.
+Optional final evaluator-slice cleanup: add a diagnostic export command for the evaluator status bundle if a local artifact is useful. Keep promotion disabled. Do not implement promotion.
 
 Keep these out of scope:
 - candidate promotion execution
