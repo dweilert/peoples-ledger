@@ -1,6 +1,6 @@
 # Project Handoff
 
-Last updated: 2026-07-23
+Last updated: 2026-07-25
 
 ## Current Status
 
@@ -85,13 +85,12 @@ The 3 skipped tests are intentional future-promotion contract tests. They define
 
 ## Recommended Next Step
 
-Do Phase 3 planning only. The next unit should choose one narrow, disabled-by-default promotion-gate planning slice. Do not implement real promotion yet.
+Phase 3 planning has started. Continue planning only unless the project owner explicitly approves implementation. Do not implement real promotion yet.
 
-Best first Phase 3 planning slice:
+Current first Phase 3 planning slice:
 
-- create a Phase 3 boundary document
-- define one disabled-by-default promotion request evaluator plan
-- add executable planning/documentation tests
+- `docs/phase-3-boundary.md` defines one disabled-by-default promotion request evaluator plan
+- `tests/test_phase3_boundary.py` provides executable planning/documentation tests
 - keep promotion, public candidate reporting, live providers, broad ingestion, microsimulation, live monitoring, state modeling, and household financial data handling out of scope
 
 ## Continuation Prompt
@@ -106,6 +105,7 @@ Start by reading:
 - docs/phase-2-closure-checklist.md
 - docs/phase-2-status.md
 - docs/phase-2-promotion-contract.md
+- docs/phase-3-boundary.md
 - docs/project-handoff.md
 
 Current status:
@@ -123,7 +123,7 @@ Current status:
 Continue with Phase 3 planning only unless I explicitly approve implementation.
 
 Recommended next unit:
-Create a Phase 3 boundary/planning document for a narrow, disabled-by-default promotion request evaluator. Add executable documentation tests. Do not implement promotion.
+Extend Phase 3 planning with a disabled-by-default promotion request evaluator contract. Add executable documentation tests. Do not implement promotion.
 
 Keep these out of scope:
 - candidate promotion execution
