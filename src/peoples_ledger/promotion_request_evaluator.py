@@ -12,6 +12,7 @@ IMPLEMENTED_EXAMPLE_IDS = {
     "phase3_eval_example_schema_invalid_request",
     "phase3_eval_example_source_hash_mismatch",
     "phase3_eval_example_prompt_unapproved",
+    "phase3_eval_example_privacy_marker",
 }
 
 
@@ -80,6 +81,8 @@ def _message_for_code(code: str) -> str:
         return "Candidate source snapshot hash does not match the expected source fixture."
     if code == "extraction_prompt.template_unapproved":
         return "Promotion prompt template is not approved for candidate-to-exemplar use."
+    if code == "privacy.household_financial_data_detected":
+        return "Synthetic household financial data marker blocks evaluator progression."
     if code == "promotion_disabled.phase3_hard_stop":
         return "Promotion remains disabled for the Phase 3 evaluator."
     return "Phase 3 evaluator gate is not implemented in this slice."
@@ -92,6 +95,8 @@ def _remediation_for_code(code: str) -> str:
         return "Reconcile the local source snapshot hash before prompt, review, ledger, or report gates are evaluated."
     if code == "extraction_prompt.template_unapproved":
         return "Approve a promotion-specific prompt template in a later authorized scope before later gates are evaluated."
+    if code == "privacy.household_financial_data_detected":
+        return "Remove household financial data markers before review, ledger, report, or risk gates are evaluated."
     if code == "promotion_disabled.phase3_hard_stop":
         return "Keep promotion disabled until a later approved scope removes this hard stop."
     return "Leave this gate skipped until its implementation slice is approved."
