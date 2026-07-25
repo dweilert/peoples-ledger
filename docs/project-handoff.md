@@ -42,7 +42,7 @@ Ran 197 tests
 OK (skipped=3)
 ```
 
-At the original Phase 2 handoff, the 3 skipped tests were intentional future-promotion contract tests. Current Phase 3 planning has 12 skipped tests, all of which define behavior that must stay blocked until a future phase explicitly implements promotion gates.
+At the original Phase 2 handoff, the 3 skipped tests were intentional future-promotion contract tests. Current Phase 3 implementation has 11 skipped tests, all of which define behavior that must stay blocked until a future phase explicitly implements later promotion gates.
 
 ## What Is Complete
 
@@ -85,7 +85,7 @@ At the original Phase 2 handoff, the 3 skipped tests were intentional future-pro
 
 ## Recommended Next Step
 
-Phase 3 planning has started. Continue planning only unless the project owner explicitly approves implementation. Do not implement real promotion yet.
+Phase 3 implementation has started with the approved schema-first evaluator slice. Continue only with disabled-by-default, read-only fixture evaluation. Do not implement real promotion.
 
 Current first Phase 3 planning slice:
 
@@ -95,6 +95,7 @@ Current first Phase 3 planning slice:
 - `docs/phase-3-implementation-entry-checklist.md` defines the conditions required before evaluator implementation can start
 - `docs/phase-3-evaluator-risk-review.md` records documentation-only risks and stop conditions for the evaluator boundary
 - `docs/phase-3-planning-closure-checklist.md` records the planning artifacts, validation standard, blocked scope, and implementation decision point
+- `src/peoples_ledger/promotion_request_evaluator.py` implements the schema-first fixture example only
 - `tests/test_phase3_boundary.py` provides executable planning/documentation tests
 - `tests/test_phase3_promotion_evaluator_contract.py` covers the future evaluator contract
 - `tests/test_phase3_promotion_evaluator_fixtures.py` validates the fixture-only examples
@@ -126,6 +127,7 @@ Start by reading:
 
 Current status:
 - Phase 2 is complete for the bounded POC and merged to main.
+- Phase 3 schema-first evaluator implementation has started.
 - Latest known Phase 2 closure commit: 137f6a2 Add Phase 2 closure checklist (#16).
 - The last complete validation passed:
   - make validate
@@ -134,12 +136,12 @@ Current status:
   - make phase2-acceptance
   - make test
   - make test-browser
-- The full unit suite last passed with 253 tests and 12 intentionally skipped future-promotion contract tests.
+- The full unit suite last passed with 253 tests and 11 intentionally skipped future-promotion contract tests.
 
-Continue with Phase 3 planning only unless I explicitly approve implementation.
+Continue with disabled-by-default Phase 3 evaluator implementation only. Keep promotion execution disabled.
 
 Recommended next unit:
-Pause before implementation unless the project owner explicitly approves evaluator implementation. The next implementation unit should unskip one schema-first evaluator test and keep promotion disabled. Do not implement promotion without that approval.
+Unskip one source-gate evaluator test and implement only the smallest read-only fixture path needed for that source failure. Keep promotion disabled. Do not implement promotion.
 
 Keep these out of scope:
 - candidate promotion execution

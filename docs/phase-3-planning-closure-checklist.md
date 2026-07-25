@@ -34,7 +34,7 @@ make test
 make test-browser
 ```
 
-The full unit suite currently includes 253 tests with 12 intentional future-promotion skips.
+The full unit suite currently includes 253 tests with 11 intentional future-promotion skips.
 
 ## Still Blocked
 
@@ -72,5 +72,5 @@ This planning closure slice is complete when:
 - README and handoff point to this checklist
 - Phase 3 risk-review and implementation-entry checklist tests pass
 - Phase 2 acceptance still passes
-- no evaluator implementation exists
+- no evaluator implementation exists beyond approved read-only fixture slices
 - no candidate promotion, public candidate reporting, source registry mutation, live provider path, or household-data storage is enabled

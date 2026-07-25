@@ -81,17 +81,17 @@ The same promotion audit cross-check is exposed through the read-only `promotion
 
 Phase 2 is complete for the bounded POC. The closure checklist records the exit criteria, remaining intentional blockers, and Phase 3 entry criteria without starting Phase 3 work.
 
-Phase 3 planning has started with a disabled-by-default promotion request evaluator boundary. No promotion implementation is enabled.
+Phase 3 implementation has started with the approved schema-first, disabled-by-default promotion request evaluator slice. No candidate promotion execution is enabled.
 
 The Phase 3 promotion request evaluator contract now defines the future read-only fixture inputs, deterministic gate order, result shape, blocker codes, privacy precedence, and mutation prohibitions while keeping the evaluator unimplemented.
 
 Phase 3 evaluator contract examples live at `data/fixtures/phase3/promotion_evaluator_contract_examples.json`. They cover each first-failing gate as fixture-only expected outputs and still do not promote candidates or alter public reports.
 
-Skipped future evaluator tests now name the required behavior for each fixture case before any implementation exists.
+Skipped future evaluator tests now name the required behavior for later fixture cases while the first schema-only evaluator slice exists.
 
 The Phase 3 implementation-entry checklist at `docs/phase-3-implementation-entry-checklist.md` defines what must be true before any evaluator code can be started, including owner approval, test-first sequencing, read-only fixture scope, and privacy gates.
 
-The Phase 3 evaluator risk review at `docs/phase-3-evaluator-risk-review.md` records approval-confusion, privacy, fixture-creep, live-provider, ledger, public-report, and claim-overreach risks while implementation remains blocked.
+The Phase 3 evaluator risk review at `docs/phase-3-evaluator-risk-review.md` records approval-confusion, privacy, fixture-creep, live-provider, ledger, public-report, and claim-overreach risks while later gates remain blocked.
 
 The Phase 3 planning closure checklist at `docs/phase-3-planning-closure-checklist.md` records the current planning artifacts, validation standard, blocked scope, and implementation decision point.
 
