@@ -14,6 +14,44 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from peoples_ledger.backend.server import Handler
 from peoples_ledger.decision_ledger import DecisionLedger
+from peoples_ledger.paths import SCHEMA_DIR
+from peoples_ledger.schema_validator import SchemaRegistry
+
+
+def _promotion_evaluator_contract_view(payload: dict) -> dict:
+    return {
+        "contract_ref": payload["contract_ref"],
+        "evaluation_count": payload["evaluation_count"],
+        "evaluations": [
+            {
+                "blocker_codes": [blocker["code"] for blocker in evaluation["blockers"]],
+                "candidate_analysis_unit_id": evaluation["candidate_analysis_unit_id"],
+                "first_failing_gate": evaluation["first_failing_gate"],
+                "household_financial_data_detected": evaluation["household_financial_data_detected"],
+                "mutation_flags": {
+                    "ledger_appended": evaluation["ledger_appended"],
+                    "live_provider_called": evaluation["live_provider_called"],
+                    "mutation_performed": evaluation["mutation_performed"],
+                    "public_report_changed": evaluation["public_report_changed"],
+                },
+                "request_id": evaluation["request_id"],
+                "status": evaluation["status"],
+            }
+            for evaluation in payload["evaluations"]
+        ],
+        "first_failing_gates": payload["first_failing_gates"],
+        "fixture_id": payload["fixture_id"],
+        "gate_order": payload["gate_order"],
+        "household_financial_data_storage_allowed": payload["household_financial_data_storage_allowed"],
+        "id": payload["id"],
+        "mutation_flags": {
+            "ledger_appended": payload["ledger_appended"],
+            "live_provider_called": payload["live_provider_called"],
+            "promotion_execution_allowed": payload["promotion_execution_allowed"],
+            "public_report_changed": payload["public_report_changed"],
+        },
+        "status": payload["status"],
+    }
 
 
 class BackendIntegrationTests(unittest.TestCase):
@@ -147,6 +185,14 @@ class BackendIntegrationTests(unittest.TestCase):
         self.assertFalse(payload["public_report_changed"])
         self.assertFalse(payload["live_provider_called"])
         self.assertIn("promotion_disabled", payload["first_failing_gates"])
+
+    def test_promotion_evaluator_endpoint_matches_status_schema(self) -> None:
+        payload = self.get_json("/candidates/promotion-evaluator")
+        contract_view = _promotion_evaluator_contract_view(payload)
+
+        SchemaRegistry(SCHEMA_DIR).validate("phase3_promotion_evaluator_status", contract_view)
+        self.assertEqual(contract_view["status"], "blocked")
+        self.assertFalse(contract_view["mutation_flags"]["promotion_execution_allowed"])
 
     def test_html_report_endpoint(self) -> None:
         with urllib.request.urlopen(f"{self.base_url}/reports/tcja-2017-representative-provisions.html", timeout=3) as response:
